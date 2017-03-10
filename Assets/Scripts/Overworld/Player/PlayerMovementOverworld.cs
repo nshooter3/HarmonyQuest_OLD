@@ -121,7 +121,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
     private void Move(Vector3 dir)
     {
         //Applies movement based on vector3 from CheckForMove
-        rb.MovePosition(playerPos.position + dir * actualSpeed);
+        rb.velocity =  dir * actualSpeed * 50;
     }
 
     private void CheckForKeyInput()
@@ -240,6 +240,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
         }
         else
         {
+            Move(new Vector3(0, 0, 0));
             anim.SetBool("IsMoving", false);
         }
 
