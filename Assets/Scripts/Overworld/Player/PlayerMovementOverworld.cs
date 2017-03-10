@@ -54,6 +54,10 @@ public class PlayerMovementOverworld : MonoBehaviour {
     //Holds the player's emote gameobject for easy access
     public EmoteAnimator emote;
 
+    //Both player colliders
+    private CircleCollider2D circCol;
+    private BoxCollider2D boxCol;
+
     void Awake()
     {
         Dialoguer.Initialize();
@@ -72,6 +76,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
         rb = playerPos.GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playerState = PlayerState.Default;
+        ToggleColliders(true);
         sceneScript = FindObjectOfType<SceneScript>();
         MusicManager.MM.Init();
 
@@ -297,6 +302,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
         if (col.gameObject.layer == 10 && door != null)
         {
             playerState = PlayerState.Cutscene;
+            ToggleColliders(false);
             anim.SetBool("IsMoving", false);
             fade.FadeOut();
             door.Teleport();
@@ -317,6 +323,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
     public void InitPlayerInteract()
     {
         playerState = PlayerState.Interacting;
+        ToggleColliders(false);
         cameraCutsceneFlag = true;
         anim.SetBool("IsMoving", false);
         sceneScript.UpdateScene();
@@ -333,6 +340,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
     {
         GlobalVars.GV.GetUpdatedDialoguerVars();
         playerState = PlayerState.Default;
+        ToggleColliders(true);
         cameraDefaultFlag = true;
         sceneScript.UpdateScene();
         MusicManager.MM.RaiseMusicInit(MusicManager.MM.sceneMusic.volume);
@@ -373,6 +381,13 @@ public class PlayerMovementOverworld : MonoBehaviour {
         {
             InitPlayerDefaultFromDialogue();
         }
+    }
+
+    //Call this to enable/disable player colliders
+    public void ToggleColliders(bool toggle)
+    {
+        circCol.enabled = toggle;
+        boxCol.enabled = toggle;
     }
 
 }
