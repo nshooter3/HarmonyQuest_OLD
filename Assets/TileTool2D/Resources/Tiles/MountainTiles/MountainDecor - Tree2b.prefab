@@ -16,12 +16,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000013056616230}
-  - 114: {fileID: 114000012459686416}
-  - 212: {fileID: 212000011589727384}
-  - 61: {fileID: 61000013534158714}
+  - component: {fileID: 4000013056616230}
+  - component: {fileID: 114000012459686416}
+  - component: {fileID: 212000011589727384}
+  - component: {fileID: 61000013534158714}
+  - component: {fileID: 114545671016732458}
   m_Layer: 0
   m_Name: MountainDecor - Tree2b
   m_TagString: Untagged
@@ -38,10 +39,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &61000013534158714
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -139,6 +140,17 @@ MonoBehaviour:
   tiles: []
   savePosition: {x: 0, y: 0}
   moved: 0
+--- !u!114 &114545671016732458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011095534884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59a35a8684948424fad85adb4e947125, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212000011589727384
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -153,7 +165,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_Materials:
   - {fileID: 2100000, guid: 5d779ac2dbc64a045b272075bb039723, type: 2}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -161,7 +175,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89

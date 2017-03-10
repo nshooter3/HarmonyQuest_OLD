@@ -56,6 +56,9 @@ TagManager:
   - name: OverworldUI
     uniqueID: 2272899011
     locked: 0
+  - name: BattleBackground
+    uniqueID: 2570418687
+    locked: 0
   - name: Battle
     uniqueID: 3521576237
     locked: 0
