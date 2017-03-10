@@ -10,8 +10,7 @@ public class Mountain1 : SceneScript{
 	
 	// Update is called once per frame
 	void Update () {
-	    if(Input.GetKeyDown(KeyCode.A))
-            PlayerMovementOverworld.instance.InitDialogue(gameObject);
+
     }
 
     public override void UpdateScene()

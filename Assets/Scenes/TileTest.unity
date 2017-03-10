@@ -15527,7 +15527,7 @@ Prefab:
         type: 2}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 1fc960b12ced6f24eae0550efc8b39ba,
+      objectReference: {fileID: 21300000, guid: 886dfab43523daa49818ba14af0c1e3e,
         type: 3}
     - target: {fileID: 4000012760351622, guid: fde83d0b7fb1f5a4a9b75c6fd513bc87, type: 2}
       propertyPath: m_LocalScale.x
