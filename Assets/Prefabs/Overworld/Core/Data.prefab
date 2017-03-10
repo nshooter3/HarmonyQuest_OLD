@@ -16,12 +16,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 4000012320579476}
-  - 114: {fileID: 114000012891774732}
-  - 114: {fileID: 114000013023768512}
-  - 114: {fileID: 114000010450968658}
+  - component: {fileID: 4000012320579476}
+  - component: {fileID: 114000012891774732}
+  - component: {fileID: 114000013023768512}
+  - component: {fileID: 114000010450968658}
+  - component: {fileID: 114843964431249114}
   m_Layer: 0
   m_Name: Data
   m_TagString: Untagged
@@ -38,10 +39,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &114000010450968658
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -88,3 +89,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11a2a269f00e27d4f8d5ba49ee97b53b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114843964431249114
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000011624211150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44af9c8470285d54bb76d8a24591295c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  confirmPress: 0
+  backPress: 0
+  menuPress: 0
+  upPress: 0
+  downPress: 0
+  leftPress: 0
+  rightPress: 0
+  confirmRelease: 0
+  backRelease: 0
+  menuRelease: 0
+  upRelease: 0
+  downRelease: 0
+  leftRelease: 0
+  rightRelease: 0
+  confirmHeld: 0
+  backHeld: 0
+  menuHeld: 0
+  upHeld: 0
+  downHeld: 0
+  leftHeld: 0
+  rightHeld: 0

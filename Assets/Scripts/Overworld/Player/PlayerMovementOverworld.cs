@@ -76,7 +76,6 @@ public class PlayerMovementOverworld : MonoBehaviour {
         rb = playerPos.GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         playerState = PlayerState.Default;
-        ToggleColliders(true);
         sceneScript = FindObjectOfType<SceneScript>();
         MusicManager.MM.Init();
 
@@ -92,6 +91,11 @@ public class PlayerMovementOverworld : MonoBehaviour {
         textbox = GameObject.FindObjectOfType<Textbox>();
         dataManager = GameObject.FindObjectOfType<DataManager>();
         fade = GameObject.FindObjectOfType<FadeInFadeOut>();
+
+        circCol = GetComponent<CircleCollider2D>();
+        boxCol = GetComponent<BoxCollider2D>();
+
+        ToggleColliders(true);
 
         //Debug.Log(GlobalVars.GV.destination);
 
@@ -126,6 +130,8 @@ public class PlayerMovementOverworld : MonoBehaviour {
 
     private void CheckForKeyInput()
     {
+        InputManager.instance.UpdateInput();
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
@@ -143,7 +149,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
 
     private void CheckForInteractableInput() {
         dlog.UpdateVars();
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (InputManager.instance.confirmPress)
         {
             if (textbox.textLoading)
             {
@@ -166,11 +172,11 @@ public class PlayerMovementOverworld : MonoBehaviour {
         }
 
         if (textbox.choicesActive && !textbox.choiceUIMoving) {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (InputManager.instance.upPress)
             {
                 textbox.choiceUp();
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            else if (InputManager.instance.downPress)
             {
                 textbox.choiceDown();
             }
@@ -190,49 +196,49 @@ public class PlayerMovementOverworld : MonoBehaviour {
     {
         anim.SetBool("IsMoving", true);
         //Check for various directional keys/combinations for movement
-        if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.UpArrow))
+        if (InputManager.instance.rightHeld && InputManager.instance.upHeld)
         {
             Move(new Vector3(0.67f, 0.67f, 0));
             anim.SetInteger("Direction", 0);
             interact.transform.position = up.transform.position;
         }
-        else if (Input.GetKey(KeyCode.RightArrow) && Input.GetKey(KeyCode.DownArrow))
+        else if (InputManager.instance.rightHeld && InputManager.instance.downHeld)
         {
             Move(new Vector3(0.67f, -0.67f, 0));
             anim.SetInteger("Direction", 2);
             interact.transform.position = down.transform.position;
         }
-        else if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.UpArrow))
+        else if (InputManager.instance.leftHeld && InputManager.instance.upHeld)
         {
             Move(new Vector3(-0.67f, 0.67f, 0));
             anim.SetInteger("Direction", 0);
             interact.transform.position = up.transform.position;
         }
-        else if (Input.GetKey(KeyCode.LeftArrow) && Input.GetKey(KeyCode.DownArrow))
+        else if (InputManager.instance.leftHeld && InputManager.instance.downHeld)
         {
             Move(new Vector3(-0.67f, -0.67f, 0));
             anim.SetInteger("Direction", 2);
             interact.transform.position = down.transform.position;
         }
-        else if (Input.GetKey(KeyCode.RightArrow))
+        else if (InputManager.instance.rightHeld)
         {
             Move(new Vector3(1, 0, 0));
             anim.SetInteger("Direction", 1);
             interact.transform.position = right.transform.position;
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (InputManager.instance.leftHeld)
         {
             Move(new Vector3(-1, 0, 0));
             anim.SetInteger("Direction", 3);
             interact.transform.position = left.transform.position;
         }
-        else if (Input.GetKey(KeyCode.UpArrow))
+        else if (InputManager.instance.upHeld)
         {
             Move(new Vector3(0, 1, 0));
             anim.SetInteger("Direction", 0);
             interact.transform.position = up.transform.position;
         }
-        else if (Input.GetKey(KeyCode.DownArrow))
+        else if (InputManager.instance.downHeld)
         {
             Move(new Vector3(0, -1, 0));
             anim.SetInteger("Direction", 2);
@@ -245,7 +251,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
         }
 
         //Used to set speed depending on whether or not the player is dashing
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        if (InputManager.instance.shiftHeld)
         {
             actualSpeed = speed * 1.5f;
             //dataManager.Save(1);
@@ -257,7 +263,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
 
 
         //Checks for interactable objects
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (InputManager.instance.confirmPress)
         {
             GameObject temp = CheckForInteractable();
             if (temp != null)
