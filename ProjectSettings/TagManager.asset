@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Player
+  - Interactable
+  - CameraBounds
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Interactable
+  - Camera
+  - Door
+  - Cutscene
+  - Pushable
+  - Crate
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 3651190501
+    locked: 0
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: AbovePlayer
+    uniqueID: 2378404207
+    locked: 0
+  - name: OverworldParticleEffects
+    uniqueID: 779869163
+    locked: 0
+  - name: OverworldUI
+    uniqueID: 2272899011
+    locked: 0
+  - name: Battle
+    uniqueID: 3521576237
+    locked: 0
+  - name: BattleUI
+    uniqueID: 2567444097
+    locked: 0
