@@ -6,15 +6,25 @@ using System.IO;
 
 public class DataManager : MonoBehaviour {
 
+    public static DataManager instance;
+
+    void Awake() {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this.gameObject);
+    }
+
     //Saves variables in this script to a playerPref file
     public void Save(int fileNum)
     {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/globalVars" + fileNum + ".dat");
 
-        SaveData saveData = PrepareSaveData();
+        SaveData saveData = PrepareSaveData(GlobalVars.GV.saveData);
         bf.Serialize(file, saveData);
         file.Close();
+        Debug.Log("save successful");
     }
 
     public void Reset(int fileNum)
@@ -27,7 +37,7 @@ public class DataManager : MonoBehaviour {
         file.Close();
     }
 
-    //Loads variables in this script from a playerPref file
+    //Loads variables in this script from a file
     public void Load(int fileNum)
     {
         if (File.Exists(Application.persistentDataPath + "/globalVars" + fileNum + ".dat"))
@@ -36,57 +46,14 @@ public class DataManager : MonoBehaviour {
             FileStream file = File.Open(Application.persistentDataPath + "/globalVars" + fileNum + ".dat", FileMode.Open);
             SaveData saveData = (SaveData)bf.Deserialize(file);
             file.Close();
-            UnpackSaveData(saveData);
+            GlobalVars.GV.saveData = PrepareSaveData(saveData);
+            Debug.Log("load successful");
         }
     }
 
-    SaveData PrepareSaveData()
+    public static T PrepareSaveData<T>(T saveData)
     {
-        SaveData saveData = new SaveData();
-        //General variables
-        #region
-        saveData.experience = GlobalVars.GV.saveData.experience;
-        saveData.level = GlobalVars.GV.saveData.level;
-        saveData.playerName = GlobalVars.GV.saveData.playerName;
-        saveData.curScene = GlobalVars.GV.saveData.curScene;
-        saveData.deathCount = GlobalVars.GV.saveData.deathCount;
-        saveData.destination = GlobalVars.GV.saveData.destination;
-        #endregion
-
-        //Demo scene variables
-        #region
-        saveData.talkedToBanana = GlobalVars.GV.saveData.talkedToBanana;
-        saveData.recruitedTranslator = GlobalVars.GV.saveData.recruitedTranslator;
-        saveData.movedBanana = GlobalVars.GV.saveData.movedBanana;
-        saveData.talkedToBananaBill = GlobalVars.GV.saveData.talkedToBananaBill;
-
-        saveData.hallwayProgress = GlobalVars.GV.saveData.hallwayProgress;
-        saveData.potman = GlobalVars.GV.saveData.potman;
-        #endregion
-        return saveData;
-    }
-
-    void UnpackSaveData(SaveData saveData)
-    {
-        #region
-        GlobalVars.GV.saveData.experience = saveData.experience;
-        GlobalVars.GV.saveData.level = saveData.level;
-        GlobalVars.GV.saveData.playerName = saveData.playerName;
-        GlobalVars.GV.saveData.curScene = saveData.curScene;
-        GlobalVars.GV.saveData.deathCount = saveData.deathCount;
-        GlobalVars.GV.saveData.destination = saveData.destination;
-        #endregion
-
-        //Demo scene variables
-        #region
-        GlobalVars.GV.saveData.talkedToBanana = saveData.talkedToBanana;
-        GlobalVars.GV.saveData.recruitedTranslator = saveData.recruitedTranslator;
-        GlobalVars.GV.saveData.movedBanana = saveData.movedBanana;
-        GlobalVars.GV.saveData.talkedToBananaBill = saveData.talkedToBananaBill;
-
-        GlobalVars.GV.saveData.hallwayProgress = saveData.hallwayProgress;
-        GlobalVars.GV.saveData.potman = saveData.potman;
-        #endregion
+        return (T) saveData;
     }
 
 
@@ -99,7 +66,7 @@ public class SaveData
     #region
     public int experience = 0;
     public int level = 1;
-    public string playerName = "Bill";
+    public string playerName = "Melody";
     public string curScene = "demo1";
     public string destination = "s1";
     public int deathCount = 0;

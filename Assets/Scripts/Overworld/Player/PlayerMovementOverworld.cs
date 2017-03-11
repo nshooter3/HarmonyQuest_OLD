@@ -36,9 +36,6 @@ public class PlayerMovementOverworld : MonoBehaviour {
     //Freezes player while screen is black and song is switching
     private float freezeTimer;
 
-    //Used to save/load files
-    public DataManager dataManager;
-
     //Used to fade screen for scene transitions
     public FadeInFadeOut fade;
 
@@ -89,7 +86,6 @@ public class PlayerMovementOverworld : MonoBehaviour {
         emote = playerPos.GetComponent<EmoteAnimator>();
         dlog = GameObject.FindObjectOfType<Dialogue>();
         textbox = GameObject.FindObjectOfType<Textbox>();
-        dataManager = GameObject.FindObjectOfType<DataManager>();
         fade = GameObject.FindObjectOfType<FadeInFadeOut>();
 
         circCol = GetComponent<CircleCollider2D>();
