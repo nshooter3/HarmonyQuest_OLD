@@ -3,11 +3,11 @@ using System.Collections;
 
 public class PlayerMovementBattle : MonoBehaviour {
 
+    public static PlayerMovementBattle instance;
+
     public float speed, actualSpeed;
 
     public Transform rBullet, lBullet;
-
-    public GameObject[] bullets;
 
     private Transform playerPos;
 
@@ -24,6 +24,14 @@ public class PlayerMovementBattle : MonoBehaviour {
     Vector3 dashDir;
 
     Rigidbody2D rb;
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this.gameObject);
+    }
 
     // Use this for initialization
     void Start () {
@@ -99,8 +107,7 @@ public class PlayerMovementBattle : MonoBehaviour {
         {
             if (InputManager.instance.confirmHeld)
             {
-                Instantiate(bullets[0], rBullet.transform.position, Quaternion.identity);
-                Instantiate(bullets[0], lBullet.transform.position, Quaternion.identity);
+                BulletPool.instance.SpawnNormalBullet(transform.position);
                 bulletCooldownCur = bulletCooldownMax;
             }
         }
