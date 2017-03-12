@@ -17,6 +17,7 @@ public class BattleUIHandler : MonoBehaviour {
     bool healthDropping, staminaDropping, enemyDropping;
     //The delay before the bar starts dropping
     float healthDropDelay, staminaDropDelay, enemyDropDelay, maxDelay = 0.5f;
+    Vector3 initScaleHealth, initScaleStamina, initScaleEnemy;
 
     void Awake()
     {
@@ -42,6 +43,10 @@ public class BattleUIHandler : MonoBehaviour {
         healthLength = healthMain.transform.localScale.x;
         staminaLength = staminaMain.transform.localScale.x;
         enemyLength = enemyMain.transform.localScale.x;
+
+        initScaleHealth = healthAll.transform.localScale;
+        initScaleStamina = staminaAll.transform.localScale;
+        initScaleEnemy = enemyAll.transform.localScale;
     }
 
     public void DecreaseHealth(float damage)
@@ -101,16 +106,40 @@ public class BattleUIHandler : MonoBehaviour {
             enemyDrop.transform.localScale = new Vector3(enemyLength * (enemy / enemyMax), enemyMain.transform.localScale.y, enemyMain.transform.localScale.z);
     }
 
+    //Starts coroutine that makes the gameObject's scale pump
+    public void BarPump(GameObject bar, Vector3 initScale, float scaleUpRatio, float dur)
+    {
+        StartCoroutine(Pump(bar, initScale, scaleUpRatio, dur));
+    }
+
+    //coroutine that makes the gameObject's scale pump. Call BarPump to use
+    private IEnumerator Pump(GameObject obj, Vector3 initScale, float scaleUpRatio, float dur)
+    {
+        obj.transform.localScale = initScale;
+        float maxDur = dur;
+        Vector3 originalScale = obj.transform.localScale;
+        for (float f = dur; dur > 0; dur -= Time.deltaTime)
+        {
+            obj.transform.localScale = originalScale * (1f + (scaleUpRatio - 1f) * (dur/maxDur));
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        obj.transform.localScale = originalScale;
+        yield return null;
+    }
+
     // Update is called once per frame
     void Update () {
 
-        /*if (Input.GetKeyDown(KeyCode.Z)){
+        /*
+        if (Input.GetKeyDown(KeyCode.Z)){
             DecreaseEnemy(10);
+            BarPump(enemyAll, initScaleEnemy, 1.1f, 0.1f);
         }
         else if (Input.GetKeyDown(KeyCode.X))
         {
             IncreaseEnemy(10);
-        }*/
+        }
+        */
 
         if (healthDropping)
         {
