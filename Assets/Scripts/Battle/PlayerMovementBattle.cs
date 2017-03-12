@@ -7,6 +7,11 @@ public class PlayerMovementBattle : MonoBehaviour {
 
     public float speed, actualSpeed;
 
+    //The cost of a dash in stamina
+    private float dashCost = 10f;
+    //How quickly stamina comes back, and how long it takes to start regenerating
+    private float staminaRegenRate = 25, regenCooldown, maxRegenCooldown = 0.5f;
+
     public Transform rBullet, lBullet;
 
     private Transform playerPos;
@@ -92,14 +97,27 @@ public class PlayerMovementBattle : MonoBehaviour {
             CheckDirectionalMovement();
 
             //Used to set speed depending on whether or not the player is dashing
-            if (InputManager.instance.shiftPress && rb.velocity.magnitude > 0 && dashCooldown <= 0)
+            if (InputManager.instance.shiftPress && rb.velocity.magnitude > 0 && dashCooldown <= 0 && BattleUIHandler.instance.stamina > dashCost)
             {
+                BattleUIHandler.instance.DecreaseStamina(dashCost);
+                regenCooldown = maxRegenCooldown;
                 dashTimer = maxDashTimer;
                 invulnTimer = maxInvulnTimer;
                 dashDir = rb.velocity;
                 ren.color = new Color(1, 1, 1, 0.1f);
                 dodge.Play();
                 StartCoroutine(SizePulse());
+            }
+            else
+            {
+                if (regenCooldown > 0)
+                {
+                    regenCooldown -= Time.deltaTime;
+                }
+                else
+                {
+                    BattleUIHandler.instance.IncreaseStamina(Time.deltaTime * staminaRegenRate);
+                }
             }
         }
         //Used to determine firing patterns
