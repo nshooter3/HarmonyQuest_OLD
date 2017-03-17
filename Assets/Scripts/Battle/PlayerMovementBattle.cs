@@ -28,6 +28,9 @@ public class PlayerMovementBattle : MonoBehaviour {
     float dashTimer = 0, invulnTimer = 0, maxDashTimer = 0.05f, maxInvulnTimer = 0.025f, dashCooldown = 0, maxDashCooldown = 0.1f;
     Vector3 dashDir;
 
+    public Transform shootLeft, shootUpperLeft, shootLowerLeft, shootRight, shootUpperRight, shootLowerRight;
+    
+
     Rigidbody2D rb;
 
     void Awake()
@@ -97,16 +100,23 @@ public class PlayerMovementBattle : MonoBehaviour {
             CheckDirectionalMovement();
 
             //Used to set speed depending on whether or not the player is dashing
-            if (InputManager.instance.shiftPress && rb.velocity.magnitude > 0 && dashCooldown <= 0 && BattleUIHandler.instance.stamina > dashCost)
+            if (InputManager.instance.shiftPress && rb.velocity.magnitude > 0 && dashCooldown <= 0)
             {
-                BattleUIHandler.instance.DecreaseStamina(dashCost);
-                regenCooldown = maxRegenCooldown;
-                dashTimer = maxDashTimer;
-                invulnTimer = maxInvulnTimer;
-                dashDir = rb.velocity;
-                ren.color = new Color(1, 1, 1, 0.1f);
-                dodge.Play();
-                StartCoroutine(SizePulse());
+                if (BattleUIHandler.instance.stamina > 0)
+                {
+                    BattleUIHandler.instance.DecreaseStamina(dashCost);
+                    regenCooldown = maxRegenCooldown;
+                    dashTimer = maxDashTimer;
+                    invulnTimer = maxInvulnTimer;
+                    dashDir = rb.velocity;
+                    ren.color = new Color(1, 1, 1, 0.1f);
+                    dodge.Play();
+                    StartCoroutine(SizePulse());
+                }
+                else
+                {
+                    StartCoroutine(BattleUIHandler.instance.AlphaFlash(BattleUIHandler.instance.staminaFlash.GetComponent<SpriteRenderer>()));
+                }
             }
             else
             {

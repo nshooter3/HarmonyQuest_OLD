@@ -6,6 +6,7 @@ public class NormalBullet : Bullet {
     public override void Init(Vector3 pos, Vector3 dir)
     {
         //Override in child
+        friendly = true;
         active = true;
         speed = 10;
         this.direction = dir;

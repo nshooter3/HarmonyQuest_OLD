@@ -8,7 +8,7 @@ public class BattleUIHandler : MonoBehaviour {
 
     //References to the UI in need of manipulation
     public GameObject healthMain, staminaMain, enemyMain, healthDrop, staminaDrop, enemyDrop,
-        healthAll, staminaAll, enemyAll;
+        healthAll, staminaAll, enemyAll, staminaFlash;
     //Values for attributes
     public float health, healthMax, stamina, staminaMax, enemy, enemyMax;
     //Max length of the actual bars in unity units
@@ -70,8 +70,8 @@ public class BattleUIHandler : MonoBehaviour {
 
     public void DecreaseStamina(float damage)
     {
-        stamina = Mathf.Max(0, stamina - damage);
-        staminaMain.transform.localScale = new Vector3(staminaLength * (stamina / staminaMax), staminaMain.transform.localScale.y, staminaMain.transform.localScale.z);
+        stamina = stamina - damage;
+        staminaMain.transform.localScale = new Vector3(staminaLength * (Mathf.Max(0, stamina) / staminaMax), staminaMain.transform.localScale.y, staminaMain.transform.localScale.z);
         if (staminaDropping != true)
         {
             staminaDropping = true;
@@ -82,9 +82,9 @@ public class BattleUIHandler : MonoBehaviour {
     public void IncreaseStamina(float healing)
     {
         stamina = Mathf.Min(staminaMax, stamina + healing);
-        staminaMain.transform.localScale = new Vector3(staminaLength * (stamina / staminaMax), staminaMain.transform.localScale.y, staminaMain.transform.localScale.z);
+        staminaMain.transform.localScale = new Vector3(staminaLength * (Mathf.Max(0, stamina) / staminaMax), staminaMain.transform.localScale.y, staminaMain.transform.localScale.z);
         if (staminaDrop.transform.localScale.x < staminaMain.transform.localScale.x)
-            staminaDrop.transform.localScale = new Vector3(staminaLength * (stamina / staminaMax), staminaMain.transform.localScale.y, staminaMain.transform.localScale.z);
+            staminaDrop.transform.localScale = new Vector3(staminaLength * (Mathf.Max(0, stamina) / staminaMax), staminaMain.transform.localScale.y, staminaMain.transform.localScale.z);
     }
 
     public void DecreaseEnemy(float damage)
@@ -190,4 +190,17 @@ public class BattleUIHandler : MonoBehaviour {
             }
         }
     }
+
+    //Size effect to juice up dodges
+    public IEnumerator AlphaFlash(SpriteRenderer sprite)
+    {
+        for (float f = .5f; f >= 0; f -= 0.05f)
+        {
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, f);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, 0);
+        yield return null;
+    }
+
 }

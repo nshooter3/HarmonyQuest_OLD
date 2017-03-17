@@ -22,11 +22,9 @@ public class BoundBullets : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        Debug.Log("col");
         if (col.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
             col.gameObject.GetComponent<Bullet>().Reset();
-            Debug.Log("reset");
         }
     }
 }

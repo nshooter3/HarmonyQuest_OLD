@@ -10,7 +10,9 @@ public class Bullet : MonoBehaviour {
     //How fast the bullet moves
     protected float speed;
     //How much damage the bullet will cause to its target
-    protected float damage;
+    public float damage;
+    //Whether the bullet will harm the enemy or the player
+    public bool friendly;
 
     Rigidbody2D rb;
 
