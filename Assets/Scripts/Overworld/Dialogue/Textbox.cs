@@ -384,11 +384,10 @@ public class Textbox : MonoBehaviour {
         portraitProgess = 0;
         pFade = false;
         if(DName != "")
-            text.text = DName + ": " + newText;
+            finalText = DName + ": " + newText;
         else
-            text.text = newText;
-        text.text = "<color=#0000>" + text.text + "</color>";
-        finalText = newText;
+            finalText = newText;
+        text.text = "<color=#0000>" + finalText + "</color>";
 
         textLoading = true;
         textIndex = 0;

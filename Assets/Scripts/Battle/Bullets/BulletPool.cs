@@ -26,12 +26,19 @@ public class BulletPool : MonoBehaviour {
 		
 	}
 
+    //Alternate constructor that defaults dir to up
     public void SpawnNormalBullet(Vector3 pos)
+    {
+        SpawnNormalBullet(pos, new Vector3(0, 1, 0));
+    }
+
+    //Attempt to load a normal bullet
+    public void SpawnNormalBullet(Vector3 pos, Vector3 dir)
     {
         NormalBullet temp = (NormalBullet)FindAvailableBullet(normalBullets);
         if (temp != null)
         {
-            temp.Init(PlayerMovementBattle.instance.transform.position, new Vector3(0,1,0));
+            temp.Init(pos, dir.normalized);
         }
         else
         {

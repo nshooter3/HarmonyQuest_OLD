@@ -15,20 +15,20 @@ MonoBehaviour:
     generateEnum: 1
     dialogues:
     - id: 0
-      name: TalkToAPot
-      startPage: 8
-      scrollPosition: {x: 1281.9069, y: 0}
+      name: TileDemoBanana
+      startPage: 0
+      scrollPosition: {x: 0, y: 0}
       phases:
       - id: 0
-        type: 6
-        theme: 
-        position: {x: 2751, y: 406}
-        outs: 
-        advanced: 0
-        metadata: 
-        text: 
-        name: 
-        portrait: 
+        type: 0
+        theme: BananaBill
+        position: {x: 371.17828, y: 31}
+        outs: 01000000
+        advanced: 1
+        metadata: talking
+        text: Oh hey! This is the demo right?
+        name: Banana Bill
+        portrait: BananaBill
         audio: 
         audioDelay: 0
         rect:
@@ -53,13 +53,13 @@ MonoBehaviour:
       - id: 1
         type: 1
         theme: 
-        position: {x: 777.1783, y: 12}
-        outs: 0400000003000000
-        advanced: 0
-        metadata: 
-        text: Look inside?
-        name: 
-        portrait: 
+        position: {x: 701, y: 30}
+        outs: 0200000004000000
+        advanced: 1
+        metadata: happyTalking
+        text: Can I be in it?
+        name: Banana Bill
+        portrait: BananaBill
         audio: 
         audioDelay: 0
         rect:
@@ -70,8 +70,8 @@ MonoBehaviour:
           height: 0
         newWindow: 0
         choices:
-        - Yes
-        - No
+        - Sure!
+        - Nah
         waitType: 0
         waitDuration: 0
         variableScope: 0
@@ -86,13 +86,13 @@ MonoBehaviour:
       - id: 2
         type: 0
         theme: 
-        position: {x: 371.17828, y: 31}
-        outs: 01000000
-        advanced: 0
-        metadata: 
-        text: It's a big ol' pot.
-        name: 
-        portrait: 
+        position: {x: 1055, y: 13}
+        outs: 03000000
+        advanced: 1
+        metadata: happyTalking
+        text: Yay!
+        name: Banana Bill
+        portrait: BananaBill
         audio: 
         audioDelay: 0
         rect:
@@ -115,13 +115,13 @@ MonoBehaviour:
         variableGetValue: 
         messageName: 
       - id: 3
-        type: 0
+        type: 6
         theme: 
-        position: {x: 1806.1782, y: 416}
-        outs: 00000000
+        position: {x: 1523, y: 229}
+        outs: 
         advanced: 0
         metadata: 
-        text: It's probably empty anyway. These things never have any useful items.
+        text: 
         name: 
         portrait: 
         audio: 
@@ -148,199 +148,13 @@ MonoBehaviour:
       - id: 4
         type: 0
         theme: 
-        position: {x: 1148.0764, y: 26}
-        outs: 05000000
-        advanced: 0
-        metadata: 
-        text: You see a tiny man in a loincloth huddled up at the bottom of the pot.
-        name: 
-        portrait: 
-        audio: 
-        audioDelay: 0
-        rect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        newWindow: 0
-        choices: []
-        waitType: 0
-        waitDuration: 0
-        variableScope: 0
-        variableType: 0
-        variableId: 0
-        variableScrollPosition: {x: 0, y: 0}
-        variableSetEquation: 0
-        variableSetValue: 
-        variableGetEquation: 0
-        variableGetValue: 
-        messageName: 
-      - id: 5
-        type: 0
-        theme: 
-        position: {x: 1487.0764, y: 27}
-        outs: 06000000
-        advanced: 0
-        metadata: 
-        text: He looks up at you, holds a finger up to his lips, and goes "shhhh..."
-        name: 
-        portrait: 
-        audio: 
-        audioDelay: 0
-        rect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        newWindow: 0
-        choices: []
-        waitType: 0
-        waitDuration: 0
-        variableScope: 0
-        variableType: 0
-        variableId: 0
-        variableScrollPosition: {x: 0, y: 0}
-        variableSetEquation: 0
-        variableSetValue: 
-        variableGetEquation: 0
-        variableGetValue: 
-        messageName: 
-      - id: 6
-        type: 0
-        theme: 
-        position: {x: 1821.0764, y: 27}
-        outs: 07000000
-        advanced: 0
-        metadata: 
-        text: You decide to leave him and the pot alone.
-        name: 
-        portrait: 
-        audio: 
-        audioDelay: 0
-        rect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        newWindow: 0
-        choices: []
-        waitType: 0
-        waitDuration: 0
-        variableScope: 0
-        variableType: 0
-        variableId: 0
-        variableScrollPosition: {x: 0, y: 0}
-        variableSetEquation: 0
-        variableSetValue: 
-        variableGetEquation: 0
-        variableGetValue: 
-        messageName: 
-      - id: 7
-        type: 3
-        theme: 
-        position: {x: 2159, y: 76}
-        outs: 00000000
-        advanced: 0
-        metadata: 
-        text: 
-        name: 
-        portrait: 
-        audio: 
-        audioDelay: 0
-        rect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        newWindow: 0
-        choices: []
-        waitType: 0
-        waitDuration: 0
-        variableScope: 0
-        variableType: 1
-        variableId: 1
-        variableScrollPosition: {x: 0, y: 0}
-        variableSetEquation: 0
-        variableSetValue: 1
-        variableGetEquation: 0
-        variableGetValue: 
-        messageName: 
-      - id: 8
-        type: 4
-        theme: 
-        position: {x: 10, y: 101}
-        outs: 0200000009000000
-        advanced: 0
-        metadata: 
-        text: 
-        name: 
-        portrait: 
-        audio: 
-        audioDelay: 0
-        rect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        newWindow: 0
-        choices: []
-        waitType: 0
-        waitDuration: 0
-        variableScope: 0
-        variableType: 1
-        variableId: 1
-        variableScrollPosition: {x: 0, y: 0}
-        variableSetEquation: 0
-        variableSetValue: 
-        variableGetEquation: 0
-        variableGetValue: 0
-        messageName: 
-      - id: 9
-        type: 0
-        theme: 
-        position: {x: 381, y: 413}
-        outs: 0a000000
-        advanced: 0
-        metadata: 
-        text: Nope. Not gonna deal with this. Moving on.
-        name: 
-        portrait: 
-        audio: 
-        audioDelay: 0
-        rect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        newWindow: 0
-        choices: []
-        waitType: 0
-        waitDuration: 0
-        variableScope: 0
-        variableType: 0
-        variableId: 0
-        variableScrollPosition: {x: 0, y: 0}
-        variableSetEquation: 0
-        variableSetValue: 
-        variableGetEquation: 0
-        variableGetValue: 
-        messageName: 
-      - id: 10
-        type: 6
-        theme: 
-        position: {x: 757, y: 434}
-        outs: 
-        advanced: 0
-        metadata: 
-        text: 
-        name: 
-        portrait: 
+        position: {x: 1051, y: 473}
+        outs: 03000000
+        advanced: 1
+        metadata: sadTalking
+        text: Awww...
+        name: Banana Bill
+        portrait: BananaBill
         audio: 
         audioDelay: 0
         rect:
@@ -374,7 +188,7 @@ MonoBehaviour:
     - id: 1
       name: TalkToABanana
       startPage: 0
-      scrollPosition: {x: 3055.2012, y: 1773}
+      scrollPosition: {x: 0, y: 993}
       phases:
       - id: 0
         type: 0
@@ -1231,7 +1045,7 @@ MonoBehaviour:
     - id: 2
       name: BananaBill
       startPage: 11
-      scrollPosition: {x: 1447.7739, y: 0}
+      scrollPosition: {x: 0, y: 0}
       phases:
       - id: 0
         type: 6
@@ -1329,7 +1143,7 @@ MonoBehaviour:
       - id: 3
         type: 0
         theme: BananaBill
-        position: {x: 900.1, y: 83}
+        position: {x: 894.1, y: 88}
         outs: 04000000
         advanced: 1
         metadata: talking

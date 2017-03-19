@@ -25,7 +25,7 @@ public class PlayerMovementBattle : MonoBehaviour {
     ParticleSystem dodge;
 
     //Vars for dashing duration and direction
-    float dashTimer = 0, invulnTimer = 0, maxDashTimer = 0.05f, maxInvulnTimer = 0.025f, dashCooldown = 0, maxDashCooldown = 0.1f;
+    float dashTimer = 0, maxDashTimer = 0.05f, dashCooldown = 0, maxDashCooldown = 0.1f;
     Vector3 dashDir;
 
     public Transform shootLeft, shootUpperLeft, shootLowerLeft, shootRight, shootUpperRight, shootLowerRight;
@@ -47,7 +47,7 @@ public class PlayerMovementBattle : MonoBehaviour {
         speed = 6f;//Stored value
         actualSpeed = speed;//Modified value that is actually used
         playerPos = gameObject.transform;
-        bulletCooldownMax = 0.05f;
+        bulletCooldownMax = 0.1f;
         bulletCooldownCur = 0;
         rb = GetComponent<Rigidbody2D>();
         ren = GetComponent<SpriteRenderer>();
@@ -70,15 +70,6 @@ public class PlayerMovementBattle : MonoBehaviour {
     {
         if (dashTimer > 0)
         {
-            /*
-            if (invulnTimer > 0)
-            {
-                invulnTimer -= Time.deltaTime;
-            }
-            else if (invulnTimer <= 0)
-            {
-                ren.color = new Color(1, 1, 1, 1) ;
-            }*/
             Move(dashDir * 1.3f);
             dashTimer -= Time.deltaTime;
             if (dashTimer <= 0)
@@ -107,7 +98,6 @@ public class PlayerMovementBattle : MonoBehaviour {
                     BattleUIHandler.instance.DecreaseStamina(dashCost);
                     regenCooldown = maxRegenCooldown;
                     dashTimer = maxDashTimer;
-                    invulnTimer = maxInvulnTimer;
                     dashDir = rb.velocity;
                     ren.color = new Color(1, 1, 1, 0.1f);
                     dodge.Play();
@@ -135,7 +125,21 @@ public class PlayerMovementBattle : MonoBehaviour {
         {
             if (InputManager.instance.confirmHeld)
             {
-                BulletPool.instance.SpawnNormalBullet(transform.position);
+                BulletPool.instance.SpawnNormalBullet(shootLeft.position);
+                BulletPool.instance.SpawnNormalBullet(shootRight.position);
+                bulletCooldownCur = bulletCooldownMax;
+            }
+            else if (InputManager.instance.backHeld)
+            {
+                BulletPool.instance.SpawnNormalBullet(transform.position, new Vector3(0, -1, 0));
+                BulletPool.instance.SpawnNormalBullet(shootUpperLeft.position, new Vector3(-1,1,0));
+                BulletPool.instance.SpawnNormalBullet(shootUpperRight.position, new Vector3(1, 1, 0));
+                bulletCooldownCur = bulletCooldownMax*2f;
+            }
+            else if (InputManager.instance.menuHeld)
+            {
+                BulletPool.instance.SpawnNormalBullet(shootLowerLeft.position, new Vector3(-1, -1, 0));
+                BulletPool.instance.SpawnNormalBullet(shootLowerRight.position, new Vector3(1, -1, 0));
                 bulletCooldownCur = bulletCooldownMax;
             }
         }

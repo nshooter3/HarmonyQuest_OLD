@@ -66,6 +66,24 @@ public class PortraitEmotions : MonoBehaviour {
                     case "invisible":
                         anim.SetTrigger("invisible");
                         break;
+                    case "misc":
+                        anim.SetTrigger("misc");
+                        break;
+                    case "miscTalking":
+                        anim.SetTrigger("miscTalking");
+                        break;
+                    case "misc2":
+                        anim.SetTrigger("misc2");
+                        break;
+                    case "misc2Talking":
+                        anim.SetTrigger("misc2Talking");
+                        break;
+                    case "misc3":
+                        anim.SetTrigger("misc3");
+                        break;
+                    case "misc3Talking":
+                        anim.SetTrigger("misc3Talking");
+                        break;
                 }
             }
         }

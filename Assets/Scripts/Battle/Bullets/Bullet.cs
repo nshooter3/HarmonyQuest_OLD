@@ -41,14 +41,22 @@ public class Bullet : MonoBehaviour {
     }
 
     //Function called from bullet pool to "create" bullet
-    public virtual void Init(Vector3 pos, Vector3 dir)
+    public virtual void Init(Vector3 pos, Vector3 dir, bool friendly = false, float damage = 10)
     {
         //Override in child
         active = true;
         this.direction = dir;
         transform.position = pos;
+        this.damage = damage;
+        this.friendly = friendly;
         ToggleCollider(true);
         ToggleRenderer(true);
+    }
+
+    //Alternate constructor
+    public virtual void Init(Vector3 pos, Vector3 dir)
+    {
+        Init(pos, dir, false, 10f);
     }
 
     //Function to disable bullet and make it available to the bullet pool

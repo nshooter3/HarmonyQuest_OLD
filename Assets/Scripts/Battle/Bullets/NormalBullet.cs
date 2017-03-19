@@ -8,7 +8,7 @@ public class NormalBullet : Bullet {
         //Override in child
         friendly = true;
         active = true;
-        speed = 10;
+        speed = 7.5f;
         this.direction = dir;
         transform.position = pos;
         ToggleCollider(true);
