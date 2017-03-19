@@ -175,6 +175,7 @@ public class Textbox : MonoBehaviour {
             {
                 if (textIndex < finalText.Length + 1)
                 {
+                    //Whether or not to play a voice sample
                     if (sFXCount == 0)
                     {
                         PlayTextSFX();
@@ -183,21 +184,23 @@ public class Textbox : MonoBehaviour {
                     else
                         sFXCount = (sFXCount + 1) % maxSFXCount;
 
+                    //Whether or not to include a character name
                     string temp = "";
                     if (DName != "")
                     {
                         temp = DName + ": ";
                     }
+                    //Update dialogue UI
                     text.text = temp + finalText.Substring(0, textIndex) + "<color=#0000>" + finalText.Substring(textIndex) + "</color>";
 
+                    //Adds slight pauses after certain characters for spacing
                     if (textIndex - 1 > 0 && (textIndex - 1) < finalText.Length && (finalText[(textIndex - 1)].Equals('.') || finalText[(textIndex - 1)].Equals(',') ||
                         finalText[(textIndex - 1)].Equals('!') || finalText[(textIndex - 1)].Equals('?')))
                     {
                         pauseCount = 8;
                         sFXCount = 0;
                     }
-                    //else
-                    //textTimer = textTimerMax;
+                    
                     textIndex++;
                 }
                 else
