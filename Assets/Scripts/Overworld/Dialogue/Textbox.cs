@@ -183,12 +183,15 @@ public class Textbox : MonoBehaviour {
                     else
                         sFXCount = (sFXCount + 1) % maxSFXCount;
 
-                    //TODO update text
+                    string temp = "";
+                    if (DName != "")
+                    {
+                        temp = DName + ": ";
+                    }
+                    text.text = temp + finalText.Substring(0, textIndex) + "<color=#0000>" + finalText.Substring(textIndex) + "</color>";
 
-                    text.text = finalText.Substring(0, textIndex) + "<color=#0000>" + finalText.Substring(textIndex) + "</color>";
-
-                    if (textIndex < text.text.Length && (text.text[textIndex].Equals('.') || text.text[textIndex].Equals(',') ||
-                        text.text[textIndex].Equals('!') || text.text[textIndex].Equals('?')))
+                    if (textIndex - 1 > 0 && (textIndex - 1) < finalText.Length && (finalText[(textIndex - 1)].Equals('.') || finalText[(textIndex - 1)].Equals(',') ||
+                        finalText[(textIndex - 1)].Equals('!') || finalText[(textIndex - 1)].Equals('?')))
                     {
                         pauseCount = 8;
                         sFXCount = 0;
@@ -384,10 +387,11 @@ public class Textbox : MonoBehaviour {
         portraitProgess = 0;
         pFade = false;
         if(DName != "")
-            finalText = DName + ": " + newText;
+            text.text = DName + ": " + newText;
         else
-            finalText = newText;
+            text.text = newText;
         text.text = "<color=#0000>" + finalText + "</color>";
+        finalText = newText;
 
         textLoading = true;
         textIndex = 0;
@@ -444,8 +448,12 @@ public class Textbox : MonoBehaviour {
     //Called upon end of text typing/skip
     public void finishText()
     {
-
-        text.text = finalText;
+        string temp = "";
+        if (DName != "")
+        {
+            temp = DName + ": ";
+        }
+        text.text = temp + finalText;
         textLoading = false;
         startTime = Time.time;
         choiceUIWait = false;
