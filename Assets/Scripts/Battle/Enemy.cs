@@ -50,9 +50,9 @@ public class Enemy : MonoBehaviour {
 
     IEnumerator GetHit()
     {
-        sr.gameObject.transform.localPosition = Vector3.zero;
+        //sr.gameObject.transform.localPosition = Vector3.zero;
         Vector3 rot = new Vector3(0, 0, (Random.Range(0, 1) * 2 - 1)*2);
-        Vector3 tempDir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0).normalized * Random.Range(0.04f, 0.06f);
+        //Vector3 tempDir = new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0).normalized * Random.Range(0.04f, 0.06f);
         hitTimer = maxHitTimer;
         for (var f = maxHitTimer; f >= 0; f -= Time.deltaTime)
         {
@@ -62,6 +62,8 @@ public class Enemy : MonoBehaviour {
             sr.gameObject.transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one*1.1f, f / maxHitTimer);
             yield return new WaitForSeconds(Time.deltaTime);
         }
+        sr.gameObject.transform.eulerAngles = Vector3.zero;
+        sr.gameObject.transform.localScale = Vector3.one;
         sr.color = initCol;
         yield return null;
     }
