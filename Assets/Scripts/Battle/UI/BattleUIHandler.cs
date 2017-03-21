@@ -33,7 +33,7 @@ public class BattleUIHandler : MonoBehaviour {
         //TEMP SCRIPT FOR HEALTH/STAMINA/ENEMY. Need to hook this up to datamanager and enemy info later
         healthMax = 100;
         staminaMax = 100;
-        enemyMax = 100;
+        enemyMax = 1000;
         //TEMP
 
         health = healthMax;
@@ -96,6 +96,7 @@ public class BattleUIHandler : MonoBehaviour {
             enemyDropping = true;
             enemyDropDelay = maxDelay;
         }
+        BarPump(enemyAll, initScaleEnemy, 1.1f, 0.1f);
     }
 
     public void IncreaseEnemy(float healing)

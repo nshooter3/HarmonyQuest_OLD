@@ -27,7 +27,6 @@ public class Bullet : MonoBehaviour {
         direction = new Vector3 (0,1,0);
         startTrans = transform;
         speed = 1f;
-        damage = 1f;
         Reset();
     }
 
