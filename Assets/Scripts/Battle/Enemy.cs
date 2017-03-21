@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-    public float maxhealth, health;
+    public float maxhealth, health, damage;
     Vector3 dir;
     Rigidbody2D rb;
     SpriteRenderer sr;

@@ -553,7 +553,7 @@ GameObject:
   - component: {fileID: 491045691}
   - component: {fileID: 491045692}
   - component: {fileID: 491045693}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: TestEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -601,6 +601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxhealth: 200
   health: 0
+  damage: 10
 --- !u!50 &491045693
 Rigidbody2D:
   serializedVersion: 4

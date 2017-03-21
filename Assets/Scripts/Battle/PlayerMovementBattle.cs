@@ -208,5 +208,4 @@ public class PlayerMovementBattle : MonoBehaviour {
         transform.eulerAngles = Vector3.zero;
         yield return null;
     }
-
 }

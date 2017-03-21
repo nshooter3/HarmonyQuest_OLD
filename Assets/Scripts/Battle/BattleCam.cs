@@ -34,7 +34,7 @@ public class BattleCam : MonoBehaviour {
 
     public void CamShake()
     {
-        CamShake(Random.Range(0.1f, 0.3f));
+        CamShake(Random.Range(0.3f, 0.4f));
     }
 
     IEnumerator Shake(float mag)

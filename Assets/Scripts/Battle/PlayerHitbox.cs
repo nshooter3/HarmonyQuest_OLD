@@ -20,15 +20,35 @@ public class PlayerHitbox : MonoBehaviour {
         }
 	}
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
         if (curCooldown <= 0)
         {
+            Debug.Log("hit");
+            //Check for both bullet and enemy collisions
+            float damage = 0;
             if (col.gameObject.layer == LayerMask.NameToLayer("Bullet") && !col.gameObject.GetComponent<Bullet>().friendly)
             {
-                BattleUIHandler.instance.DecreaseHealth(col.gameObject.GetComponent<Bullet>().damage);
+                Bullet temp = col.gameObject.GetComponent<Bullet>();
+                damage = temp.damage;
+                temp.Reset();
             }
-            curCooldown = maxCooldown;
+            else if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                damage = col.gameObject.GetComponent<Enemy>().damage;
+            }
+
+            if (damage > 0)
+            {
+                BattleUIHandler.instance.DecreaseHealth(damage);
+                BattleCam.instance.CamShake();
+                curCooldown = maxCooldown;
+                if (BattleUIHandler.instance.health <= 0)
+                {
+                    //TODO Add transition to game over state here
+                    Destroy(gameObject);
+                }
+            }
         }
     }
 
