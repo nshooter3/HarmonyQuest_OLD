@@ -20,7 +20,7 @@ public class PlayerMovementBattle : MonoBehaviour {
 
     Vector3 initScale;
 
-    SpriteRenderer ren;
+    public SpriteRenderer ren;
 
     ParticleSystem dodge;
 
