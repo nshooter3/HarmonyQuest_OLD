@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BoundBullets : MonoBehaviour {
-
-    //Used to reset bullets that leave the game area.
+public class BoundEnemyAndEnemyBullets : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -15,16 +13,15 @@ public class BoundBullets : MonoBehaviour {
 	void Update () {
 		
 	}
-
-    void OnCollisionEnter2D(Collision2D col) {
-
-    }
-
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.layer == LayerMask.NameToLayer("Bullet") && col.gameObject.GetComponent<Bullet>().friendly)
+        if (col.gameObject.layer == LayerMask.NameToLayer("Bullet"))
         {
             col.gameObject.GetComponent<Bullet>().Reset();
+        }
+        else if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            Destroy(col.gameObject);
         }
     }
 }

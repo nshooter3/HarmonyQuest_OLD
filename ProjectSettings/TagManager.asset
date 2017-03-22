@@ -45,8 +45,17 @@ TagManager:
   - name: Background
     uniqueID: 3651190501
     locked: 0
+  - name: BattleBackground
+    uniqueID: 2570418687
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Battle
+    uniqueID: 3521576237
+    locked: 0
+  - name: BattleUI
+    uniqueID: 2567444097
     locked: 0
   - name: AbovePlayer
     uniqueID: 2378404207
@@ -56,13 +65,4 @@ TagManager:
     locked: 0
   - name: OverworldUI
     uniqueID: 2272899011
-    locked: 0
-  - name: BattleBackground
-    uniqueID: 2570418687
-    locked: 0
-  - name: Battle
-    uniqueID: 3521576237
-    locked: 0
-  - name: BattleUI
-    uniqueID: 2567444097
     locked: 0
