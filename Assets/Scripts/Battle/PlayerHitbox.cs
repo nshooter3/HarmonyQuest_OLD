@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class PlayerHitbox : MonoBehaviour {
 
+    public static PlayerHitbox instance;
+
     public float maxCooldown = 1f;
     public float curCooldown;
     float flashTimer;
     //Up number to increase flashing speed during invulnerability
     float flashSpeed = 6f;
 
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
+
+    public BoxCollider2D boxCol;
+
 	// Use this for initialization
 	void Start () {
-		
+        boxCol = GetComponent<BoxCollider2D>();
 	}
 	
 	// Update is called once per frame

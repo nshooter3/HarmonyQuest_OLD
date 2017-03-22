@@ -74,6 +74,7 @@ public class PlayerMovementBattle : MonoBehaviour {
             dashTimer -= Time.deltaTime;
             if (dashTimer <= 0)
             {
+                PlayerHitbox.instance.boxCol.enabled = true;
                 dashCooldown = maxDashCooldown;
                 ren.color = new Color(1, 1, 1, 1);
             }
@@ -98,6 +99,7 @@ public class PlayerMovementBattle : MonoBehaviour {
                     BattleUIHandler.instance.DecreaseStamina(dashCost);
                     regenCooldown = maxRegenCooldown;
                     dashTimer = maxDashTimer;
+                    PlayerHitbox.instance.boxCol.enabled = false;
                     dashDir = rb.velocity;
                     ren.color = new Color(1, 1, 1, 0.1f);
                     dodge.Play();
