@@ -381,7 +381,7 @@ GameObject:
   - component: {fileID: 334359780}
   - component: {fileID: 334359781}
   m_Layer: 17
-  m_Name: Quad
+  m_Name: CircleBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

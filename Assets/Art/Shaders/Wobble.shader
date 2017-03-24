@@ -50,12 +50,12 @@
 				fixed4 col = tex2D(_MainTex, i.uv);
 				// apply fog
 				UNITY_APPLY_FOG(i.fogCoord, col);
-				//col.r = col.r * _SinTime.z;
-				//col.g = col.g * _CosTime.w;
-				//col.b = col.b * _SinTime.y;
-				col.r = col.b * sin((i.uv.r * col.g + i.uv.g + _Time.y));
-				col.g = col.r * sin((i.uv.r + _Time.y + 1)) * col.b;
-				col.b = col.g * sin(i.uv.g + _Time.y * col.r);
+
+				col = tex2D(_MainTex, i.uv + float2(sin(i.vertex.y / (_SinTime.x*15 + 35)), sin(i.vertex.x/( _SinTime.x*15 + 35))));
+
+				col.r = col.r * _SinTime.x*.5;
+				col.g = col.g * _SinTime.y;
+				col.b = col.b*.7;
 
 				return col;
 			}
