@@ -11,6 +11,8 @@ public class PlayerHitbox : MonoBehaviour {
     float flashTimer;
     //Up number to increase flashing speed during invulnerability
     float flashSpeed = 6f;
+    //whether or not to play flashing animation after taking hit
+    bool shield = false;
 
     void Awake()
     {
@@ -32,18 +34,21 @@ public class PlayerHitbox : MonoBehaviour {
         if (curCooldown > 0)
         {
             curCooldown -= Time.deltaTime;
-            if (flashTimer > 0)
+            if (!shield)
             {
-                flashTimer -= Time.deltaTime;
-            }
-            else
-            {
-                flashTimer = maxCooldown / flashSpeed;
-                PlayerMovementBattle.instance.ren.enabled = !PlayerMovementBattle.instance.ren.enabled;
-            }
-            if (curCooldown <= 0)
-            {
-                PlayerMovementBattle.instance.ren.enabled = true;
+                if (flashTimer > 0)
+                {
+                    flashTimer -= Time.deltaTime;
+                }
+                else
+                {
+                    flashTimer = maxCooldown / flashSpeed;
+                    PlayerMovementBattle.instance.ren.enabled = !PlayerMovementBattle.instance.ren.enabled;
+                }
+                if (curCooldown <= 0)
+                {
+                    PlayerMovementBattle.instance.ren.enabled = true;
+                }
             }
         }
 	}
@@ -57,21 +62,35 @@ public class PlayerHitbox : MonoBehaviour {
             if (col.gameObject.layer == LayerMask.NameToLayer("Bullet") && !col.gameObject.GetComponent<Bullet>().friendly)
             {
                 Bullet temp = col.gameObject.GetComponent<Bullet>();
-                damage = temp.damage;
+                TakeDamage(temp.damage);
                 temp.Reset();
             }
             else if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                damage = col.gameObject.GetComponent<Enemy>().damage;
+                TakeDamage(col.gameObject.GetComponent<Enemy>().damage);
             }
+        }
+    }
 
-            if (damage > 0)
+    void TakeDamage(float damage)
+    {
+        if (damage > 0)
+        {
+            if (PlayerShield.instance.active)
+            {
+                BattleUIHandler.instance.DecreaseStamina(damage * 2f);
+                BattleCam.instance.CamShake();
+                curCooldown = maxCooldown;
+                shield = true;
+            }
+            else
             {
                 BattleUIHandler.instance.DecreaseHealth(damage);
                 BattleCam.instance.CamShake();
                 curCooldown = maxCooldown;
                 flashTimer = maxCooldown / flashSpeed;
                 PlayerMovementBattle.instance.ren.enabled = false;
+                shield = false;
                 if (BattleUIHandler.instance.health <= 0)
                 {
                     //TODO Add transition to game over state here

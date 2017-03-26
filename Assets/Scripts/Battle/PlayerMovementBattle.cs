@@ -23,6 +23,7 @@ public class PlayerMovementBattle : MonoBehaviour {
     public SpriteRenderer ren;
 
     ParticleSystem dodge;
+    public ParticleSystem shieldBreak;
 
     //Vars for dashing duration and direction
     float dashTimer = 0, maxDashTimer = 0.05f, dashCooldown = 0, maxDashCooldown = 0.1f;
@@ -32,6 +33,12 @@ public class PlayerMovementBattle : MonoBehaviour {
     
 
     Rigidbody2D rb;
+
+    //Generic var for functions that need to store stuff
+    float temp;
+
+    //Used to prevent shield from activating too early after a shield break
+    float shieldRegen = 0, maxShieldRegen = 0.5f;
 
     void Awake()
     {
@@ -62,8 +69,17 @@ public class PlayerMovementBattle : MonoBehaviour {
 
     private void Move(Vector3 dir)
     {
+        //Adjusts speed based on whether or not shield is active
+        if (PlayerShield.instance.active)
+        {
+            temp = 0.5f;
+        }
+        else
+        {
+            temp = 0.75f;
+        }
         //Applies movement based on vector3 from CheckForMove
-        rb.velocity = dir * actualSpeed*0.75f;
+        rb.velocity = dir * actualSpeed* temp;
     }
 
     private void CheckForKeyInput()
@@ -92,7 +108,7 @@ public class PlayerMovementBattle : MonoBehaviour {
             CheckDirectionalMovement();
 
             //Used to set speed depending on whether or not the player is dashing
-            if (InputManager.instance.shiftPress && rb.velocity.magnitude > 0 && dashCooldown <= 0)
+            if (InputManager.instance.shiftPress && rb.velocity.magnitude > 0 && dashCooldown <= 0 && !PlayerShield.instance.active)
             {
                 if (BattleUIHandler.instance.stamina > 0)
                 {
@@ -112,7 +128,26 @@ public class PlayerMovementBattle : MonoBehaviour {
             }
             else
             {
-                if (regenCooldown > 0)
+                if (BattleUIHandler.instance.stamina > 0 && shieldRegen > 0)
+                {
+                    shieldRegen -= Time.deltaTime;
+                }
+                if (PlayerShield.instance.active)
+                {
+                    BattleUIHandler.instance.DecreaseStamina(Time.deltaTime * staminaRegenRate*0.5f);
+                    if (BattleUIHandler.instance.stamina <= 0)
+                    {
+                        //Punish player for losing all stamina with shield up
+                        BattleUIHandler.instance.stamina = -50f;
+                        shieldBreak.Play();
+                        BattleCam.instance.CamShake();
+                        StartCoroutine(BattleUIHandler.instance.AlphaFlash(BattleUIHandler.instance.staminaFlash.GetComponent<SpriteRenderer>()));
+                        PlayerShield.instance.ToggleActive(false);
+                        shieldRegen = maxShieldRegen;
+                    }
+                    regenCooldown = 0;
+                }
+                else if (regenCooldown > 0)
                 {
                     regenCooldown -= Time.deltaTime;
                 }
@@ -125,24 +160,35 @@ public class PlayerMovementBattle : MonoBehaviour {
         //Used to determine firing patterns
         if (bulletCooldownCur <= 0)
         {
-            if (InputManager.instance.confirmHeld)
+            if (InputManager.instance.confirmHeld && InputManager.instance.backHeld)
             {
-                BulletPool.instance.SpawnNormalBullet(shootLeft.position);
-                BulletPool.instance.SpawnNormalBullet(shootRight.position);
-                bulletCooldownCur = bulletCooldownMax;
+                if (!PlayerShield.instance.active && BattleUIHandler.instance.stamina > 0 && shieldRegen <= 0)
+                {
+                    PlayerShield.instance.ToggleActive(true);
+                }
             }
-            else if (InputManager.instance.backHeld)
+            else
             {
-                BulletPool.instance.SpawnNormalBullet(transform.position, new Vector3(0, -1, 0));
-                BulletPool.instance.SpawnNormalBullet(shootUpperLeft.position, new Vector3(-1,1,0));
-                BulletPool.instance.SpawnNormalBullet(shootUpperRight.position, new Vector3(1, 1, 0));
-                bulletCooldownCur = bulletCooldownMax*2f;
-            }
-            else if (InputManager.instance.menuHeld)
-            {
-                BulletPool.instance.SpawnNormalBullet(shootLowerLeft.position, new Vector3(-1, -1, 0));
-                BulletPool.instance.SpawnNormalBullet(shootLowerRight.position, new Vector3(1, -1, 0));
-                bulletCooldownCur = bulletCooldownMax;
+                PlayerShield.instance.ToggleActive(false);
+                if (InputManager.instance.confirmHeld)
+                {
+                    BulletPool.instance.SpawnNormalBullet(shootLeft.position);
+                    BulletPool.instance.SpawnNormalBullet(shootRight.position);
+                    bulletCooldownCur = bulletCooldownMax;
+                }
+                else if (InputManager.instance.backHeld)
+                {
+                    BulletPool.instance.SpawnNormalBullet(transform.position, new Vector3(0, -1, 0));
+                    BulletPool.instance.SpawnNormalBullet(shootUpperLeft.position, new Vector3(-1, 1, 0));
+                    BulletPool.instance.SpawnNormalBullet(shootUpperRight.position, new Vector3(1, 1, 0));
+                    bulletCooldownCur = bulletCooldownMax * 2f;
+                }
+                else if (InputManager.instance.menuHeld)
+                {
+                    BulletPool.instance.SpawnNormalBullet(shootLowerLeft.position, new Vector3(-1, -1, 0));
+                    BulletPool.instance.SpawnNormalBullet(shootLowerRight.position, new Vector3(1, -1, 0));
+                    bulletCooldownCur = bulletCooldownMax;
+                }
             }
         }
         else
