@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour {
     SpriteRenderer sr;
     Color initCol, hitCol;
     float hitTimer = 0, maxHitTimer = 0.1f;
+    public Material mat;
 
 	// Use this for initialization
 	void Start () {
@@ -18,6 +19,7 @@ public class Enemy : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = dir*2;
         sr = GetComponentInChildren<SpriteRenderer>();
+        sr.material = mat;
         initCol = sr.color;
         hitCol = Color.red;
         health = maxhealth;
