@@ -6,8 +6,7 @@ public class PlayerShield : MonoBehaviour {
 
     SpriteRenderer sr;
     CircleCollider2D boxCol;
-    //if greater than 0, is currently being collided with
-    public int colCount;
+
     //whether or not shield is active
     public bool active;
     //determines the scale of the shield as stamina decreases
@@ -31,7 +30,6 @@ public class PlayerShield : MonoBehaviour {
         boxCol = GetComponent<CircleCollider2D>();
         sr.enabled = false;
         boxCol.enabled = false;
-        colCount = 0;
 	}
 	
 	// Update is called once per frame
@@ -50,19 +48,21 @@ public class PlayerShield : MonoBehaviour {
         transform.localScale = new Vector3(curSize, curSize, 1);
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    void OnTriggerStay2D(Collider2D col)
     {
-        if ((col.gameObject.layer == LayerMask.NameToLayer("Bullet") && !col.gameObject.GetComponent<Bullet>().friendly) || col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        if (PlayerHitbox.instance.curCooldown <= 0)
         {
-            colCount++;
-        }
-    }
-
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if ((col.gameObject.layer == LayerMask.NameToLayer("Bullet") && !col.gameObject.GetComponent<Bullet>().friendly) || col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            colCount--;
+            //Check for both bullet and enemy collisions
+            if (col.gameObject.layer == LayerMask.NameToLayer("Bullet") && !col.gameObject.GetComponent<Bullet>().friendly)
+            {
+                Bullet temp = col.gameObject.GetComponent<Bullet>();
+                PlayerHitbox.instance.TakeDamage(temp.damage, true);
+                temp.Reset();
+            }
+            else if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+            {
+                PlayerHitbox.instance.TakeDamage(col.gameObject.GetComponent<Enemy>().damage, true);
+            }
         }
     }
 
@@ -77,5 +77,9 @@ public class PlayerShield : MonoBehaviour {
         sr.enabled = active;
         boxCol.enabled = active;
         this.active = active;
+        if (PlayerHitbox.instance != null)
+        {
+            PlayerHitbox.instance.boxCol.enabled = !active;
+        }
     }
 }

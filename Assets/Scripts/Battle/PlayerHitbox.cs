@@ -71,11 +71,11 @@ public class PlayerHitbox : MonoBehaviour {
         }
     }
 
-    void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool shieldActive = false)
     {
         if (damage > 0)
         {
-            if (PlayerShield.instance.active)
+            if (shieldActive)
             {
                 BattleUIHandler.instance.DecreaseStamina(damage * 2f);
                 BattleCam.instance.CamShake();
@@ -93,7 +93,8 @@ public class PlayerHitbox : MonoBehaviour {
                 if (BattleUIHandler.instance.health <= 0)
                 {
                     //TODO Add transition to game over state here
-                    Destroy(gameObject);
+                    Destroy(PlayerMovementBattle.instance.gameObject);
+                    //Destroy(gameObject);
                 }
             }
         }

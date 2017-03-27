@@ -131,17 +131,6 @@ public class BattleUIHandler : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        /*
-        if (Input.GetKeyDown(KeyCode.Z)){
-            DecreaseEnemy(10);
-            BarPump(enemyAll, initScaleEnemy, 1.1f, 0.1f);
-        }
-        else if (Input.GetKeyDown(KeyCode.X))
-        {
-            IncreaseEnemy(10);
-        }
-        */
-
         if (healthDropping)
         {
             if (healthDropDelay > 0)
