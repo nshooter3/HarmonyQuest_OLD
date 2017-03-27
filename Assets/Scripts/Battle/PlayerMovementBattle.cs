@@ -140,6 +140,7 @@ public class PlayerMovementBattle : MonoBehaviour {
                         //Punish player for losing all stamina with shield up
                         BattleUIHandler.instance.stamina = -50f;
                         shieldBreak.Play();
+                        shieldHit.Play();
                         BattleCam.instance.CamShake();
                         StartCoroutine(BattleUIHandler.instance.AlphaFlash(BattleUIHandler.instance.staminaFlash.GetComponent<SpriteRenderer>()));
                         PlayerShield.instance.ToggleActive(false);

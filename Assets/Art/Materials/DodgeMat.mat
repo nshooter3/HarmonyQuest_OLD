@@ -7,7 +7,7 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: DodgeMat
-  m_Shader: {fileID: 203, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: 4800000, guid: 0a65a21132a192f439475161a69a1069, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -98,8 +98,20 @@ Material:
         name: _InvFade
       second: 1
     - first:
+        name: _MaxX
+      second: 1000
+    - first:
+        name: _MaxY
+      second: 1000
+    - first:
         name: _Metallic
       second: 0
+    - first:
+        name: _MinX
+      second: -1000
+    - first:
+        name: _MinY
+      second: -1000
     - first:
         name: _Mode
       second: 0

@@ -79,7 +79,11 @@ public class PlayerHitbox : MonoBehaviour {
             {
                 BattleUIHandler.instance.DecreaseStamina(damage * 2f);
                 BattleCam.instance.CamShake();
-                PlayerMovementBattle.instance.shieldHit.Play();
+                //Prevent shield hit particle from firing twice upon breaking
+                if (BattleUIHandler.instance.stamina > 0)
+                {
+                    PlayerMovementBattle.instance.shieldHit.Play();
+                }
                 curCooldown = maxCooldown;
                 shield = true;
             }

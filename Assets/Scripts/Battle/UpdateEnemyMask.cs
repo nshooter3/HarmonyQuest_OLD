@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UpdateEnemyMask : MonoBehaviour {
 
-    public Material mat;
+    public Material[] mat;
 
 	// Use this for initialization
 	void Start () {
@@ -21,11 +21,13 @@ public class UpdateEnemyMask : MonoBehaviour {
 
     void UpdateMatParams()
     {
-        Debug.Log("Update mat params");
-        mat.SetFloat("_MinX", transform.position.x - transform.localScale.x / 2f);
-        mat.SetFloat("_MaxX", transform.position.x + transform.localScale.x / 2f);
-        mat.SetFloat("_MinY", transform.position.y - transform.localScale.y / 2f);
-        mat.SetFloat("_MaxY", transform.position.y + transform.localScale.y / 2f);
+        foreach (Material m in mat)
+        {
+            m.SetFloat("_MinX", transform.position.x - transform.localScale.x / 2f);
+            m.SetFloat("_MaxX", transform.position.x + transform.localScale.x / 2f);
+            m.SetFloat("_MinY", transform.position.y - transform.localScale.y / 2f);
+            m.SetFloat("_MaxY", transform.position.y + transform.localScale.y / 2f);
+        }
         transform.hasChanged = false;
     }
 }

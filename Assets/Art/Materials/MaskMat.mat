@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: EnemyMaskMat
+  m_Name: MaskMat
   m_Shader: {fileID: 4800000, guid: 0a65a21132a192f439475161a69a1069, type: 3}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
