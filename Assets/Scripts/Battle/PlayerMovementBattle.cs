@@ -23,7 +23,7 @@ public class PlayerMovementBattle : MonoBehaviour {
     public SpriteRenderer ren;
 
     ParticleSystem dodge;
-    public ParticleSystem shieldBreak;
+    public ParticleSystem shieldBreak, shieldHit;
 
     //Vars for dashing duration and direction
     float dashTimer = 0, maxDashTimer = 0.05f, dashCooldown = 0, maxDashCooldown = 0.1f;

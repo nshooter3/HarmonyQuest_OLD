@@ -79,6 +79,7 @@ public class PlayerHitbox : MonoBehaviour {
             {
                 BattleUIHandler.instance.DecreaseStamina(damage * 2f);
                 BattleCam.instance.CamShake();
+                PlayerMovementBattle.instance.shieldHit.Play();
                 curCooldown = maxCooldown;
                 shield = true;
             }
