@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour {
 
     public float maxhealth, health, damage;
     Vector3 dir;
+    Vector3 initPos;
     Rigidbody2D rb;
     SpriteRenderer sr;
     Color initCol, hitCol;
@@ -20,6 +21,7 @@ public class Enemy : MonoBehaviour {
         initCol = sr.color;
         hitCol = Color.red;
         health = maxhealth;
+        initPos = transform.position;
 	}
 	
 	// Update is called once per frame
@@ -43,7 +45,7 @@ public class Enemy : MonoBehaviour {
             if (health <= 0)
             {
                 BattleUIHandler.instance.DecreaseEnemy(maxhealth);
-                Destroy(gameObject);
+                Destroy();
             }
         }
     }
@@ -66,6 +68,13 @@ public class Enemy : MonoBehaviour {
         sr.gameObject.transform.localScale = Vector3.one;
         sr.color = initCol;
         yield return null;
+    }
+
+    public void Destroy()
+    {
+        //TODO make this NOT reset the enemy to their startPos
+        transform.position = initPos;
+        health = maxhealth;
     }
 
 }

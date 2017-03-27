@@ -58,7 +58,6 @@ public class PlayerHitbox : MonoBehaviour {
         if (curCooldown <= 0)
         {
             //Check for both bullet and enemy collisions
-            float damage = 0;
             if (col.gameObject.layer == LayerMask.NameToLayer("Bullet") && !col.gameObject.GetComponent<Bullet>().friendly)
             {
                 Bullet temp = col.gameObject.GetComponent<Bullet>();

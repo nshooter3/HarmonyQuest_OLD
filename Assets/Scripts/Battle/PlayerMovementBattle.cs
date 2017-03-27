@@ -134,7 +134,7 @@ public class PlayerMovementBattle : MonoBehaviour {
                 }
                 if (PlayerShield.instance.active)
                 {
-                    BattleUIHandler.instance.DecreaseStamina(Time.deltaTime * staminaRegenRate*0.5f);
+                    BattleUIHandler.instance.DecreaseStamina(Time.deltaTime * staminaRegenRate*0.75f);
                     if (BattleUIHandler.instance.stamina <= 0)
                     {
                         //Punish player for losing all stamina with shield up

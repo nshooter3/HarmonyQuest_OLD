@@ -21,7 +21,7 @@ public class BoundEnemyAndEnemyBullets : MonoBehaviour {
         }
         else if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
         {
-            Destroy(col.gameObject);
+            col.gameObject.GetComponent<Enemy>().Destroy();
         }
     }
 }
