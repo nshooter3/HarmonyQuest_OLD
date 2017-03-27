@@ -93,7 +93,7 @@ Material:
       second: 1
     - first:
         name: _MaxX
-      second: 2.4381227
+      second: 4.1499963
     - first:
         name: _MaxY
       second: 3.7437482
@@ -102,7 +102,7 @@ Material:
       second: 0
     - first:
         name: _MinX
-      second: -2.4381227
+      second: -4.1499963
     - first:
         name: _MinY
       second: -3.7437482
