@@ -96,19 +96,19 @@ Material:
       second: 1
     - first:
         name: _MaxX
-      second: 1000
+      second: 4.1499963
     - first:
         name: _MaxY
-      second: 1000
+      second: 3.7437482
     - first:
         name: _Metallic
       second: 0
     - first:
         name: _MinX
-      second: -1000
+      second: -4.1499963
     - first:
         name: _MinY
-      second: -1000
+      second: -3.7437482
     - first:
         name: _Mode
       second: 0
