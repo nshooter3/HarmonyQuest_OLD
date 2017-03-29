@@ -14,6 +14,8 @@ public class PlayerHitbox : MonoBehaviour {
     //whether or not to play flashing animation after taking hit
     bool shield = false;
 
+    BoxCollider2D boxCol;
+
     void Awake()
     {
         if (instance == null)
@@ -22,12 +24,15 @@ public class PlayerHitbox : MonoBehaviour {
             Destroy(gameObject);
     }
 
-    public BoxCollider2D boxCol;
-
 	// Use this for initialization
 	void Start () {
         boxCol = GetComponent<BoxCollider2D>();
 	}
+
+    public void ToggleBoxCol(bool toggle)
+    {
+        boxCol.enabled = toggle;
+    }
 	
 	// Update is called once per frame
 	void Update () {

@@ -90,7 +90,7 @@ public class PlayerMovementBattle : MonoBehaviour {
             dashTimer -= Time.deltaTime;
             if (dashTimer <= 0)
             {
-                PlayerHitbox.instance.boxCol.enabled = true;
+                PlayerHitbox.instance.GetComponent<BoxCollider2D>().enabled = true;
                 dashCooldown = maxDashCooldown;
                 ren.color = new Color(1, 1, 1, 1);
             }
@@ -115,7 +115,7 @@ public class PlayerMovementBattle : MonoBehaviour {
                     BattleUIHandler.instance.DecreaseStamina(dashCost);
                     regenCooldown = maxRegenCooldown;
                     dashTimer = maxDashTimer;
-                    PlayerHitbox.instance.boxCol.enabled = false;
+                    PlayerHitbox.instance.GetComponent<BoxCollider2D>().enabled = false;
                     dashDir = rb.velocity;
                     ren.color = new Color(1, 1, 1, 0.1f);
                     dodge.Play();
@@ -170,7 +170,10 @@ public class PlayerMovementBattle : MonoBehaviour {
             }
             else
             {
-                PlayerShield.instance.ToggleActive(false);
+                if (PlayerShield.instance.active)
+                {
+                    PlayerShield.instance.ToggleActive(false);
+                }
                 if (InputManager.instance.confirmHeld)
                 {
                     BulletPool.instance.SpawnNormalBullet(shootLeft.position);

@@ -79,7 +79,7 @@ public class PlayerShield : MonoBehaviour {
         this.active = active;
         if (PlayerHitbox.instance != null)
         {
-            PlayerHitbox.instance.boxCol.enabled = !active;
+            PlayerHitbox.instance.ToggleBoxCol(!active);
         }
     }
 }
