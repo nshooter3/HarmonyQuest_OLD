@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerShield : MonoBehaviour {
 
     SpriteRenderer sr;
-    CircleCollider2D boxCol;
+    CircleCollider2D cirCol;
 
     //whether or not shield is active
     public bool active;
@@ -27,9 +27,9 @@ public class PlayerShield : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         sr = GetComponent<SpriteRenderer>();
-        boxCol = GetComponent<CircleCollider2D>();
+        cirCol = GetComponent<CircleCollider2D>();
         sr.enabled = false;
-        boxCol.enabled = false;
+        cirCol.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -75,7 +75,7 @@ public class PlayerShield : MonoBehaviour {
             AdjustShieldSize();
         }
         sr.enabled = active;
-        boxCol.enabled = active;
+        cirCol.enabled = active;
         this.active = active;
         if (PlayerHitbox.instance != null)
         {

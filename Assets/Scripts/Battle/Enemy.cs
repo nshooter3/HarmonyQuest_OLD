@@ -42,13 +42,18 @@ public class Enemy : MonoBehaviour {
         {
             Bullet temp = col.gameObject.GetComponent<Bullet>();
             temp.Reset();
-            health -= temp.damage;
-            StartCoroutine(GetHit());
-            if (health <= 0)
-            {
-                BattleUIHandler.instance.DecreaseEnemy(maxhealth);
-                Destroy();
-            }
+            TakeDamage(temp.damage);
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        health -= damage;
+        StartCoroutine(GetHit());
+        if (health <= 0)
+        {
+            BattleUIHandler.instance.DecreaseEnemy(maxhealth);
+            Destroy();
         }
     }
 

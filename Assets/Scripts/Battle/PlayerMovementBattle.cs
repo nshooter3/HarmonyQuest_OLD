@@ -37,8 +37,8 @@ public class PlayerMovementBattle : MonoBehaviour {
     //Generic var for functions that need to store stuff
     float temp;
 
-    //Used to prevent shield from activating too early after a shield break
-    float shieldRegen = 0, maxShieldRegen = 0.5f;
+    //Used to prevent specials from activating too early after running out of stamina
+    float specialRegen = 0, maxspecialRegen = 0.5f;
 
     void Awake()
     {
@@ -70,7 +70,7 @@ public class PlayerMovementBattle : MonoBehaviour {
     private void Move(Vector3 dir)
     {
         //Adjusts speed based on whether or not shield is active
-        if (PlayerShield.instance.active)
+        if (PlayerShield.instance.active || PlayerKillzone.instance.active)
         {
             temp = 0.5f;
         }
@@ -84,6 +84,7 @@ public class PlayerMovementBattle : MonoBehaviour {
 
     private void CheckForKeyInput()
     {
+        //If player is dashing, move based on that
         if (dashTimer > 0)
         {
             Move(dashDir * 1.3f);
@@ -108,7 +109,7 @@ public class PlayerMovementBattle : MonoBehaviour {
             CheckDirectionalMovement();
 
             //Used to set speed depending on whether or not the player is dashing
-            if (InputManager.instance.shiftPress && rb.velocity.magnitude > 0 && dashCooldown <= 0 && !PlayerShield.instance.active)
+            if (InputManager.instance.shiftPress && rb.velocity.magnitude > 0 && dashCooldown <= 0 && !PlayerShield.instance.active && !PlayerKillzone.instance.active)
             {
                 if (BattleUIHandler.instance.stamina > 0)
                 {
@@ -128,9 +129,12 @@ public class PlayerMovementBattle : MonoBehaviour {
             }
             else
             {
-                if (BattleUIHandler.instance.stamina > 0 && shieldRegen > 0)
+                if (BattleUIHandler.instance.stamina > 0)
                 {
-                    shieldRegen -= Time.deltaTime;
+                    if (specialRegen > 0)
+                    {
+                        specialRegen -= Time.deltaTime;
+                    }
                 }
                 if (PlayerShield.instance.active)
                 {
@@ -144,7 +148,17 @@ public class PlayerMovementBattle : MonoBehaviour {
                         BattleCam.instance.CamShake();
                         StartCoroutine(BattleUIHandler.instance.AlphaFlash(BattleUIHandler.instance.staminaFlash.GetComponent<SpriteRenderer>()));
                         PlayerShield.instance.ToggleActive(false);
-                        shieldRegen = maxShieldRegen;
+                        specialRegen = maxspecialRegen;
+                    }
+                    regenCooldown = 0;
+                }
+                else if (PlayerKillzone.instance.active)
+                {
+                    BattleUIHandler.instance.DecreaseStamina(Time.deltaTime * staminaRegenRate*2);
+                    if (BattleUIHandler.instance.stamina <= 0)
+                    {
+                        PlayerKillzone.instance.ToggleActive(false);
+                        specialRegen = maxspecialRegen;
                     }
                     regenCooldown = 0;
                 }
@@ -163,7 +177,7 @@ public class PlayerMovementBattle : MonoBehaviour {
         {
             if (InputManager.instance.confirmHeld && InputManager.instance.backHeld)
             {
-                if (!PlayerShield.instance.active && BattleUIHandler.instance.stamina > 0 && shieldRegen <= 0)
+                if (!PlayerShield.instance.active && BattleUIHandler.instance.stamina > 0 && specialRegen <= 0)
                 {
                     PlayerShield.instance.ToggleActive(true);
                 }
@@ -174,24 +188,38 @@ public class PlayerMovementBattle : MonoBehaviour {
                 {
                     PlayerShield.instance.ToggleActive(false);
                 }
-                if (InputManager.instance.confirmHeld)
+                if (InputManager.instance.confirmHeld && InputManager.instance.menuHeld)
                 {
-                    BulletPool.instance.SpawnNormalBullet(shootLeft.position);
-                    BulletPool.instance.SpawnNormalBullet(shootRight.position);
-                    bulletCooldownCur = bulletCooldownMax;
+                    if (!PlayerKillzone.instance.active && BattleUIHandler.instance.stamina > 0 && specialRegen <= 0)
+                    {
+                        PlayerKillzone.instance.ToggleActive(true);
+                    }
                 }
-                else if (InputManager.instance.backHeld)
+                else
                 {
-                    BulletPool.instance.SpawnNormalBullet(transform.position, new Vector3(0, -1, 0));
-                    BulletPool.instance.SpawnNormalBullet(shootUpperLeft.position, new Vector3(-1, 1, 0));
-                    BulletPool.instance.SpawnNormalBullet(shootUpperRight.position, new Vector3(1, 1, 0));
-                    bulletCooldownCur = bulletCooldownMax * 2f;
-                }
-                else if (InputManager.instance.menuHeld)
-                {
-                    BulletPool.instance.SpawnNormalBullet(shootLowerLeft.position, new Vector3(-1, -1, 0));
-                    BulletPool.instance.SpawnNormalBullet(shootLowerRight.position, new Vector3(1, -1, 0));
-                    bulletCooldownCur = bulletCooldownMax;
+                    if (PlayerKillzone.instance.active)
+                    {
+                        PlayerKillzone.instance.ToggleActive(false);
+                    }
+                    if (InputManager.instance.confirmHeld)
+                    {
+                        BulletPool.instance.SpawnNormalBullet(shootLeft.position);
+                        BulletPool.instance.SpawnNormalBullet(shootRight.position);
+                        bulletCooldownCur = bulletCooldownMax;
+                    }
+                    else if (InputManager.instance.backHeld)
+                    {
+                        BulletPool.instance.SpawnNormalBullet(transform.position, new Vector3(0, -1, 0));
+                        BulletPool.instance.SpawnNormalBullet(shootUpperLeft.position, new Vector3(-1, 1, 0));
+                        BulletPool.instance.SpawnNormalBullet(shootUpperRight.position, new Vector3(1, 1, 0));
+                        bulletCooldownCur = bulletCooldownMax * 2f;
+                    }
+                    else if (InputManager.instance.menuHeld)
+                    {
+                        BulletPool.instance.SpawnNormalBullet(shootLowerLeft.position, new Vector3(-1, -1, 0));
+                        BulletPool.instance.SpawnNormalBullet(shootLowerRight.position, new Vector3(1, -1, 0));
+                        bulletCooldownCur = bulletCooldownMax;
+                    }
                 }
             }
         }
