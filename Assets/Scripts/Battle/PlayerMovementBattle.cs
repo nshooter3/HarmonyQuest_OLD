@@ -159,6 +159,7 @@ public class PlayerMovementBattle : MonoBehaviour {
                     {
                         PlayerKillzone.instance.ToggleActive(false);
                         specialRegen = maxspecialRegen;
+                        StartCoroutine(BattleUIHandler.instance.AlphaFlash(BattleUIHandler.instance.staminaFlash.GetComponent<SpriteRenderer>()));
                     }
                     regenCooldown = 0;
                 }
