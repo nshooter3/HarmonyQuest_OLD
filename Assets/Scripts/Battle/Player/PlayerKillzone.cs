@@ -31,7 +31,7 @@ public class PlayerKillzone : MonoBehaviour {
 	void Start () {
         sr = GetComponent<SpriteRenderer>();
         col = sr.color;
-        initAlpha = col[3];
+        initAlpha = col.w;
         cirCol = GetComponent<CircleCollider2D>();
         sr.enabled = false;
         cirCol.enabled = false;
@@ -54,7 +54,7 @@ public class PlayerKillzone : MonoBehaviour {
                 }
                 cooldown = maxCooldown;
             }
-            col[3] = Mathf.Lerp(initAlpha/12f, initAlpha, (BattleUIHandler.instance.stamina/ BattleUIHandler.instance.staminaMax));
+            col.w = Mathf.Lerp(initAlpha/12f, initAlpha, (BattleUIHandler.instance.stamina/ BattleUIHandler.instance.staminaMax));
             sr.color = col;
         }
 	}

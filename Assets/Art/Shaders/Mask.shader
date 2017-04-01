@@ -20,6 +20,7 @@ Shader "Battle/Mask"
 
 			Pass
 			{
+				ZTest Off
 				Blend SrcAlpha OneMinusSrcAlpha
 				CGPROGRAM
 				#pragma vertex vert
