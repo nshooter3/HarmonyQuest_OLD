@@ -33,7 +33,7 @@ public class Reticule : MonoBehaviour {
     public void TriggerReticuleAction(Vector3 pos)
     {
         active = true;
-        transform.position = pos;
+        transform.position = new Vector3(pos.x + Random.Range(-0.2f, 0.2f), pos.y + Random.Range(-0.2f, 0.2f), pos.z);
         lr.SetPosition(0, transform.position);
         StartCoroutine(ReticuleAction());
     }
