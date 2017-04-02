@@ -30,9 +30,11 @@ public class Reticule : MonoBehaviour {
         }
 	}
 
-    public void Trigger()
+    public void TriggerReticuleAction(Vector3 pos)
     {
         active = true;
+        transform.position = pos;
+        lr.SetPosition(0, transform.position);
         StartCoroutine(ReticuleAction());
     }
 
@@ -52,6 +54,7 @@ public class Reticule : MonoBehaviour {
                 lr.enabled = false;
             }
         }
+        sr.color = col;
         active = false;
     }
 }

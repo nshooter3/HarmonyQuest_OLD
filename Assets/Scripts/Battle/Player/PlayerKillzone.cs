@@ -14,8 +14,8 @@ public class PlayerKillzone : MonoBehaviour {
     List<Enemy> curCols = new List<Enemy>();
 
     //Cooldown for zap attack
-    float cooldown, maxCooldown = 0.05f;
-    float damage = 30f;
+    float cooldown, maxCooldown = 0.1f;
+    float damage = 60f;
 
     public static PlayerKillzone instance;
 
@@ -50,7 +50,9 @@ public class PlayerKillzone : MonoBehaviour {
                 Debug.Log(curCols.Count);
                 if (curCols.Count > 0)
                 {
-                    curCols[Random.Range(0, curCols.Count)].TakeDamage(damage);
+                    int ran = Random.Range(0, curCols.Count);
+                    BulletPool.instance.SpawnReticule(curCols[ran].transform.position);
+                    curCols[ran].TakeDamage(damage);
                 }
                 cooldown = maxCooldown;
             }

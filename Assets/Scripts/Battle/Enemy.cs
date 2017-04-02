@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour {
     Vector3 initPos;
     Rigidbody2D rb;
     SpriteRenderer sr;
+    Collider2D col;
     Color initCol, hitCol;
     float hitTimer = 0, maxHitTimer = 0.1f;
     public Material mat;
@@ -19,6 +20,7 @@ public class Enemy : MonoBehaviour {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = dir*2;
         sr = GetComponentInChildren<SpriteRenderer>();
+        col = GetComponent<Collider2D>();
         sr.material = mat;
         initCol = sr.color;
         hitCol = Color.red;
@@ -82,6 +84,6 @@ public class Enemy : MonoBehaviour {
         //TODO make this NOT reset the enemy to their startPos
         transform.position = initPos;
         health = maxhealth;
+        //Destroy(this.gameObject);y
     }
-
 }

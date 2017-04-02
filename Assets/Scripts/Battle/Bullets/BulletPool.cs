@@ -7,6 +7,7 @@ public class BulletPool : MonoBehaviour {
     public static BulletPool instance;
 
     public Bullet[] normalBullets;
+    public Reticule[] reticules;
 
     void Awake()
     {
@@ -30,6 +31,19 @@ public class BulletPool : MonoBehaviour {
     public void SpawnNormalBullet(Vector3 pos)
     {
         SpawnNormalBullet(pos, new Vector3(0, 1, 0));
+    }
+
+    public void SpawnReticule(Vector3 pos)
+    {
+        Reticule temp = (Reticule)FindAvailableReticule(reticules);
+        if (temp != null)
+        {
+            temp.TriggerReticuleAction(pos);
+        }
+        else
+        {
+            Debug.LogError("No reticules available");
+        }
     }
 
     //Attempt to load a normal bullet
@@ -59,12 +73,29 @@ public class BulletPool : MonoBehaviour {
         return null;
     }
 
+    private Reticule FindAvailableReticule(Reticule[] list)
+    {
+        for (int i = 0; i < list.Length; i++)
+        {
+            if (!list[i].active)
+            {
+                return list[i];
+            }
+        }
+        return null;
+    }
+
     private void InitPool()
     {
         for (int i = 0; i < normalBullets.Length; i++)
         {
             normalBullets[i] = Instantiate(normalBullets[i]);
             normalBullets[i].transform.parent = gameObject.transform;
+        }
+        for (int i = 0; i < reticules.Length; i++)
+        {
+            reticules[i] = Instantiate(reticules[i]);
+            reticules[i].transform.parent = gameObject.transform;
         }
     }
 }
