@@ -202,7 +202,26 @@ public class PlayerMovementBattle : MonoBehaviour {
                     {
                         PlayerKillzone.instance.ToggleActive(false);
                     }
-                    if (InputManager.instance.confirmHeld)
+
+                    if (InputManager.instance.backPress && InputManager.instance.menuPress)
+                    {
+                        if (Bomb.instance.idle)
+                        {
+                            if (BattleUIHandler.instance.stamina > 0)
+                            {
+                                Bomb.instance.Plant(transform.position);
+                            }
+                            else
+                            {
+                                StartCoroutine(BattleUIHandler.instance.AlphaFlash(BattleUIHandler.instance.staminaFlash.GetComponent<SpriteRenderer>()));
+                            }
+                        }
+                        else if (Bomb.instance.planted)
+                        {
+                            Bomb.instance.Boom();
+                        }
+                    }
+                    else if (InputManager.instance.confirmHeld)
                     {
                         BulletPool.instance.SpawnNormalBullet(shootLeft.position);
                         BulletPool.instance.SpawnNormalBullet(shootRight.position);
