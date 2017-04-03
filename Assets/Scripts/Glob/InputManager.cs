@@ -12,6 +12,9 @@ public class InputManager : MonoBehaviour
     public bool confirmPress = false, backPress = false, menuPress = false, upPress = false, downPress = false, leftPress = false, rightPress = false, shiftPress = false;
     public bool confirmRelease = false, backRelease = false, menuRelease = false, upRelease = false, downRelease = false, leftRelease = false, rightRelease = false, shiftRelease = false;
     public bool confirmHeld = false, backHeld = false, menuHeld = false, upHeld = false, downHeld = false, leftHeld = false, rightHeld = false, shiftHeld = false;
+    public bool shoot1 = false, shoot2 = false, shoot3 = false, shield = false, killzone = false, bomb = false, dash = false;
+
+    public bool waitForBombRelease = false;
 
     public static InputManager instance;
 
@@ -29,7 +32,7 @@ public class InputManager : MonoBehaviour
 
     }
 
-    // Update is called once per frame
+    // Call this function to update
     public void UpdateInput()
     {
         ResetVars();
@@ -40,6 +43,7 @@ public class InputManager : MonoBehaviour
     //Updates vars based on keyboard input
     private void UpdateKeyboard()
     {
+
         //Up
         if (Input.GetKey(KeyCode.UpArrow)){
             upHeld = true;
@@ -99,6 +103,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             confirmHeld = true;
+            shoot1 = true;
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
@@ -113,6 +118,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
         {
             backHeld = true;
+            shoot2 = true;
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
@@ -127,6 +133,7 @@ public class InputManager : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             menuHeld = true;
+            shoot3 = true;
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
@@ -145,11 +152,37 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.RightShift))
         {
             shiftPress = true;
+            dash = true;
         }
         if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
         {
             shiftRelease = true;
         }
+
+        //Shield
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
+        {
+            shield = true;
+        }
+
+        //Killzone
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+        {
+            killzone = true;
+        }
+
+        //Check to prevent bomb from firing multiple times
+        if (waitForBombRelease && (!Input.GetKey(KeyCode.S) || !Input.GetKey(KeyCode.D)))
+        {
+            waitForBombRelease = false;
+        }
+
+        //Bomb
+        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+        {
+            bomb = true;
+        }
+
     }
 
     //Resets all public variables
@@ -179,5 +212,12 @@ public class InputManager : MonoBehaviour
         shiftPress = false;
         shiftRelease = false;
         shiftHeld = false;
+        shoot1 = false;
+        shoot2 = false;
+        shoot3 = false;
+        dash = false;
+        shield = false;
+        killzone = false;
+        bomb = false;
     }
 }

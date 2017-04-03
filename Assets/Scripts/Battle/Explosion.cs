@@ -10,7 +10,7 @@ public class Explosion : MonoBehaviour {
     Vector4 color, initColor;
     bool active = false;
 
-    float damage = 500;
+    float damage = 100;
 
     // Use this for initialization
     void Start () {

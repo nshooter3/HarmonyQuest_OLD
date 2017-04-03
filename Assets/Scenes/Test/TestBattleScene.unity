@@ -8020,7 +8020,7 @@ MonoBehaviour:
   planted: 0
   idle: 1
   boom: 1
-  staminaCost: 80
+  staminaCost: 40
 --- !u!1 &1550669142
 GameObject:
   m_ObjectHideFlags: 0
