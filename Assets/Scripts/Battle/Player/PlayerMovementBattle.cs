@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerMovementBattle : MonoBehaviour {
+public class PlayerMovementBattle : MonoBehaviour
+{
 
     public static PlayerMovementBattle instance;
 
@@ -30,7 +31,7 @@ public class PlayerMovementBattle : MonoBehaviour {
     Vector3 dashDir;
 
     public Transform shootLeft, shootUpperLeft, shootLowerLeft, shootRight, shootUpperRight, shootLowerRight;
-    
+
 
     Rigidbody2D rb;
 
@@ -49,7 +50,8 @@ public class PlayerMovementBattle : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         initScale = transform.localScale;
         speed = 6f;//Stored value
         actualSpeed = speed;//Modified value that is actually used
@@ -60,12 +62,13 @@ public class PlayerMovementBattle : MonoBehaviour {
         ren = GetComponent<SpriteRenderer>();
         dodge = GetComponentInChildren<ParticleSystem>();
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         InputManager.instance.UpdateInput();
         CheckForKeyInput();
-	}
+    }
 
     private void Move(Vector3 dir)
     {
@@ -79,7 +82,7 @@ public class PlayerMovementBattle : MonoBehaviour {
             temp = 0.75f;
         }
         //Applies movement based on vector3 from CheckForMove
-        rb.velocity = dir * actualSpeed* temp;
+        rb.velocity = dir * actualSpeed * temp;
     }
 
     private void CheckForKeyInput()
@@ -109,7 +112,7 @@ public class PlayerMovementBattle : MonoBehaviour {
             CheckDirectionalMovement();
 
             //Used to set speed depending on whether or not the player is dashing
-            if (InputManager.instance.shiftPress && rb.velocity.magnitude > 0 && dashCooldown <= 0 && !PlayerShield.instance.active && !PlayerKillzone.instance.active)
+            if (InputManager.instance.dash && rb.velocity.magnitude > 0 && dashCooldown <= 0 && !PlayerShield.instance.active && !PlayerKillzone.instance.active)
             {
                 if (BattleUIHandler.instance.stamina > 0)
                 {
@@ -154,7 +157,7 @@ public class PlayerMovementBattle : MonoBehaviour {
                 }
                 else if (PlayerKillzone.instance.active)
                 {
-                    BattleUIHandler.instance.DecreaseStamina(Time.deltaTime * staminaRegenRate*2);
+                    BattleUIHandler.instance.DecreaseStamina(Time.deltaTime * staminaRegenRate * 2);
                     if (BattleUIHandler.instance.stamina <= 0)
                     {
                         PlayerKillzone.instance.ToggleActive(false);
@@ -174,42 +177,46 @@ public class PlayerMovementBattle : MonoBehaviour {
             }
         }
         //Used to determine firing patterns
-        if (bulletCooldownCur <= 0)
+        if (InputManager.instance.shield)
         {
-            if (InputManager.instance.confirmHeld && InputManager.instance.backHeld)
+            bulletCooldownCur = 0;
+            if (!PlayerShield.instance.active && BattleUIHandler.instance.stamina > 0 && specialRegen <= 0)
             {
-                if (!PlayerShield.instance.active && BattleUIHandler.instance.stamina > 0 && specialRegen <= 0)
+                PlayerShield.instance.ToggleActive(true);
+            }
+        }
+        else
+        {
+            if (PlayerShield.instance.active)
+            {
+                PlayerShield.instance.ToggleActive(false);
+            }
+            if (InputManager.instance.killzone)
+            {
+                bulletCooldownCur = 0;
+                if (!PlayerKillzone.instance.active && BattleUIHandler.instance.stamina > 0 && specialRegen <= 0)
                 {
-                    PlayerShield.instance.ToggleActive(true);
+                    PlayerKillzone.instance.ToggleActive(true);
                 }
             }
             else
             {
-                if (PlayerShield.instance.active)
+                if (PlayerKillzone.instance.active)
                 {
-                    PlayerShield.instance.ToggleActive(false);
+                    PlayerKillzone.instance.ToggleActive(false);
                 }
-                if (InputManager.instance.confirmHeld && InputManager.instance.menuHeld)
-                {
-                    if (!PlayerKillzone.instance.active && BattleUIHandler.instance.stamina > 0 && specialRegen <= 0)
-                    {
-                        PlayerKillzone.instance.ToggleActive(true);
-                    }
-                }
-                else
-                {
-                    if (PlayerKillzone.instance.active)
-                    {
-                        PlayerKillzone.instance.ToggleActive(false);
-                    }
 
-                    if (InputManager.instance.backPress && InputManager.instance.menuPress)
+                if (InputManager.instance.bomb)
+                {
+                    if (!InputManager.instance.waitForBombRelease)
                     {
+                        bulletCooldownCur = 0;
                         if (Bomb.instance.idle)
                         {
                             if (BattleUIHandler.instance.stamina > 0)
                             {
                                 Bomb.instance.Plant(transform.position);
+                                InputManager.instance.waitForBombRelease = true;
                             }
                             else
                             {
@@ -219,33 +226,37 @@ public class PlayerMovementBattle : MonoBehaviour {
                         else if (Bomb.instance.planted)
                         {
                             Bomb.instance.Boom();
+                            InputManager.instance.waitForBombRelease = true;
                         }
                     }
-                    else if (InputManager.instance.confirmHeld)
+                }
+                else if (bulletCooldownCur <= 0)
+                {
+                    if (InputManager.instance.shoot1)
                     {
                         BulletPool.instance.SpawnNormalBullet(shootLeft.position);
                         BulletPool.instance.SpawnNormalBullet(shootRight.position);
                         bulletCooldownCur = bulletCooldownMax;
                     }
-                    else if (InputManager.instance.backHeld)
+                    else if (InputManager.instance.shoot2)
                     {
                         BulletPool.instance.SpawnNormalBullet(transform.position, new Vector3(0, -1, 0));
                         BulletPool.instance.SpawnNormalBullet(shootUpperLeft.position, new Vector3(-1, 1, 0));
                         BulletPool.instance.SpawnNormalBullet(shootUpperRight.position, new Vector3(1, 1, 0));
                         bulletCooldownCur = bulletCooldownMax * 2f;
                     }
-                    else if (InputManager.instance.menuHeld)
+                    else if (InputManager.instance.shoot3)
                     {
                         BulletPool.instance.SpawnNormalBullet(shootLowerLeft.position, new Vector3(-1, -1, 0));
                         BulletPool.instance.SpawnNormalBullet(shootLowerRight.position, new Vector3(1, -1, 0));
                         bulletCooldownCur = bulletCooldownMax;
                     }
                 }
+                else
+                {
+                    bulletCooldownCur -= Time.deltaTime;
+                }
             }
-        }
-        else
-        {
-            bulletCooldownCur -= Time.deltaTime;
         }
     }
 
@@ -298,11 +309,11 @@ public class PlayerMovementBattle : MonoBehaviour {
     //Size effect to juice up dodges
     IEnumerator SizePulse()
     {
-        float rotDir = (Random.Range(0, 2) - 0.5f)*40;
+        float rotDir = (Random.Range(0, 2) - 0.5f) * 40;
         for (float f = 1; f >= 0; f -= 0.1f)
         {
             transform.eulerAngles = Vector3.Lerp(Vector3.zero, new Vector3(0, 0, rotDir), f);
-            transform.localScale = initScale * (1f + f/2f);
+            transform.localScale = initScale * (1f + f / 2f);
             yield return new WaitForSeconds(0.005f);
         }
         transform.eulerAngles = Vector3.zero;
