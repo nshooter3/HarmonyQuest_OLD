@@ -46,6 +46,19 @@ public class BulletPool : MonoBehaviour {
         }
     }
 
+    public void SpawnReticule(Enemy en)
+    {
+        Reticule temp = (Reticule)FindAvailableReticule(reticules);
+        if (temp != null)
+        {
+            temp.TriggerReticuleAction(en);
+        }
+        else
+        {
+            Debug.LogError("No reticules available");
+        }
+    }
+
     //Attempt to load a normal bullet
     public void SpawnNormalBullet(Vector3 pos, Vector3 dir)
     {

@@ -51,7 +51,7 @@ public class PlayerKillzone : MonoBehaviour {
                 if (curCols.Count > 0)
                 {
                     int ran = Random.Range(0, curCols.Count);
-                    BulletPool.instance.SpawnReticule(curCols[ran].transform.position);
+                    BulletPool.instance.SpawnReticule(curCols[ran].GetComponent<Enemy>());
                     curCols[ran].TakeDamage(damage);
                 }
                 cooldown = maxCooldown;

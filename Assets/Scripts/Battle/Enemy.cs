@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour {
     Color initCol, hitCol;
     float hitTimer = 0, maxHitTimer = 0.1f;
     public Material mat;
+    public List<Reticule> reticules;
 
 	// Use this for initialization
 	void Start () {
@@ -26,7 +27,8 @@ public class Enemy : MonoBehaviour {
         hitCol = Color.red;
         health = maxhealth;
         initPos = transform.position;
-	}
+        reticules = new List<Reticule>();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -82,6 +84,11 @@ public class Enemy : MonoBehaviour {
     public void Destroy()
     {
         //TODO make this NOT reset the enemy to their startPos
+        foreach (Reticule ret in reticules)
+        {
+            ret.transform.parent = null;
+        }
+        reticules = new List<Reticule>();
         transform.position = initPos;
         health = maxhealth;
         //Destroy(this.gameObject);y

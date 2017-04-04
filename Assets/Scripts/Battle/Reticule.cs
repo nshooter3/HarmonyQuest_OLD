@@ -38,6 +38,16 @@ public class Reticule : MonoBehaviour {
         StartCoroutine(ReticuleAction());
     }
 
+    public void TriggerReticuleAction(Enemy en)
+    {
+        active = true;
+        transform.parent = en.transform;
+        transform.localPosition = new Vector3(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f), transform.position.z);
+        lr.SetPosition(0, transform.position);
+        en.reticules.Add(this);
+        StartCoroutine(ReticuleAction());
+    }
+
     IEnumerator ReticuleAction()
     {
         lr.enabled = true;
