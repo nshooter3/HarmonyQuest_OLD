@@ -14,6 +14,8 @@ public class FollowPlayer : MonoBehaviour {
     float xMin, xMax, yMin, yMax;
     float camWidth, camHeight;
 
+    public bool follow = true;
+
     RaycastHit2D result;
 
 	// Use this for initialization
@@ -45,16 +47,20 @@ public class FollowPlayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(cameraState == CameraState.Default){
-            CamFollowPlayer();
-        }
-        if (pMov.cameraDefaultFlag)
+        if (follow)
         {
-            SetCameraDefault();
-        }
-        if (pMov.cameraCutsceneFlag)
-        {
-            SetCameraCutscene();
+            if (cameraState == CameraState.Default)
+            {
+                CamFollowPlayer();
+            }
+            if (pMov.cameraDefaultFlag)
+            {
+                SetCameraDefault();
+            }
+            if (pMov.cameraCutsceneFlag)
+            {
+                SetCameraCutscene();
+            }
         }
     }
 

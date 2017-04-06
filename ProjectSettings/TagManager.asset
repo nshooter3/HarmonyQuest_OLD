@@ -45,6 +45,15 @@ TagManager:
   - name: Background
     uniqueID: 3651190501
     locked: 0
+  - name: TileBackground
+    uniqueID: 3002109477
+    locked: 0
+  - name: TileDefault
+    uniqueID: 3459150799
+    locked: 0
+  - name: TileDecor
+    uniqueID: 3355331277
+    locked: 0
   - name: BattleBackground
     uniqueID: 2570418687
     locked: 0
