@@ -264,35 +264,36 @@ public class PlayerMovementOverworld : MonoBehaviour {
             GameObject temp = CheckForInteractable();
             if (temp != null)
             {
-                InitDialogue(temp);
-                //MusicManager.MM.LowerMusicInit(MusicManager.MM.sceneMusic.volume);
+                if (temp.GetComponent<Dialogue>() != null)
+                {
+                    InitDialogue(temp);
+                }
+                else if (temp.GetComponent<InteractiveObject>() != null)
+                {
+                    InitInteractiveObject(temp);
+                }
             }
         }
     }
 
     private GameObject CheckForInteractable()
     {
-        /*for (int i = 0; i < interactables.Length; i++)
-        {
-            if (interactables[i].gameObject.GetComponent<BoxCollider2D>().bounds.Intersects(interact.GetComponent<BoxCollider2D>().bounds))
-                return interactables[i];
-        }*/
-
         switch (anim.GetInteger("Direction"))
         {
             case 0:
                 result = GlobalFunctions.GF.RaycastY(transform, Vector2.up, 0.25f, 1 << LayerMask.NameToLayer("Interactable"), 0.05f);
                 break;
             case 1:
-                result = GlobalFunctions.GF.RaycastX(transform, Vector2.right, 0.334f, 1 << LayerMask.NameToLayer("Interactable"), 0.05f);
+                result = GlobalFunctions.GF.RaycastX(transform, Vector2.right, 0.5f, 1 << LayerMask.NameToLayer("Interactable"), 0.05f);
                 break;
             case 2:
-                result = GlobalFunctions.GF.RaycastY(transform, Vector2.down, 0.461f, 1 << LayerMask.NameToLayer("Interactable"), 0.05f);
+                result = GlobalFunctions.GF.RaycastY(transform, Vector2.down, 0.8f, 1 << LayerMask.NameToLayer("Interactable"), 0.05f);
                 break;
             case 3:
-                result = GlobalFunctions.GF.RaycastX(transform, Vector2.left, 0.368f, 1 << LayerMask.NameToLayer("Interactable"), 0.05f);
+                result = GlobalFunctions.GF.RaycastX(transform, Vector2.left, 0.5f, 1 << LayerMask.NameToLayer("Interactable"), 0.05f);
                 break;
         }
+        //Debug.Log(result.transform.name);
         if (result.collider == null)
             return null;
         return result.collider.gameObject;
@@ -321,6 +322,11 @@ public class PlayerMovementOverworld : MonoBehaviour {
         dlog = temp.GetComponent<Dialogue>();
         dlog.triggerDialogue();
         SetTextbox();
+    }
+
+    public void InitInteractiveObject(GameObject temp)
+    {
+        temp.GetComponent<InteractiveObject>().Interact();
     }
 
     public void InitPlayerInteract()

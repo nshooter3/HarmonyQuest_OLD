@@ -9,6 +9,8 @@ public class Crate : MonoBehaviour {
     bool freezeX, freezeY;
     string c1, c2, c3, c4;
 
+    public LayerMask mask;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -22,10 +24,10 @@ public class Crate : MonoBehaviour {
     //Freezes/unfreezes crate's x and y axes based on it's surroundings
     private void SetMovability()
     {
-        result1 = GlobalFunctions.GF.RaycastY(up, Vector2.up, 0.01f, 0.1f);
-        result2 = GlobalFunctions.GF.RaycastY(down, Vector2.down, 0.01f, 0.1f);
-        result3 = GlobalFunctions.GF.RaycastX(right, Vector2.right, 0.01f, 0.1f);
-        result4 = GlobalFunctions.GF.RaycastX(left, Vector2.left, 0.01f, 0.1f);
+        result1 = GlobalFunctions.GF.RaycastY(up, Vector2.up, 0.01f, mask, 0.1f);
+        result2 = GlobalFunctions.GF.RaycastY(down, Vector2.down, 0.01f, mask, 0.1f);
+        result3 = GlobalFunctions.GF.RaycastX(right, Vector2.right, 0.01f, mask, 0.1f);
+        result4 = GlobalFunctions.GF.RaycastX(left, Vector2.left, 0.01f, mask, 0.1f);
         c1 = "";
         c2 = "";
         c3 = "";

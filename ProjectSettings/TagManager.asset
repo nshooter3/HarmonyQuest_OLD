@@ -27,8 +27,8 @@ TagManager:
   - Bullet
   - Enemy
   - SubCamera
-  - 
-  - 
+  - CameraBounds
+  - Player
   - 
   - 
   - 
