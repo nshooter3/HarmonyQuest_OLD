@@ -92,9 +92,14 @@ public class Textbox : MonoBehaviour {
     private int sFXCount, maxSFXCount;
     private int pauseCount;
 
+    void Awake()
+    {
+        all.SetActive(true);
+    }
+
     // Use this for initialization
     void Start () {
-        all.SetActive(true);
+        //all.SetActive(true);
         ToggleOff();
         text = textObj.GetComponent<Text>();
         c1 = choice1.GetComponent<Text>();

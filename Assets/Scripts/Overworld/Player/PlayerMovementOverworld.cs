@@ -306,6 +306,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
         if (col.gameObject.layer == 10 && door != null)
         {
             playerState = PlayerState.Cutscene;
+            Move(new Vector3(0, 0, 0));
             ToggleColliders(false);
             anim.SetBool("IsMoving", false);
             fade.FadeOut();

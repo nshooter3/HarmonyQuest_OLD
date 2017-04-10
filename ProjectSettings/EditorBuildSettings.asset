@@ -6,4 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TileTest.unity
+    path: Assets/Scenes/Levels/TwilitHollow/TwilitHollow1_Cliff.unity
+  - enabled: 1
+    path: Assets/Scenes/Levels/TwilitHollow/TwilitHollow2_Boulder.unity
+  - enabled: 1
+    path: Assets/Scenes/Levels/TwilitHollow/TwilitHollow3_Treasure.unity
