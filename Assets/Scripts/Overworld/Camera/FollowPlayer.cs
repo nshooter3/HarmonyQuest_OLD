@@ -21,7 +21,7 @@ public class FollowPlayer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         camHeight = GetComponent<Camera>().orthographicSize;
-        camWidth = camHeight * 1.5f;
+        camWidth = camHeight * (800f/600f);
 
         boundHolder = GameObject.FindGameObjectWithTag("CameraBounds");
         if (boundHolder != null)

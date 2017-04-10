@@ -57,6 +57,9 @@ TagManager:
   - name: BattleBackground
     uniqueID: 2570418687
     locked: 0
+  - name: AboveTilesBelowPlayer
+    uniqueID: 3585810537
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

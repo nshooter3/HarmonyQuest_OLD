@@ -5,7 +5,7 @@ using System.Collections;
 public class Textbox : MonoBehaviour {
 
     //References to all the gameObjects that make up the textbox GUI
-    public GameObject textObj, boxObj, choicesObj, choice1, choice2, choice3, selection, portraitPlaceholder;
+    public GameObject textObj, boxObj, choicesObj, choice1, choice2, choice3, selection, portraitPlaceholder, all;
     private GameObject portrait;
 
     //Text component of the dialogue and each choice gameObject
@@ -94,6 +94,7 @@ public class Textbox : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        all.SetActive(true);
         ToggleOff();
         text = textObj.GetComponent<Text>();
         c1 = choice1.GetComponent<Text>();
