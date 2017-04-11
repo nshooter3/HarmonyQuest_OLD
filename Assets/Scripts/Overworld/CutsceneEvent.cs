@@ -13,9 +13,12 @@ public class CutsceneEvent : MonoBehaviour {
 
     //Determines whether or not the object is ready for a new command
     public bool commandInProgress;
+    //Whether or not to change direction automatically upon movement, and whether or not sprite directions are diagonal
+    public bool autoChangeDirection = true, animDiag = false;
 
     //Used for movement
     Vector3 start, destination;
+    Vector3 direction;
     float speed;
     bool moving;
 
@@ -34,6 +37,7 @@ public class CutsceneEvent : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        direction = Vector2.zero;
         commandInProgress = false;
         moving = false;
         speed = 1;
@@ -80,16 +84,71 @@ public class CutsceneEvent : MonoBehaviour {
 	}
 
     //Moves gameObject towards destination
-    public void Move(Vector3 destination, float speed, string dir)
+    public void Move(Vector3 destination, float speed, string dir = "")
     {
-        commandInProgress = true;
-        ChangeDirection(dir);
         start = gameObject.transform.position;
         this.destination = destination;
         this.speed = speed;
         moving = true;
         if (anim != null)
             anim.SetBool("IsMoving", true);
+        direction = destination - transform.position;
+        commandInProgress = true;
+        if (dir != "")
+        {
+            ChangeDirection(dir);
+        }
+        else if (autoChangeDirection)
+        {
+            UpdateDirectionFromMovement();
+        }
+    }
+
+    void UpdateDirectionFromMovement()
+    {
+        //Updates direction depending on whether the sprites faces up/down/left/right or diagonally
+        if (!animDiag)
+        {
+            if (direction.y > 0)
+            {
+                anim.SetInteger("Direction", 0);
+            }
+            else if(direction.y < 0)
+            {
+                anim.SetInteger("Direction", 2);
+            }
+            else if (direction.x > 0)
+            {
+                anim.SetInteger("Direction", 1);
+            }
+            else
+            {
+                anim.SetInteger("Direction", 3);
+            }
+        }
+        else
+        {
+            if (direction.x < 0)
+            {
+                anim.SetBool("FacingLeft", true);
+                //Debug.Log("LEFT");
+            }
+            else if (direction.x > 0)
+            {
+                anim.SetBool("FacingLeft", false);
+                //Debug.Log("RIGHT");
+            }
+            if (direction.y < 0)
+            {
+                anim.SetBool("FacingUp", false);
+                //Debug.Log("DOWN");
+            }
+            else if(direction.y > 0)
+            {
+                anim.SetBool("FacingUp", true);
+                //Debug.Log("UP");
+            }
+        }
     }
 
     //Changes direction gameObject is facing (Happens instantly, follow up with wait command if delay is warranted)
@@ -112,6 +171,16 @@ public class CutsceneEvent : MonoBehaviour {
                     anim.SetInteger("Direction", 1);
                     break;
             }
+        }
+    }
+
+    //Changes direction gameObject is facing (Happens instantly, follow up with wait command if delay is warranted)
+    public void ChangeDirectionDiagonal(bool left, bool up)
+    {
+        if (anim != null)
+        {
+            anim.SetBool("FacingLeft", left);
+            anim.SetBool("FacingUp", up);
         }
     }
 
