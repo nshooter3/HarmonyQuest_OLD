@@ -106,47 +106,50 @@ public class CutsceneEvent : MonoBehaviour {
 
     void UpdateDirectionFromMovement()
     {
-        //Updates direction depending on whether the sprites faces up/down/left/right or diagonally
-        if (!animDiag)
+        if (anim != null)
         {
-            if (direction.y > 0)
+            //Updates direction depending on whether the sprites faces up/down/left/right or diagonally
+            if (!animDiag)
             {
-                anim.SetInteger("Direction", 0);
-            }
-            else if(direction.y < 0)
-            {
-                anim.SetInteger("Direction", 2);
-            }
-            else if (direction.x > 0)
-            {
-                anim.SetInteger("Direction", 1);
+                if (direction.y > 0)
+                {
+                    anim.SetInteger("Direction", 0);
+                }
+                else if (direction.y < 0)
+                {
+                    anim.SetInteger("Direction", 2);
+                }
+                else if (direction.x > 0)
+                {
+                    anim.SetInteger("Direction", 1);
+                }
+                else
+                {
+                    anim.SetInteger("Direction", 3);
+                }
             }
             else
             {
-                anim.SetInteger("Direction", 3);
-            }
-        }
-        else
-        {
-            if (direction.x < 0)
-            {
-                anim.SetBool("FacingLeft", true);
-                //Debug.Log("LEFT");
-            }
-            else if (direction.x > 0)
-            {
-                anim.SetBool("FacingLeft", false);
-                //Debug.Log("RIGHT");
-            }
-            if (direction.y < 0)
-            {
-                anim.SetBool("FacingUp", false);
-                //Debug.Log("DOWN");
-            }
-            else if(direction.y > 0)
-            {
-                anim.SetBool("FacingUp", true);
-                //Debug.Log("UP");
+                if (direction.x < 0)
+                {
+                    anim.SetBool("FacingLeft", true);
+                    //Debug.Log("LEFT");
+                }
+                else if (direction.x > 0)
+                {
+                    anim.SetBool("FacingLeft", false);
+                    //Debug.Log("RIGHT");
+                }
+                if (direction.y < 0)
+                {
+                    anim.SetBool("FacingUp", false);
+                    //Debug.Log("DOWN");
+                }
+                else if (direction.y > 0)
+                {
+                    anim.SetBool("FacingUp", true);
+                    //Debug.Log("UP");
+                }
             }
         }
     }

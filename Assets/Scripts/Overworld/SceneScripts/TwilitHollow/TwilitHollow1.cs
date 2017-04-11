@@ -5,22 +5,25 @@ using System;
 
 public class TwilitHollow1 : SceneScript {
 
-    public CutsceneEvent dad;
+    public CutsceneEvent dad, cam;
+    //Camera mounts
+    public Transform cMount1, cMount2, cMount3;
+    public FishingRod rod;
 
 	// Use this for initialization
 	void Start () {
-        /*
-        dad.actionQueue.Enqueue(new Action(() => { dad.Wait(1); }));
-        dad.actionQueue.Enqueue(new Action(() => { dad.Move(new Vector3(2,-4,0), 3); }));
-        dad.actionQueue.Enqueue(new Action(() => { dad.Wait(1); }));
-        dad.actionQueue.Enqueue(new Action(() => { dad.Move(new Vector3(-2, 2, 0), 3); }));
-        dad.actionQueue.Enqueue(new Action(() => { dad.Wait(1); }));
-        dad.actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, false); }));
-        dad.actionQueue.Enqueue(new Action(() => { dad.Wait(1); }));
-        dad.actionQueue.Enqueue(new Action(() => { dad.Move(new Vector3(-2, -2, 0), 3); }));
-        dad.actionQueue.Enqueue(new Action(() => { dad.Move(new Vector3( 2, -2, 0), 3); }));
-        dad.actionQueue.Enqueue(new Action(() => { dad.Wait(1); }));
-        */
+
+    }
+
+    void InitFishingCutscene()
+    {
+        PlayerMovementOverworld.instance.InitPlayerInteract();
+        cam.transform.position = cMount1.position;
+        cam.actionQueue.Enqueue(new Action(() => { cam.Move(cMount2.position, 1.5f); }));
+        cam.actionQueue.Enqueue(new Action(() => { rod.Interact(); }));
+        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(5); }));
+        cam.actionQueue.Enqueue(new Action(() => { cam.Move(cMount3.position, 1.5f); }));
+        cam.actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefault(); }));
     }
 	
 	// Update is called once per frame

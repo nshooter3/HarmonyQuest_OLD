@@ -84,7 +84,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
         cutsceneFlag = false;
 
         emote = playerPos.GetComponent<EmoteAnimator>();
-        dlog = GameObject.FindObjectOfType<Dialogue>();
+        //dlog = GameObject.FindObjectOfType<Dialogue>();
         textbox = GameObject.FindObjectOfType<Textbox>();
         fade = GameObject.FindObjectOfType<FadeInFadeOut>();
 
@@ -144,9 +144,13 @@ public class PlayerMovementOverworld : MonoBehaviour {
     }
 
     private void CheckForInteractableInput() {
-        dlog.UpdateVars();
         if (InputManager.instance.confirmPress)
         {
+            if (dlog != null)
+            {
+                //Used for alerting scene scripts to dialogue events
+                dlog.UpdateVars();
+            }
             if (textbox.textLoading)
             {
                 textbox.finishText();
@@ -156,15 +160,14 @@ public class PlayerMovementOverworld : MonoBehaviour {
             {
                 AdvanceDialogue();
             }
-
             if (dlog != null && dlog.mName != "")
             {
+                //Used for alerting scene scripts to dialogue events
                 mName = dlog.mName;
                 mData = dlog.mData;
                 dlog.mName = "";
                 dlog.mData = "";
             }
-
         }
 
         if (textbox.choicesActive && !textbox.choiceUIMoving) {
