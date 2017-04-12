@@ -69,6 +69,9 @@ TagManager:
   - name: BattleUI
     uniqueID: 2567444097
     locked: 0
+  - name: AbovePlayerNPC
+    uniqueID: 2113528479
+    locked: 0
   - name: AbovePlayer
     uniqueID: 2378404207
     locked: 0

@@ -7,7 +7,7 @@ public class AdjustLayerBasedOnPlayerPos : MonoBehaviour {
     //Adjusts layer based on player position, allows player to go in front of/behind sprites
 
     string initLayer;
-    public string adjustedLayer = "AbovePlayer";
+    public string adjustedLayer = "AbovePlayerNPC";
     SpriteRenderer sr;
     PlayerMovementOverworld player;
 
