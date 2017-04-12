@@ -6,6 +6,7 @@ using System;
 public class TwilitHollow1 : SceneScript {
 
     public CutsceneEvent dad, cam, player;
+    public EmoteAnimator dadEmote;
     public GameObject bike, bikePile, bikeDes, fishingBike, fishingBaby;
     Vector3 bikePileLower;
     //Camera mounts
@@ -29,6 +30,7 @@ public class TwilitHollow1 : SceneScript {
         PlayerMovementOverworld.instance.InitPlayerInteract();
         cam.actionQueue.Enqueue(new Action(() => { player.DisableRenderer(); }));
         cam.transform.position = cMount1.position;
+        dad.transform.position = dMount1.position;
         cam.actionQueue.Enqueue(new Action(() => { cam.Move(cMount2.position, 1.5f); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
         cam.actionQueue.Enqueue(new Action(() => { GlobalFunctions.instance.AdjustColorOverTimeTextMesh(fadedCol, normCol, 1, author); }));
@@ -37,7 +39,7 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(2f); }));
         cam.actionQueue.Enqueue(new Action(() => { rod.Interact(); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(3.5f); }));
-        cam.actionQueue.Enqueue(new Action(() => { cam.Move(cMount3.position, 1.5f); }));
+        cam.actionQueue.Enqueue(new Action(() => { cam.Move(cMount3.position, 2f); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1); }));
         cam.actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(false, false); }));
         cam.actionQueue.Enqueue(new Action(() => { fishingBike.SetActive(false); }));
@@ -54,13 +56,15 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(5f); }));
         cam.actionQueue.Enqueue(new Action(() => { rod.Interact("baby"); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(3.5f); }));
+        cam.actionQueue.Enqueue(new Action(() => { dadEmote.SetEmotion("Surprise") ; }));
+        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
         cam.actionQueue.Enqueue(new Action(() => { fishingBaby.SetActive(false); }));
-        cam.actionQueue.Enqueue(new Action(() => { dad.Move(dMount2.position, 6); }));
+        cam.actionQueue.Enqueue(new Action(() => { dad.Move(dMount2.position, 4); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
         cam.actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, false); }));
         cam.actionQueue.Enqueue(new Action(() => { player.EnableRenderer(); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(2f); }));
-        cam.actionQueue.Enqueue(new Action(() => { dad.Move(dMount3.position, 6); }));
+        cam.actionQueue.Enqueue(new Action(() => { dad.Move(dMount3.position, 4); }));
 
         cam.actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefault(); }));
     }
