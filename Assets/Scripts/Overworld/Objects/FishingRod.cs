@@ -44,14 +44,25 @@ public class FishingRod : InteractiveObject
         }
     }
 
-    public override void Interact()
+    public override void Interact(string id = "bike")
     {
-        //Debug.Log("interact");
+        if (id == "")
+        {
+            int ran = Random.Range(0, 100);
+            if (ran == 0)
+            {
+                id = "unicycle";
+            }
+            else
+            {
+                id = "bike";
+            }
+        }
         if (!active)
         {
             if (!raised)
             {
-                Raise();
+                Raise(id);
             }
             else
             {

@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class InteractiveObject : MonoBehaviour
 {
-    public virtual void Interact() { }
+    public virtual void Interact(string id = "") { }
 }
