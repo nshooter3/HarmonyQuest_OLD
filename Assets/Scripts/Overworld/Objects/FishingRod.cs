@@ -10,6 +10,7 @@ public class FishingRod : InteractiveObject
     public GameObject baby, bike, unicycle;
     public LineRenderer lr;
     float maxTimer = 2;
+    AudioSource sfx;
 
     public bool active = false, raised = false;
 
@@ -18,6 +19,7 @@ public class FishingRod : InteractiveObject
         bottomPos = bait.transform.position;
         destPos = dest.transform.position;
         UpdateLineRenderer();
+        sfx = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -74,11 +76,13 @@ public class FishingRod : InteractiveObject
     public void Raise(string id = "bike")
     {
         SetActiveCatch(id);
+        sfx.Play();
         StartCoroutine(RaiseEvent());
     }
 
     public void Lower()
     {
+        sfx.Play();
         StartCoroutine(LowerEvent());
     }
 
@@ -93,6 +97,7 @@ public class FishingRod : InteractiveObject
         }
         bait.transform.position = destPos;
         UpdateLineRenderer();
+        sfx.Stop();
         active = false;
         raised = true;
     }
@@ -108,6 +113,7 @@ public class FishingRod : InteractiveObject
         }
         bait.transform.position = bottomPos;
         UpdateLineRenderer();
+        sfx.Stop();
         active = false;
         raised = false;
     }
