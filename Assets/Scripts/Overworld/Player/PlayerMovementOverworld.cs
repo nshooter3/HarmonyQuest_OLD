@@ -284,16 +284,16 @@ public class PlayerMovementOverworld : MonoBehaviour {
         switch (anim.GetInteger("Direction"))
         {
             case 0:
-                result = GlobalFunctions.GF.RaycastY(transform, Vector2.up, 0.25f, 1 << LayerMask.NameToLayer("Interactable"), 0.05f);
+                result = GlobalFunctions.instance.RaycastY(transform, Vector2.up, 0.25f, 1 << LayerMask.NameToLayer("Interactable"), 0.05f);
                 break;
             case 1:
-                result = GlobalFunctions.GF.RaycastX(transform, Vector2.right, 0.5f, 1 << LayerMask.NameToLayer("Interactable"), 0.05f);
+                result = GlobalFunctions.instance.RaycastX(transform, Vector2.right, 0.5f, 1 << LayerMask.NameToLayer("Interactable"), 0.05f);
                 break;
             case 2:
-                result = GlobalFunctions.GF.RaycastY(transform, Vector2.down, 0.8f, 1 << LayerMask.NameToLayer("Interactable"), 0.05f);
+                result = GlobalFunctions.instance.RaycastY(transform, Vector2.down, 0.8f, 1 << LayerMask.NameToLayer("Interactable"), 0.05f);
                 break;
             case 3:
-                result = GlobalFunctions.GF.RaycastX(transform, Vector2.left, 0.5f, 1 << LayerMask.NameToLayer("Interactable"), 0.05f);
+                result = GlobalFunctions.instance.RaycastX(transform, Vector2.left, 0.5f, 1 << LayerMask.NameToLayer("Interactable"), 0.05f);
                 break;
         }
         //Debug.Log(result.transform.name);

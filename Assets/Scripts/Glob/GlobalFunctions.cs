@@ -3,16 +3,16 @@ using System.Collections;
 
 public class GlobalFunctions : MonoBehaviour {
 
-    public static GlobalFunctions GF;
+    public static GlobalFunctions instance;
 
     void Awake()
     {
-        if (GF == null)
+        if (instance == null)
         {
             DontDestroyOnLoad(gameObject);
-            GF = this;
+            instance = this;
         }
-        else if (GF != this)
+        else if (instance != this)
         {
             Destroy(gameObject);
         }
@@ -105,4 +105,47 @@ public class GlobalFunctions : MonoBehaviour {
         return temp;
     }
 
+    //Lerps a passed in transform between 2 rotations over time
+    public IEnumerator RotateOverTime(Vector3 startRot, Vector3 endRot, float time, Transform obj)
+    {
+        for (float t = time; t >= 0; t -= Time.deltaTime)
+        {
+            obj.transform.eulerAngles = Vector3.Lerp(endRot, startRot, t/time);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        obj.transform.eulerAngles = endRot;
+    }
+
+    //Lerps a passed in transform between 2 sizes over time
+    public IEnumerator AdjustSizeOverTime(Vector3 startSize, Vector3 endSize, float time, Transform obj)
+    {
+        for (float t = time; t >= 0; t -= Time.deltaTime)
+        {
+            obj.transform.localScale = Vector3.Lerp(endSize, startSize, t / time);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        obj.transform.localScale = endSize;
+    }
+
+    //Lerps a passed in transform between 2 positions over time
+    public IEnumerator AdjustPositionOverTime(Vector3 startPos, Vector3 endPos, float time, Transform obj)
+    {
+        for (float t = time; t >= 0; t -= Time.deltaTime)
+        {
+            obj.transform.position = Vector3.Lerp(endPos, startPos, t / time);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        obj.transform.position = endPos;
+    }
+
+    //Lerps a passed in spriteRenderer between 2 colors over time
+    public IEnumerator AdjustColorOverTime(Color startCol, Color endCol, float time, SpriteRenderer obj)
+    {
+        for (float t = time; t >= 0; t -= Time.deltaTime)
+        {
+            obj.color = Color.Lerp(endCol, startCol, t / time);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        obj.color = endCol;
+    }
 }
