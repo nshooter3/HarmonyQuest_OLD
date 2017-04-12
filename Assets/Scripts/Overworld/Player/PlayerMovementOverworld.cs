@@ -98,7 +98,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
         //Set player start location
         SpawnSpot[] temp = FindObjectsOfType<SpawnSpot>();
         for (int i = 0; i < temp.Length; i++){
-            if (temp[i].spawnName == GlobalVars.GV.saveData.destination)
+            if (temp[i].spawnName == GlobalVars.instance.saveData.destination)
             {
                 playerPos.transform.position = temp[i].gameObject.transform.position;
                 anim.SetInteger("Direction", temp[i].spawnDir);
@@ -352,7 +352,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
 
     public void InitPlayerDefault()
     {
-        GlobalVars.GV.GetUpdatedDialoguerVars();
+        GlobalVars.instance.GetUpdatedDialoguerVars();
         playerState = PlayerState.Default;
         ToggleColliders(true);
         cameraDefaultFlag = true;

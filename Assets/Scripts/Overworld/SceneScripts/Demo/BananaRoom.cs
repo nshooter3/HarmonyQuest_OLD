@@ -12,6 +12,7 @@ public class BananaRoom : SceneScript
     }
 
     public override void UpdateScene() {
+        /*
         if (GlobalVars.GV.saveData.movedBanana)
         {
             banana.GetComponent<Renderer>().enabled = false;
@@ -22,5 +23,6 @@ public class BananaRoom : SceneScript
             bBill.GetComponent<Renderer>().enabled = false;
             bBill.GetComponent<BoxCollider2D>().enabled = false;
         }
+        */
     }
 }

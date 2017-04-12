@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 public class Hallway : SceneScript
 {
+    /*
     public CutsceneTrigger c1, c2, c3, c4;
     public GameObject dialogue;
     PlayerMovementOverworld playerMov;
@@ -15,6 +16,7 @@ public class Hallway : SceneScript
 
     public void Start()
     {
+        
         UpdateScene();
         playerMov = GameObject.FindWithTag("Player").GetComponent<PlayerMovementOverworld>();
 
@@ -32,16 +34,18 @@ public class Hallway : SceneScript
         {
             npc.actionQueue.Enqueue(new Action(() => { npc.DisableRenderer(); }));
         }
+        
 
     }
-
+    */
     public override void UpdateScene()
     {
         
     }
-
+    /*
     public void Update()
     {
+        
         if (playerMov.playerState == PlayerMovementOverworld.PlayerState.Default)
         {
             if ((c1.isCol && GlobalVars.GV.saveData.hallwayProgress == 0)
@@ -129,6 +133,6 @@ public class Hallway : SceneScript
         cam.actionQueue.Enqueue(new Action(() => { cam.Move(new Vector3(playerMov.transform.position.x, playerMov.transform.position.y, -10), 1, ""); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
 
-    }
+    }*/
 
 }

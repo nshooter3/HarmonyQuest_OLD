@@ -11,7 +11,7 @@ public class Door : MonoBehaviour {
 
     public void Teleport()
     {
-        GlobalVars.GV.saveData.destination = destName;
+        GlobalVars.instance.saveData.destination = destName;
         teleport = true;
         timer = timerMax;
         if (musicFadeOut)
@@ -33,7 +33,7 @@ public class Door : MonoBehaviour {
                 timer -= Time.deltaTime;
             else
             {
-                GlobalVars.GV.saveData.destination = destName;
+                GlobalVars.instance.saveData.destination = destName;
                 if (destScene != "")
                 {
                     SceneManager.LoadScene(destScene);

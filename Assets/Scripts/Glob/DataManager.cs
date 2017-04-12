@@ -21,7 +21,7 @@ public class DataManager : MonoBehaviour {
         BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(Application.persistentDataPath + "/globalVars" + fileNum + ".dat");
 
-        SaveData saveData = PrepareSaveData(GlobalVars.GV.saveData);
+        SaveData saveData = PrepareSaveData(GlobalVars.instance.saveData);
         bf.Serialize(file, saveData);
         file.Close();
         Debug.Log("save successful");
@@ -46,7 +46,7 @@ public class DataManager : MonoBehaviour {
             FileStream file = File.Open(Application.persistentDataPath + "/globalVars" + fileNum + ".dat", FileMode.Open);
             SaveData saveData = (SaveData)bf.Deserialize(file);
             file.Close();
-            GlobalVars.GV.saveData = PrepareSaveData(saveData);
+            GlobalVars.instance.saveData = PrepareSaveData(saveData);
             Debug.Log("load successful");
         }
     }
@@ -72,6 +72,7 @@ public class SaveData
     public int deathCount = 0;
     #endregion
 
+    /*
     //Demo scene variables
     #region
     public bool talkedToBanana = false;
@@ -81,5 +82,5 @@ public class SaveData
 
     public float hallwayProgress = -1f;
     public float potman = 0f;
-    #endregion
+    #endregion*/
 }

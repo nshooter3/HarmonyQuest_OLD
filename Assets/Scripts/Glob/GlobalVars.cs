@@ -3,21 +3,21 @@ using System.Collections;
 
 public class GlobalVars : MonoBehaviour {
 
-    public static GlobalVars GV;
+    public static GlobalVars instance;
     public SaveData saveData;
 
     void Awake()
     {
-        if (GV == null)
+        if (instance == null)
         {
             Screen.SetResolution(800, 600, true);
             DontDestroyOnLoad(gameObject);
-            GV = this;
+            instance = this;
 
             //TODO REMOVE THIS ONCE SAVING AND LOADING IS IN
-            GV.saveData = new SaveData();
+            instance.saveData = new SaveData();
         }
-        else if (GV != this)
+        else if (instance != this)
         {
             Destroy(gameObject);
         }
@@ -26,6 +26,7 @@ public class GlobalVars : MonoBehaviour {
 
     public void GetUpdatedDialoguerVars()
     {
+        /*
         //Demo scene variables
         #region
         saveData.talkedToBanana = Dialoguer.GetGlobalBoolean(0);
@@ -35,11 +36,12 @@ public class GlobalVars : MonoBehaviour {
 
         saveData.hallwayProgress = Dialoguer.GetGlobalFloat(0);
         saveData.potman = Dialoguer.GetGlobalFloat(1);
-        #endregion
+        #endregion*/
     }
 
     public void SetDialoguerVars()
     {
+        /*
         //Demo scene variables
         #region
         Dialoguer.SetGlobalBoolean(0, saveData.talkedToBanana);
@@ -49,6 +51,6 @@ public class GlobalVars : MonoBehaviour {
 
         Dialoguer.SetGlobalFloat(0, saveData.hallwayProgress);
         Dialoguer.SetGlobalFloat(1, saveData.potman);
-        #endregion
+        #endregion*/
     }
 }
