@@ -5581,6 +5581,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b5557820473bfd547a6632055a915622, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &641550815 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1260735801507664, guid: 1d11fecc008453e4bbbcaebba1114fbe,
+    type: 2}
+  m_PrefabInternal: {fileID: 1398997432}
 --- !u!4 &641550817 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4543790124826810, guid: 1d11fecc008453e4bbbcaebba1114fbe,
@@ -7411,6 +7416,10 @@ Prefab:
     - target: {fileID: 224000011031238692, guid: 0781b05dfa2c53c418ca2b243ed2c735,
         type: 2}
       propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1764289935755184, guid: 0781b05dfa2c53c418ca2b243ed2c735, type: 2}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -10482,10 +10491,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dad: {fileID: 2932023}
   cam: {fileID: 491900194}
+  bike: {fileID: 1098020296}
+  bikePile: {fileID: 641550815}
+  bikeDes: {fileID: 388858747}
+  fishingBike: {fileID: 1985411836}
   cMount1: {fileID: 1050002174}
   cMount2: {fileID: 393584562}
   cMount3: {fileID: 1605003246}
   rod: {fileID: 1495386279}
+  author: {fileID: 2031835494}
 --- !u!1001 &1122321002
 Prefab:
   m_ObjectHideFlags: 0
@@ -19128,6 +19142,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 74c6b270ca38c434ab986a867a351c26, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1985411836 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1085825578813744, guid: ecb9fbeb34bf3a94799835aca06fde9c,
+    type: 2}
+  m_PrefabInternal: {fileID: 78654668}
 --- !u!1001 &1986161065
 Prefab:
   m_ObjectHideFlags: 0
@@ -20081,6 +20100,90 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fde83d0b7fb1f5a4a9b75c6fd513bc87, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2031835493
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2031835496}
+  - component: {fileID: 2031835495}
+  - component: {fileID: 2031835494}
+  m_Layer: 0
+  m_Name: AuthorTextMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!102 &2031835494
+TextMesh:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2031835493}
+  m_Text: 'A GAME BY
+
+    NICK SHOOTER'
+  m_OffsetZ: 0
+  m_CharacterSize: 16
+  m_LineSpacing: 1.5
+  m_Anchor: 4
+  m_Alignment: 0
+  m_TabSize: 4
+  m_FontSize: 0
+  m_FontStyle: 0
+  m_RichText: 1
+  m_Font: {fileID: 12800000, guid: e3533f41e54f8d142922b44e60bc2655, type: 3}
+  m_Color:
+    serializedVersion: 2
+    rgba: 4294967295
+--- !u!23 &2031835495
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2031835493}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: e3533f41e54f8d142922b44e60bc2655, type: 3}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!4 &2031835496
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2031835493}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.7, y: -1, z: 0}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2040282386
 Prefab:
   m_ObjectHideFlags: 0

@@ -105,8 +105,13 @@ public class GlobalFunctions : MonoBehaviour {
         return temp;
     }
 
+    public void AdjustRotationOverTime(Vector3 startRot, Vector3 endRot, float time, Transform obj)
+    {
+        StartCoroutine(AdjustRotationOverTimeCo(startRot, endRot, time, obj));
+    }
+
     //Lerps a passed in transform between 2 rotations over time
-    public IEnumerator RotateOverTime(Vector3 startRot, Vector3 endRot, float time, Transform obj)
+    IEnumerator AdjustRotationOverTimeCo(Vector3 startRot, Vector3 endRot, float time, Transform obj)
     {
         for (float t = time; t >= 0; t -= Time.deltaTime)
         {
@@ -116,8 +121,13 @@ public class GlobalFunctions : MonoBehaviour {
         obj.transform.eulerAngles = endRot;
     }
 
+    public void AdjustSizeOverTime(Vector3 startSize, Vector3 endSize, float time, Transform obj)
+    {
+        StartCoroutine(AdjustSizeOverTimeCo(startSize, endSize, time, obj));
+    }
+
     //Lerps a passed in transform between 2 sizes over time
-    public IEnumerator AdjustSizeOverTime(Vector3 startSize, Vector3 endSize, float time, Transform obj)
+    IEnumerator AdjustSizeOverTimeCo(Vector3 startSize, Vector3 endSize, float time, Transform obj)
     {
         for (float t = time; t >= 0; t -= Time.deltaTime)
         {
@@ -127,8 +137,13 @@ public class GlobalFunctions : MonoBehaviour {
         obj.transform.localScale = endSize;
     }
 
+    public void AdjustPositionOverTime(Vector3 startPos, Vector3 endPos, float time, Transform obj)
+    {
+        StartCoroutine(AdjustPositionOverTimeCo(startPos, endPos, time, obj));
+    }
+
     //Lerps a passed in transform between 2 positions over time
-    public IEnumerator AdjustPositionOverTime(Vector3 startPos, Vector3 endPos, float time, Transform obj)
+    IEnumerator AdjustPositionOverTimeCo(Vector3 startPos, Vector3 endPos, float time, Transform obj)
     {
         for (float t = time; t >= 0; t -= Time.deltaTime)
         {
@@ -138,8 +153,29 @@ public class GlobalFunctions : MonoBehaviour {
         obj.transform.position = endPos;
     }
 
+    public void AdjustColorOverTime(Color startCol, Color endCol, float time, SpriteRenderer obj)
+    {
+        StartCoroutine(AdjustColorOverTimeCo(startCol, endCol, time, obj));
+    }
+
     //Lerps a passed in spriteRenderer between 2 colors over time
-    public IEnumerator AdjustColorOverTime(Color startCol, Color endCol, float time, SpriteRenderer obj)
+    IEnumerator AdjustColorOverTimeCo(Color startCol, Color endCol, float time, SpriteRenderer obj)
+    {
+        for (float t = time; t >= 0; t -= Time.deltaTime)
+        {
+            obj.color = Color.Lerp(endCol, startCol, t / time);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        obj.color = endCol;
+    }
+
+    public void AdjustColorOverTimeTextMesh(Color startCol, Color endCol, float time, TextMesh obj)
+    {
+        StartCoroutine(AdjustColorOverTimeTextMeshCo(startCol, endCol, time, obj));
+    }
+
+    //Lerps a passed in textMesh between 2 colors over time
+    IEnumerator AdjustColorOverTimeTextMeshCo(Color startCol, Color endCol, float time, TextMesh obj)
     {
         for (float t = time; t >= 0; t -= Time.deltaTime)
         {
