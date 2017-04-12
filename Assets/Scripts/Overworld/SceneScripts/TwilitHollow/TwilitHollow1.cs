@@ -6,7 +6,6 @@ using System;
 public class TwilitHollow1 : SceneScript {
 
     public CutsceneEvent dad, cam, player;
-    public EmoteAnimator dadEmote;
     public GameObject bike, bikePile, bikeDes, fishingBike, fishingBaby;
     Vector3 bikePileLower;
     //Camera mounts
@@ -56,7 +55,7 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(5f); }));
         cam.actionQueue.Enqueue(new Action(() => { rod.Interact("baby"); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(3.5f); }));
-        cam.actionQueue.Enqueue(new Action(() => { dadEmote.SetEmotion("Surprise") ; }));
+        cam.actionQueue.Enqueue(new Action(() => { dad.GetComponentInChildren<EmoteAnimator>().SetEmotion("Surprise") ; }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
         cam.actionQueue.Enqueue(new Action(() => { fishingBaby.SetActive(false); }));
         cam.actionQueue.Enqueue(new Action(() => { dad.Move(dMount2.position, 4); }));
