@@ -21,7 +21,7 @@ public class TwilitHollow1 : SceneScript {
         fadedCol.w = 0;
         author.color = fadedCol;
         bikePileLower = new Vector3(bikePile.transform.position.x, bikePile.transform.position.y - 0.05f, bikePile.transform.position.z);
-        InitFishingCutscene();
+        //InitFishingCutscene();
     }
 
     void InitFishingCutscene()

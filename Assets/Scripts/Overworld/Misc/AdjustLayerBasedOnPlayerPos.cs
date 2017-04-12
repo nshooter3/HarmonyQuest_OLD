@@ -10,10 +10,10 @@ public class AdjustLayerBasedOnPlayerPos : MonoBehaviour {
     public string adjustedLayer = "AbovePlayer";
     SpriteRenderer sr;
     PlayerMovementOverworld player;
-    bool abovePlayer = true;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         sr = GetComponent<SpriteRenderer>();
         initLayer = sr.sortingLayerName;
         player = FindObjectOfType<PlayerMovementOverworld>();
@@ -23,19 +23,17 @@ public class AdjustLayerBasedOnPlayerPos : MonoBehaviour {
 	void Update () {
         if (player != null)
         {
-            if (player.transform.position.y < transform.position.y)
+            if (player.transform.position.y <= transform.position.y)
             {
-                if (abovePlayer)
+                if (sr.sortingLayerName != initLayer)
                 {
                     sr.sortingLayerName = initLayer;
-                    abovePlayer = false;
                 }
             }
             else if (player.transform.position.y > transform.position.y) {
-                if (!abovePlayer)
+                if (sr.sortingLayerName !=adjustedLayer)
                 {
                     sr.sortingLayerName = adjustedLayer;
-                    abovePlayer = true;
                 }
             }
         }

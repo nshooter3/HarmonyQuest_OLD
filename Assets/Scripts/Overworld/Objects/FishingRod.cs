@@ -25,6 +25,25 @@ public class FishingRod : InteractiveObject
 		
 	}
 
+    //Changes which catch object is visible
+    public void SetActiveCatch(string id = "bike")
+    {
+        baby.SetActive(false);
+        bike.SetActive(false);
+        unicycle.SetActive(false);
+        switch (id) {
+            case "bike":
+                bike.SetActive(true);
+                break;
+            case "unicycle":
+                unicycle.SetActive(true);
+                break;
+            case "baby":
+                baby.SetActive(true);
+                break;
+        }
+    }
+
     public override void Interact()
     {
         //Debug.Log("interact");
@@ -43,6 +62,7 @@ public class FishingRod : InteractiveObject
 
     public void Raise(string id = "bike")
     {
+        SetActiveCatch(id);
         StartCoroutine(RaiseEvent());
     }
 
