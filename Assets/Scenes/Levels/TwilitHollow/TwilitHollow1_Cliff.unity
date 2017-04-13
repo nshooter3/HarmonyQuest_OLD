@@ -9541,6 +9541,10 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 11475564, guid: 2db2a7d61ac436a4a9635383b7f4f0f1, type: 2}
+      propertyPath: musicFadeOut
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2db2a7d61ac436a4a9635383b7f4f0f1, type: 2}
   m_IsPrefabParent: 0
