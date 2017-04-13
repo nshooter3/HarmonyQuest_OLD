@@ -48,6 +48,7 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { GlobalFunctions.instance.AdjustRotationOverTime(bike.transform.eulerAngles, bikeDes.transform.eulerAngles, 0.35f, bike.transform); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(0.45f); }));
         cam.actionQueue.Enqueue(new Action(() => { GlobalFunctions.instance.AdjustPositionOverTime(bikePileLower, bikePile.transform.position, 0.1f, bikePile.transform); }));
+        cam.actionQueue.Enqueue(new Action(() => { SFXManager.instance.Spawn("BikeCrash"); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1.55f); }));
         cam.actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, false); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
@@ -55,6 +56,8 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(5f); }));
         cam.actionQueue.Enqueue(new Action(() => { rod.Interact("baby"); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(3.5f); }));
+        cam.actionQueue.Enqueue(new Action(() => { SFXManager.instance.Spawn("CryingBaby1"); }));
+        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(4f); }));
         cam.actionQueue.Enqueue(new Action(() => { dad.GetComponentInChildren<EmoteAnimator>().SetEmotion("Surprise") ; }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
         cam.actionQueue.Enqueue(new Action(() => { fishingBaby.SetActive(false); }));
@@ -62,7 +65,9 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
         cam.actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, false); }));
         cam.actionQueue.Enqueue(new Action(() => { player.EnableRenderer(); }));
-        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(2f); }));
+        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
+        cam.actionQueue.Enqueue(new Action(() => { SFXManager.instance.Spawn("CryingBaby2"); }));
+        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(5f); }));
         cam.actionQueue.Enqueue(new Action(() => { dad.Move(dMount3.position, 4); }));
 
         cam.actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefault(); }));
