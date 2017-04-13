@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MusicManager : MonoBehaviour {
 
-    public static MusicManager MM;
+    public static MusicManager instance;
 
     public AudioSource sceneMusic, cutScene, majorEvent;
     private AudioSource tempAudio;
@@ -17,12 +17,12 @@ public class MusicManager : MonoBehaviour {
     //Makes first MusicManager permanent, destroys duplicates
     void Awake()
     {
-        if (MM == null)
+        if (instance == null)
         {
             DontDestroyOnLoad(gameObject);
-            MM = this;
+            instance = this;
         }
-        else if (MM != this)
+        else if (instance != this)
         {
             Destroy(gameObject);
         }

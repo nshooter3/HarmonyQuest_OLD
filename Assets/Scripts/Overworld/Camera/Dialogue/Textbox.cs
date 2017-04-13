@@ -409,7 +409,7 @@ public class Textbox : MonoBehaviour {
         porAnim.DoneTalking(portrait, false);
 
         if (DTheme != ""){
-            MusicManager.MM.PlayCutsceneSongInit(DTheme, 0.3f);
+            MusicManager.instance.PlayCutsceneSongInit(DTheme, 0.3f);
         }
 
         //Sets portrait prefab

@@ -16,7 +16,7 @@ public class Door : MonoBehaviour {
         timer = timerMax;
         if (musicFadeOut)
         {
-            MusicManager.MM.FadeOutInit();
+            MusicManager.instance.FadeOutInit();
         }
     }
 

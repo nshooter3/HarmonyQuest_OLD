@@ -250,7 +250,7 @@ public class CutsceneEvent : MonoBehaviour {
 
     public void PlayCutsceneSong(string song, float vol)
     {
-        MusicManager.MM.PlayCutsceneSongInit(song, vol);
+        MusicManager.instance.PlayCutsceneSongInit(song, vol);
     }
 
 }

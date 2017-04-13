@@ -74,7 +74,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
         anim = GetComponent<Animator>();
         playerState = PlayerState.Default;
         sceneScript = FindObjectOfType<SceneScript>();
-        MusicManager.MM.Init();
+        MusicManager.instance.Init();
 
         freezeTimer = 1;
 
@@ -357,7 +357,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
         ToggleColliders(true);
         cameraDefaultFlag = true;
         sceneScript.UpdateScene();
-        MusicManager.MM.RaiseMusicInit(MusicManager.MM.sceneMusic.volume);
+        MusicManager.instance.RaiseMusicInit(MusicManager.instance.sceneMusic.volume);
     }
 
     public void ToggleOnDialogueUI()
