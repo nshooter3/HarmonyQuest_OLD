@@ -179,7 +179,7 @@ public class Textbox : MonoBehaviour {
         {
             if (pauseCount == 0)
             {
-                if (textIndex < finalText.Length + 1)
+                if (textIndex < finalText.Length)
                 {
                     //Whether or not to play a voice sample
                     if (sFXCount == 0)

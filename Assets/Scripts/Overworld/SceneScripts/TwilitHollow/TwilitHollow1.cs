@@ -88,7 +88,6 @@ public class TwilitHollow1 : SceneScript {
 
     public void CutsceneWait1()
     {
-        Debug.Log("yeah");
         //CutsceneWait1
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(3f); }));

@@ -33,6 +33,7 @@ public class SFXManager : MonoBehaviour
         for (int i = 0; i < length; i++)
         {
             SFXPool[i] = Instantiate(sampleCell);
+            SFXPool[i].transform.parent = transform;
         }
         for (int i = 0; i < sources.Length; i++)
         {
