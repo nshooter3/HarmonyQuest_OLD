@@ -8283,6 +8283,11 @@ Prefab:
       objectReference: {fileID: 1500433129}
     - target: {fileID: 114366180650452242, guid: c9d974a3742a3664bb61a26762c62af4,
         type: 2}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 2065357912}
+    - target: {fileID: 114366180650452242, guid: c9d974a3742a3664bb61a26762c62af4,
+        type: 2}
       propertyPath: cMount1
       value: 
       objectReference: {fileID: 1050002174}
@@ -8321,11 +8326,6 @@ Prefab:
       propertyPath: author
       value: 
       objectReference: {fileID: 2031835494}
-    - target: {fileID: 114366180650452242, guid: c9d974a3742a3664bb61a26762c62af4,
-        type: 2}
-      propertyPath: dialogue
-      value: 
-      objectReference: {fileID: 2065357912}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c9d974a3742a3664bb61a26762c62af4, type: 2}
   m_IsPrefabParent: 0
@@ -14186,7 +14186,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11412198, guid: aebd836153195e54eba0caded716e437, type: 2}
       propertyPath: spawnDir
-      value: 2
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: aebd836153195e54eba0caded716e437, type: 2}
@@ -14647,16 +14647,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 17
       objectReference: {fileID: 0}
-    - target: {fileID: 114146856905126994, guid: 55614c1926e885d40a32a4384ae33cda,
-        type: 2}
-      propertyPath: emote
-      value: 
-      objectReference: {fileID: 197586, guid: f587c4b0869dda045a0abb8e781c36b7, type: 2}
-    - target: {fileID: 114146856905126994, guid: 55614c1926e885d40a32a4384ae33cda,
-        type: 2}
-      propertyPath: prefab
-      value: 
-      objectReference: {fileID: 197586, guid: f587c4b0869dda045a0abb8e781c36b7, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55614c1926e885d40a32a4384ae33cda, type: 2}
   m_IsPrefabParent: 0

@@ -70,6 +70,8 @@ public class SaveData
     public string curScene = "demo1";
     public string destination = "s1";
     public int deathCount = 0;
+    //States: baby, child, adult
+    public string age = "baby";
     #endregion
 
     /*

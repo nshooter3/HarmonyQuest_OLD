@@ -55,6 +55,8 @@ public class PlayerMovementOverworld : MonoBehaviour {
     private CircleCollider2D circCol;
     private BoxCollider2D boxCol;
 
+    public GameObject baby, child, adult;
+
     void Awake()
     {
         Dialoguer.Initialize();
@@ -71,7 +73,10 @@ public class PlayerMovementOverworld : MonoBehaviour {
         raycastRange = 0.05f;
         playerPos = gameObject.transform;
         rb = playerPos.GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+
+        //Set player sprite depending on age
+        SetPlayerSprite();
+
         playerState = PlayerState.Default;
         sceneScript = FindObjectOfType<SceneScript>();
         MusicManager.instance.Init();
@@ -402,6 +407,29 @@ public class PlayerMovementOverworld : MonoBehaviour {
     {
         circCol.enabled = toggle;
         boxCol.enabled = toggle;
+    }
+
+    public void SetPlayerSprite()
+    {
+        //Change sprite depending on player age
+        adult.SetActive(false);
+        child.SetActive(false);
+        baby.SetActive(false);
+        switch (GlobalVars.instance.saveData.age)
+        {
+            case "baby":
+                baby.SetActive(true);
+                anim = baby.GetComponent<Animator>();
+                break;
+            case "child":
+                child.SetActive(true);
+                anim = child.GetComponent<Animator>();
+                break;
+            case "adult":
+                adult.SetActive(true);
+                anim = child.GetComponent<Animator>();
+                break;
+        }
     }
 
 }

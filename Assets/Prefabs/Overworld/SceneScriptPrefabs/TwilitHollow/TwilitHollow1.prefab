@@ -140,6 +140,7 @@ MonoBehaviour:
   bikeDes: {fileID: 0}
   fishingBike: {fileID: 0}
   fishingBaby: {fileID: 0}
+  dialogue: {fileID: 0}
   cMount1: {fileID: 0}
   cMount2: {fileID: 0}
   cMount3: {fileID: 0}
