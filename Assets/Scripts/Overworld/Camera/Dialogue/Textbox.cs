@@ -435,6 +435,8 @@ public class Textbox : MonoBehaviour {
                 portraitStartPos = new Vector2(portraitTransform.anchoredPosition.x - portraitMoveDistance, portraitTransform.anchoredPosition.y);
                 portraitEndPos = portraitTransform.anchoredPosition;
                 portraitMoving = true;
+                portraitCol = new Color(portrait.GetComponent<Image>().color.r, portrait.GetComponent<Image>().color.b, portrait.GetComponent<Image>().color.g, 0);
+                portrait.GetComponent<Image>().color = portraitCol;
             }
 
             //Sets portrait emotion
