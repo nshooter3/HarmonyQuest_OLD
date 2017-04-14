@@ -55,7 +55,10 @@ public class PlayerMovementOverworld : MonoBehaviour {
     private CircleCollider2D circCol;
     private BoxCollider2D boxCol;
 
+    //The player's sprite/animation holders for her different states
     public GameObject baby, child, adult;
+    //Used to hold the current active sprite/animator gameobject
+    public GameObject currentSprite;
 
     void Awake()
     {
@@ -109,6 +112,9 @@ public class PlayerMovementOverworld : MonoBehaviour {
                 anim.SetInteger("Direction", temp[i].spawnDir);
             }
         }
+
+        //Used to init scenescript after playermovementoverworld is set up
+        FindObjectOfType<SceneScript>().StartScene();
     }
 
     void Update()
@@ -419,14 +425,17 @@ public class PlayerMovementOverworld : MonoBehaviour {
         {
             case "baby":
                 baby.SetActive(true);
+                currentSprite = baby;
                 anim = baby.GetComponent<Animator>();
                 break;
             case "child":
                 child.SetActive(true);
+                currentSprite = child;
                 anim = child.GetComponent<Animator>();
                 break;
             case "adult":
                 adult.SetActive(true);
+                currentSprite = adult;
                 anim = child.GetComponent<Animator>();
                 break;
         }

@@ -215,15 +215,29 @@ public class CutsceneEvent : MonoBehaviour {
     }
 
     //Makes object visible
-    public void EnableRenderer()
+    public void EnableRenderer(GameObject obj = null)
     {
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        if (obj == null)
+        {
+            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+        }
+        else
+        {
+            obj.GetComponent<SpriteRenderer>().enabled = true;
+        }
     }
 
     //Makes object invisible
-    public void DisableRenderer()
+    public void DisableRenderer(GameObject obj = null)
     {
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        if (obj == null)
+        {
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        }
+        else
+        {
+            obj.GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
 
     //Plays sound

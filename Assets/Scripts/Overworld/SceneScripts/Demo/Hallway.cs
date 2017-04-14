@@ -38,6 +38,9 @@ public class Hallway : SceneScript
 
     }
     */
+    public override void StartScene()
+    {
+    }
     public override void UpdateScene()
     {
         

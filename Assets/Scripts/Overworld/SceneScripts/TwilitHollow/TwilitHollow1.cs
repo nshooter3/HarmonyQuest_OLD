@@ -16,13 +16,13 @@ public class TwilitHollow1 : SceneScript {
     Vector4 fadedCol, normCol;
 
 	// Use this for initialization
-	void Start () {
+	public override void StartScene () {
         normCol = author.color;
         fadedCol = normCol;
         fadedCol.w = 0;
         author.color = fadedCol;
         bikePileLower = new Vector3(bikePile.transform.position.x, bikePile.transform.position.y - 0.05f, bikePile.transform.position.z);
-        //InitFishingCutscene();
+        InitFishingCutscene();
     }
 
     void Update()
@@ -74,7 +74,7 @@ public class TwilitHollow1 : SceneScript {
     void InitFishingCutscene()
     {
         PlayerMovementOverworld.instance.InitPlayerInteract();
-        cam.actionQueue.Enqueue(new Action(() => { player.DisableRenderer(); }));
+        cam.actionQueue.Enqueue(new Action(() => { player.DisableRenderer(PlayerMovementOverworld.instance.currentSprite); }));
         cam.transform.position = cMount1.position;
         dad.transform.position = dMount1.position;
         cam.actionQueue.Enqueue(new Action(() => { cam.Move(cMount2.position, 1.5f); }));
@@ -148,7 +148,7 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { dad.Move(dMount2.position, 4); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
         cam.actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, false); }));
-        cam.actionQueue.Enqueue(new Action(() => { player.EnableRenderer(); }));
+        cam.actionQueue.Enqueue(new Action(() => { player.EnableRenderer(PlayerMovementOverworld.instance.currentSprite); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
         cam.actionQueue.Enqueue(new Action(() => { SFXManager.instance.Spawn("CryingBaby2"); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(5f); }));

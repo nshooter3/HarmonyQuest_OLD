@@ -10,7 +10,7 @@ public class Demo4 : SceneScript
     }
 
     // Use this for initialization
-    void Start()
+    public override void StartScene()
     {
 
     }

@@ -6,8 +6,7 @@ public class BananaRoom : SceneScript
 
     public GameObject banana, bBill;
 
-    public void Start()
-    {
+    public override void StartScene () {
         UpdateScene();
     }
 
