@@ -109,10 +109,12 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Move(cMount3.position, 2f); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1); }));
+        cam.actionQueue.Enqueue(new Action(() => { SFXManager.instance.Spawn("Wop"); }));
         cam.actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(false, false); }));
         cam.actionQueue.Enqueue(new Action(() => { fishingBike.SetActive(false); }));
         cam.actionQueue.Enqueue(new Action(() => { bike.SetActive(true); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1); }));
+        cam.actionQueue.Enqueue(new Action(() => { SFXManager.instance.Spawn("Whoosh"); }));
         cam.actionQueue.Enqueue(new Action(() => { GlobalFunctions.instance.AdjustPositionOverTime(bike.transform.position, bikeDes.transform.position, 0.35f, bike.transform); }));
         cam.actionQueue.Enqueue(new Action(() => { GlobalFunctions.instance.AdjustRotationOverTime(bike.transform.eulerAngles, bikeDes.transform.eulerAngles, 0.35f, bike.transform); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(0.45f); }));

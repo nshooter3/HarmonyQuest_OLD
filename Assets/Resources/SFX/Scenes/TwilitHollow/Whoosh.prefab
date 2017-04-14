@@ -9,80 +9,50 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1304483616387944}
+  m_RootGameObject: {fileID: 1909024357443274}
   m_IsPrefabParent: 1
---- !u!1 &1304483616387944
+--- !u!1 &1909024357443274
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4263181061635542}
-  - component: {fileID: 114932227175196396}
+  - component: {fileID: 4711793152561608}
+  - component: {fileID: 82097586951196588}
   m_Layer: 0
-  m_Name: SFXManager
+  m_Name: Whoosh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1752394581937874
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4653776266388782}
-  - component: {fileID: 82404334361083298}
-  m_Layer: 0
-  m_Name: SamplePoolCell
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4263181061635542
+--- !u!4 &4711793152561608
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1304483616387944}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 4653776266388782}
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4653776266388782
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1752394581937874}
+  m_GameObject: {fileID: 1909024357443274}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 4263181061635542}
+  m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!82 &82404334361083298
+--- !u!82 &82097586951196588
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1752394581937874}
+  m_GameObject: {fileID: 1909024357443274}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24306332, guid: d2d6673cb2f7fa24bb1020907104af37,
     type: 2}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3bd45c75cb0bbf148963548f3f960599, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.362
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -151,23 +121,3 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114932227175196396
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1304483616387944}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f13535b5ebea7a04b8c17521567a7bce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sampleCell: {fileID: 82404334361083298}
-  sources:
-  - {fileID: 82854542139335980, guid: 377bef5c41865c249b9c35d7a96effda, type: 2}
-  - {fileID: 82454892047175632, guid: 712da78afd513fc40aa8c80721bbcb46, type: 2}
-  - {fileID: 82266981278437860, guid: f7f09b99d5e9a4e40accc42bf0f8d148, type: 2}
-  - {fileID: 82911572076743254, guid: 5dd165c6f8b35a44abebbb7a5a98e2ba, type: 2}
-  - {fileID: 82097586951196588, guid: 89020eeec55dfd6419774cd331b1ebb6, type: 2}
-  - {fileID: 82618285596237976, guid: 8b0f54906edb92b42aae071b347a6c46, type: 2}
-  length: 20
