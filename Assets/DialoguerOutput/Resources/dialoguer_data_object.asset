@@ -15,20 +15,20 @@ MonoBehaviour:
     generateEnum: 1
     dialogues:
     - id: 0
-      name: TileDemoBanana
+      name: TwilitHollow1_Cliff
       startPage: 0
-      scrollPosition: {x: 0, y: 0}
+      scrollPosition: {x: 5053.207, y: 0}
       phases:
       - id: 0
         type: 0
-        theme: BananaBill
-        position: {x: 371.17828, y: 31}
+        theme: 
+        position: {x: 213, y: 356}
         outs: 01000000
         advanced: 1
         metadata: talking
-        text: Oh hey! This is the demo right?
-        name: Banana Bill
-        portrait: BananaBill
+        text: Ah, what a beautiful night for fishing off of cliffs.
+        name: MasterFist
+        portrait: MasterFist
         audio: 
         audioDelay: 0
         rect:
@@ -51,15 +51,15 @@ MonoBehaviour:
         variableGetValue: 
         messageName: 
       - id: 1
-        type: 1
+        type: 5
         theme: 
-        position: {x: 701, y: 30}
-        outs: 0200000004000000
-        advanced: 1
-        metadata: happyTalking
-        text: Can I be in it?
-        name: Banana Bill
-        portrait: BananaBill
+        position: {x: 535, y: 356}
+        outs: 02000000
+        advanced: 0
+        metadata: 
+        text: 
+        name: 
+        portrait: 
         audio: 
         audioDelay: 0
         rect:
@@ -69,9 +69,7 @@ MonoBehaviour:
           width: 0
           height: 0
         newWindow: 0
-        choices:
-        - Sure!
-        - Nah
+        choices: []
         waitType: 0
         waitDuration: 0
         variableScope: 0
@@ -82,17 +80,17 @@ MonoBehaviour:
         variableSetValue: 
         variableGetEquation: 0
         variableGetValue: 
-        messageName: 
+        messageName: CutsceneWait1
       - id: 2
         type: 0
         theme: 
-        position: {x: 1055, y: 13}
+        position: {x: 768, y: 356}
         outs: 03000000
         advanced: 1
-        metadata: happyTalking
-        text: Yay!
-        name: Banana Bill
-        portrait: BananaBill
+        metadata: 
+        text: 
+        name: MasterFist
+        portrait: MasterFist
         audio: 
         audioDelay: 0
         rect:
@@ -115,9 +113,632 @@ MonoBehaviour:
         variableGetValue: 
         messageName: 
       - id: 3
+        type: 0
+        theme: 
+        position: {x: 1086.7283, y: 356}
+        outs: 04000000
+        advanced: 1
+        metadata: talking
+        text: Aha, a bite! I bet it's a sweet sword! Or perhaps the secret to an ancient
+          battle technique!
+        name: MasterFist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 4
+        type: 5
+        theme: 
+        position: {x: 1403, y: 357}
+        outs: 05000000
+        advanced: 0
+        metadata: 
+        text: 
+        name: 
+        portrait: 
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: CutsceneReelIn1
+      - id: 5
+        type: 0
+        theme: 
+        position: {x: 1622, y: 353}
+        outs: 06000000
+        advanced: 1
+        metadata: 
+        text: 
+        name: MasterFist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 6
+        type: 0
+        theme: 
+        position: {x: 1949, y: 352}
+        outs: 07000000
+        advanced: 1
+        metadata: talking
+        text: Aw man, not another one of these.
+        name: MasterFist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 7
+        type: 5
+        theme: 
+        position: {x: 2271, y: 357}
+        outs: 08000000
+        advanced: 0
+        metadata: 
+        text: 
+        name: 
+        portrait: 
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: CutsceneThrowBike
+      - id: 8
+        type: 0
+        theme: 
+        position: {x: 2489, y: 350}
+        outs: 09000000
+        advanced: 1
+        metadata: 
+        text: 
+        name: MasterFist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 9
+        type: 0
+        theme: 
+        position: {x: 2800, y: 354}
+        outs: 0a000000
+        advanced: 1
+        metadata: talking
+        text: How am I supposed to become a mighty warrior if all I can catch are
+          these dang bikes?
+        name: MasterFist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 10
+        type: 0
+        theme: 
+        position: {x: 3108, y: 355}
+        outs: 0b000000
+        advanced: 1
+        metadata: talking
+        text: 'Oh well, it''s like they say: If at first you don''t succeed, keep
+          doing the same thing forever!'
+        name: MasterFist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 11
+        type: 5
+        theme: 
+        position: {x: 3417, y: 353}
+        outs: 0c000000
+        advanced: 0
+        metadata: 
+        text: 
+        name: 
+        portrait: 
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: CutsceneLowerBait1
+      - id: 12
+        type: 0
+        theme: 
+        position: {x: 3629, y: 353}
+        outs: 0d000000
+        advanced: 1
+        metadata: 
+        text: 
+        name: MasterFist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 13
+        type: 0
+        theme: 
+        position: {x: 3938, y: 352}
+        outs: 10000000
+        advanced: 1
+        metadata: talking
+        text: Oh my! A baby!
+        name: MasterFist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 14
+        type: 0
+        theme: 
+        position: {x: 4762, y: 341}
+        outs: 0f000000
+        advanced: 1
+        metadata: talking
+        text: Umm... Do you have any parents? Or dads?
+        name: MasterFist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 15
+        type: 0
+        theme: 
+        position: {x: 5078, y: 338}
+        outs: 12000000
+        advanced: 1
+        metadata: talking
+        text: I read on the back of a cereal box that babies usually have dads.
+        name: MasterFist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 16
+        type: 5
+        theme: 
+        position: {x: 4240, y: 352}
+        outs: 11000000
+        advanced: 0
+        metadata: 
+        text: 
+        name: 
+        portrait: 
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: CutsceneGrabBaby
+      - id: 17
+        type: 0
+        theme: 
+        position: {x: 4449, y: 344}
+        outs: 0e000000
+        advanced: 1
+        metadata: 
+        text: 
+        name: MasterFist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 18
+        type: 5
+        theme: 
+        position: {x: 5392, y: 330}
+        outs: 19000000
+        advanced: 0
+        metadata: 
+        text: 
+        name: 
+        portrait: 
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: CutsceneLookAround
+      - id: 19
+        type: 0
+        theme: 
+        position: {x: 5604, y: 327}
+        outs: 14000000
+        advanced: 1
+        metadata: talking
+        text: No dads around here. I guess that makes me dad!
+        name: MasterFist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 20
+        type: 0
+        theme: 
+        position: {x: 5912, y: 327}
+        outs: 15000000
+        advanced: 1
+        metadata: talking
+        text: Very well, my baby disciple. Your training begins immediately!
+        name: MasterFist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 21
+        type: 0
+        theme: 
+        position: {x: 6221, y: 325}
+        outs: 16000000
+        advanced: 1
+        metadata: talking
+        text: Come with me!
+        name: MasterFist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 22
+        type: 5
+        theme: 
+        position: {x: 6529, y: 321}
+        outs: 18000000
+        advanced: 0
+        metadata: 
+        text: 
+        name: 
+        portrait: 
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: CutsceneEnd
+      - id: 23
         type: 6
         theme: 
-        position: {x: 1523, y: 229}
+        position: {x: 7071, y: 324}
         outs: 
         advanced: 0
         metadata: 
@@ -145,16 +766,47 @@ MonoBehaviour:
         variableGetEquation: 0
         variableGetValue: 
         messageName: 
-      - id: 4
+      - id: 24
         type: 0
         theme: 
-        position: {x: 1051, y: 473}
-        outs: 03000000
+        position: {x: 6742, y: 325}
+        outs: 17000000
         advanced: 1
-        metadata: sadTalking
-        text: Awww...
-        name: Banana Bill
-        portrait: BananaBill
+        metadata: 
+        text: 
+        name: MasterFist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 25
+        type: 0
+        theme: 
+        position: {x: 5377.4175, y: 834}
+        outs: 13000000
+        advanced: 1
+        metadata: 
+        text: 
+        name: MasterFist
+        portrait: MasterFist
         audio: 
         audioDelay: 0
         rect:
@@ -1808,7 +2460,7 @@ MonoBehaviour:
     - id: 3
       name: HallwayDemo
       startPage: 0
-      scrollPosition: {x: 22.132526, y: 961}
+      scrollPosition: {x: 6735.144, y: 1001}
       phases:
       - id: 0
         type: 4
@@ -2937,207 +3589,6 @@ MonoBehaviour:
         variableScrollPosition: {x: 0, y: 0}
         variableSetEquation: 0
         variableSetValue: 4
-        variableGetEquation: 0
-        variableGetValue: 
-        messageName: 
-      floats:
-        variables: []
-        selection: 0
-      strings:
-        variables: []
-        selection: 0
-      booleans:
-        variables: []
-        selection: 0
-    - id: 4
-      name: LockedDoor
-      startPage: 0
-      scrollPosition: {x: 268.0291, y: 0}
-      phases:
-      - id: 0
-        type: 0
-        theme: 
-        position: {x: 192, y: 10}
-        outs: 01000000
-        advanced: 0
-        metadata: 
-        text: It's locked.
-        name: 
-        portrait: 
-        audio: 
-        audioDelay: 0
-        rect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        newWindow: 0
-        choices: []
-        waitType: 0
-        waitDuration: 0
-        variableScope: 0
-        variableType: 0
-        variableId: 0
-        variableScrollPosition: {x: 0, y: 0}
-        variableSetEquation: 0
-        variableSetValue: 
-        variableGetEquation: 0
-        variableGetValue: 
-        messageName: 
-      - id: 1
-        type: 0
-        theme: 
-        position: {x: 528, y: 10}
-        outs: 02000000
-        advanced: 0
-        metadata: 
-        text: You notice a note attached to the door.
-        name: 
-        portrait: 
-        audio: 
-        audioDelay: 0
-        rect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        newWindow: 0
-        choices: []
-        waitType: 0
-        waitDuration: 0
-        variableScope: 0
-        variableType: 0
-        variableId: 0
-        variableScrollPosition: {x: 0, y: 0}
-        variableSetEquation: 0
-        variableSetValue: 
-        variableGetEquation: 0
-        variableGetValue: 
-        messageName: 
-      - id: 2
-        type: 0
-        theme: 
-        position: {x: 851, y: 10}
-        outs: 03000000
-        advanced: 0
-        metadata: 
-        text: '"Under construction: The room with the sample that guy was talking
-          about"'
-        name: 
-        portrait: 
-        audio: 
-        audioDelay: 0
-        rect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        newWindow: 0
-        choices: []
-        waitType: 0
-        waitDuration: 0
-        variableScope: 0
-        variableType: 0
-        variableId: 0
-        variableScrollPosition: {x: 0, y: 0}
-        variableSetEquation: 0
-        variableSetValue: 
-        variableGetEquation: 0
-        variableGetValue: 
-        messageName: 
-      - id: 3
-        type: 0
-        theme: 
-        position: {x: 1177, y: 11}
-        outs: 04000000
-        advanced: 0
-        metadata: 
-        text: '"Also under construction: The entire rest of the game"'
-        name: 
-        portrait: 
-        audio: 
-        audioDelay: 0
-        rect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        newWindow: 0
-        choices: []
-        waitType: 0
-        waitDuration: 0
-        variableScope: 0
-        variableType: 0
-        variableId: 0
-        variableScrollPosition: {x: 0, y: 0}
-        variableSetEquation: 0
-        variableSetValue: 
-        variableGetEquation: 0
-        variableGetValue: 
-        messageName: 
-      - id: 4
-        type: 0
-        theme: 
-        position: {x: 1500, y: 10}
-        outs: 05000000
-        advanced: 0
-        metadata: 
-        text: '"Sorry for the inconvenience, and we hope you have a nice day" -Management'
-        name: 
-        portrait: 
-        audio: 
-        audioDelay: 0
-        rect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        newWindow: 0
-        choices: []
-        waitType: 0
-        waitDuration: 0
-        variableScope: 0
-        variableType: 0
-        variableId: 0
-        variableScrollPosition: {x: 0, y: 0}
-        variableSetEquation: 0
-        variableSetValue: 
-        variableGetEquation: 0
-        variableGetValue: 
-        messageName: 
-      - id: 5
-        type: 6
-        theme: 
-        position: {x: 1827, y: 28}
-        outs: 
-        advanced: 0
-        metadata: 
-        text: 
-        name: 
-        portrait: 
-        audio: 
-        audioDelay: 0
-        rect:
-          serializedVersion: 2
-          x: 0
-          y: 0
-          width: 0
-          height: 0
-        newWindow: 0
-        choices: []
-        waitType: 0
-        waitDuration: 0
-        variableScope: 0
-        variableType: 0
-        variableId: 0
-        variableScrollPosition: {x: 0, y: 0}
-        variableSetEquation: 0
-        variableSetValue: 
         variableGetEquation: 0
         variableGetValue: 
         messageName: 

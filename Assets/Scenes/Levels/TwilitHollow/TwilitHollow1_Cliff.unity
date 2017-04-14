@@ -8321,6 +8321,11 @@ Prefab:
       propertyPath: author
       value: 
       objectReference: {fileID: 2031835494}
+    - target: {fileID: 114366180650452242, guid: c9d974a3742a3664bb61a26762c62af4,
+        type: 2}
+      propertyPath: dialogue
+      value: 
+      objectReference: {fileID: 2065357912}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c9d974a3742a3664bb61a26762c62af4, type: 2}
   m_IsPrefabParent: 0
@@ -14655,6 +14660,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 55614c1926e885d40a32a4384ae33cda, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2065357912 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1670645345012690, guid: 55614c1926e885d40a32a4384ae33cda,
+    type: 2}
+  m_PrefabInternal: {fileID: 2065357911}
 --- !u!1001 &2070871222
 Prefab:
   m_ObjectHideFlags: 0
