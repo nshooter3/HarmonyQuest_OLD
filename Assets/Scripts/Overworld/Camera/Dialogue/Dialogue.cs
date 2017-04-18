@@ -16,20 +16,20 @@ public class Dialogue : MonoBehaviour {
         triggerDialogue();
     }
 
-    public void triggerDialogue()
+    public virtual void triggerDialogue()
     {
         dInit.dialogueID = dialogueID;
         dInit.triggerDialogue();
         UpdateVars();
     }
 
-    public void dialogueStep(int choice)
+    public virtual void dialogueStep(int choice)
     {
         dInit.dialogueStep(choice);
         UpdateVars();
     }
 
-    public void UpdateVars()
+    public virtual void UpdateVars()
     {
         text = dInit.text;
         choices = dInit.choices;
@@ -47,7 +47,7 @@ public class Dialogue : MonoBehaviour {
         }
     }
 
-    public void endedReset()
+    public virtual void endedReset()
     {
         ended = false;
         dInit.ended = false;

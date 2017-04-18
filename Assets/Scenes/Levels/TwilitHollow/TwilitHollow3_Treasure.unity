@@ -27894,6 +27894,48 @@ Transform:
   m_PrefabParentObject: {fileID: 4044543628584588, guid: a2eb8f1d94efab94e9c23d0f0c1e5629,
     type: 2}
   m_PrefabInternal: {fileID: 1984882976}
+--- !u!1001 &2002136114
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4263181061635542, guid: 26a154212351a9f45a39a31d4c962de5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263181061635542, guid: 26a154212351a9f45a39a31d4c962de5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263181061635542, guid: 26a154212351a9f45a39a31d4c962de5, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263181061635542, guid: 26a154212351a9f45a39a31d4c962de5, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263181061635542, guid: 26a154212351a9f45a39a31d4c962de5, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263181061635542, guid: 26a154212351a9f45a39a31d4c962de5, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263181061635542, guid: 26a154212351a9f45a39a31d4c962de5, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263181061635542, guid: 26a154212351a9f45a39a31d4c962de5, type: 2}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 26a154212351a9f45a39a31d4c962de5, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &2003561405
 Prefab:
   m_ObjectHideFlags: 0
@@ -28929,6 +28971,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2100382258}
   - component: {fileID: 2100382259}
+  - component: {fileID: 2100382260}
   m_Layer: 8
   m_Name: Treasure
   m_TagString: Untagged
@@ -28965,6 +29008,32 @@ BoxCollider2D:
   m_Offset: {x: 0, y: -0.1}
   serializedVersion: 2
   m_Size: {x: 1, y: 0.8}
+--- !u!114 &2100382260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2100382257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a674c3ec255c7e2408dfbdb559cf8eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueID: 0
+  text: 
+  choices: []
+  ended: 0
+  DName: 
+  DPortrait: 
+  DMetadata: 
+  DTheme: 
+  mName: 
+  mData: 
+  dInit: {fileID: 0}
+  dialogue:
+  - It's a treasure chest.
+  - You can't open it, because you aren't old enough to have arms.
+  - '...or maybe they''re just wrapped up too tight.'
 --- !u!1 &2106375976
 GameObject:
   m_ObjectHideFlags: 0
