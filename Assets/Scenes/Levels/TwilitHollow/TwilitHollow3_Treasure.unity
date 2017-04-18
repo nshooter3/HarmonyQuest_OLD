@@ -29033,7 +29033,7 @@ MonoBehaviour:
   dialogue:
   - It's a treasure chest.
   - You can't open it, because you aren't old enough to have arms.
-  - '...or maybe they''re just wrapped up too tight.'
+  - '...or maybe you''re just wrapped up too tight to move.'
 --- !u!1 &2106375976
 GameObject:
   m_ObjectHideFlags: 0

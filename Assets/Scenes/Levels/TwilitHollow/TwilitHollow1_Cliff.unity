@@ -3668,9 +3668,42 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 1517944823142144, guid: 59ad326456ef9c34d91be2b3c89b17b4, type: 2}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 59ad326456ef9c34d91be2b3c89b17b4, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &580775618 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1517944823142144, guid: 59ad326456ef9c34d91be2b3c89b17b4,
+    type: 2}
+  m_PrefabInternal: {fileID: 580775617}
+--- !u!114 &580775619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 580775618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a674c3ec255c7e2408dfbdb559cf8eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueID: 0
+  text: 
+  choices: []
+  ended: 0
+  DName: 
+  DPortrait: 
+  DMetadata: 
+  DTheme: 
+  mName: 
+  mData: 
+  dInit: {fileID: 0}
+  dialogue:
+  - It's a bike.
 --- !u!1001 &602067482
 Prefab:
   m_ObjectHideFlags: 0
@@ -3995,6 +4028,30 @@ GameObject:
   m_PrefabParentObject: {fileID: 1260735801507664, guid: 1d11fecc008453e4bbbcaebba1114fbe,
     type: 2}
   m_PrefabInternal: {fileID: 1398997432}
+--- !u!114 &641550816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 641550815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a674c3ec255c7e2408dfbdb559cf8eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueID: 0
+  text: 
+  choices: []
+  ended: 0
+  DName: 
+  DPortrait: 
+  DMetadata: 
+  DTheme: 
+  mName: 
+  mData: 
+  dInit: {fileID: 0}
+  dialogue:
+  - It's a pile of bikes.
 --- !u!4 &641550817 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4543790124826810, guid: 1d11fecc008453e4bbbcaebba1114fbe,
@@ -9491,6 +9548,10 @@ Prefab:
     - target: {fileID: 4543790124826810, guid: 1d11fecc008453e4bbbcaebba1114fbe, type: 2}
       propertyPath: m_RootOrder
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1260735801507664, guid: 1d11fecc008453e4bbbcaebba1114fbe, type: 2}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d11fecc008453e4bbbcaebba1114fbe, type: 2}
