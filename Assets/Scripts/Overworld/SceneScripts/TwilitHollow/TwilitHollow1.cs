@@ -22,7 +22,10 @@ public class TwilitHollow1 : SceneScript {
         fadedCol.w = 0;
         author.color = fadedCol;
         bikePileLower = new Vector3(bikePile.transform.position.x, bikePile.transform.position.y - 0.05f, bikePile.transform.position.z);
-        InitFishingCutscene();
+        if (GlobalVars.instance.saveData.hollowProgress == 0)
+        {
+            InitFishingCutscene();
+        }
     }
 
     void Update()
@@ -86,7 +89,7 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.InitDialogue(PlayerMovementOverworld.instance, dialogue);})) ;
     }
 
-    public void CutsceneWait1()
+    void CutsceneWait1()
     {
         //CutsceneWait1
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
@@ -94,7 +97,7 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
     }
 
-    public void CutsceneReelIn1()
+    void CutsceneReelIn1()
     {
         // CutsceneReelIn1
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
@@ -103,7 +106,7 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
     }
 
-    public void CutsceneThrowBike()
+    void CutsceneThrowBike()
     {
         //CutsceneThowBike
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
@@ -126,7 +129,7 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
     }
 
-    public void CutsceneLowerBait1(){
+    void CutsceneLowerBait1(){
         //CutsceneLowerBait1
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
@@ -141,7 +144,7 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
     }
 
-    public void CutsceneGrabBaby()
+    void CutsceneGrabBaby()
     {
         //CutsceneGrabBaby
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
@@ -157,7 +160,7 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
     }
 
-    public void CutsceneLookAround()
+    void CutsceneLookAround()
     {
         //CutsceneLookAround
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
@@ -173,13 +176,14 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
     }
 
-    public void CutsceneEnd()
+    void CutsceneEnd()
     {
         //CutsceneEnd
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1); }));
         cam.actionQueue.Enqueue(new Action(() => { dad.Move(dMount3.position, 4); }));
         cam.actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefault(); }));
+        GlobalVars.instance.saveData.hollowProgress = 1;
     }
 
     // Update is called once per frame

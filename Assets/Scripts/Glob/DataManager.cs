@@ -74,6 +74,11 @@ public class SaveData
     public string age = "baby";
     #endregion
 
+    //TwilitHollow variables
+    #region
+    public int hollowProgress = 0;
+    #endregion
+
     /*
     //Demo scene variables
     #region
