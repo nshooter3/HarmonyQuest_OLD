@@ -24,7 +24,7 @@ public class TwilitHollow2_Boulder : SceneScript {
     public override void StartScene()
     {
         //TODO Temp, get rid of this later
-        GlobalVars.instance.saveData.hollowProgress = 1;
+        //GlobalVars.instance.saveData.hollowProgress = 1;
         //End temp
 
         if (GlobalVars.instance.saveData.hollowProgress == 1)
