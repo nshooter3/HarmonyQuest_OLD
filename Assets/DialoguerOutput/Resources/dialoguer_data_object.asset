@@ -17,7 +17,7 @@ MonoBehaviour:
     - id: 0
       name: TwilitHollow1_Cliff
       startPage: 0
-      scrollPosition: {x: 5958, y: 240}
+      scrollPosition: {x: 5353.192, y: 240}
       phases:
       - id: 0
         type: 0
@@ -3604,7 +3604,7 @@ MonoBehaviour:
     - id: 4
       name: TwilitHollow2_Rock
       startPage: 0
-      scrollPosition: {x: 2046.8915, y: 0}
+      scrollPosition: {x: 775.127, y: 0}
       phases:
       - id: 0
         type: 0
@@ -3644,7 +3644,7 @@ MonoBehaviour:
         outs: 03000000
         advanced: 1
         metadata: talking
-        text: Sometimes in life, you run into adversity. Big, metaphorical rocks standing
+        text: Sometimes, you run into adversity. Big, metaphorical rocks standing
           between you and your goals.
         name: Master Fist
         portrait: MasterFist
@@ -3863,7 +3863,7 @@ MonoBehaviour:
         outs: 09000000
         advanced: 1
         metadata: talking
-        text: You gotta punch life in the face and take all it's lemons while it's
+        text: You gotta punch life in the face and take all its lemons while it's
           reeling!
         name: Master Fist
         portrait: MasterFist

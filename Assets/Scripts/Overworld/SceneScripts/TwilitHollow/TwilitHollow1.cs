@@ -93,7 +93,9 @@ public class TwilitHollow1 : SceneScript {
     {
         //CutsceneWait1
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
-        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(3f); }));
+        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1.5f); }));
+        cam.actionQueue.Enqueue(new Action(() => { dad.GetComponentInChildren<EmoteAnimator>().SetEmotion("Surprise"); }));
+        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(0.75f); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
     }
 
