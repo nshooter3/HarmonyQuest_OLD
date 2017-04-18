@@ -203,8 +203,11 @@ public class Textbox : MonoBehaviour {
                     if (textIndex - 1 > 0 && (textIndex - 1) < finalText.Length && (finalText[(textIndex - 1)].Equals('.') || finalText[(textIndex - 1)].Equals(',') ||
                         finalText[(textIndex - 1)].Equals('!') || finalText[(textIndex - 1)].Equals('?')))
                     {
-                        pauseCount = 8;
-                        sFXCount = 0;
+                        //Prevents pause if followed by quotation mark
+                        if (!(textIndex < finalText.Length && finalText[(textIndex)].Equals('"'))) {
+                            pauseCount = 8;
+                            sFXCount = 0;
+                        }
                     }
                     
                     textIndex++;
