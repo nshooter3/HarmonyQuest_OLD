@@ -3604,7 +3604,7 @@ MonoBehaviour:
     - id: 4
       name: TwilitHollow2_Rock
       startPage: 0
-      scrollPosition: {x: 2341, y: 0}
+      scrollPosition: {x: 2046.8915, y: 0}
       phases:
       - id: 0
         type: 0
@@ -3824,7 +3824,7 @@ MonoBehaviour:
         variableSetValue: 
         variableGetEquation: 0
         variableGetValue: 
-        messageName: CutsceneDestroyRock
+        messageName: CutsceneBreakRock
       - id: 7
         type: 0
         theme: 

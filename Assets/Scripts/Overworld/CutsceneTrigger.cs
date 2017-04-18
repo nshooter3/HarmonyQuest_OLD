@@ -10,7 +10,10 @@ public class CutsceneTrigger : MonoBehaviour {
 	void Start () {
         isCol = false;
         col = GetComponent<BoxCollider2D>();
-        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        if (gameObject.GetComponent<SpriteRenderer>() != null)
+        {
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+        }
     }
 
     void OnTriggerEnter2D(Collider2D col)
