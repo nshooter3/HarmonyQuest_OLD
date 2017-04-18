@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114690439594559692}
   - component: {fileID: 114971691771455080}
   m_Layer: 8
-  m_Name: MasterFist
+  m_Name: MasterFistOverworld
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
