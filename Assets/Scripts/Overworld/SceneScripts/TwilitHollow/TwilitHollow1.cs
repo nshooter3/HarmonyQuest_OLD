@@ -184,7 +184,7 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1); }));
         cam.actionQueue.Enqueue(new Action(() => { dad.Move(dMount3.position, 4); }));
-        cam.actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefault(); }));
+        cam.actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue(); }));
         GlobalVars.instance.saveData.hollowProgress = 1;
     }
 

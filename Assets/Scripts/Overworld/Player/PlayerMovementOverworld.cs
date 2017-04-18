@@ -370,6 +370,7 @@ public class PlayerMovementOverworld : MonoBehaviour {
         cameraDefaultFlag = true;
         sceneScript.UpdateScene();
         MusicManager.instance.RaiseMusicInit(MusicManager.instance.sceneMusic.volume);
+        cutsceneFlag = false;
     }
 
     public void ToggleOnDialogueUI()
