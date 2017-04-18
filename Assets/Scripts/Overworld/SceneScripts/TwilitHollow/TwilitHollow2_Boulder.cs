@@ -106,6 +106,7 @@ public class TwilitHollow2_Boulder : SceneScript {
 
     IEnumerator BlowUpRock()
     {
+        SFXManager.instance.Spawn("RockBreak");
         rockExplode.Play();
         rockSmoke.Play();
         rockExploded = true;
