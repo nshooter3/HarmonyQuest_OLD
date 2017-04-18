@@ -17,7 +17,7 @@ MonoBehaviour:
     - id: 0
       name: TwilitHollow1_Cliff
       startPage: 0
-      scrollPosition: {x: 5958, y: 180}
+      scrollPosition: {x: 5958, y: 240}
       phases:
       - id: 0
         type: 0
@@ -3589,6 +3589,426 @@ MonoBehaviour:
         variableScrollPosition: {x: 0, y: 0}
         variableSetEquation: 0
         variableSetValue: 4
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      floats:
+        variables: []
+        selection: 0
+      strings:
+        variables: []
+        selection: 0
+      booleans:
+        variables: []
+        selection: 0
+    - id: 4
+      name: TwilitHollow2_Rock
+      startPage: 0
+      scrollPosition: {x: 2341, y: 0}
+      phases:
+      - id: 0
+        type: 0
+        theme: 
+        position: {x: 200, y: 22}
+        outs: 01000000
+        advanced: 1
+        metadata: talking
+        text: Alright, time for a life lesson!
+        name: Master Fist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 1
+        type: 0
+        theme: 
+        position: {x: 517, y: 21}
+        outs: 03000000
+        advanced: 1
+        metadata: talking
+        text: Sometimes in life, you run into adversity. Big, metaphorical rocks standing
+          between you and your goals.
+        name: Master Fist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 2
+        type: 0
+        theme: 
+        position: {x: 1138, y: 23}
+        outs: 04000000
+        advanced: 1
+        metadata: talking
+        text: For you can overcome these challenges by keeping your head up and persevering!
+        name: Master Fist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 3
+        type: 0
+        theme: 
+        position: {x: 827, y: 23}
+        outs: 02000000
+        advanced: 1
+        metadata: talking
+        text: Things might look bad, maybe even impossible. But don't lose hope!
+        name: Master Fist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 4
+        type: 0
+        theme: 
+        position: {x: 1451, y: 24}
+        outs: 05000000
+        advanced: 1
+        metadata: talking
+        text: You gotta look that rock in the eye and say "Hey stupid, you're in the
+          way!"
+        name: Master Fist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 5
+        type: 0
+        theme: 
+        position: {x: 1764, y: 23}
+        outs: 06000000
+        advanced: 1
+        metadata: talking
+        text: Take your willpower fist, and overcome it into a million little pieces!
+        name: Master Fist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 6
+        type: 5
+        theme: 
+        position: {x: 2083, y: 22}
+        outs: 07000000
+        advanced: 0
+        metadata: 
+        text: 
+        name: 
+        portrait: 
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: CutsceneDestroyRock
+      - id: 7
+        type: 0
+        theme: 
+        position: {x: 2298, y: 21}
+        outs: 08000000
+        advanced: 1
+        metadata: talking
+        text: 
+        name: Master Fist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 8
+        type: 0
+        theme: 
+        position: {x: 2618, y: 19}
+        outs: 09000000
+        advanced: 1
+        metadata: talking
+        text: You gotta punch life in the face and take all it's lemons while it's
+          reeling!
+        name: Master Fist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 9
+        type: 0
+        theme: 
+        position: {x: 2928, y: 19}
+        outs: 0a000000
+        advanced: 1
+        metadata: talking
+        text: Now come! You have much to learn.
+        name: Master Fist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 10
+        type: 5
+        theme: 
+        position: {x: 3241, y: 15}
+        outs: 0b000000
+        advanced: 0
+        metadata: 
+        text: 
+        name: 
+        portrait: 
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: CutsceneEnd
+      - id: 11
+        type: 0
+        theme: 
+        position: {x: 3454, y: 17}
+        outs: 0c000000
+        advanced: 1
+        metadata: talking
+        text: 
+        name: Master Fist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 12
+        type: 6
+        theme: 
+        position: {x: 3801, y: 25}
+        outs: 
+        advanced: 0
+        metadata: 
+        text: 
+        name: 
+        portrait: 
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
         variableGetEquation: 0
         variableGetValue: 
         messageName: 

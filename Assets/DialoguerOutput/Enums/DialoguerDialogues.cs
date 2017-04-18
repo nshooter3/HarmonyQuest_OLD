@@ -5,4 +5,5 @@ public enum DialoguerDialogues{
 	TalkToABanana = 1,
 	BananaBill = 2,
 	HallwayDemo = 3,
+	TwilitHollow2_Rock = 4,
 }
