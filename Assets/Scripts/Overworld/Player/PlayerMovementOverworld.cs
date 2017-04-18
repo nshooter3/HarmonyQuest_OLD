@@ -161,23 +161,24 @@ public class PlayerMovementOverworld : MonoBehaviour {
             {
                 //Used for alerting scene scripts to dialogue events
                 dlog.UpdateVars();
-            }
-            if (textbox.textLoading)
-            {
-                textbox.finishText();
-                textbox.setNoChoiceTimer();
-            }
-            else if(!textbox.choiceUIMoving && !textbox.isNoChoiceTimerRunning())
-            {
-                AdvanceDialogue();
-            }
-            if (dlog != null && dlog.mName != "")
-            {
-                //Used for alerting scene scripts to dialogue events
-                mName = dlog.mName;
-                mData = dlog.mData;
-                dlog.mName = "";
-                dlog.mData = "";
+
+                if (textbox.textLoading)
+                {
+                    textbox.finishText();
+                    textbox.setNoChoiceTimer();
+                }
+                else if (!textbox.choiceUIMoving && !textbox.isNoChoiceTimerRunning())
+                {
+                    AdvanceDialogue();
+                }
+                if (dlog.mName != "")
+                {
+                    //Used for alerting scene scripts to dialogue events
+                    mName = dlog.mName;
+                    mData = dlog.mData;
+                    dlog.mName = "";
+                    dlog.mData = "";
+                }
             }
         }
 

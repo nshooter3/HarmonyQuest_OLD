@@ -24,15 +24,22 @@ public class TwilitHollow2_Boulder : SceneScript {
     public override void StartScene()
     {
         //TODO Temp, get rid of this later
-        //GlobalVars.instance.saveData.hollowProgress = 1;
+        //GlobalVars.instance.saveData.hollowProgress = 2;
         //End temp
 
         if (GlobalVars.instance.saveData.hollowProgress == 1)
         {
+            GlobalVars.instance.saveData.hollowProgress = 2;
             dad.GetComponent<Collider2D>().enabled = false;
             dad.transform.position = d1.position;
             dad.actionQueue.Enqueue(new Action(() => { dad.Move(d2.position, 4); }));
             dad.actionQueue.Enqueue(new Action(() => { dad.Move(d3.position, 4); }));
+        }
+        else if (GlobalVars.instance.saveData.hollowProgress == 2)
+        {
+            dad.GetComponent<Collider2D>().enabled = false;
+            dad.transform.position = d3.position;
+            dad.ChangeDirectionDiagonal(false, true);
         }
         else
         {
@@ -43,7 +50,7 @@ public class TwilitHollow2_Boulder : SceneScript {
 	
 	// Update is called once per frame
 	void Update () {
-        if (ct1.gameObject.activeSelf && ct1.isCol && PlayerMovementOverworld.instance.playerState == PlayerMovementOverworld.PlayerState.Default)
+        if (ct1.gameObject.activeSelf && ct1.isCol && PlayerMovementOverworld.instance.playerState == PlayerMovementOverworld.PlayerState.Default && GlobalVars.instance.saveData.hollowProgress == 2)
         {
             CutsceneInit();
         }
@@ -101,7 +108,7 @@ public class TwilitHollow2_Boulder : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Move(camPos, 1f); }));
         cam.actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefault(); }));
-        GlobalVars.instance.saveData.hollowProgress = 2;
+        GlobalVars.instance.saveData.hollowProgress = 3;
     }
 
     IEnumerator BlowUpRock()

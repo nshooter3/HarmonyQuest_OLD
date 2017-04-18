@@ -33,6 +33,7 @@ public class CutsceneEvent : MonoBehaviour {
     void Awake()
     {
         actionQueue = new Queue<Action>();
+        anim = GetComponent<Animator>();
     }
 
 	// Use this for initialization
@@ -42,7 +43,6 @@ public class CutsceneEvent : MonoBehaviour {
         moving = false;
         speed = 1;
         dur = 0;
-        anim = GetComponent<Animator>();
     }
 	
 	// Update is called once per frame
