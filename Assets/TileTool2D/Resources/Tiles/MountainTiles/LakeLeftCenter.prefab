@@ -92,7 +92,7 @@ MonoBehaviour:
   currentAttachment: {fileID: 0}
   tileSprite: 
   tileA:
-  - {fileID: 21300008, guid: 90f19fc54c81d004391430bd0322ba30, type: 3}
+  - {fileID: 21300000, guid: 6878b900c8f6b4e49902c41cc1f68574, type: 3}
   tileC: []
   tileCE: []
   tileCN: []
