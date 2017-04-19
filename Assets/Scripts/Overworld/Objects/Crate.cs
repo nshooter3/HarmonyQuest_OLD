@@ -4,6 +4,7 @@ using System.Collections;
 public class Crate : MonoBehaviour {
 
     public Transform center, up, down, left, right;
+    public float width = 0.1f;
     RaycastHit2D result1, result2, result3, result4;
     public Rigidbody2D rb;
     bool freezeX, freezeY;
@@ -24,10 +25,10 @@ public class Crate : MonoBehaviour {
     //Freezes/unfreezes crate's x and y axes based on it's surroundings
     private void SetMovability()
     {
-        result1 = GlobalFunctions.instance.RaycastY(up, Vector2.up, 0.01f, mask, 0.5f);
-        result2 = GlobalFunctions.instance.RaycastY(down, Vector2.down, 0.01f, mask, 0.5f);
-        result3 = GlobalFunctions.instance.RaycastX(right, Vector2.right, 0.01f, mask, 0.5f);
-        result4 = GlobalFunctions.instance.RaycastX(left, Vector2.left, 0.01f, mask, 0.5f);
+        result1 = GlobalFunctions.instance.RaycastY(up, Vector2.up, 0.01f, mask, width);
+        result2 = GlobalFunctions.instance.RaycastY(down, Vector2.down, 0.01f, mask, width);
+        result3 = GlobalFunctions.instance.RaycastX(right, Vector2.right, 0.01f, mask, width);
+        result4 = GlobalFunctions.instance.RaycastX(left, Vector2.left, 0.01f, mask, width);
         c1 = "";
         c2 = "";
         c3 = "";
