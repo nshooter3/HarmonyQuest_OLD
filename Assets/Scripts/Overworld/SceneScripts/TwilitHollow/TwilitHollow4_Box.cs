@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class TwilitHollow4_Lake : SceneScript {
+public class TwilitHollow4_Box : SceneScript {
 
 	// Use this for initialization
 	void Start () {
