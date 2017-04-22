@@ -22,6 +22,8 @@ public class FollowPlayer : MonoBehaviour {
 	void Start () {
         camHeight = GetComponent<Camera>().orthographicSize;
         camWidth = camHeight * (800f/600f);
+        Debug.Log("width : " + camWidth);
+        Debug.Log("height : " + camHeight);
 
         boundHolder = GameObject.FindGameObjectWithTag("CameraBounds");
         if (boundHolder != null)
@@ -33,6 +35,10 @@ public class FollowPlayer : MonoBehaviour {
                 xMin = boundHolder.transform.position.x - cameraBounds.size.x / 2f + camWidth;
                 yMax = boundHolder.transform.position.y + cameraBounds.size.y / 2f - camHeight;
                 yMin = boundHolder.transform.position.y - cameraBounds.size.y / 2f + camHeight;
+                Debug.Log("xMax : " + xMax);
+                Debug.Log("xMin : " + xMin);
+                Debug.Log("yMax : " + yMax);
+                Debug.Log("yMin : " + yMin);
             }
         }
         cameraState = CameraState.Default;

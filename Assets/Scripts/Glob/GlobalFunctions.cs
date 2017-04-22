@@ -184,4 +184,28 @@ public class GlobalFunctions : MonoBehaviour {
         }
         obj.color = endCol;
     }
+
+    public void DBZTeleport(SpriteRenderer sr)
+    {
+        StartCoroutine(DBZTeleportCo(sr));
+    }
+
+    IEnumerator DBZTeleportCo(SpriteRenderer sr)
+    {
+        int count = 0, maxCount = 30;
+        float offset = 0.1f;
+        Vector3 initPos = sr.transform.position;
+        Color initCol = new Color(sr.color.r, sr.color.g, sr.color.b, 0.75f);
+        Color finalCol = new Color(initCol.r,initCol.g, initCol.b, 0);
+        while (count < maxCount)
+        {
+            yield return new WaitForSeconds(0.01f);
+            sr.transform.position = new Vector3(initPos.x + offset*count/10f, initPos.y, initPos.z);
+            sr.color = Color.Lerp(initCol, finalCol, count/((maxCount-1)*1f));
+            offset *= -1;
+            count++;
+        }
+        sr.transform.position = initPos;
+        sr.color = finalCol;
+    }
 }
