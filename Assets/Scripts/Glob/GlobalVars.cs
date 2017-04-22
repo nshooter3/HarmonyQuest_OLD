@@ -37,6 +37,11 @@ public class GlobalVars : MonoBehaviour {
         saveData.hallwayProgress = Dialoguer.GetGlobalFloat(0);
         saveData.potman = Dialoguer.GetGlobalFloat(1);
         #endregion*/
+
+        //Twilit Hollow Variables
+        #region
+        saveData.hollowProgress = (int)Dialoguer.GetGlobalFloat(0);
+        #endregion
     }
 
     public void SetDialoguerVars()
@@ -52,5 +57,10 @@ public class GlobalVars : MonoBehaviour {
         Dialoguer.SetGlobalFloat(0, saveData.hallwayProgress);
         Dialoguer.SetGlobalFloat(1, saveData.potman);
         #endregion*/
+
+        //Twilit Hollow Variables
+        #region
+        Dialoguer.SetGlobalFloat(0, saveData.hollowProgress);
+        #endregion
     }
 }
