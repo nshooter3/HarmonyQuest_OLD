@@ -7,4 +7,5 @@ public enum DialoguerDialogues{
 	HallwayDemo = 3,
 	TwilitHollow2_Rock = 4,
 	TwilitHollow4_Box = 5,
+	TwilitHollow5_Pond = 6,
 }
