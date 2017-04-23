@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class TwilitHollow5_Pond : MonoBehaviour {
+public class TwilitHollow5_Pond : SceneScript {
 
 	// Use this for initialization
 	void Start () {
@@ -13,4 +14,16 @@ public class TwilitHollow5_Pond : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    // Use this for initialization
+    public override void StartScene()
+    {
+
+    }
+
+    // Update is called once per frame
+    public override void UpdateScene()
+    {
+
+    }
 }
