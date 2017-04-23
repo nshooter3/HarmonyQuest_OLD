@@ -259,6 +259,7 @@ public class CutsceneEvent : MonoBehaviour {
 
     public void ToggleOffDialogueUI()
     {
+        //Debug.Log("toggle");
         GameObject.FindObjectOfType<PlayerMovementOverworld>().ToggleOffDialogueUI();
     }
 

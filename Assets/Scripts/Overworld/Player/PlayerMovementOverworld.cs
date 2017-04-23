@@ -347,10 +347,12 @@ public class PlayerMovementOverworld : MonoBehaviour {
 
     public void InitPlayerInteract()
     {
+        GlobalVars.instance.SetDialoguerVars();
         Move(new Vector3(0, 0, 0));
         playerState = PlayerState.Interacting;
         ToggleColliders(false);
         cameraCutsceneFlag = true;
+        cutsceneFlag = false;
         anim.SetBool("IsMoving", false);
         sceneScript.UpdateScene();
     }

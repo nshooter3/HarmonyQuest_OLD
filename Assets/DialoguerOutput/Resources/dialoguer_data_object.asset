@@ -4024,7 +4024,7 @@ MonoBehaviour:
     - id: 5
       name: TwilitHollow4_Box
       startPage: 7
-      scrollPosition: {x: 0, y: 0}
+      scrollPosition: {x: 649, y: 0}
       phases:
       - id: 0
         type: 0
@@ -4093,10 +4093,10 @@ MonoBehaviour:
         type: 0
         theme: 
         position: {x: 1103, y: 19}
-        outs: 03000000
+        outs: 08000000
         advanced: 1
         metadata: talking
-        text: I'll be waiting on the other side.
+        text: I'll be waiting on the other side. Good luck!
         name: Master Fist
         portrait: MasterFist
         audio: 
@@ -4123,7 +4123,7 @@ MonoBehaviour:
       - id: 3
         type: 6
         theme: 
-        position: {x: 1457, y: 46}
+        position: {x: 1979, y: 36}
         outs: 
         advanced: 0
         metadata: 
@@ -4186,7 +4186,7 @@ MonoBehaviour:
         type: 0
         theme: 
         position: {x: 727, y: 475}
-        outs: 06000000
+        outs: 0a000000
         advanced: 1
         metadata: talking
         text: You'll be benching cars in no time at this rate!
@@ -4216,7 +4216,7 @@ MonoBehaviour:
       - id: 6
         type: 6
         theme: 
-        position: {x: 1061, y: 478}
+        position: {x: 1644, y: 487}
         outs: 
         advanced: 0
         metadata: 
@@ -4274,6 +4274,130 @@ MonoBehaviour:
         variableSetValue: 
         variableGetEquation: 0
         variableGetValue: 3
+        messageName: 
+      - id: 8
+        type: 5
+        theme: 
+        position: {x: 1436, y: 14}
+        outs: 09000000
+        advanced: 0
+        metadata: 
+        text: 
+        name: 
+        portrait: 
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: CutsceneTeleport
+      - id: 9
+        type: 0
+        theme: 
+        position: {x: 1652, y: 10}
+        outs: 03000000
+        advanced: 1
+        metadata: talking
+        text: 
+        name: Master Fist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: 
+      - id: 10
+        type: 5
+        theme: 
+        position: {x: 1060, y: 475}
+        outs: 0b000000
+        advanced: 0
+        metadata: 
+        text: 
+        name: 
+        portrait: 
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
+        messageName: CutsceneEnd
+      - id: 11
+        type: 0
+        theme: 
+        position: {x: 1283, y: 476}
+        outs: 06000000
+        advanced: 1
+        metadata: talking
+        text: 
+        name: Master Fist
+        portrait: MasterFist
+        audio: 
+        audioDelay: 0
+        rect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        newWindow: 0
+        choices: []
+        waitType: 0
+        waitDuration: 0
+        variableScope: 0
+        variableType: 0
+        variableId: 0
+        variableScrollPosition: {x: 0, y: 0}
+        variableSetEquation: 0
+        variableSetValue: 
+        variableGetEquation: 0
+        variableGetValue: 
         messageName: 
       floats:
         variables: []

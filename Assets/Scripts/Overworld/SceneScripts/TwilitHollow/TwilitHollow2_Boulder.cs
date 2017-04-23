@@ -108,7 +108,7 @@ public class TwilitHollow2_Boulder : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Move(camPos, 1f); }));
         cam.actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue(); }));
-        GlobalVars.instance.saveData.hollowProgress = 3;
+        cam.actionQueue.Enqueue(new Action(() => {GlobalVars.instance.saveData.hollowProgress = 3; }));
     }
 
     IEnumerator BlowUpRock()

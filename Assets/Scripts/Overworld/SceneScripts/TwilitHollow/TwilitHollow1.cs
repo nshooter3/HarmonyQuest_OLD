@@ -185,7 +185,7 @@ public class TwilitHollow1 : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1); }));
         cam.actionQueue.Enqueue(new Action(() => { dad.Move(dMount3.position, 4); }));
         cam.actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue(); }));
-        GlobalVars.instance.saveData.hollowProgress = 1;
+        cam.actionQueue.Enqueue(new Action(() => {GlobalVars.instance.saveData.hollowProgress = 1;}));
     }
 
     // Update is called once per frame
