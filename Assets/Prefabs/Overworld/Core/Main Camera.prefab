@@ -1996,7 +1996,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   cameraState: 0
-  follow: 0
+  follow: 1
 --- !u!114 &114000010954471008
 MonoBehaviour:
   m_ObjectHideFlags: 1
