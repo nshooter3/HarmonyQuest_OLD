@@ -79,7 +79,7 @@ public class TwilitHollow1 : SceneScript {
         PlayerMovementOverworld.instance.InitPlayerInteract();
         cam.actionQueue.Enqueue(new Action(() => { player.DisableRenderer(PlayerMovementOverworld.instance.currentSprite); }));
         cam.transform.position = cMount1.position;
-        Debug.Log(cam.transform.position);
+        //Debug.Log(cam.transform.position);
         dad.transform.position = dMount1.position;
         cam.actionQueue.Enqueue(new Action(() => { cam.Move(cMount2.position, 1.5f); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
