@@ -84,23 +84,30 @@ public class CutsceneEvent : MonoBehaviour {
 	}
 
     //Moves gameObject towards destination
-    public void Move(Vector3 destination, float speed, string dir = "")
+    public void Move(Vector3 destination, float speed, string dir = "", CutsceneEvent obj = null)
     {
-        start = gameObject.transform.position;
-        this.destination = destination;
-        this.speed = speed;
-        moving = true;
-        if (anim != null)
-            anim.SetBool("IsMoving", true);
-        direction = destination - transform.position;
-        commandInProgress = true;
-        if (dir != "")
+        if (obj != null)
         {
-            ChangeDirection(dir);
+            obj.Move(destination, speed, dir, null);
         }
-        else if (autoChangeDirection)
+        else
         {
-            UpdateDirectionFromMovement();
+            start = gameObject.transform.position;
+            this.destination = destination;
+            this.speed = speed;
+            moving = true;
+            if (anim != null)
+                anim.SetBool("IsMoving", true);
+            direction = destination - transform.position;
+            commandInProgress = true;
+            if (dir != "")
+            {
+                ChangeDirection(dir);
+            }
+            else if (autoChangeDirection)
+            {
+                UpdateDirectionFromMovement();
+            }
         }
     }
 

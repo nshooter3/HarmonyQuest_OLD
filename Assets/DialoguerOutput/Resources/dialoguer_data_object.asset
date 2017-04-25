@@ -17,7 +17,7 @@ MonoBehaviour:
     - id: 0
       name: TwilitHollow1_Cliff
       startPage: 0
-      scrollPosition: {x: 5353.192, y: 240}
+      scrollPosition: {x: 5353.192, y: 436}
       phases:
       - id: 0
         type: 0
@@ -4411,7 +4411,7 @@ MonoBehaviour:
     - id: 6
       name: TwilitHollow5_Pond
       startPage: 0
-      scrollPosition: {x: 533.50024, y: 0}
+      scrollPosition: {x: 709.1255, y: 660}
       phases:
       - id: 0
         type: 4
@@ -4669,7 +4669,7 @@ MonoBehaviour:
         advanced: 1
         metadata: talking
         text: A true warrior cannot win through strength alone. You must forge your
-          mind, and learn to observe your surroundings!
+          mind, and observe your surroundings!
         name: Master Fist
         portrait: MasterFist
         audio: 

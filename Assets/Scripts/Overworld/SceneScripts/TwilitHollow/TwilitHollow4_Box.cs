@@ -99,6 +99,6 @@ public class TwilitHollow4_Box : SceneScript {
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
         cam.actionQueue.Enqueue(new Action(() => { dad.Move(d3.position, 4); }));
         cam.actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue(); }));
-        cam.actionQueue.Enqueue(new Action(() => { GlobalVars.instance.saveData.hollowProgress = 5; }));
+        cam.actionQueue.Enqueue(() => GlobalVars.instance.saveData.hollowProgress = 5);
     }
 }
