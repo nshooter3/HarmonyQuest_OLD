@@ -17,7 +17,7 @@ MonoBehaviour:
     - id: 0
       name: TwilitHollow1_Cliff
       startPage: 0
-      scrollPosition: {x: 5353.192, y: 436}
+      scrollPosition: {x: 0, y: 436}
       phases:
       - id: 0
         type: 0
@@ -4411,7 +4411,7 @@ MonoBehaviour:
     - id: 6
       name: TwilitHollow5_Pond
       startPage: 0
-      scrollPosition: {x: 709.1255, y: 660}
+      scrollPosition: {x: 0, y: 0}
       phases:
       - id: 0
         type: 4
@@ -4442,7 +4442,7 @@ MonoBehaviour:
         variableSetEquation: 0
         variableSetValue: 
         variableGetEquation: 0
-        variableGetValue: 4
+        variableGetValue: 5
         messageName: 
       - id: 1
         type: 4
@@ -4473,7 +4473,7 @@ MonoBehaviour:
         variableSetEquation: 0
         variableSetValue: 
         variableGetEquation: 0
-        variableGetValue: 5
+        variableGetValue: 6
         messageName: 
       - id: 2
         type: 0

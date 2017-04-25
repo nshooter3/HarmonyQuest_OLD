@@ -9,7 +9,7 @@ public class TwilitHollow4_Box : SceneScript {
     public ParticleSystem teleport;
     public CutsceneTrigger c1;
 
-    public Transform d1, d2, d3;
+    public Transform d1, d2, d3, box, boxMount;
     Color dadCol;
 
 	// Use this for initialization
@@ -41,7 +41,7 @@ public class TwilitHollow4_Box : SceneScript {
     // Use this for initialization
     public override void StartScene()
     {
-        //GlobalVars.instance.saveData.hollowProgress = 3;
+        //GlobalVars.instance.saveData.hollowProgress = 5;
         teleport.transform.parent = dad.transform;
         dadCol = dad.GetComponent<SpriteRenderer>().color;
         if (GlobalVars.instance.saveData.hollowProgress == 3)
@@ -55,6 +55,9 @@ public class TwilitHollow4_Box : SceneScript {
         else
         {
             c1.gameObject.SetActive(false);
+        }
+        if(GlobalVars.instance.saveData.hollowProgress > 4){
+            box.position = boxMount.position;
         }
     }
 

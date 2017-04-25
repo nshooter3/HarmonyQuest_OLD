@@ -5,7 +5,7 @@ using System;
 
 public class TwilitHollow5_Pond : SceneScript {
 
-    public Transform d1, d2, d3, d4, d5, d6, d7, d8, d9;
+    public Transform d1, d2, d3, d4, d5, d6, d7, d8, d9, box1, box2, boxMount1, boxMount2;
     public CutsceneTrigger c1, c2, c3;
     public CutsceneEvent dad, cam;
     Color dadCol;
@@ -58,6 +58,7 @@ public class TwilitHollow5_Pond : SceneScript {
     // Use this for initialization
     public override void StartScene()
     {
+        //GlobalVars.instance.saveData.hollowProgress = 8;
         teleport.transform.parent = dad.transform;
         dadCol = dad.GetComponent<SpriteRenderer>().color;
         if (GlobalVars.instance.saveData.hollowProgress == 5)
@@ -71,6 +72,10 @@ public class TwilitHollow5_Pond : SceneScript {
         else if (GlobalVars.instance.saveData.hollowProgress == 7)
         {
             dad.transform.position = d8.position;
+        }
+        if (GlobalVars.instance.saveData.hollowProgress > 7) {
+            box1.position = boxMount1.position;
+            box2.position = boxMount2.position;
         }
     }
 
