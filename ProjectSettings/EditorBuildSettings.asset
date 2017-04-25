@@ -13,3 +13,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/TwilitHollow/TwilitHollow3_Treasure.unity
   - enabled: 1
     path: Assets/Scenes/Levels/TwilitHollow/TwilitHollow4_Box.unity
+  - enabled: 1
+    path: Assets/Scenes/Levels/TwilitHollow/TwilitHollow5_Pond.unity

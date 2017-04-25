@@ -68,7 +68,7 @@ public class TwilitHollow4_Box : SceneScript {
         dad.transform.position = d1.position;
         PlayerMovementOverworld.instance.InitPlayerInteract();
         cam.actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, true); }));
-        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(2f); }));
+        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1.5f); }));
         cam.actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, false); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
         cam.actionQueue.Enqueue(new Action(() => { cam.InitDialogue(PlayerMovementOverworld.instance, gameObject); }));

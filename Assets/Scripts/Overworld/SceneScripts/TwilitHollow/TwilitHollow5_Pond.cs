@@ -19,17 +19,17 @@ public class TwilitHollow5_Pond : SceneScript {
 	// Update is called once per frame
 	void Update () {
         //Debug.Log("Hollow Progress: " + GlobalVars.instance.saveData.hollowProgress);
-        if (c1 != null && c1.isCol && GlobalVars.instance.saveData.hollowProgress == 4 && c1.gameObject.activeSelf &&
+        if (c1 != null && c1.isCol && GlobalVars.instance.saveData.hollowProgress == 5 && c1.gameObject.activeSelf &&
             PlayerMovementOverworld.instance.playerState == PlayerMovementOverworld.PlayerState.Default)
         {
             CutsceneAskName();
         }
-        else if (c2 != null && c2.isCol && GlobalVars.instance.saveData.hollowProgress == 5 && c2.gameObject.activeSelf &&
+        else if (c2 != null && c2.isCol && GlobalVars.instance.saveData.hollowProgress == 6 && c2.gameObject.activeSelf &&
             PlayerMovementOverworld.instance.playerState == PlayerMovementOverworld.PlayerState.Default)
         {
             CutscenePuzzle();
         }
-        else if (c3 != null && c3.isCol && GlobalVars.instance.saveData.hollowProgress == 6 && c3.gameObject.activeSelf &&
+        else if (c3 != null && c3.isCol && GlobalVars.instance.saveData.hollowProgress == 7 && c3.gameObject.activeSelf &&
             PlayerMovementOverworld.instance.playerState == PlayerMovementOverworld.PlayerState.Default)
         {
             CutscenePuzzleComplete();
@@ -60,10 +60,17 @@ public class TwilitHollow5_Pond : SceneScript {
     {
         teleport.transform.parent = dad.transform;
         dadCol = dad.GetComponent<SpriteRenderer>().color;
-        GlobalVars.instance.saveData.hollowProgress = 4;
-        if (GlobalVars.instance.saveData.hollowProgress == 4)
+        if (GlobalVars.instance.saveData.hollowProgress == 5)
         {
             CutsceneIntro();
+        }
+        else if (GlobalVars.instance.saveData.hollowProgress == 6)
+        {
+            dad.transform.position = d7.position;
+        }
+        else if (GlobalVars.instance.saveData.hollowProgress == 7)
+        {
+            dad.transform.position = d8.position;
         }
     }
 
@@ -92,7 +99,7 @@ public class TwilitHollow5_Pond : SceneScript {
     {
         dad.actionQueue.Enqueue(() => cam.ToggleOffDialogueUI());
         dad.actionQueue.Enqueue(() => PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue());
-        dad.actionQueue.Enqueue(() => GlobalVars.instance.saveData.hollowProgress = 5);
+        dad.actionQueue.Enqueue(() => GlobalVars.instance.saveData.hollowProgress = 6);
         dad.actionQueue.Enqueue(() => dad.Move(d3.position, 5.5f));
         dad.actionQueue.Enqueue(() => dad.Move(d4.position, 5.5f));
         dad.actionQueue.Enqueue(() => dad.Move(d5.position, 5.5f));
@@ -119,7 +126,7 @@ public class TwilitHollow5_Pond : SceneScript {
         dad.actionQueue.Enqueue(() => dad.transform.position = d8.position);
         dad.actionQueue.Enqueue(() => dad.GetComponent<SpriteRenderer>().color = dadCol);
         dad.actionQueue.Enqueue(() => PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue());
-        dad.actionQueue.Enqueue(() => GlobalVars.instance.saveData.hollowProgress = 6);
+        dad.actionQueue.Enqueue(() => GlobalVars.instance.saveData.hollowProgress = 7);
     }
 
     void CutscenePuzzleComplete()
@@ -134,7 +141,7 @@ public class TwilitHollow5_Pond : SceneScript {
     {
         dad.actionQueue.Enqueue(() => cam.ToggleOffDialogueUI());
         dad.actionQueue.Enqueue(() => PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue());
-        dad.actionQueue.Enqueue(() => GlobalVars.instance.saveData.hollowProgress = 7);
+        dad.actionQueue.Enqueue(() => GlobalVars.instance.saveData.hollowProgress = 8);
         dad.actionQueue.Enqueue(() => dad.Move(d9.position, 4f));
     }
 }
