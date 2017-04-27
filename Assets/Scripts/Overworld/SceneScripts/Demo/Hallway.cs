@@ -98,10 +98,10 @@ public class Hallway : SceneScript
 
         npc.transform.position = d[0].transform.position;
 
-        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
-        cam.actionQueue.Enqueue(new Action(() => { cam.Move(new Vector3(cam.transform.position.x, c[0].position.y, -10), 1.7f, ""); }));
-        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1.5f); }));
-        cam.actionQueue.Enqueue(new Action(() => { cam.Move(new Vector3(cam.transform.position.x, playerMov.transform.position.y - 1, -10), 1.5f, ""); }));
+        actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
+        actionQueue.Enqueue(new Action(() => { cam.Move(new Vector3(cam.transform.position.x, c[0].position.y, -10), 1.7f, ""); }));
+        actionQueue.Enqueue(new Action(() => { cam.Wait(1.5f); }));
+        actionQueue.Enqueue(new Action(() => { cam.Move(new Vector3(cam.transform.position.x, playerMov.transform.position.y - 1, -10), 1.5f, ""); }));
 
         npc.actionQueue.Enqueue(new Action(() => { npc.Wait(3); }));
         npc.actionQueue.Enqueue(new Action(() => { npc.PlayCutsceneSong("Baxter_Temp", 0.2f); }));
@@ -132,9 +132,9 @@ public class Hallway : SceneScript
         npc.actionQueue.Enqueue(new Action(() => { npc.Move(d[1].position, 6, "down"); }));
         npc.actionQueue.Enqueue(new Action(() => { npc.DisableRenderer(); }));
 
-        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(2f); }));
-        cam.actionQueue.Enqueue(new Action(() => { cam.Move(new Vector3(playerMov.transform.position.x, playerMov.transform.position.y, -10), 1, ""); }));
-        cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { cam.Wait(2f); }));
+        actionQueue.Enqueue(new Action(() => { cam.Move(new Vector3(playerMov.transform.position.x, playerMov.transform.position.y, -10), 1, ""); }));
+        actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
 
     }*/
 

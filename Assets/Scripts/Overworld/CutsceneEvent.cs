@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System;
 
 public class CutsceneEvent : MonoBehaviour {
 
@@ -11,8 +10,6 @@ public class CutsceneEvent : MonoBehaviour {
 
     Animator anim;
 
-    //Determines whether or not the object is ready for a new command
-    public bool commandInProgress;
     //Whether or not to change direction automatically upon movement, and whether or not sprite directions are diagonal
     public bool autoChangeDirection = true, animDiag = false;
 
@@ -25,21 +22,16 @@ public class CutsceneEvent : MonoBehaviour {
     //Used for waiting. If dur is greater than zero, a wait command is in progress.
     float dur;
 
-    //Actions to be carried out one at a time, in order
-    public Queue<Action> actionQueue;
-    Action action;
-
     //Needs to be instantiated early, due to actionQueue being used in scene script start methods
     void Awake()
     {
-        actionQueue = new Queue<Action>();
         anim = GetComponent<Animator>();
     }
 
 	// Use this for initialization
 	void Start () {
         direction = Vector2.zero;
-        commandInProgress = false;
+        SceneScript.instance.commandInProgress = false;
         moving = false;
         speed = 1;
         dur = 0;
@@ -47,7 +39,7 @@ public class CutsceneEvent : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (commandInProgress)
+        if (SceneScript.instance.commandInProgress)
         {
             //Move update logic
             if (moving)
@@ -57,7 +49,7 @@ public class CutsceneEvent : MonoBehaviour {
                 {
                     transform.position = destination;
                     moving = false;
-                    commandInProgress = false;
+                    SceneScript.instance.commandInProgress = false;
                     if (anim != null)
                         anim.SetBool("IsMoving", false);
                 }
@@ -69,26 +61,18 @@ public class CutsceneEvent : MonoBehaviour {
                 dur -= Time.deltaTime;
                 if (dur <= 0)
                 {
-                    commandInProgress = false;
+                    SceneScript.instance.commandInProgress = false;
                 }
-            }
-        }
-        else
-        {
-            if (actionQueue.Count > 0)
-            {
-                action = actionQueue.Dequeue();
-                action();
             }
         }
 	}
 
     //Moves gameObject towards destination
-    public void Move(Vector3 destination, float speed, string dir = "", CutsceneEvent obj = null)
+    public void Move(Vector3 destination, float speed, string dir = "", bool freezeQueue = true, CutsceneEvent obj = null)
     {
         if (obj != null)
         {
-            obj.Move(destination, speed, dir, null);
+            obj.Move(destination, speed, dir, freezeQueue, null);
         }
         else
         {
@@ -99,7 +83,7 @@ public class CutsceneEvent : MonoBehaviour {
             if (anim != null)
                 anim.SetBool("IsMoving", true);
             direction = destination - transform.position;
-            commandInProgress = true;
+            SceneScript.instance.commandInProgress = freezeQueue;
             if (dir != "")
             {
                 ChangeDirection(dir);
@@ -217,7 +201,7 @@ public class CutsceneEvent : MonoBehaviour {
     //Waits for dur seconds before being able to recieve a new command
     public void Wait(float dur)
     {
-        commandInProgress = true;
+        SceneScript.instance.commandInProgress = true;
         this.dur = dur;
     }
 

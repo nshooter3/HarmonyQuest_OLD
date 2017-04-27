@@ -19,6 +19,7 @@ public class TwilitHollow4_Box : SceneScript {
 	
 	// Update is called once per frame
 	void Update () {
+        UpdateQueue();
         if (c1 != null && c1.isCol && GlobalVars.instance.saveData.hollowProgress == 4 && c1.gameObject.activeSelf &&
             PlayerMovementOverworld.instance.playerState == PlayerMovementOverworld.PlayerState.Default)
         {
@@ -70,24 +71,24 @@ public class TwilitHollow4_Box : SceneScript {
     {
         dad.transform.position = d1.position;
         PlayerMovementOverworld.instance.InitPlayerInteract();
-        cam.actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, true); }));
-        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1.5f); }));
-        cam.actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, false); }));
-        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
-        cam.actionQueue.Enqueue(new Action(() => { cam.InitDialogue(PlayerMovementOverworld.instance, gameObject); }));
+        actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, true); }));
+        actionQueue.Enqueue(new Action(() => { cam.Wait(1.5f); }));
+        actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, false); }));
+        actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
+        actionQueue.Enqueue(new Action(() => { cam.InitDialogue(PlayerMovementOverworld.instance, gameObject); }));
     }
 
     void CutsceneTeleport()
     {
-        cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
-        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
-        cam.actionQueue.Enqueue(new Action(() => { GlobalFunctions.instance.DBZTeleport(dad.GetComponent<SpriteRenderer>()); }));
-        cam.actionQueue.Enqueue(new Action(() => { teleport.Play(); }));
-        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
-        cam.actionQueue.Enqueue(new Action(() => { dad.transform.position = d2.position; }));
-        cam.actionQueue.Enqueue(new Action(() => { dad.GetComponent<SpriteRenderer>().color = dadCol; }));
-        cam.actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue(); }));
-        cam.actionQueue.Enqueue(new Action(() => { GlobalVars.instance.saveData.hollowProgress = 4; }));
+        actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
+        actionQueue.Enqueue(new Action(() => { GlobalFunctions.instance.DBZTeleport(dad.GetComponent<SpriteRenderer>()); }));
+        actionQueue.Enqueue(new Action(() => { teleport.Play(); }));
+        actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
+        actionQueue.Enqueue(new Action(() => { dad.transform.position = d2.position; }));
+        actionQueue.Enqueue(new Action(() => { dad.GetComponent<SpriteRenderer>().color = dadCol; }));
+        actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue(); }));
+        actionQueue.Enqueue(new Action(() => { GlobalVars.instance.saveData.hollowProgress = 4; }));
     }
 
     void StartDialogue2()
@@ -98,10 +99,10 @@ public class TwilitHollow4_Box : SceneScript {
 
     void CutsceneEnd()
     {
-        cam.actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
-        cam.actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
-        cam.actionQueue.Enqueue(new Action(() => { dad.Move(d3.position, 4); }));
-        cam.actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue(); }));
-        cam.actionQueue.Enqueue(() => GlobalVars.instance.saveData.hollowProgress = 5);
+        actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
+        actionQueue.Enqueue(new Action(() => { dad.Move(d3.position, 4); }));
+        actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue(); }));
+        actionQueue.Enqueue(() => GlobalVars.instance.saveData.hollowProgress = 5);
     }
 }
