@@ -15,6 +15,9 @@ public abstract class SceneScript : MonoBehaviour {
     //Determines whether or not the object is ready for a new command
     public bool commandInProgress;
 
+    //Used for waiting. If dur is greater than zero, a wait command is in progress.
+    float dur;
+
     public static SceneScript instance;
 
     void Awake()
@@ -29,8 +32,16 @@ public abstract class SceneScript : MonoBehaviour {
 
     public void UpdateQueue()
     {
-        Debug.Log("buh");
-        if (!commandInProgress)
+        //Wait update logic
+        if (dur > 0)
+        {
+            dur -= Time.deltaTime;
+            if (dur <= 0)
+            {
+                instance.commandInProgress = false;
+            }
+        }
+        else if (!commandInProgress)
         {
             if (actionQueue.Count > 0)
             {
@@ -38,6 +49,41 @@ public abstract class SceneScript : MonoBehaviour {
                 action();
             }
         }
+    }
+
+    //Waits for dur seconds before being able to recieve a new command
+    public void Wait(float dur)
+    {
+        SceneScript.instance.commandInProgress = true;
+        this.dur = dur;
+    }
+
+    //Plays sound
+    public void PlaySound(AudioSource sound)
+    {
+        sound.Play();
+    }
+
+    //Starts dialogue
+    public void InitDialogue(PlayerMovementOverworld pMov, GameObject dialogue)
+    {
+        pMov.InitDialogue(dialogue);
+    }
+
+    public void ToggleOnDialogueUI()
+    {
+        FindObjectOfType<PlayerMovementOverworld>().ToggleOnDialogueUI();
+    }
+
+    public void ToggleOffDialogueUI()
+    {
+        //Debug.Log("toggle");
+        FindObjectOfType<PlayerMovementOverworld>().ToggleOffDialogueUI();
+    }
+
+    public void PlayCutsceneSong(string song, float vol)
+    {
+        MusicManager.instance.PlayCutsceneSongInit(song, vol);
     }
 
 }

@@ -25,6 +25,7 @@ public class TwilitHollow1 : SceneScript {
         if (GlobalVars.instance.saveData.hollowProgress == 0)
         {
             InitFishingCutscene();
+            //GlobalVars.instance.saveData.hollowProgress = 1;
         }
     }
 
@@ -83,111 +84,111 @@ public class TwilitHollow1 : SceneScript {
         //Debug.Log(cam.transform.position);
         dad.transform.position = dMount1.position;
         actionQueue.Enqueue(new Action(() => { cam.Move(cMount2.position, 1.5f); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1f); }));
         actionQueue.Enqueue(new Action(() => { GlobalFunctions.instance.AdjustColorOverTimeTextMesh(fadedCol, normCol, 1, author); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(3.5f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(3.5f); }));
         actionQueue.Enqueue(new Action(() => { GlobalFunctions.instance.AdjustColorOverTimeTextMesh(normCol, fadedCol, 1, author); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(2f); }));
-        actionQueue.Enqueue(new Action(() => { cam.InitDialogue(PlayerMovementOverworld.instance, dialogue);})) ;
+        actionQueue.Enqueue(new Action(() => { Wait(2f); }));
+        actionQueue.Enqueue(new Action(() => { InitDialogue(PlayerMovementOverworld.instance, dialogue);})) ;
     }
 
     void CutsceneWait1()
     {
         //CutsceneWait1
-        actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1.5f); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOffDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1.5f); }));
         actionQueue.Enqueue(new Action(() => { dad.GetComponentInChildren<EmoteAnimator>().SetEmotion("Surprise"); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(0.75f); }));
-        actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { Wait(0.75f); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOnDialogueUI(); }));
     }
 
     void CutsceneReelIn1()
     {
         // CutsceneReelIn1
-        actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOffDialogueUI(); }));
         actionQueue.Enqueue(new Action(() => { rod.Interact(); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(3.5f); }));
-        actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { Wait(3.5f); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOnDialogueUI(); }));
     }
 
     void CutsceneThrowBike()
     {
         //CutsceneThowBike
-        actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOffDialogueUI(); }));
         actionQueue.Enqueue(new Action(() => { cam.Move(cMount3.position, 2f); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1); }));
         actionQueue.Enqueue(new Action(() => { SFXManager.instance.Spawn("Wop"); }));
         actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(false, false); }));
         actionQueue.Enqueue(new Action(() => { fishingBike.SetActive(false); }));
         actionQueue.Enqueue(new Action(() => { bike.SetActive(true); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1); }));
         actionQueue.Enqueue(new Action(() => { SFXManager.instance.Spawn("Whoosh"); }));
         actionQueue.Enqueue(new Action(() => { GlobalFunctions.instance.AdjustPositionOverTime(bike.transform.position, bikeDes.transform.position, 0.35f, bike.transform); }));
         actionQueue.Enqueue(new Action(() => { GlobalFunctions.instance.AdjustRotationOverTime(bike.transform.eulerAngles, bikeDes.transform.eulerAngles, 0.35f, bike.transform); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(0.45f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(0.45f); }));
         actionQueue.Enqueue(new Action(() => { GlobalFunctions.instance.AdjustPositionOverTime(bikePileLower, bikePile.transform.position, 0.1f, bikePile.transform); }));
         actionQueue.Enqueue(new Action(() => { SFXManager.instance.Spawn("BikeCrash"); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1.55f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1f); }));
         actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, false); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
-        actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1f); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOnDialogueUI(); }));
     }
 
     void CutsceneLowerBait1(){
         //CutsceneLowerBait1
-        actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOffDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1f); }));
         actionQueue.Enqueue(new Action(() => { rod.Interact(); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(5f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(5f); }));
         actionQueue.Enqueue(new Action(() => { rod.Interact("baby"); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(3.5f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(3.5f); }));
         actionQueue.Enqueue(new Action(() => { SFXManager.instance.Spawn("CryingBaby1"); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(4f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(4f); }));
         actionQueue.Enqueue(new Action(() => { dad.GetComponentInChildren<EmoteAnimator>().SetEmotion("Surprise"); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
-        actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { Wait(0.5f); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOnDialogueUI(); }));
     }
 
     void CutsceneGrabBaby()
     {
         //CutsceneGrabBaby
-        actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOffDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { Wait(0.5f); }));
         actionQueue.Enqueue(new Action(() => { fishingBaby.SetActive(false); }));
         actionQueue.Enqueue(new Action(() => { dad.Move(dMount2.position, 4); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
         actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, false); }));
         actionQueue.Enqueue(new Action(() => { player.EnableRenderer(PlayerMovementOverworld.instance.currentSprite); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1f); }));
         actionQueue.Enqueue(new Action(() => { SFXManager.instance.Spawn("CryingBaby2"); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(5f); }));
-        actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { Wait(5f); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOnDialogueUI(); }));
     }
 
     void CutsceneLookAround()
     {
         //CutsceneLookAround
-        actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOffDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1); }));
         actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(false, false); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(0.5f); }));
         actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(false, true); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(0.5f); }));
         actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, true); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(0.5f); }));
         actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, false); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1); }));
-        actionQueue.Enqueue(new Action(() => { cam.ToggleOnDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOnDialogueUI(); }));
     }
 
     void CutsceneEnd()
     {
         //CutsceneEnd
-        actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1); }));
-        actionQueue.Enqueue(new Action(() => { dad.Move(dMount3.position, 4); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOffDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { dad.GetComponent<Collider2D>().enabled = false; }));
+        actionQueue.Enqueue(new Action(() => { dad.Move(dMount3.position, 4f, "", false); }));
         actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue(); }));
-        actionQueue.Enqueue(new Action(() => {GlobalVars.instance.saveData.hollowProgress = 1;}));
+        actionQueue.Enqueue(new Action(() => { GlobalVars.instance.saveData.hollowProgress = 1; }));
+        //actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue(); }));
     }
 
     // Update is called once per frame

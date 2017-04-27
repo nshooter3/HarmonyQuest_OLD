@@ -97,13 +97,13 @@ public class TwilitHollow5_Pond : SceneScript {
     {
         c1.gameObject.SetActive(false);
         PlayerMovementOverworld.instance.InitPlayerInteract();
-        actionQueue.Enqueue(() => cam.Wait(0.5f));
-        actionQueue.Enqueue(() => cam.InitDialogue(PlayerMovementOverworld.instance, gameObject));
+        actionQueue.Enqueue(() => Wait(0.5f));
+        actionQueue.Enqueue(() => InitDialogue(PlayerMovementOverworld.instance, gameObject));
     }
 
     void CutscenePostIntro()
     {
-        actionQueue.Enqueue(() => cam.ToggleOffDialogueUI());
+        actionQueue.Enqueue(() => ToggleOffDialogueUI());
         actionQueue.Enqueue(() => PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue());
         actionQueue.Enqueue(() => GlobalVars.instance.saveData.hollowProgress = 6);
         actionQueue.Enqueue(() => dad.Move(d3.position, 5.5f));
@@ -118,17 +118,17 @@ public class TwilitHollow5_Pond : SceneScript {
     {
         c2.gameObject.SetActive(false);
         PlayerMovementOverworld.instance.InitPlayerInteract();
-        actionQueue.Enqueue(() => cam.Wait(0.5f));
-        actionQueue.Enqueue(() => cam.InitDialogue(PlayerMovementOverworld.instance, gameObject));
+        actionQueue.Enqueue(() => Wait(0.5f));
+        actionQueue.Enqueue(() => InitDialogue(PlayerMovementOverworld.instance, gameObject));
     }
 
     void CutsceneTeleport()
     {
-        actionQueue.Enqueue(() => dad.ToggleOffDialogueUI());
-        actionQueue.Enqueue(() => dad.Wait(1f));
+        actionQueue.Enqueue(() => ToggleOffDialogueUI());
+        actionQueue.Enqueue(() => Wait(1f));
         actionQueue.Enqueue(() => GlobalFunctions.instance.DBZTeleport(dad.GetComponent<SpriteRenderer>()));
         actionQueue.Enqueue(() => teleport.Play());
-        actionQueue.Enqueue(() => dad.Wait(1f));
+        actionQueue.Enqueue(() => Wait(1f));
         actionQueue.Enqueue(() => dad.transform.position = d8.position);
         actionQueue.Enqueue(() => dad.GetComponent<SpriteRenderer>().color = dadCol);
         actionQueue.Enqueue(() => PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue());
@@ -139,13 +139,13 @@ public class TwilitHollow5_Pond : SceneScript {
     {
         c3.gameObject.SetActive(false);
         PlayerMovementOverworld.instance.InitPlayerInteract();
-        actionQueue.Enqueue(() => cam.Wait(0.5f));
-        actionQueue.Enqueue(() => cam.InitDialogue(PlayerMovementOverworld.instance, gameObject));
+        actionQueue.Enqueue(() => Wait(0.5f));
+        actionQueue.Enqueue(() => InitDialogue(PlayerMovementOverworld.instance, gameObject));
     }
 
     void CutsceneEnd()
     {
-        actionQueue.Enqueue(() => cam.ToggleOffDialogueUI());
+        actionQueue.Enqueue(() => ToggleOffDialogueUI());
         actionQueue.Enqueue(() => PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue());
         actionQueue.Enqueue(() => GlobalVars.instance.saveData.hollowProgress = 8);
         actionQueue.Enqueue(() => dad.Move(d9.position, 4f));

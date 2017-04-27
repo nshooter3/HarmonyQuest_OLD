@@ -17,10 +17,7 @@ public class CutsceneEvent : MonoBehaviour {
     Vector3 start, destination;
     Vector3 direction;
     float speed;
-    bool moving;
-
-    //Used for waiting. If dur is greater than zero, a wait command is in progress.
-    float dur;
+    bool moving, freezeQueue;
 
     //Needs to be instantiated early, due to actionQueue being used in scene script start methods
     void Awake()
@@ -34,35 +31,25 @@ public class CutsceneEvent : MonoBehaviour {
         SceneScript.instance.commandInProgress = false;
         moving = false;
         speed = 1;
-        dur = 0;
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (SceneScript.instance.commandInProgress)
+        //Move update logic
+        if (moving)
         {
-            //Move update logic
-            if (moving)
+            transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime * speed);
+            if (Vector2.Distance(start, transform.position) >= Vector2.Distance(start, destination))
             {
-                transform.position = Vector3.MoveTowards(transform.position, destination, Time.deltaTime * speed);
-                if (Vector2.Distance(start, transform.position) >= Vector2.Distance(start, destination))
+                transform.position = destination;
+                moving = false;
+                if (freezeQueue == true)
                 {
-                    transform.position = destination;
-                    moving = false;
-                    SceneScript.instance.commandInProgress = false;
-                    if (anim != null)
-                        anim.SetBool("IsMoving", false);
-                }
-            }
-
-            //Wait update logic
-            if (dur > 0)
-            {
-                dur -= Time.deltaTime;
-                if (dur <= 0)
-                {
+                    freezeQueue = false;
                     SceneScript.instance.commandInProgress = false;
                 }
+                if (anim != null)
+                    anim.SetBool("IsMoving", false);
             }
         }
 	}
@@ -83,7 +70,8 @@ public class CutsceneEvent : MonoBehaviour {
             if (anim != null)
                 anim.SetBool("IsMoving", true);
             direction = destination - transform.position;
-            SceneScript.instance.commandInProgress = freezeQueue;
+            this.freezeQueue = freezeQueue;
+            SceneScript.instance.commandInProgress = this.freezeQueue;
             if (dir != "")
             {
                 ChangeDirection(dir);
@@ -198,13 +186,6 @@ public class CutsceneEvent : MonoBehaviour {
         }
     }
 
-    //Waits for dur seconds before being able to recieve a new command
-    public void Wait(float dur)
-    {
-        SceneScript.instance.commandInProgress = true;
-        this.dur = dur;
-    }
-
     //Makes object visible
     public void EnableRenderer(GameObject obj = null)
     {
@@ -230,33 +211,4 @@ public class CutsceneEvent : MonoBehaviour {
             obj.GetComponent<SpriteRenderer>().enabled = false;
         }
     }
-
-    //Plays sound
-    public void PlaySound(AudioSource sound)
-    {
-        sound.Play();
-    }
-
-    //Starts dialogue
-    public void InitDialogue(PlayerMovementOverworld pMov, GameObject dialogue)
-    {
-        pMov.InitDialogue(dialogue);
-    }
-
-    public void ToggleOnDialogueUI()
-    {
-        GameObject.FindObjectOfType<PlayerMovementOverworld>().ToggleOnDialogueUI();
-    }
-
-    public void ToggleOffDialogueUI()
-    {
-        //Debug.Log("toggle");
-        GameObject.FindObjectOfType<PlayerMovementOverworld>().ToggleOffDialogueUI();
-    }
-
-    public void PlayCutsceneSong(string song, float vol)
-    {
-        MusicManager.instance.PlayCutsceneSongInit(song, vol);
-    }
-
 }

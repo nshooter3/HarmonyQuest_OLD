@@ -26,7 +26,7 @@ public class TwilitHollow2_Boulder : SceneScript {
         //TODO Temp, get rid of this later
         //GlobalVars.instance.saveData.hollowProgress = 2;
         //End temp
-
+        
         if (GlobalVars.instance.saveData.hollowProgress == 1)
         {
             GlobalVars.instance.saveData.hollowProgress = 2;
@@ -80,33 +80,32 @@ public class TwilitHollow2_Boulder : SceneScript {
         ct1.gameObject.SetActive(false);
         PlayerMovementOverworld.instance.InitPlayerInteract();
         actionQueue.Enqueue(new Action(() => { cam.Move(c1.position, 1f); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(0.5f); }));
         actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, false); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1); }));
-        actionQueue.Enqueue(new Action(() => { cam.InitDialogue(PlayerMovementOverworld.instance, gameObject); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1); }));
+        actionQueue.Enqueue(new Action(() => { InitDialogue(PlayerMovementOverworld.instance, gameObject); }));
     }
 
     void CutsceneBreakRock()
     {
-        actionQueue.Enqueue(new Action(() => { dad.ToggleOffDialogueUI(); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOffDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { Wait(0.5f); }));
         actionQueue.Enqueue(new Action(() => { dad.Move(d4.position, 4); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1f); }));
         actionQueue.Enqueue(new Action(() => { GlobalFunctions.instance.AdjustPositionOverTime(new Vector3 (dad.transform.position.x, dad.transform.position.y + 0.15f, dad.transform.position.z), 
             dad.transform.position, 0.1f, dad.transform); }));
         actionQueue.Enqueue(new Action(() => { StartCoroutine(BlowUpRock()); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1.5f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1.5f); }));
         actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, false); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
-        actionQueue.Enqueue(new Action(() => { dad.ToggleOnDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1f); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOnDialogueUI(); }));
     }
 
     void CutsceneEnd()
     {
-        actionQueue.Enqueue(new Action(() => { dad.ToggleOffDialogueUI(); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(0.5f); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOffDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { Wait(0.5f); }));
         actionQueue.Enqueue(new Action(() => { dad.Move(d5.position, 4); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
         actionQueue.Enqueue(new Action(() => { cam.Move(camPos, 1f); }));
         actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue(); }));
         actionQueue.Enqueue(new Action(() => {GlobalVars.instance.saveData.hollowProgress = 3; }));

@@ -72,19 +72,19 @@ public class TwilitHollow4_Box : SceneScript {
         dad.transform.position = d1.position;
         PlayerMovementOverworld.instance.InitPlayerInteract();
         actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, true); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1.5f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1.5f); }));
         actionQueue.Enqueue(new Action(() => { dad.ChangeDirectionDiagonal(true, false); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
-        actionQueue.Enqueue(new Action(() => { cam.InitDialogue(PlayerMovementOverworld.instance, gameObject); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1f); }));
+        actionQueue.Enqueue(new Action(() => { InitDialogue(PlayerMovementOverworld.instance, gameObject); }));
     }
 
     void CutsceneTeleport()
     {
-        actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOffDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1f); }));
         actionQueue.Enqueue(new Action(() => { GlobalFunctions.instance.DBZTeleport(dad.GetComponent<SpriteRenderer>()); }));
         actionQueue.Enqueue(new Action(() => { teleport.Play(); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
+        actionQueue.Enqueue(new Action(() => { Wait(1f); }));
         actionQueue.Enqueue(new Action(() => { dad.transform.position = d2.position; }));
         actionQueue.Enqueue(new Action(() => { dad.GetComponent<SpriteRenderer>().color = dadCol; }));
         actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue(); }));
@@ -93,15 +93,14 @@ public class TwilitHollow4_Box : SceneScript {
 
     void StartDialogue2()
     {
-       cam.InitDialogue(PlayerMovementOverworld.instance, gameObject);
+       InitDialogue(PlayerMovementOverworld.instance, gameObject);
        c1.gameObject.SetActive(false);
     }
 
     void CutsceneEnd()
     {
-        actionQueue.Enqueue(new Action(() => { cam.ToggleOffDialogueUI(); }));
-        actionQueue.Enqueue(new Action(() => { cam.Wait(1f); }));
-        actionQueue.Enqueue(new Action(() => { dad.Move(d3.position, 4); }));
+        actionQueue.Enqueue(new Action(() => { ToggleOffDialogueUI(); }));
+        actionQueue.Enqueue(new Action(() => { dad.Move(d3.position, 4, "", false); }));
         actionQueue.Enqueue(new Action(() => { PlayerMovementOverworld.instance.InitPlayerDefaultFromDialogue(); }));
         actionQueue.Enqueue(() => GlobalVars.instance.saveData.hollowProgress = 5);
     }
