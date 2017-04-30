@@ -208,4 +208,12 @@ public class GlobalFunctions : MonoBehaviour {
         sr.transform.position = initPos;
         sr.color = finalCol;
     }
+
+    public float RoundToNearestPixel(float unityUnits, float pixelsPerUnit)
+    {
+        float valueInPixels = unityUnits * pixelsPerUnit;
+        valueInPixels = Mathf.Round(valueInPixels);
+        float roundedUnityUnits = valueInPixels * (1 / pixelsPerUnit);
+        return roundedUnityUnits;
+    }
 }

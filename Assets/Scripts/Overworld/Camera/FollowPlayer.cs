@@ -16,6 +16,10 @@ public class FollowPlayer : MonoBehaviour {
 
     public bool follow = true;
 
+    //How many pixels are in a Unity unit. used for clamping camera to pixels
+    //Not currently being used
+    float pixelsPerUnits = 32f;
+
     RaycastHit2D result;
 
 	// Use this for initialization
