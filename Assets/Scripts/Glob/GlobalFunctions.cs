@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class GlobalFunctions : MonoBehaviour {
 
@@ -209,6 +210,7 @@ public class GlobalFunctions : MonoBehaviour {
         sr.color = finalCol;
     }
 
+    //Used to round to pixel based on unity units, possibly useful for camera
     public float RoundToNearestPixel(float unityUnits, float pixelsPerUnit)
     {
         float valueInPixels = unityUnits * pixelsPerUnit;
@@ -216,4 +218,17 @@ public class GlobalFunctions : MonoBehaviour {
         float roundedUnityUnits = valueInPixels * (1 / pixelsPerUnit);
         return roundedUnityUnits;
     }
+
+    public string FormatTime(float time)
+    {
+        int intTime = (int)time;
+        int minutes = intTime / 60;
+        int seconds = intTime % 60;
+        float fraction = time * 1000;
+        fraction = (fraction % 1000);
+        int fraction2 = (int)fraction / 10;
+        string timeText = String.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, fraction2);
+        return timeText;
+    }
+
 }

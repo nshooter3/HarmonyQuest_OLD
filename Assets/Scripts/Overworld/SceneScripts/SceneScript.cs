@@ -12,10 +12,11 @@ public abstract class SceneScript : MonoBehaviour {
     public Queue<Action> actionQueue;
     Action action;
 
-    //Determines whether or not the object is ready for a new command
-    public bool commandInProgress;
+    //commandInProgress determines whether or not the object is ready for a new command
+    // wait freezes the actionqueue until it is set back to false
+    public bool commandInProgress, wait;
 
-    //Used for waiting. If dur is greater than zero, a wait command is in progress.
+    //Used for wait function. If dur is greater than zero, a wait command is in progress.
     float dur;
 
     public static SceneScript instance;
@@ -32,21 +33,24 @@ public abstract class SceneScript : MonoBehaviour {
 
     public void UpdateQueue()
     {
-        //Wait update logic
-        if (dur > 0)
+        if (!wait)
         {
-            dur -= Time.deltaTime;
-            if (dur <= 0)
+            //Wait function update logic
+            if (dur > 0)
             {
-                instance.commandInProgress = false;
+                dur -= Time.deltaTime;
+                if (dur <= 0)
+                {
+                    instance.commandInProgress = false;
+                }
             }
-        }
-        else if (!commandInProgress)
-        {
-            if (actionQueue.Count > 0)
+            else if (!commandInProgress)
             {
-                action = actionQueue.Dequeue();
-                action();
+                if (actionQueue.Count > 0)
+                {
+                    action = actionQueue.Dequeue();
+                    action();
+                }
             }
         }
     }
