@@ -17635,6 +17635,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   commandInProgress: 0
+  wait: 0
   dad: {fileID: 0}
   box1: {fileID: 0}
   box2: {fileID: 0}

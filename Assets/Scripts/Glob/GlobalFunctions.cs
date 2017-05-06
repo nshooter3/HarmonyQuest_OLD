@@ -219,7 +219,21 @@ public class GlobalFunctions : MonoBehaviour {
         return roundedUnityUnits;
     }
 
-    public string FormatTime(float time)
+    //Converts time in seconds to SS:MS format
+    public string FormatTimeSeconds(float time)
+    {
+        int intTime = (int)time;
+        int seconds = intTime;
+        float fraction = time * 1000;
+        fraction = (fraction % 1000);
+        int fraction2 = (int)fraction / 10;
+        string timeText = "";
+        timeText = String.Format("{0:00}:{1:00}", seconds, fraction2);
+        return timeText;
+    }
+
+    //Converts time in seconds to MM:SS:MS format
+    public string FormatTimeMinutes(float time)
     {
         int intTime = (int)time;
         int minutes = intTime / 60;

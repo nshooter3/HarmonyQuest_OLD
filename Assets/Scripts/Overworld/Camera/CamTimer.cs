@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class CamTimer : MonoBehaviour {
+public class CamTimer : MonoBehaviour
+{
 
     //Current time and maxTime for the timer
     public float curTime, maxTime;
@@ -13,21 +14,30 @@ public class CamTimer : MonoBehaviour {
     //UI text component
     Text text;
 
+    Vector3 startSize, startRot, startPos;
+    Vector4 startCol;
+
     public static CamTimer instance;
 
-	void Awake () {
+    void Awake()
+    {
         if (instance == null)
             instance = this;
         else
             Destroy(gameObject);
 
         text = GetComponent<Text>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+        startSize = transform.localScale;
+        startPos = transform.position;
+        startRot = transform.eulerAngles;
+        startCol = text.color;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     //Turns on/off text component
     public void ToggleVisibility(bool toggle)
@@ -38,10 +48,17 @@ public class CamTimer : MonoBehaviour {
     //Sets Timer. If flash is true, makes timer flash for 3 seconds. Callback fires after timer is set, or after flashing if that is enabled
     public void SetTimer(float maxTime, bool flash = false, Action callback = null)
     {
+        transform.localScale = startSize;
+        transform.position = startPos;
+        transform.eulerAngles = startRot;
+        text.color = startCol;
         ToggleVisibility(true);
         timerActive = true;
         this.maxTime = maxTime;
-        text.text = GlobalFunctions.instance.FormatTime(maxTime);
+        if (maxTime >= 60)
+            text.text = GlobalFunctions.instance.FormatTimeMinutes(maxTime);
+        else
+            text.text = GlobalFunctions.instance.FormatTimeSeconds(maxTime);
         if (flash)
         {
             StartCoroutine(TimerFlashCo(1.5f, 3, callback));
@@ -64,7 +81,7 @@ public class CamTimer : MonoBehaviour {
     IEnumerator TimerFlashCo(float dur, int flashes, Action callback)
     {
         ToggleVisibility(true);
-        flashes = flashes*2 - 1;
+        flashes = flashes * 2 - 1;
         float flashTimer = dur / flashes;
         float maxFlashTimer = flashTimer;
         while (dur > 0)
@@ -92,20 +109,31 @@ public class CamTimer : MonoBehaviour {
     }
 
     //Starts timer countdown. Callback fires when the timer runs out
-    public void StartTimer(Action callback = null)
+    public void StartTimer(Action callback = null, bool shakeWhenLow = true)
     {
-        StartCoroutine(StartTimerCo(callback));
+        StartCoroutine(StartTimerCo(callback, shakeWhenLow));
     }
 
-    IEnumerator StartTimerCo(Action callback)
+    IEnumerator StartTimerCo(Action callback, bool shakeWhenLow)
     {
         ToggleVisibility(true);
         curTime = maxTime;
         while (curTime > 0)
         {
             curTime = Mathf.Max(curTime - Time.deltaTime, 0);
-            text.text = GlobalFunctions.instance.FormatTime(curTime);
+            if(maxTime >= 60)
+                text.text = GlobalFunctions.instance.FormatTimeMinutes(curTime);
+            else
+                text.text = GlobalFunctions.instance.FormatTimeSeconds(curTime);
             yield return new WaitForSeconds(Time.deltaTime);
+            //Visual effects for running out of time
+            if (curTime < 10 && shakeWhenLow)
+            {
+                float val = 1 - curTime / 10;
+                text.color = Color.Lerp(startCol, Color.red, val);
+                text.transform.localScale = Vector3.Lerp(startSize, startSize * 1.3f, val);
+                text.transform.position = startPos + new Vector3(UnityEngine.Random.Range(-val, val)*4f, UnityEngine.Random.Range(-val, val) * 4f, 0);
+            }
         }
         timerActive = false;
         if (callback != null)
