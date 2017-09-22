@@ -61,7 +61,7 @@ public class PlayerShield : MonoBehaviour {
             }
             else if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                PlayerHitbox.instance.TakeDamage(col.gameObject.GetComponent<Enemy>().damage, true);
+                //PlayerHitbox.instance.TakeDamage(col.gameObject.GetComponent<Enemy>().damage, true);
             }
         }
     }

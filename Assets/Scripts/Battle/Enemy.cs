@@ -4,42 +4,59 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour {
 
-    public float maxhealth, health, damage;
-    Vector3 dir;
-    Vector3 initPos;
-    Rigidbody2D rb;
-    SpriteRenderer sr;
-    Collider2D col;
-    Color initCol, hitCol;
-    float hitTimer = 0, maxHitTimer = 0.1f;
+    //Enemy max health and current health
+    public float maxhealth, health;
+    //Material associated with enemy's sprite renderer
     public Material mat;
+    //Used to store reticules targeting this enemy
+    //Likely going to be deprecated
     public List<Reticule> reticules;
+    //Used to calculate the tick duration based on the bpm of the music
+    public float bpm = 120f;
 
-	// Use this for initialization
-	void Start () {
-        dir = new Vector3(1, -1, 0).normalized;
+    //Tracks which tick the enemy is on, used to time attacks/movement. Will likely be reset upon entering a new state.
+    public int tick = 0;
+
+    //Misc components
+    protected  Rigidbody2D rb;
+    protected  SpriteRenderer sr;
+    protected  Collider2D col;
+    //Init col is default color, hitCol is the color the sprite renderer will be shaded to upon taking damage
+    protected  Color initCol, hitCol;
+    //Gives the enemy some iframes before taking another hit
+    //Likely will be deprecated after limiting the player's offensive capability
+    protected float hitTimer = 0, maxHitTimer = 0.1f;
+
+    //Basic enemy state machine. Can be expanded upon in subclasses if necessary
+    protected enum EnemyState { Idle, Move, Attack };
+    protected EnemyState enemyState;
+
+    //Delegate that is called upon an update tick
+    protected delegate void UpdateTick();
+    protected UpdateTick MyUpdateTick;
+    //The interval in seconds that a tick occurs
+    protected float tickDuration;
+
+    void Awake()
+    {
+        tickDuration = 60f / bpm;
+    }
+
+    // Use this for initialization
+    void Start () {
+        //dir = new Vector3(1, -1, 0).normalized;
         rb = GetComponent<Rigidbody2D>();
-        rb.velocity = dir*2;
         sr = GetComponentInChildren<SpriteRenderer>();
         col = GetComponent<Collider2D>();
         sr.material = mat;
         initCol = sr.color;
         hitCol = Color.red;
         health = maxhealth;
-        initPos = transform.position;
         reticules = new List<Reticule>();
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-    void FixedUpdate()
-    {
-
+        enemyState = EnemyState.Idle;
     }
 
+    //Checks for bullets that damage the enemy. Might be deprecated depending on where I go with the combat
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject.layer == LayerMask.NameToLayer("Bullet") && col.gameObject.GetComponent<Bullet>().friendly)
@@ -50,6 +67,7 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    //Takes damages, handles events for reaching 0 health
     public void TakeDamage(float damage)
     {
         health -= damage;
@@ -61,6 +79,7 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    //Juice effects associated with taking damage
     IEnumerator GetHit()
     {
         //sr.gameObject.transform.localPosition = Vector3.zero;
@@ -81,8 +100,11 @@ public class Enemy : MonoBehaviour {
         yield return null;
     }
 
+    //Handle logic for enemy health reaching 0
     public void Destroy()
     {
+        StopTick();
+        /*
         //TODO make this NOT reset the enemy to their startPos
         foreach (Reticule ret in reticules)
         {
@@ -91,6 +113,37 @@ public class Enemy : MonoBehaviour {
         reticules = new List<Reticule>();
         transform.position = initPos;
         health = maxhealth;
-        //Destroy(this.gameObject);y
+        Destroy(this.gameObject);
+        */
     }
+
+    //Calls the MyUpdateTick delegate once per beat based on the bpm;
+    IEnumerator TickCounter()
+    {
+        while (true)
+        {
+            MyUpdateTick();
+            yield return new WaitForSeconds(tickDuration);
+        }
+    }
+
+    //Starts the TickCounter coroutine
+    public void StartTick()
+    {
+        StartCoroutine(TickCounter());
+    }
+
+    //Stops the TickCounter coroutine from firing
+    public void StopTick()
+    {
+        StopCoroutine(TickCounter());
+    }
+
+    //Virtual functions to be implemented in children enemy classes. Defines non-tick related updates during states.
+    protected virtual void IdleUpdate(){}
+
+    protected virtual void MoveUpdate(){}
+
+    protected virtual void AttackUpdate(){}
+
 }

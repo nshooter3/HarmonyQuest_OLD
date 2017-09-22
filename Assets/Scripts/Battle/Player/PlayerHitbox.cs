@@ -71,7 +71,7 @@ public class PlayerHitbox : MonoBehaviour {
             }
             else if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                TakeDamage(col.gameObject.GetComponent<Enemy>().damage);
+                //TakeDamage(col.gameObject.GetComponent<Enemy>().damage);
             }
         }
     }

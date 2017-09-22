@@ -154,6 +154,23 @@ public class GlobalFunctions : MonoBehaviour {
         obj.transform.position = endPos;
     }
 
+    public void AdjustPositionOverTimeSmooth(Vector3 startPos, Vector3 endPos, float time, Transform obj)
+    {
+        StartCoroutine(AdjustPositionOverTimeSmoothCo(startPos, endPos, time, obj));
+    }
+
+    //Lerps a passed in transform between 2 positions over time smoothly
+    IEnumerator AdjustPositionOverTimeSmoothCo(Vector3 startPos, Vector3 endPos, float time, Transform obj)
+    {
+        float t = 0;
+        while (t <= 1.0)
+        {
+            t += Time.deltaTime / time;
+            obj.transform.position = Vector3.Lerp(startPos, endPos, Mathf.SmoothStep(0.0f, 1.0f, t));
+            yield return new WaitForSeconds(0);
+        }
+    }
+
     public void AdjustColorOverTime(Color startCol, Color endCol, float time, SpriteRenderer obj)
     {
         StartCoroutine(AdjustColorOverTimeCo(startCol, endCol, time, obj));
