@@ -7,8 +7,9 @@ public class CyanSlasher : Enemy {
     //int idleTickLimit = 4;
     //int moveTickLimit = 4;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    protected override void Start () {
+        base.Start();
         enemyState = EnemyState.Idle;
         MyUpdateTick = IdleTick;
         StartTick();

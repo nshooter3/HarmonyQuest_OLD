@@ -58,7 +58,7 @@ public class PlayerHitbox : MonoBehaviour {
         }
 	}
 
-    void OnTriggerStay2D(Collider2D col)
+    /*void OnTriggerStay2D(Collider2D col)
     {
         if (curCooldown <= 0)
         {
@@ -74,37 +74,40 @@ public class PlayerHitbox : MonoBehaviour {
                 //TakeDamage(col.gameObject.GetComponent<Enemy>().damage);
             }
         }
-    }
+    }*/
 
     public void TakeDamage(float damage, bool shieldActive = false)
     {
-        if (damage > 0)
+        if (curCooldown <= 0)
         {
-            if (shieldActive)
+            if (damage > 0)
             {
-                BattleUIHandler.instance.DecreaseStamina(damage * 2f);
-                BattleCam.instance.CamShake();
-                //Prevent shield hit particle from firing twice upon breaking
-                if (BattleUIHandler.instance.stamina > 0)
+                if (shieldActive)
                 {
-                    PlayerMovementBattle.instance.shieldHit.Play();
+                    BattleUIHandler.instance.DecreaseStamina(damage * 2f);
+                    BattleCam.instance.CamShake();
+                    //Prevent shield hit particle from firing twice upon breaking
+                    if (BattleUIHandler.instance.stamina > 0)
+                    {
+                        PlayerMovementBattle.instance.shieldHit.Play();
+                    }
+                    curCooldown = maxCooldown;
+                    shield = true;
                 }
-                curCooldown = maxCooldown;
-                shield = true;
-            }
-            else
-            {
-                BattleUIHandler.instance.DecreaseHealth(damage);
-                BattleCam.instance.CamShake();
-                curCooldown = maxCooldown;
-                flashTimer = maxCooldown / flashSpeed;
-                PlayerMovementBattle.instance.ren.enabled = false;
-                shield = false;
-                if (BattleUIHandler.instance.health <= 0)
+                else
                 {
-                    //TODO Add transition to game over state here
-                    Destroy(PlayerMovementBattle.instance.gameObject);
-                    //Destroy(gameObject);
+                    BattleUIHandler.instance.DecreaseHealth(damage);
+                    BattleCam.instance.CamShake();
+                    curCooldown = maxCooldown;
+                    flashTimer = maxCooldown / flashSpeed;
+                    PlayerMovementBattle.instance.ren.enabled = false;
+                    shield = false;
+                    if (BattleUIHandler.instance.health <= 0)
+                    {
+                        //TODO Add transition to game over state here
+                        Destroy(PlayerMovementBattle.instance.gameObject);
+                        //Destroy(gameObject);
+                    }
                 }
             }
         }

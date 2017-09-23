@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour {
     //Enemy max health and current health
     public float maxhealth, health;
     //Material associated with enemy's sprite renderer
-    public Material mat;
+    //public Material mat;
     //Used to store reticules targeting this enemy
     //Likely going to be deprecated
     public List<Reticule> reticules;
@@ -37,18 +37,22 @@ public class Enemy : MonoBehaviour {
     //The interval in seconds that a tick occurs
     protected float tickDuration;
 
+    //Reference to attack manager. Used to call animation events that toggle hitboxes
+    private EnemyAttackManager attackManager;
+
     void Awake()
     {
         tickDuration = 60f / bpm;
     }
 
     // Use this for initialization
-    void Start () {
+    protected virtual void Start () {
         //dir = new Vector3(1, -1, 0).normalized;
         rb = GetComponent<Rigidbody2D>();
-        sr = GetComponentInChildren<SpriteRenderer>();
+        sr = GetComponent<SpriteRenderer>();
         col = GetComponent<Collider2D>();
-        sr.material = mat;
+        attackManager = GetComponentInChildren<EnemyAttackManager>();
+        //sr.material = mat;
         initCol = sr.color;
         hitCol = Color.red;
         health = maxhealth;
@@ -144,6 +148,23 @@ public class Enemy : MonoBehaviour {
 
     protected virtual void MoveUpdate(){}
 
-    protected virtual void AttackUpdate(){}
+    protected virtual void AttackUpdate(){ }
 
+    //Calls attack manager functions. Used to that I can access them through animation events
+    public void EnableAttack(string attack)
+    {
+        attackManager.EnableAttack(attack, 1);
+    }
+    public void EnableAttackDontDisableOtherAttacks(string attack)
+    {
+        attackManager.EnableAttack(attack, 0);
+    }
+    public void DisableAttack(string attack)
+    {
+        attackManager.DisableAttack(attack);
+    }
+    public void DisableAllAttacks()
+    {
+        attackManager.DisableAllAttacks();
+    }
 }
