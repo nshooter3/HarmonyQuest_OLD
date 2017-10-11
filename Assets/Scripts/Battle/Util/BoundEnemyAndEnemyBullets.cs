@@ -19,9 +19,5 @@ public class BoundEnemyAndEnemyBullets : MonoBehaviour {
         {
             col.gameObject.GetComponent<Bullet>().Reset();
         }
-        else if (col.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            col.gameObject.GetComponent<Enemy>().Destroy();
-        }
     }
 }

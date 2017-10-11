@@ -11,11 +11,6 @@ public class Enemy : MonoBehaviour {
     //Used to store reticules targeting this enemy
     //Likely going to be deprecated
     public List<Reticule> reticules;
-    //Used to calculate the tick duration based on the bpm of the music
-    public float bpm = 120f;
-
-    //Tracks which tick the enemy is on, used to time attacks/movement. Will likely be reset upon entering a new state.
-    public int tick = 0;
 
     //Misc components
     protected  Rigidbody2D rb;
@@ -30,19 +25,15 @@ public class Enemy : MonoBehaviour {
     //Basic enemy state machine. Can be expanded upon in subclasses if necessary
     protected enum EnemyState { Idle, Move, Attack };
     protected EnemyState enemyState;
-
-    //Delegate that is called upon an update tick
-    protected delegate void UpdateTick();
-    protected UpdateTick MyUpdateTick;
-    //The interval in seconds that a tick occurs
-    protected float tickDuration;
+    //Bool for determing whether or not enemy is currently executing a command
+    protected bool isPerformingAction = false;
 
     //Reference to attack manager. Used to call animation events that toggle hitboxes
     private EnemyAttackManager attackManager;
 
     void Awake()
     {
-        tickDuration = 60f / bpm;
+        
     }
 
     // Use this for initialization
@@ -79,7 +70,7 @@ public class Enemy : MonoBehaviour {
         if (health <= 0)
         {
             BattleUIHandler.instance.DecreaseEnemy(maxhealth);
-            Destroy();
+            Defeat();
         }
     }
 
@@ -105,9 +96,8 @@ public class Enemy : MonoBehaviour {
     }
 
     //Handle logic for enemy health reaching 0
-    public void Destroy()
+    public void Defeat()
     {
-        StopTick();
         /*
         //TODO make this NOT reset the enemy to their startPos
         foreach (Reticule ret in reticules)
@@ -121,50 +111,23 @@ public class Enemy : MonoBehaviour {
         */
     }
 
-    //Calls the MyUpdateTick delegate once per beat based on the bpm;
-    IEnumerator TickCounter()
-    {
-        while (true)
-        {
-            MyUpdateTick();
-            yield return new WaitForSeconds(tickDuration);
-        }
-    }
-
-    //Starts the TickCounter coroutine
-    public void StartTick()
-    {
-        StartCoroutine(TickCounter());
-    }
-
-    //Stops the TickCounter coroutine from firing
-    public void StopTick()
-    {
-        StopCoroutine(TickCounter());
-    }
-
-    //Virtual functions to be implemented in children enemy classes. Defines non-tick related updates during states.
-    protected virtual void IdleUpdate(){}
-
-    protected virtual void MoveUpdate(){}
-
-    protected virtual void AttackUpdate(){ }
-
     //Calls attack manager functions. Used to that I can access them through animation events
-    public void EnableAttack(string attack)
-    {
-        attackManager.EnableAttack(attack, 1);
-    }
-    public void EnableAttackDontDisableOtherAttacks(string attack)
-    {
-        attackManager.EnableAttack(attack, 0);
-    }
-    public void DisableAttack(string attack)
-    {
-        attackManager.DisableAttack(attack);
-    }
-    public void DisableAllAttacks()
-    {
-        attackManager.DisableAllAttacks();
-    }
+    //*** *** ***
+        public void EnableAttack(string attack)
+        {
+            attackManager.EnableAttack(attack, 1);
+        }
+        public void EnableAttackDontDisableOtherAttacks(string attack)
+        {
+            attackManager.EnableAttack(attack, 0);
+        }
+        public void DisableAttack(string attack)
+        {
+            attackManager.DisableAttack(attack);
+        }
+        public void DisableAllAttacks()
+        {
+            attackManager.DisableAllAttacks();
+        }
+    //*** *** ***
 }

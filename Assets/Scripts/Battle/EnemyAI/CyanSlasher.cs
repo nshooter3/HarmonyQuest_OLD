@@ -1,79 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class CyanSlasher : Enemy {
-
-    //int idleTickLimit = 4;
-    //int moveTickLimit = 4;
 
     // Use this for initialization
     protected override void Start () {
         base.Start();
         enemyState = EnemyState.Idle;
-        MyUpdateTick = IdleTick;
-        StartTick();
     }
-	
-	// Update is called once per frame
-	void Update () {
-        switch (enemyState) {
-            case EnemyState.Idle:
-                IdleUpdate();
-                break;
-            case EnemyState.Move:
-                MoveUpdate();
-                break;
-            case EnemyState.Attack:
-                AttackUpdate();
-                break;
+
+    void Update()
+    {
+        //If the enemy isn't currently carrying out a task, select a new action
+        if (!isPerformingAction)
+        {
+            //Select next action based on the state the enemy is exiting
+            switch (enemyState) {
+                case EnemyState.Idle:
+                    //TODO: stuff
+                    break;
+                case EnemyState.Move:
+                    //TODO: stuff
+                    break;
+                case EnemyState.Attack:
+                    //TODO: stuff
+                    break;
+            }
         }
-	}
-    
-    // ****************************************************
-    // Logic that fires from the update loop, based on the enemy's current state
-    // ****************************************************
-    protected override void IdleUpdate()
-    {
-
-    }
-
-    protected override void MoveUpdate()
-    {
-        //transform.position -= new Vector3(0,Time.deltaTime,0);
-    }
-
-    protected override void AttackUpdate()
-    {
-
-    }
-
-    // ****************************************************
-    // Logic that fires on a tick based update, based on what has been passed into the Tick delegate
-    // ****************************************************
-    private void IdleTick()
-    {
-        //print("idle tick");
-        tick++;
-        //if (tick >= idleTickLimit)
-        //{
-        //    EnterMoveState();
-        //}
-    }
-
-    private void MoveTick()
-    {
-        //print("move tick");
-        tick++;
-        //if (tick >= idleTickLimit)
-        //{
-        //    EnterIdleState();
-        //}
-    }
-
-    private void AttackTick()
-    {
-        tick++;
     }
 
     // ****************************************************
@@ -81,24 +36,40 @@ public class CyanSlasher : Enemy {
     // ****************************************************
     private void EnterIdleState()
     {
-        //print("Enter idle state");
         enemyState = EnemyState.Idle;
-        MyUpdateTick = IdleTick;
-        tick = 0;
+        isPerformingAction = true;
     }
 
     private void EnterMoveState()
     {
-        //print("Enter move state");
         enemyState = EnemyState.Move;
-        MyUpdateTick = MoveTick;
-        tick = 0;
+        isPerformingAction = true;
     }
 
     private void EnterAttackState()
     {
         enemyState = EnemyState.Attack;
-        MyUpdateTick = AttackTick;
-        tick = 0;
+        isPerformingAction = true;
     }
+
+    //*** *** *** Behaviors *** *** ***
+
+        //Wait for a period, then check for next behavior
+        IEnumerator Wait(float seconds)
+        {
+            EnterIdleState();
+            yield return new WaitForSeconds(seconds);
+            isPerformingAction = false;
+        }
+
+        //Move to a new location from current location, then check for next behavior
+        IEnumerator TimedMovement(Vector2 destination, float duration)
+        {
+            EnterMoveState();
+            Vector2 start = transform.position;
+            yield return new WaitForSeconds(duration);
+            isPerformingAction = false;
+        }
+
+    //*** *** *** End Behaviors *** *** ***
 }

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyAttackManager : MonoBehaviour
 {
-
-    public EnemyAttack[] attacks;
+    //List of information for each attack frame, includes damage and hitbox. Automatically populates by searching children.
+    private EnemyAttack[] attacks;
 
     void Awake()
     {
@@ -16,6 +16,7 @@ public class EnemyAttackManager : MonoBehaviour
     void Start()
     {
         DisableAllAttacks();
+        attacks = GetComponentsInChildren<EnemyAttack>();
     }
 
     //Enables an attack in attacks based on name matching
