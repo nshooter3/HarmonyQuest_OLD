@@ -9,6 +9,9 @@ public class BeatManager : MonoBehaviour {
     //The interval in seconds that a tick occurs
     private float tickDuration;
 
+    //The boss's theme
+    public AudioSource song;
+
     //Delegate that is called upon an update tick
     public delegate void UpdateTick();
     public UpdateTick MyUpdateTick;
@@ -81,5 +84,23 @@ public class BeatManager : MonoBehaviour {
     public void StopTick()
     {
         StopCoroutine(TickCounter());
+    }
+
+    //Play the enemy's song
+    public void PlaySong()
+    {
+        song.Play();
+    }
+
+    //Stop the enemy's song
+    public void StopSong()
+    {
+        song.Stop();
+    }
+
+    //Change audioclip to a new song
+    public void ChangeSong(AudioClip newSong)
+    {
+        song.clip = newSong;
     }
 }
