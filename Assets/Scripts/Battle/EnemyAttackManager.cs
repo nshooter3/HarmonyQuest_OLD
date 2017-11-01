@@ -15,8 +15,8 @@ public class EnemyAttackManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        DisableAllAttacks();
         attacks = GetComponentsInChildren<EnemyAttack>();
+        DisableAllAttacks();
     }
 
     //Enables an attack in attacks based on name matching
