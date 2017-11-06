@@ -21,7 +21,8 @@ public class AfterImageGenerator : MonoBehaviour {
 
     void SpawnTrailPart()
     {
-        GameObject trailPart = new GameObject();
+        AfterImagePool.instance.SpawnAfterImage(transform, 0.2f);
+        /*GameObject trailPart = new GameObject();
         SpriteRenderer trailPartRenderer = trailPart.AddComponent<SpriteRenderer>();
         trailPartRenderer.sprite = GetComponent<SpriteRenderer>().sprite;
         trailPartRenderer.color = new Color(trailPartRenderer.color.r, trailPartRenderer.color.g, trailPartRenderer.color.b, 0.5f);
@@ -30,6 +31,6 @@ public class AfterImageGenerator : MonoBehaviour {
         trailPart.transform.localScale = transform.localScale;
 
         GlobalFunctions.instance.AdjustColorOverTime(trailPartRenderer.color, new Color(trailPartRenderer.color.r, trailPartRenderer.color.g, trailPartRenderer.color.b, 0), 0.5f, trailPartRenderer);
-        Destroy(trailPart, 1f);
+        Destroy(trailPart, 1f);*/
     }
 }

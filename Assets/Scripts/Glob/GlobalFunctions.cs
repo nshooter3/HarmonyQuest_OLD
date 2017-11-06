@@ -262,4 +262,20 @@ public class GlobalFunctions : MonoBehaviour {
         return timeText;
     }
 
+    //Resets a target transform to match a source transform
+    public void CopyTranform(Transform target, Transform source)
+    {
+        target.position = source.position;
+        target.eulerAngles = source.eulerAngles;
+        target.localScale = source.localScale;
+    }
+
+    //Resets a target transform to default values
+    public void ResetTranform(Transform target)
+    {
+        target.position = Vector3.zero;
+        target.eulerAngles = Vector3.zero;
+        target.localScale = Vector3.one;
+    }
+
 }
