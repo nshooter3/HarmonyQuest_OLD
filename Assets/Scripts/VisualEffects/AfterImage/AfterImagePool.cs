@@ -38,7 +38,21 @@ public class AfterImagePool : MonoBehaviour {
         }
         else
         {
-            Debug.LogError("No bullets available");
+            Debug.LogError("No after images available");
+        }
+    }
+
+    //Attempt to load a shrinking after image
+    public void SpawnShrinkingAfterImage(Transform trans, float fadeTime)
+    {
+        AfterImageObject temp = (AfterImageObject)FindAvailableAfterImage(pool);
+        if (temp != null)
+        {
+            temp.ToggleOn(trans, fadeTime, true);
+        }
+        else
+        {
+            Debug.LogError("No after images available");
         }
     }
 
@@ -60,7 +74,8 @@ public class AfterImagePool : MonoBehaviour {
         for (int i = 0; i < pool.Length; i++)
         {
             pool[i] = Instantiate(pool[i]);
-            pool[i].transform.parent = gameObject.transform;
+            pool[i].transform.parent = transform;
+            pool[i].originalParent = transform;
         }
     }
 }

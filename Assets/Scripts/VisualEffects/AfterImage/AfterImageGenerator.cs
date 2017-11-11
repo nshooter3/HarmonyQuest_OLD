@@ -6,7 +6,7 @@ public class AfterImageGenerator : MonoBehaviour {
 
     void Start()
     {
-        //StartAfterImage(0.1f);
+        //StartAfterImage(0.5f);
     }
 
     public void StartAfterImage(float interval)
@@ -21,16 +21,6 @@ public class AfterImageGenerator : MonoBehaviour {
 
     void SpawnTrailPart()
     {
-        AfterImagePool.instance.SpawnAfterImage(transform, 0.2f);
-        /*GameObject trailPart = new GameObject();
-        SpriteRenderer trailPartRenderer = trailPart.AddComponent<SpriteRenderer>();
-        trailPartRenderer.sprite = GetComponent<SpriteRenderer>().sprite;
-        trailPartRenderer.color = new Color(trailPartRenderer.color.r, trailPartRenderer.color.g, trailPartRenderer.color.b, 0.5f);
-        trailPart.transform.position = transform.position;
-        trailPart.transform.eulerAngles = transform.eulerAngles;
-        trailPart.transform.localScale = transform.localScale;
-
-        GlobalFunctions.instance.AdjustColorOverTime(trailPartRenderer.color, new Color(trailPartRenderer.color.r, trailPartRenderer.color.g, trailPartRenderer.color.b, 0), 0.5f, trailPartRenderer);
-        Destroy(trailPart, 1f);*/
+        AfterImagePool.instance.SpawnShrinkingAfterImage(transform, 0.2f);
     }
 }
