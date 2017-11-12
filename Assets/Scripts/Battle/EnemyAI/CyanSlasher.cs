@@ -29,6 +29,9 @@ public class CyanSlasher : Enemy {
                     break;
             }
         }
+        /*if (Input.GetKeyDown(KeyCode.Space)){
+            GlobalFunctions.instance.AdjustMultColorOverTime(Color.white, 0.75f, 0.1f, GetComponent<SpriteRenderer>().material);
+        }*/
     }
 
     // ****************************************************

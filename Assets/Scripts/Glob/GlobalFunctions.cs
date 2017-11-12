@@ -187,6 +187,23 @@ public class GlobalFunctions : MonoBehaviour {
         obj.color = endCol;
     }
 
+    public void AdjustMultColorOverTime(Color col, float strength, float time, Material obj)
+    {
+        StartCoroutine(AdjustMultColorOverTimeCo(col, strength, time, obj));
+    }
+
+    //Lerps a passed in spriteRenderer between 2 colors over time
+    IEnumerator AdjustMultColorOverTimeCo(Color col, float strength, float time, Material obj)
+    {
+        obj.SetColor("_MultColor", col);
+        for (float t = time; t >= 0; t -= Time.deltaTime)
+        {
+            obj.SetFloat("_MultStrength", Mathf.Lerp(0, strength, t / time));
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        obj.SetFloat("_MultStrength", 0);
+    }
+
     public void AdjustColorOverTimeTextMesh(Color startCol, Color endCol, float time, TextMesh obj)
     {
         StartCoroutine(AdjustColorOverTimeTextMeshCo(startCol, endCol, time, obj));

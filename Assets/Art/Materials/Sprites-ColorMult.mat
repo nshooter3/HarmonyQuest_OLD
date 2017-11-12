@@ -34,4 +34,4 @@ Material:
       second: {r: 1, g: 1, b: 1, a: 1}
     - first:
         name: _MultColor
-      second: {r: 0.875, g: 0, b: 0.81465524, a: 0.291}
+      second: {r: 1, g: 1, b: 1, a: 0.291}
