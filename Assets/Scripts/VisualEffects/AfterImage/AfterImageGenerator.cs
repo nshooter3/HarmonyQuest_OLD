@@ -6,7 +6,7 @@ public class AfterImageGenerator : MonoBehaviour {
 
     void Start()
     {
-        //StartAfterImage(0.5f);
+        //StartAfterImage(1.5f);
     }
 
     public void StartAfterImage(float interval)
@@ -21,6 +21,6 @@ public class AfterImageGenerator : MonoBehaviour {
 
     void SpawnTrailPart()
     {
-        AfterImagePool.instance.SpawnShrinkingAfterImage(transform, 0.2f);
+        AfterImagePool.instance.SpawnDBZAfterImage(transform, 1f, PlayerMovementBattle.instance.transform);
     }
 }

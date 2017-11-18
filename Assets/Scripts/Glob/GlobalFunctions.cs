@@ -225,6 +225,7 @@ public class GlobalFunctions : MonoBehaviour {
         StartCoroutine(DBZTeleportCo(sr));
     }
 
+    //Fixed DBZ teleport effect, for cutscenes 
     IEnumerator DBZTeleportCo(SpriteRenderer sr)
     {
         int count = 0, maxCount = 30;

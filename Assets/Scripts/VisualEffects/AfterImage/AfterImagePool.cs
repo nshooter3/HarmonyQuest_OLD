@@ -56,6 +56,20 @@ public class AfterImagePool : MonoBehaviour {
         }
     }
 
+    //Attempt to load a flickering DBZ style after image
+    public void SpawnDBZAfterImage(Transform trans, float fadeTime, Transform target)
+    {
+        AfterImageObject temp = (AfterImageObject)FindAvailableAfterImage(pool);
+        if (temp != null)
+        {
+            temp.ToggleOnDBZ(trans, fadeTime, target);
+        }
+        else
+        {
+            Debug.LogError("No after images available");
+        }
+    }
+
     //Util function for finding and returning available after image out of a list
     private AfterImageObject FindAvailableAfterImage(AfterImageObject[] list)
     {
