@@ -47,15 +47,22 @@ public class EnemyReticule : MonoBehaviour {
             }
             yield return new WaitForSeconds(Time.deltaTime);
         }
-        StartCoroutine(StopTracking(0.25f));
+        StartCoroutine(StopTracking(0.2f));
     }
 
     public IEnumerator StopTracking(float duration)
     {
         GlobalFunctions.instance.AdjustSizeOverTime(initScale * 2.5f, initScale, duration/2.0f, transform);
+        float afterImageTimer = 0;
         for (float t = duration; t > 0; t -= Time.deltaTime)
         {
             sr.material.SetFloat("_MultStrength", Mathf.Lerp(0, 1, 0.5f + Mathf.Sin((Time.time) * colorSpeed*10) / 2.0f));
+            afterImageTimer += Time.deltaTime;
+            if (afterImageTimer > 0.05f)
+            {
+                AfterImagePool.instance.SpawnGrowingAfterImage(transform, 0.2f);
+                afterImageTimer = 0;
+            }
             yield return new WaitForSeconds(Time.deltaTime);
         }
         sr.enabled = false;

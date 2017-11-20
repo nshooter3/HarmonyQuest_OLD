@@ -56,6 +56,20 @@ public class AfterImagePool : MonoBehaviour {
         }
     }
 
+    //Attempt to load a growing after image
+    public void SpawnGrowingAfterImage(Transform trans, float fadeTime)
+    {
+        AfterImageObject temp = (AfterImageObject)FindAvailableAfterImage(pool);
+        if (temp != null)
+        {
+            temp.ToggleOn(trans, fadeTime, false, true);
+        }
+        else
+        {
+            Debug.LogError("No after images available");
+        }
+    }
+
     //Attempt to load a flickering DBZ style after image
     public void SpawnDBZAfterImage(Transform trans, float fadeTime, Transform target)
     {

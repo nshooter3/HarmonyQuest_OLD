@@ -8,6 +8,8 @@ public class AfterImageObject : MonoBehaviour {
     public bool active = false;
     //Whether or not the object shrinks in around it's origin (used to telegraph attacks)
     public bool shrink = false;
+    //Whether or not the object grows around it's origin
+    public bool grow = false;
     //Used to reset parent after shrink command is complete
     public Transform originalParent;
 
@@ -28,7 +30,7 @@ public class AfterImageObject : MonoBehaviour {
 	}
 
     //Start fadeout
-    public void ToggleOn(Transform trans, float fadeTime, bool shrink = false)
+    public void ToggleOn(Transform trans, float fadeTime, bool shrink = false, bool grow = false)
     {
         active = true;
         sr.enabled = true;
@@ -37,11 +39,23 @@ public class AfterImageObject : MonoBehaviour {
         if (shrink)
         {
             transform.parent = trans;
-            startScale = transform.localScale*1.5f;
+            startScale = transform.localScale * 1.5f;
             endScale = transform.localScale;
             this.shrink = true;
+            StartCoroutine(AfterImageObjectFade(new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f), new Color(sr.color.r, sr.color.g, sr.color.b, 0), fadeTime));
         }
-        StartCoroutine(AfterImageObjectFade(new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f), new Color(sr.color.r, sr.color.g, sr.color.b, 0), fadeTime));
+        else if (grow)
+        {
+            transform.parent = trans;
+            startScale = transform.localScale;
+            endScale = transform.localScale * 3.0f;
+            this.grow = true;
+            StartCoroutine(AfterImageObjectFade(new Color(sr.color.r, sr.color.g, sr.color.b, 0.0f), new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f), fadeTime));
+        }
+        else
+        {
+            StartCoroutine(AfterImageObjectFade(new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f), new Color(sr.color.r, sr.color.g, sr.color.b, 0), fadeTime));
+        }
     }
 
     public void ToggleOnDBZ(Transform trans, float fadeTime, Transform target)
@@ -73,6 +87,11 @@ public class AfterImageObject : MonoBehaviour {
         for (float t = time; t >= 0; t -= Time.deltaTime)
         {
             if (shrink)
+            {
+                transform.localScale = Vector2.Lerp(endScale, startScale, t / time);
+                sr.color = Color.Lerp(startCol, endCol, t / time);
+            }
+            else if (grow)
             {
                 transform.localScale = Vector2.Lerp(endScale, startScale, t / time);
                 sr.color = Color.Lerp(startCol, endCol, t / time);
