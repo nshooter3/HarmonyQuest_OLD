@@ -53,6 +53,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 0
+  shrink: 0
+  originalParent: {fileID: 0}
 --- !u!212 &212541483692930604
 SpriteRenderer:
   m_ObjectHideFlags: 1
