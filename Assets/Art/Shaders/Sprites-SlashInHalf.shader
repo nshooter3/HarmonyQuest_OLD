@@ -9,7 +9,7 @@ Shader "Sprites/Sprites-SlashInHalf"
 		_MultColor("MultColor", Color) = (1,1,1,1)
 		_MultStrength("MultStrength", Range(0.000000,1.000000)) = 0.000000
 		_Slope("Slope", Range(-3.000000,3.000000)) = 0.000000
-		_OffsetStrength("OffsetStrength", Range(0.000000,1.000000)) = 0.000000
+		_IsSectionA("IsSectionA", Range(0,1)) = 0
 		[MaterialToggle] PixelSnap("Pixel snap", Float) = 0
 	}
 
@@ -60,7 +60,7 @@ Shader "Sprites/Sprites-SlashInHalf"
 			fixed4 _MultColor;
 			float _MultStrength;
 			float _Slope;
-			float _OffsetStrength;
+			float _IsSectionA;
 
 			v2f vert(appdata_t IN)
 			{
@@ -93,7 +93,7 @@ Shader "Sprites/Sprites-SlashInHalf"
 
 			fixed4 frag(v2f IN) : SV_Target
 			{
-				float4 perpendicularPoint = float4(1.0, 1.0/_Slope, 0.0, 1.0);
+				float4 perpendicularPoint = float4(1.0, -1.0/_Slope, 0.0, 1.0);
 				//Determine whether or not current point is on same side of line as perpendicular point
 				float ax = IN.localPos.x;
 				float ay = IN.localPos.y;
@@ -104,15 +104,26 @@ Shader "Sprites/Sprites-SlashInHalf"
 				float x2 = 1;
 				float y2 = _Slope;
 				float sameSide = ((y1 - y2) * (ax - x1) + (x2 - x1) * (ay - y1)) * ((y1 - y2) * (bx - x1) + (x2 - x1) * (by - y1));
+				if (_Slope < 0) {
+					//Workaround to prevent line sides from flipping depending on whether slope is positive or negative
+					sameSide *= -1;
+				}
 				fixed4 c;
-				if (sameSide < 0) {
-					c = SampleSpriteTexture(IN.texcoord) * IN.color;
-				}
-				else {
-					c = SampleSpriteTexture(IN.texcoord) * IN.color;
-				}
+				c = SampleSpriteTexture(IN.texcoord) * IN.color;
 				c.rgb = lerp(c.rgb, float3(_MultColor.x, _MultColor.y, _MultColor.z), _MultStrength);
 				c.rgb *= c.a;
+				if (sameSide < 0) {
+					if (_IsSectionA) {
+						c.rgb = 0;
+						c.a = 0;
+					}
+				}
+				else {
+					if (!_IsSectionA) {
+						c.rgb = 0;
+						c.a = 0;
+					}
+				}
 				return c;
 			}
 			ENDCG
