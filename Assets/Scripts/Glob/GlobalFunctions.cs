@@ -187,6 +187,23 @@ public class GlobalFunctions : MonoBehaviour {
         obj.color = endCol;
     }
 
+    public void AdjustColorOverTimeMaterial(Color startCol, Color endCol, float time, Material obj)
+    {
+        StartCoroutine(AdjustColorOverTimeMaterialCo(startCol, endCol, time, obj));
+    }
+
+    //Lerps a passed in spriteRenderer between 2 colors over time
+    IEnumerator AdjustColorOverTimeMaterialCo(Color startCol, Color endCol, float time, Material obj)
+    {
+        for (float t = time; t >= 0; t -= Time.deltaTime)
+        {
+            obj.SetColor("_TintColor", Color.Lerp(endCol, startCol, t / time));
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        obj.SetColor("_TintColor", new Color(1, 1, 1, 0));
+        obj.color = endCol;
+    }
+
     public void AdjustMultColorOverTime(Color col, float strength, float time, Material obj)
     {
         StartCoroutine(AdjustMultColorOverTimeCo(col, strength, time, obj));
@@ -294,6 +311,48 @@ public class GlobalFunctions : MonoBehaviour {
         target.position = Vector3.zero;
         target.eulerAngles = Vector3.zero;
         target.localScale = Vector3.one;
+    }
+
+    //Converts a sprite to a Texture2D
+    public Texture2D SpriteToTexture2D(Sprite sprite)
+    {
+        Texture2D tex = new Texture2D((int)(sprite.rect.width), (int) (sprite.rect.height));
+        Color[] pixels = sprite.texture.GetPixels(  (int)sprite.rect.x,
+                                                    (int)sprite.rect.y,
+                                                    (int)sprite.rect.width,
+                                                    (int)sprite.rect.height);
+        tex.SetPixels(pixels);
+        return tex;
+    }
+
+    //Converts a sprite to another sprite, pixel by pixel
+    public Sprite DuplicateSprite(Sprite sprite)
+    {
+        Texture2D tex = new Texture2D((int)(sprite.rect.width), (int)(sprite.rect.height));
+        Color[] pixels = sprite.texture.GetPixels(  (int)sprite.rect.x,
+                                                    (int)sprite.rect.y,
+                                                    (int)sprite.rect.width,
+                                                    (int)sprite.rect.height);
+        tex.SetPixels(pixels);
+        tex.Apply();
+        Sprite sprite2 = Sprite.Create(tex, new Rect(0, 0, tex.width, tex.height), new Vector2(0.5f, 0.5f), sprite.pixelsPerUnit);
+        return sprite2;
+    }
+
+    //Scale Sprite to match screen size
+    public void ResizeSpriteToScreen(SpriteRenderer sr)
+    {
+        if (sr == null) return;
+
+        transform.localScale = new Vector3(1, 1, 1);
+
+        float width = sr.sprite.bounds.size.x;
+        float height = sr.sprite.bounds.size.y;
+
+        float worldScreenHeight = Camera.main.orthographicSize * 2.0f;
+        float worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
+
+        sr.transform.localScale =  new Vector3(worldScreenWidth / width, worldScreenHeight / height, sr.transform.localScale.z);
     }
 
 }

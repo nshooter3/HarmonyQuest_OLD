@@ -8,6 +8,13 @@ TagManager:
   - Interactable
   - CameraBounds
   - Boundary
+  - Enemy
+  - ExplosionFX
+  - ground
+  - Obstacle
+  - Bullet
+  - HealthBar
+  - BombPickup
   layers:
   - Default
   - TransparentFX
@@ -30,7 +37,7 @@ TagManager:
   - CameraBounds
   - Player
   - EnemyAttack
-  - 
+  - Shatter
   - 
   - 
   - 
@@ -68,6 +75,9 @@ TagManager:
     locked: 0
   - name: BattleUI
     uniqueID: 2567444097
+    locked: 0
+  - name: BattleAboveEverything
+    uniqueID: 1303220685
     locked: 0
   - name: AbovePlayerNPC
     uniqueID: 2113528479
