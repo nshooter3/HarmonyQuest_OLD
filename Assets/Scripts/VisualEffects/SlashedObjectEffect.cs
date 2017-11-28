@@ -7,6 +7,7 @@ public class SlashedObjectEffect : MonoBehaviour {
     public SpriteRenderer SegmentA, SegmentB;
     public MeshRenderer ShatterRenderer;
     public Material shatterMat;
+    public SprayParticles spray;
 
     float slope;
 
@@ -37,7 +38,6 @@ public class SlashedObjectEffect : MonoBehaviour {
     //Used to override current segment color
     public void ChangeSegmentColor(Color col)
     {
-        print("change color");
         SegmentA.material.SetColor("_MultColor", col);
         SegmentB.material.SetColor("_MultColor", col);
     }
@@ -52,6 +52,9 @@ public class SlashedObjectEffect : MonoBehaviour {
             //workaround to prevent division by zero
             slope = 0.001f;
         }
+
+        //Init delayed particle effect
+        spray.InitParticles(obj.transform, slope, 0.05f);
 
         //Init SegmentA
         GlobalFunctions.instance.CopyTranform(SegmentA.transform, obj.transform);
