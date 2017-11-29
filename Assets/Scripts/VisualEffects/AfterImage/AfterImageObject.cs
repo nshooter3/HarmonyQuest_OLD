@@ -13,6 +13,8 @@ public class AfterImageObject : MonoBehaviour {
     //Used to reset parent after shrink command is complete
     public Transform originalParent;
 
+    public Material defaultMat;
+
     Vector3 startScale, endScale;
 
     SpriteRenderer sr;
@@ -35,6 +37,8 @@ public class AfterImageObject : MonoBehaviour {
         active = true;
         sr.enabled = true;
         sr.sprite = trans.GetComponent<SpriteRenderer>().sprite;
+        sr.sortingLayerName = trans.GetComponent<SpriteRenderer>().sortingLayerName;
+        sr.material = trans.GetComponent<SpriteRenderer>().material;
         GlobalFunctions.instance.CopyTranform(transform, trans);
         if (shrink)
         {
@@ -63,6 +67,8 @@ public class AfterImageObject : MonoBehaviour {
         active = true;
         sr.enabled = true;
         sr.sprite = trans.GetComponent<SpriteRenderer>().sprite;
+        sr.sortingLayerName = trans.GetComponent<SpriteRenderer>().sortingLayerName;
+        sr.material = trans.GetComponent<SpriteRenderer>().material;
         GlobalFunctions.instance.CopyTranform(transform, trans);
         transform.parent = trans;
         StartCoroutine(AfterImageDBZEffect(new Color(sr.color.r, sr.color.g, sr.color.b, 0.0f), new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f), fadeTime, target));
@@ -71,6 +77,8 @@ public class AfterImageObject : MonoBehaviour {
     //Reset object after fadeout
     public void ToggleOff()
     {
+        sr.sortingLayerName = "Default";
+        sr.material = defaultMat;
         sr.enabled = false;
         active = false;
         shrink = false;

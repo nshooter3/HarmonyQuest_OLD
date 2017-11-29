@@ -54,7 +54,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 0
   shrink: 0
+  grow: 0
   originalParent: {fileID: 0}
+  defaultMat: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
 --- !u!212 &212541483692930604
 SpriteRenderer:
   m_ObjectHideFlags: 1

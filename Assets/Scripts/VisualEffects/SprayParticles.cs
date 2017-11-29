@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SprayParticles : MonoBehaviour {
 
-    public ParticleSystem particlesA, particlesB;
+    public ParticleSystem particlesA, particlesB, environment;
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +23,7 @@ public class SprayParticles : MonoBehaviour {
     IEnumerator InitParticlesCo(Transform slashedObject, float slope, float delay)
     {
         yield return new WaitForSeconds(delay);
+        environment.Play();
         transform.position = new Vector3(slashedObject.position.x, slashedObject.position.y, transform.position.z);
         transform.eulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * Mathf.Atan(slope));
         particlesA.Play();

@@ -8,6 +8,7 @@ public class SlashedObjectEffect : MonoBehaviour {
     public MeshRenderer ShatterRenderer;
     public Material shatterMat;
     public SprayParticles spray;
+    public ParticleSystem environment;
 
     float slope;
 
@@ -88,15 +89,26 @@ public class SlashedObjectEffect : MonoBehaviour {
             SegmentA.GetComponent<Rigidbody2D>().velocity = new Vector2(1.0f, -1.0f / slope).normalized * breakSpeed;
         }
 
+        //StartCoroutine(AfterImage(1.75f));
         StartCoroutine(DelayedExplosion(ShatterRenderer.GetComponent<Explodable>(), 2.0f));
 
         obj.enabled = false;
     }
 
-    IEnumerator DelayedExplosion(Explodable exp, float delay)
+    IEnumerator AfterImage(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        AfterImagePool.instance.SpawnShrinkingAfterImage(SegmentA.transform, 0.2f);
+        AfterImagePool.instance.SpawnShrinkingAfterImage(SegmentB.transform, 0.2f);
+    }
+
+        IEnumerator DelayedExplosion(Explodable exp, float delay)
     {
         shatterMat.SetColor("_TintColor", new Color(1, 1, 1, 1));
         yield return new WaitForSeconds(delay);
+        AfterImagePool.instance.SpawnGrowingAfterImage(SegmentA.transform, 0.5f);
+        AfterImagePool.instance.SpawnGrowingAfterImage(SegmentB.transform, 0.5f);
+        //explode.transform.position = new Vector3(SegmentA.transform.position.x, SegmentA.transform.position.y, SegmentA.transform.position.z -1);
         exp.explode();
         exp.GetComponent<MeshRenderer>().enabled = false;
         GlobalFunctions.instance.AdjustColorOverTimeMaterial(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), 1.5f, shatterMat);
