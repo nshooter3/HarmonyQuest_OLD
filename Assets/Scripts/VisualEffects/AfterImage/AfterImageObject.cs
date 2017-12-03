@@ -32,7 +32,7 @@ public class AfterImageObject : MonoBehaviour {
 	}
 
     //Start fadeout
-    public void ToggleOn(Transform trans, float fadeTime, bool shrink = false, bool grow = false)
+    public void ToggleOn(Transform trans, float fadeTime, bool shrink = false, bool grow = false, float xOff = 0, float yOff = 0)
     {
         active = true;
         sr.enabled = true;
@@ -40,6 +40,7 @@ public class AfterImageObject : MonoBehaviour {
         sr.sortingLayerName = trans.GetComponent<SpriteRenderer>().sortingLayerName;
         sr.material = trans.GetComponent<SpriteRenderer>().material;
         GlobalFunctions.instance.CopyTranform(transform, trans);
+        transform.position = new Vector3(transform.position.x + xOff, transform.position.y + yOff, transform.position.z);
         if (shrink)
         {
             transform.parent = trans;

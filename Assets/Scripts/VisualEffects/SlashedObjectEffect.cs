@@ -56,9 +56,11 @@ public class SlashedObjectEffect : MonoBehaviour {
         //Init delayed particle effect
         spray.InitParticles(obj.transform, slope, 0.05f);
         spray.InitAbsorbParticles(1.0f);
+        StartCoroutine(RandomAfterImages(1.0f, 0.75f));
+    
 
         //Init SegmentA
-        GlobalFunctions.instance.CopyTranform(SegmentA.transform, obj.transform);
+            GlobalFunctions.instance.CopyTranform(SegmentA.transform, obj.transform);
         SegmentA.transform.position = new Vector3(SegmentA.transform.position.x, SegmentA.transform.position.y, -9.6f);
         SegmentA.sprite = obj.sprite;
         SegmentA.color = obj.color;
@@ -106,7 +108,32 @@ public class SlashedObjectEffect : MonoBehaviour {
         AfterImagePool.instance.SpawnShrinkingAfterImage(SegmentB.transform, 0.2f);
     }
 
-        IEnumerator DelayedExplosion(Explodable exp, float delay)
+    //Spawn random, flickering after images
+    IEnumerator RandomAfterImages(float duration, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        float time = duration;
+        float randomDelay = Random.Range(.1f, .4f);
+        float fadeTime, xOff, yOff;
+
+        for (float t = time; t >= 0; t -= Time.deltaTime)
+        {
+            randomDelay -= Time.deltaTime;
+            if (randomDelay <= 0 && t > 0.2f)
+            {
+                fadeTime = Random.Range(0.1f, 0.05f);
+                xOff = Random.Range(0.3f, -0.3f);
+                yOff = Random.Range(0.3f, -0.3f);
+                AfterImagePool.instance.SpawnAfterImage(SegmentA.transform, fadeTime, xOff, yOff);
+                AfterImagePool.instance.SpawnAfterImage(SegmentB.transform, fadeTime, xOff, yOff);
+                randomDelay = Random.Range(.1f, .2f);
+            }
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
+
+    IEnumerator DelayedExplosion(Explodable exp, float delay)
     {
         shatterMat.SetColor("_TintColor", new Color(1, 1, 1, 1));
         yield return new WaitForSeconds(delay);

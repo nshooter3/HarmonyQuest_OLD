@@ -29,12 +29,12 @@ public class AfterImagePool : MonoBehaviour {
     }
 
     //Attempt to load an after image
-    public void SpawnAfterImage(Transform trans, float fadeTime)
+    public void SpawnAfterImage(Transform trans, float fadeTime, float xOff = 0, float yOff = 0)
     {
         AfterImageObject temp = (AfterImageObject)FindAvailableAfterImage(pool);
         if (temp != null)
         {
-            temp.ToggleOn(trans, fadeTime);
+            temp.ToggleOn(trans, fadeTime, false, false, xOff, yOff);
         }
         else
         {
