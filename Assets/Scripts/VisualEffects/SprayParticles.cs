@@ -2,21 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SprayParticles : MonoBehaviour {
+public class SprayParticles : MonoBehaviour
+{
 
-    public ParticleSystem particlesA, particlesB, environment;
+    public ParticleSystem particlesA, particlesB, environment, absorbA, absorbB;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Use this for initialization
+    void Start()
+    {
 
-    public void InitParticles(Transform slashedObject, float slope, float delay = 0) {
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+
+    public void InitParticles(Transform slashedObject, float slope, float delay = 0)
+    {
         StartCoroutine(InitParticlesCo(slashedObject, slope, delay));
     }
 
@@ -50,5 +54,36 @@ public class SprayParticles : MonoBehaviour {
         }
         particlesA.Stop();
         particlesB.Stop();
+    }
+
+    public void InitAbsorbParticles(float delay)
+    {
+        StartCoroutine(InitAbsorbParticlesCo(delay));
+    }
+
+    IEnumerator InitAbsorbParticlesCo(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        absorbA.Play();
+        absorbB.Play();
+        float time = 0.6f;
+        ParticleSystem.EmissionModule emA = absorbA.emission;
+        ParticleSystem.EmissionModule emB = absorbB.emission;
+        ParticleSystem.ShapeModule shapeA = absorbA.shape;
+        var radiusA = shapeA.radius;
+        ParticleSystem.ShapeModule shapeB = absorbB.shape;
+        var radiusB = shapeB.radius;
+        for (float t = time; t >= 0; t -= Time.deltaTime)
+        {
+            emA.rateOverTime = Mathf.Lerp(500, 100, t / time);
+            emB.rateOverTime = Mathf.Lerp(500, 100, t / time);
+            radiusA = Mathf.Lerp(5.0f, 1.0f, t / time);
+            shapeA.radius = radiusA;
+            radiusB = Mathf.Lerp(5.0f, 1.0f, t / time);
+            shapeB.radius = radiusB;
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        absorbA.Stop();
+        absorbB.Stop();
     }
 }

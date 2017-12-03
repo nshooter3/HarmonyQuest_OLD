@@ -8,7 +8,6 @@ public class SlashedObjectEffect : MonoBehaviour {
     public MeshRenderer ShatterRenderer;
     public Material shatterMat;
     public SprayParticles spray;
-    public ParticleSystem environment;
 
     float slope;
 
@@ -56,6 +55,7 @@ public class SlashedObjectEffect : MonoBehaviour {
 
         //Init delayed particle effect
         spray.InitParticles(obj.transform, slope, 0.05f);
+        spray.InitAbsorbParticles(1.0f);
 
         //Init SegmentA
         GlobalFunctions.instance.CopyTranform(SegmentA.transform, obj.transform);
@@ -65,6 +65,8 @@ public class SlashedObjectEffect : MonoBehaviour {
         SegmentA.material.SetColor("_MultColor", col);
         SegmentA.material.SetFloat("_MultStrength", colStrength);
         SegmentA.material.SetFloat("_Slope", slope);
+        spray.absorbA.transform.parent = SegmentA.transform;
+        spray.absorbA.transform.localPosition = new Vector3(0, 0, spray.absorbA.transform.localPosition.z);
         //StartCoroutine(DelayedExplosion(SegmentA.GetComponent<Explodable>(), 2.0f));
 
         //Init SegmentB
@@ -75,18 +77,20 @@ public class SlashedObjectEffect : MonoBehaviour {
         SegmentB.material.SetColor("_MultColor", col);
         SegmentB.material.SetFloat("_MultStrength", colStrength);
         SegmentB.material.SetFloat("_Slope", slope);
+        spray.absorbB.transform.parent = SegmentB.transform;
+        spray.absorbB.transform.localPosition = new Vector3(0, 0, spray.absorbA.transform.localPosition.z);
         //StartCoroutine(DelayedExplosion(SegmentB.GetComponent<Explodable>(), 2.0f));
 
         //Init segment movement
         if (slope <= 0)
         {
-            SegmentB.GetComponent<Rigidbody2D>().velocity = new Vector2(1.0f, -1.0f / slope).normalized * breakSpeed;
             SegmentA.GetComponent<Rigidbody2D>().velocity = new Vector2(1.0f, -1.0f / slope).normalized * -breakSpeed;
+            SegmentB.GetComponent<Rigidbody2D>().velocity = new Vector2(1.0f, -1.0f / slope).normalized * breakSpeed;
         }
         else
         {
-            SegmentB.GetComponent<Rigidbody2D>().velocity = new Vector2(1.0f, -1.0f / slope).normalized * -breakSpeed;
             SegmentA.GetComponent<Rigidbody2D>().velocity = new Vector2(1.0f, -1.0f / slope).normalized * breakSpeed;
+            SegmentB.GetComponent<Rigidbody2D>().velocity = new Vector2(1.0f, -1.0f / slope).normalized * -breakSpeed;
         }
 
         //StartCoroutine(AfterImage(1.75f));
