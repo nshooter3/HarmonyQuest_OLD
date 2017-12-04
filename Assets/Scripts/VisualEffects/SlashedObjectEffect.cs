@@ -151,6 +151,6 @@ public class SlashedObjectEffect : MonoBehaviour
         explodeB.Play();
         exp.explode();
         exp.GetComponent<MeshRenderer>().enabled = false;
-        GlobalFunctions.instance.AdjustColorOverTimeMaterial(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), 1.5f, shatterMat);
+        GlobalFunctions.instance.AdjustColorOverTimeMaterial(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), 1.25f, shatterMat);
     }
 }
