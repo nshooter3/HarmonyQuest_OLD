@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlashedObjectEffect : MonoBehaviour {
+public class SlashedObjectEffect : MonoBehaviour
+{
 
     public SpriteRenderer SegmentA, SegmentB;
     public MeshRenderer ShatterRenderer;
@@ -23,17 +24,20 @@ public class SlashedObjectEffect : MonoBehaviour {
             Destroy(gameObject);
     }
 
-	// Use this for initialization
-	void Start () {
-        
+    // Use this for initialization
+    void Start()
+    {
+
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if (Input.GetKeyDown(KeyCode.Space)){
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
             //InitSlashObject(test, Color.white, 1);
         }
-	}
+    }
 
     //Used to override current segment color
     public void ChangeSegmentColor(Color col)
@@ -57,10 +61,10 @@ public class SlashedObjectEffect : MonoBehaviour {
         spray.InitParticles(obj.transform, slope, 0.05f);
         spray.InitAbsorbParticles(1.0f);
         StartCoroutine(RandomAfterImages(1.0f, 0.75f));
-    
+
 
         //Init SegmentA
-            GlobalFunctions.instance.CopyTranform(SegmentA.transform, obj.transform);
+        GlobalFunctions.instance.CopyTranform(SegmentA.transform, obj.transform);
         SegmentA.transform.position = new Vector3(SegmentA.transform.position.x, SegmentA.transform.position.y, -9.6f);
         SegmentA.sprite = obj.sprite;
         SegmentA.color = obj.color;

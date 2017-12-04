@@ -5,7 +5,7 @@ using UnityEngine;
 public class SprayParticles : MonoBehaviour
 {
 
-    public ParticleSystem particlesA, particlesB, environment, absorbA, absorbB;
+    public ParticleSystem particlesA, particlesB, environment, absorbA, absorbB, absorbA2, absorbB2;
 
     // Use this for initialization
     void Start()
@@ -66,6 +66,8 @@ public class SprayParticles : MonoBehaviour
         yield return new WaitForSeconds(delay);
         absorbA.Play();
         absorbB.Play();
+        absorbA2.Play();
+        absorbB2.Play();
         float time = 0.6f;
         ParticleSystem.EmissionModule emA = absorbA.emission;
         ParticleSystem.EmissionModule emB = absorbB.emission;
@@ -85,5 +87,9 @@ public class SprayParticles : MonoBehaviour
         }
         absorbA.Stop();
         absorbB.Stop();
+        absorbA2.Stop();
+        absorbB2.Stop();
+        absorbA2.Clear();
+        absorbB2.Clear();
     }
 }
