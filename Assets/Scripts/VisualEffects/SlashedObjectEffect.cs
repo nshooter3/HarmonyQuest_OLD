@@ -9,6 +9,7 @@ public class SlashedObjectEffect : MonoBehaviour
     public MeshRenderer ShatterRenderer;
     public Material shatterMat;
     public SprayParticles spray;
+    public ParticleSystem explodeA, explodeB;
 
     float slope;
 
@@ -144,6 +145,10 @@ public class SlashedObjectEffect : MonoBehaviour
         AfterImagePool.instance.SpawnGrowingAfterImage(SegmentA.transform, 0.5f);
         AfterImagePool.instance.SpawnGrowingAfterImage(SegmentB.transform, 0.5f);
         //explode.transform.position = new Vector3(SegmentA.transform.position.x, SegmentA.transform.position.y, SegmentA.transform.position.z -1);
+        explodeA.transform.position = SegmentA.transform.position;
+        explodeA.Play();
+        explodeB.transform.position = SegmentB.transform.position;
+        explodeB.Play();
         exp.explode();
         exp.GetComponent<MeshRenderer>().enabled = false;
         GlobalFunctions.instance.AdjustColorOverTimeMaterial(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), 1.5f, shatterMat);
