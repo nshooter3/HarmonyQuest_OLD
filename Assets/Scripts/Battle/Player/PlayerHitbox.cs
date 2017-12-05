@@ -85,7 +85,7 @@ public class PlayerHitbox : MonoBehaviour {
                 if (shieldActive)
                 {
                     BattleUIHandler.instance.DecreaseStamina(damage * 2f);
-                    BattleCam.instance.CamShake();
+                    BattleCam.instance.GenericCamShake();
                     //Prevent shield hit particle from firing twice upon breaking
                     if (BattleUIHandler.instance.stamina > 0)
                     {
@@ -97,7 +97,7 @@ public class PlayerHitbox : MonoBehaviour {
                 else
                 {
                     BattleUIHandler.instance.DecreaseHealth(damage);
-                    BattleCam.instance.CamShake();
+                    BattleCam.instance.GenericCamShake();
                     curCooldown = maxCooldown;
                     flashTimer = maxCooldown / flashSpeed;
                     PlayerMovementBattle.instance.ren.enabled = false;

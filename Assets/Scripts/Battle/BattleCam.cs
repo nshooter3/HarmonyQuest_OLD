@@ -6,8 +6,6 @@ public class BattleCam : MonoBehaviour {
 
     public static BattleCam instance;
 
-    float shakeTimer, maxShakeTimer = 0.1f;
-
     Vector3 startPos;
 
     void Awake()
@@ -28,25 +26,58 @@ public class BattleCam : MonoBehaviour {
 
     }
 
-    public void CamShake(float mag) {
-        StartCoroutine(Shake(mag));
-    }
-
-    public void CamShake()
+    //Single camera shake
+    public void GenericCamShake()
     {
-        CamShake(Random.Range(0.3f, 0.4f));
+        StartCoroutine(Shake(Random.Range(0.3f, 0.4f), Random.Range(1f, 1.5f)));
     }
 
-    IEnumerator Shake(float mag)
+    //Single camera shake with parameters
+    public void SpecificCamShake(float mag, float shakeTimer) {
+        StartCoroutine(Shake(mag, shakeTimer));
+    }
+
+    IEnumerator Shake(float mag, float shakeTimer)
     {
         Vector3 tempDir = new Vector3(Random.Range(-1f, 1f) * mag, Random.Range(-1f, 1f) * mag, startPos.z);
-        shakeTimer = maxShakeTimer* Random.Range(1f, 1.5f);
-        for (var f = maxShakeTimer; f >= 0; f -= Time.deltaTime)
+        for (var f = shakeTimer; f >= 0; f -= Time.deltaTime)
         {
-            gameObject.transform.localPosition = Vector3.Lerp(startPos, tempDir, f / maxShakeTimer);
+            gameObject.transform.localPosition = Vector3.Lerp(startPos, tempDir, f / shakeTimer);
             yield return new WaitForSeconds(Time.deltaTime);
         }
         gameObject.transform.localPosition = startPos;
-        yield return null;
+    }
+
+    //Continuous camera shake with parameter ranges
+    public void RepeatingCameraShake(float duration, float upperMag = 0.4f, float lowerMag = 0.2f, float upperShakeTimer = 0.02f, float lowerShakeTimer = 0.08f)
+    {
+        StartCoroutine(RepeatingCameraShakeCo(duration, upperMag, lowerMag, upperShakeTimer, lowerShakeTimer));
+    }
+
+    IEnumerator RepeatingCameraShakeCo(float duration, float upperMag, float lowerMag, float upperShakeTimer, float lowerShakeTimer)
+    {
+        float shakeTimer, mag;
+        while (duration > 0)
+        {
+            if (duration >= lowerShakeTimer)
+            {
+                if (duration >= upperShakeTimer)
+                {
+                    shakeTimer = Random.Range(upperShakeTimer, lowerShakeTimer);
+                }
+                else
+                {
+                    shakeTimer = duration;
+                }
+                mag = Random.Range(upperMag, lowerMag);
+                StartCoroutine(Shake(mag, shakeTimer));
+                yield return new WaitForSeconds(shakeTimer);
+                duration -= shakeTimer;
+            }
+            else
+            {
+                duration = -1;
+            }
+        }
     }
 }

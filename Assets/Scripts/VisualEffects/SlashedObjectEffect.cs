@@ -150,6 +150,7 @@ public class SlashedObjectEffect : MonoBehaviour
         explodeB.transform.position = SegmentB.transform.position;
         explodeB.Play();
         exp.explode();
+        BattleCam.instance.RepeatingCameraShake(1.0f);
         exp.GetComponent<MeshRenderer>().enabled = false;
         GlobalFunctions.instance.AdjustColorOverTimeMaterial(new Color(1, 1, 1, 1), new Color(1, 1, 1, 0), 1.25f, shatterMat);
     }

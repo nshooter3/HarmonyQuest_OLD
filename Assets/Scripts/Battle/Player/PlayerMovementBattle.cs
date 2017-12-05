@@ -148,7 +148,7 @@ public class PlayerMovementBattle : MonoBehaviour
                         BattleUIHandler.instance.stamina = -50f;
                         shieldBreak.Play();
                         shieldHit.Play();
-                        BattleCam.instance.CamShake();
+                        BattleCam.instance.GenericCamShake();
                         StartCoroutine(BattleUIHandler.instance.AlphaFlash(BattleUIHandler.instance.staminaFlash.GetComponent<SpriteRenderer>()));
                         PlayerShield.instance.ToggleActive(false);
                         specialRegen = maxspecialRegen;
