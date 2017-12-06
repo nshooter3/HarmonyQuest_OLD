@@ -29,7 +29,7 @@ public class ScreenWhiteout : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            InitSlashSequence();
+            //InitSlashSequence();
         }
     }
 
