@@ -99,9 +99,11 @@ public class SlashedObjectEffect : MonoBehaviour
 
         //StartCoroutine(AfterImage(1.75f));
         StartCoroutine(DelayedExplosion(ShatterRenderer.GetComponent<Explodable>(), 2.0f));
-        BattleCam.instance.ZoomCamera(4.75f, 1f, test.transform.position, 0.0025f);
-        GlobalFunctions.instance.DelayedFunction(() => BattleCam.instance.ZoomCamera(3.75f, 0.1f, test.transform.position, 0.0025f), 1.9f);
+        BattleCam.instance.ZoomCamera(4.25f, 1.85f, test.transform.position, 0.0025f);
+        GlobalFunctions.instance.DelayedFunction(() => BattleCam.instance.ZoomCamera(3.25f, 0.1f, test.transform.position, 0.0025f), 1.9f);
+        GlobalFunctions.instance.DelayedFunction(() => BattleCam.instance.ZoomCamera(8f, 0.2f), 2.1f);
         BattleCam.instance.RotateCamera(new Vector3(0, 0, 1), 5, 2f);
+        GlobalFunctions.instance.DelayedFunction(() => BattleCam.instance.RotateCamera(new Vector3(0, 0, -1), 45, 0.2f), 2.1f);
 
         obj.enabled = false;
     }

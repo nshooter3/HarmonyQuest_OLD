@@ -77,13 +77,19 @@ public class DynamicCamera : MonoBehaviour {
         StartCoroutine(ZoomCameraCo(newSize, duration, target, targetSpeed));
     }
 
+    //Zooms in/out camera over time
+    public void ZoomCamera(float newSize, float duration)
+    {
+        StartCoroutine(ZoomCameraCo(newSize, duration, BattleCam.instance.transform.position, 0));
+    }
+
     IEnumerator ZoomCameraCo(float newSize, float duration, Vector2 target, float targetSpeed = 0)
     {
         float startSize = cam.orthographicSize;
         for (var f = duration; f >= 0; f -= Time.deltaTime)
         {
             cam.orthographicSize = Mathf.Lerp(newSize, startSize, f / duration);
-            if (target != null)
+            if (targetSpeed != 0)
             {
                 cam.transform.position = Vector3.Lerp(transform.position, new Vector3(target.x, target.y, transform.position.z), targetSpeed);
             }
