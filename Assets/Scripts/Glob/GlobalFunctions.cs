@@ -355,4 +355,15 @@ public class GlobalFunctions : MonoBehaviour {
         sr.transform.localScale =  new Vector3(worldScreenWidth / width, worldScreenHeight / height, sr.transform.localScale.z);
     }
 
+    //Wrapper for calling a function after a specific delay
+    public void DelayedFunction(Action action, float delay)
+    {
+        StartCoroutine(DelayedFunctionCo(action, delay));
+    }
+
+    public IEnumerator DelayedFunctionCo(Action action, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        action();
+    }
 }

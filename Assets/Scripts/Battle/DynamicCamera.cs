@@ -45,6 +45,7 @@ public class DynamicCamera : MonoBehaviour {
 
     IEnumerator RepeatingCameraShakeCo(float duration, float upperMag, float lowerMag, float upperShakeTimer, float lowerShakeTimer)
     {
+        startPos = transform.position;
         float shakeTimer, mag;
         while (duration > 0)
         {

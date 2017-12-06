@@ -34,10 +34,7 @@ public class SlashedObjectEffect : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //InitSlashObject(test, Color.white, 1);
-        }
+
     }
 
     //Used to override current segment color
@@ -102,6 +99,9 @@ public class SlashedObjectEffect : MonoBehaviour
 
         //StartCoroutine(AfterImage(1.75f));
         StartCoroutine(DelayedExplosion(ShatterRenderer.GetComponent<Explodable>(), 2.0f));
+        BattleCam.instance.ZoomCamera(4.75f, 1f, test.transform.position, 0.0025f);
+        GlobalFunctions.instance.DelayedFunction(() => BattleCam.instance.ZoomCamera(3.75f, 0.1f, test.transform.position, 0.0025f), 1.9f);
+        BattleCam.instance.RotateCamera(new Vector3(0, 0, 1), 5, 2f);
 
         obj.enabled = false;
     }
