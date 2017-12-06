@@ -71,34 +71,42 @@ public class DynamicCamera : MonoBehaviour {
     }
 
     //Zooms in/out camera over time
-    public void ZoomCamera(float newSize, float duration)
+    public void ZoomCamera(float newSize, float duration, Vector3 target, float targetSpeed = 0)
     {
-        StartCoroutine(ZoomCameraCo(newSize, duration));
+        StartCoroutine(ZoomCameraCo(newSize, duration, target, targetSpeed));
     }
 
-    IEnumerator ZoomCameraCo(float newSize, float duration)
+    IEnumerator ZoomCameraCo(float newSize, float duration, Vector2 target, float targetSpeed = 0)
     {
         float startSize = cam.orthographicSize;
         for (var f = duration; f >= 0; f -= Time.deltaTime)
         {
             cam.orthographicSize = Mathf.Lerp(newSize, startSize, f / duration);
+            if (target != null)
+            {
+                cam.transform.position = Vector3.Lerp(transform.position, new Vector3(target.x, target.y, transform.position.z), targetSpeed);
+            }
             yield return new WaitForSeconds(Time.deltaTime);
         }
         cam.orthographicSize = newSize;
     }
 
     //Zooms in/out camera over time smoothly
-    public void ZoomCameraSmooth(float newSize, float duration)
+    public void ZoomCameraSmooth(float newSize, float duration, Vector2 target, float targetSpeed = 0)
     {
-        StartCoroutine(ZoomCameraSmoothCo(newSize, duration));
+        StartCoroutine(ZoomCameraSmoothCo(newSize, duration, target, targetSpeed));
     }
 
-    IEnumerator ZoomCameraSmoothCo(float newSize, float duration)
+    IEnumerator ZoomCameraSmoothCo(float newSize, float duration, Vector2 target, float targetSpeed = 0)
     {
         float startSize = cam.orthographicSize;
         for (var f = duration; f >= 0; f -= Time.deltaTime)
         {
             cam.orthographicSize = Mathf.SmoothStep(newSize, startSize, f / duration);
+            if (target != null)
+            {
+                cam.transform.position = Vector3.Lerp(transform.position, new Vector3(target.x, target.y, transform.position.z), targetSpeed);
+            }
             yield return new WaitForSeconds(Time.deltaTime);
         }
         cam.orthographicSize = newSize;

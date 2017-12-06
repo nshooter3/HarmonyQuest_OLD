@@ -7,6 +7,8 @@ public class BattleCam : DynamicCamera
 
     public static BattleCam instance;
 
+    public GameObject target;
+
     void Awake()
     {
         if (instance == null)
@@ -19,7 +21,7 @@ public class BattleCam : DynamicCamera
     void Update() {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //ZoomCameraSmooth(3f, 1f);
+            //ZoomCamera(4.5f, 2f, target.transform.position, 0.001f);
         }
     }
 }
