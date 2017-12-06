@@ -111,4 +111,23 @@ public class DynamicCamera : MonoBehaviour {
         }
         cam.orthographicSize = newSize;
     }
+
+    public void RotateCamera(Vector3 direction, float rotSpeed, float duration, float adjustSpeed = 0)
+    {
+        StartCoroutine(RotateCameraCo(direction, rotSpeed, duration, adjustSpeed = 0));
+    }
+
+    //Rotates camera towards a direction over time for a duration. Optional adjustSpeed parameter can be used to increase/decrease rotspeed by a value every frame
+    IEnumerator RotateCameraCo(Vector3 direction, float rotSpeed, float duration, float adjustSpeed = 0)
+    {
+        for (float t = duration; t >= 0; t -= Time.deltaTime)
+        {
+            cam.transform.Rotate(direction * Time.deltaTime * rotSpeed);
+            if (adjustSpeed != 0)
+            {
+                rotSpeed += adjustSpeed * Time.deltaTime;
+            }
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+    }
 }

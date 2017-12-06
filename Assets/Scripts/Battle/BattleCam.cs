@@ -22,6 +22,7 @@ public class BattleCam : DynamicCamera
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //ZoomCamera(4.5f, 2f, target.transform.position, 0.001f);
+            //RotateCamera(new Vector3(0, 0, 1), 5, 2f);
         }
     }
 }
