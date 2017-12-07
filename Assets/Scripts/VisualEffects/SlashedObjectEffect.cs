@@ -11,6 +11,8 @@ public class SlashedObjectEffect : MonoBehaviour
     public SprayParticles spray;
     public ParticleSystem explodeA, explodeB;
 
+    private AudioSource sfx;
+
     float slope;
 
     public SpriteRenderer test;
@@ -28,7 +30,7 @@ public class SlashedObjectEffect : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        sfx = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -104,6 +106,11 @@ public class SlashedObjectEffect : MonoBehaviour
         GlobalFunctions.instance.DelayedFunction(() => BattleCam.instance.ZoomCamera(8f, 0.2f), 2.1f);
         BattleCam.instance.RotateCamera(new Vector3(0, 0, 1), 5, 2f);
         GlobalFunctions.instance.DelayedFunction(() => BattleCam.instance.RotateCamera(new Vector3(0, 0, -1), 45, 0.2f), 2.1f);
+
+        if (sfx != null)
+        {
+            sfx.Play();
+        }
 
         obj.enabled = false;
     }
