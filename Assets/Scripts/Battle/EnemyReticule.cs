@@ -14,7 +14,7 @@ public class EnemyReticule : MonoBehaviour {
     void Start () {
         sr = GetComponent<SpriteRenderer>();
         initScale = Vector3.one;
-        StartTracking(PlayerMovementBattle.instance.transform, 0.1f, 2);
+        //StartTracking(PlayerMovementBattle.instance.transform, 0.1f, 2);
     }
 	
 	// Update is called once per frame
