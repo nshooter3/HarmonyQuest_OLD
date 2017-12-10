@@ -127,6 +127,10 @@ public class DynamicText : MonoBehaviour {
     IEnumerator GoEffect()
     {
         yield return new WaitForSeconds(delay);
+        if (GetComponent<ParticleSystem>() != null)
+        {
+            GetComponent<ParticleSystem>().Play();
+        }
         foreach (Text t in text)
         {
             GlobalFunctions.instance.FadeInText(t.color, duration * 0.1f, t);
