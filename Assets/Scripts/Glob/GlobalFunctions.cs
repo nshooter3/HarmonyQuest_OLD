@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 public class GlobalFunctions : MonoBehaviour {
 
@@ -154,6 +155,73 @@ public class GlobalFunctions : MonoBehaviour {
         obj.transform.position = endPos;
     }
 
+    public void AdjustPositionOverTimeTextMesh(Vector3 startPos, Vector3 endPos, float time, Text obj)
+    {
+        StartCoroutine(AdjustPositionOverTimeTextCo(startPos, endPos, time, obj));
+    }
+
+    //Lerps a passed in transform between 2 positions over time
+    IEnumerator AdjustPositionOverTimeTextCo(Vector3 startPos, Vector3 endPos, float time, Text obj)
+    {
+        for (float t = time; t >= 0; t -= Time.deltaTime)
+        {
+            obj.rectTransform.anchoredPosition = Vector3.Lerp(endPos, startPos, t / time);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        obj.transform.position = endPos;
+    }
+
+    public void AdjustPositionOverTimeSmoothText(Vector3 startPos, Vector3 endPos, float time, Text obj)
+    {
+        StartCoroutine(AdjustPositionOverTimeSmoothTextCo(startPos, endPos, time, obj));
+    }
+
+    //Lerps a passed in transform between 2 positions over time smoothly
+    IEnumerator AdjustPositionOverTimeSmoothTextCo(Vector3 startPos, Vector3 endPos, float time, Text obj)
+    {
+        float t = 0;
+        while (t <= 1.0)
+        {
+            t += Time.deltaTime / time;
+            obj.rectTransform.anchoredPosition = Vector3.Lerp(startPos, endPos, Mathf.SmoothStep(0.0f, 1.0f, t));
+            yield return new WaitForSeconds(0);
+        }
+    }
+
+    public void AdjustScaleOverTimeSmoothText(Vector3 startScale, Vector3 endScale, float time, Text obj)
+    {
+        StartCoroutine(AdjustScaleOverTimeSmoothTextCo(startScale, endScale, time, obj));
+    }
+
+    //Lerps a passed in transform between 2 positions over time smoothly
+    IEnumerator AdjustScaleOverTimeSmoothTextCo(Vector3 startScale, Vector3 endScale, float time, Text obj)
+    {
+        float t = 0;
+        while (t <= 1.0)
+        {
+            t += Time.deltaTime / time;
+            obj.rectTransform.localScale = Vector3.Lerp(startScale, endScale, Mathf.SmoothStep(0.0f, 1.0f, t));
+            yield return new WaitForSeconds(0);
+        }
+    }
+
+    public void AdjustRotOverTimeSmoothText(Vector3 startRot, Vector3 endRot, float time, Text obj)
+    {
+        StartCoroutine(AdjustRotOverTimeSmoothTextCo(startRot, endRot, time, obj));
+    }
+
+    //Lerps a passed in transform between 2 positions over time smoothly
+    IEnumerator AdjustRotOverTimeSmoothTextCo(Vector3 startRot, Vector3 endRot, float time, Text obj)
+    {
+        float t = 0;
+        while (t <= 1.0)
+        {
+            t += Time.deltaTime / time;
+            obj.rectTransform.eulerAngles = Vector3.Lerp(startRot, endRot, Mathf.SmoothStep(0.0f, 1.0f, t));
+            yield return new WaitForSeconds(0);
+        }
+    }
+
     public void AdjustPositionOverTimeSmooth(Vector3 startPos, Vector3 endPos, float time, Transform obj)
     {
         StartCoroutine(AdjustPositionOverTimeSmoothCo(startPos, endPos, time, obj));
@@ -229,6 +297,42 @@ public class GlobalFunctions : MonoBehaviour {
     //Lerps a passed in textMesh between 2 colors over time
     IEnumerator AdjustColorOverTimeTextMeshCo(Color startCol, Color endCol, float time, TextMesh obj)
     {
+        for (float t = time; t >= 0; t -= Time.deltaTime)
+        {
+            obj.color = Color.Lerp(endCol, startCol, t / time);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        obj.color = endCol;
+    }
+
+    public void FadeInText(Color col, float time, Text obj)
+    {
+        StartCoroutine(FadeInTextCo(col, time, obj));
+    }
+
+    //Lerps a passed in textMesh between 2 colors over time
+    IEnumerator FadeInTextCo(Color col, float time, Text obj)
+    {
+        Color startCol = new Color(col.r, col.g, col.b, 0);
+        Color endCol = new Color(col.r, col.g, col.b, 1);
+        for (float t = time; t >= 0; t -= Time.deltaTime)
+        {
+            obj.color = Color.Lerp(endCol, startCol, t / time);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        obj.color = endCol;
+    }
+
+    public void FadeOutText(Color col, float time, Text obj)
+    {
+        StartCoroutine(FadeOutTextCo(col, time, obj));
+    }
+
+    //Lerps a passed in textMesh between 2 colors over time
+    IEnumerator FadeOutTextCo(Color col, float time, Text obj)
+    {
+        Color startCol = new Color(col.r, col.g, col.b, 1);
+        Color endCol = new Color(col.r, col.g, col.b, 0);
         for (float t = time; t >= 0; t -= Time.deltaTime)
         {
             obj.color = Color.Lerp(endCol, startCol, t / time);
@@ -361,9 +465,42 @@ public class GlobalFunctions : MonoBehaviour {
         StartCoroutine(DelayedFunctionCo(action, delay));
     }
 
-    public IEnumerator DelayedFunctionCo(Action action, float delay)
+    IEnumerator DelayedFunctionCo(Action action, float delay)
     {
         yield return new WaitForSeconds(delay);
         action();
+    }
+
+    //Return color with maxed alpha
+    public Color ColorMaxAlpha(Color col)
+    {
+        return new Color(col.r, col.g, col.b, 1);
+    }
+
+    //Return color with min alpha
+    public Color ColorMinAlpha(Color col)
+    {
+        return new Color(col.r, col.g, col.b, 0);
+    }
+
+    public void RepeatingFunction(Action action, float delay, float duration)
+    {
+        StartCoroutine(RepeatingFunctionCo(action, delay, duration));
+    }
+
+    //Fires a function repeatedly at interval delay, until timer duration runs out
+    IEnumerator RepeatingFunctionCo(Action action, float delay, float duration)
+    {
+        float d = delay;
+        for (float i = duration; i > 0; i -= Time.deltaTime)
+        {
+            d -= Time.deltaTime;
+            if (d <= 0)
+            {
+                d = delay;
+                action();
+            }
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
     }
 }
