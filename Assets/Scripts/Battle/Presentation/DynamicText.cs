@@ -128,7 +128,7 @@ public class DynamicText : MonoBehaviour {
     IEnumerator GoEffect()
     {
         yield return new WaitForSeconds(delay);
-        ScreenWhiteout.instance.ScreenFlash(new Color(0, 0, 0, 0.5f), 0.25f);
+        ScreenFlash.instance.Flash(new Color(0, 0, 0, 0.5f), 0.25f);
         foreach (Text t in text)
         {
             GlobalFunctions.instance.FadeInText(t.color, duration * 0.1f, t);
