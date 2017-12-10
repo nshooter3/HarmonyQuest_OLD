@@ -483,6 +483,12 @@ public class GlobalFunctions : MonoBehaviour {
         return new Color(col.r, col.g, col.b, 0);
     }
 
+    //Return color with passed in alpha
+    public Color ColorChangeAlpha(Color col, float a)
+    {
+        return new Color(col.r, col.g, col.b, a);
+    }
+
     public void RepeatingFunction(Action action, float delay, float duration)
     {
         StartCoroutine(RepeatingFunctionCo(action, delay, duration));

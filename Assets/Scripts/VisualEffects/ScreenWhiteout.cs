@@ -8,6 +8,8 @@ public class ScreenWhiteout : MonoBehaviour
     public GameObject slashedObject;
     SpriteRenderer sr;
 
+    bool slashActive = false;
+
     public static ScreenWhiteout instance;
 
     void Awake()
@@ -36,7 +38,10 @@ public class ScreenWhiteout : MonoBehaviour
     //Start post battle slash sequence
     public void InitSlashSequence()
     {
+        slashActive = true;
+        StopCoroutine("ScreenFlashCo");
         sr.enabled = true;
+        sr.color = Color.white;
         sr.material.SetColor("_MultColor", Color.black);
         SlashedObjectEffect.instance.InitSlashObject(slashedObject.GetComponent<SpriteRenderer>(), Color.white, 1);
         StartCoroutine(DelayedColorChangeCo(Color.white, Color.black, 0.05f));
@@ -58,5 +63,32 @@ public class ScreenWhiteout : MonoBehaviour
         yield return new WaitForSeconds(delay);
         sr.material.SetColor("_MultColor", srCol);
         SlashedObjectEffect.instance.ChangeSegmentColor(slashedCol);
+    }
+
+    public void ScreenFlash(Color srCol, float time)
+    {
+        if (!slashActive)
+        {
+            StartCoroutine(ScreenFlashCo(srCol, time));
+        }
+    }
+
+    IEnumerator ScreenFlashCo(Color srCol, float time)
+    {
+        sr.enabled = true;
+        sr.material.SetColor("_MultColor", Color.white);
+        for (float t = time; t >= 0; t -= Time.deltaTime)
+        {
+            if (!slashActive)
+            {
+                sr.color = Color.Lerp(GlobalFunctions.instance.ColorMinAlpha(srCol), srCol, t / time);
+                yield return new WaitForSeconds(Time.deltaTime);
+            }
+        }
+        if (!slashActive)
+        {
+            sr.enabled = false;
+            sr.color = GlobalFunctions.instance.ColorMaxAlpha(srCol);
+        }
     }
 }
