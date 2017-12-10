@@ -118,8 +118,8 @@ public class DynamicText : MonoBehaviour {
         yield return new WaitForSeconds(delay);
         foreach (Text t in text)
         {
-            GlobalFunctions.instance.FadeInText(t.color, duration * 0.25f, t);
-            GlobalFunctions.instance.DelayedFunction(() => GlobalFunctions.instance.FadeOutText(t.color, duration * 0.25f, t), duration * 0.75f);
+            GlobalFunctions.instance.FadeInText(new Color(t.color.r, t.color.g, t.color.b, 1), duration * 0.25f, t);
+            GlobalFunctions.instance.DelayedFunction(() => GlobalFunctions.instance.FadeOutText(new Color(t.color.r, t.color.g, t.color.b, 1), duration * 0.25f, t), duration * 0.75f);
         }
         yield return new WaitForSeconds(duration);
         isComplete = true;
@@ -128,7 +128,8 @@ public class DynamicText : MonoBehaviour {
     IEnumerator GoEffect()
     {
         yield return new WaitForSeconds(delay);
-        ScreenFlash.instance.Flash(new Color(0, 0, 0, 0.5f), 0.25f);
+        //ScreenFlash.instance.Flash(new Color(0, 0, 0, 0.5f), 0.25f);
+        GlobalFunctions.instance.DelayedFunction(() => BattleScreenDimmer.instance.FadeOut(0.5f), duration/1.5f);
         foreach (Text t in text)
         {
             GlobalFunctions.instance.FadeInText(t.color, duration * 0.1f, t);

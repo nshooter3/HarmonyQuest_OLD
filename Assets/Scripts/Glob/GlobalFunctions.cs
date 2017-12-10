@@ -314,7 +314,7 @@ public class GlobalFunctions : MonoBehaviour {
     IEnumerator FadeInTextCo(Color col, float time, Text obj)
     {
         Color startCol = new Color(col.r, col.g, col.b, 0);
-        Color endCol = new Color(col.r, col.g, col.b, 1);
+        Color endCol = new Color(col.r, col.g, col.b, col.a);
         for (float t = time; t >= 0; t -= Time.deltaTime)
         {
             obj.color = Color.Lerp(endCol, startCol, t / time);
@@ -331,7 +331,43 @@ public class GlobalFunctions : MonoBehaviour {
     //Lerps a passed in textMesh between 2 colors over time
     IEnumerator FadeOutTextCo(Color col, float time, Text obj)
     {
-        Color startCol = new Color(col.r, col.g, col.b, 1);
+        Color startCol = new Color(col.r, col.g, col.b, col.a);
+        Color endCol = new Color(col.r, col.g, col.b, 0);
+        for (float t = time; t >= 0; t -= Time.deltaTime)
+        {
+            obj.color = Color.Lerp(endCol, startCol, t / time);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        obj.color = endCol;
+    }
+
+    public void FadeIn(Color col, float time, SpriteRenderer obj)
+    {
+        StartCoroutine(FadeInCo(col, time, obj));
+    }
+
+    //Lerps a passed in textMesh between 2 colors over time
+    IEnumerator FadeInCo(Color col, float time, SpriteRenderer obj)
+    {
+        Color startCol = new Color(col.r, col.g, col.b, 0);
+        Color endCol = new Color(col.r, col.g, col.b, col.a);
+        for (float t = time; t >= 0; t -= Time.deltaTime)
+        {
+            obj.color = Color.Lerp(endCol, startCol, t / time);
+            yield return new WaitForSeconds(Time.deltaTime);
+        }
+        obj.color = endCol;
+    }
+
+    public void FadeOut(Color col, float time, SpriteRenderer obj)
+    {
+        StartCoroutine(FadeOutCo(col, time, obj));
+    }
+
+    //Lerps a passed in textMesh between 2 colors over time
+    IEnumerator FadeOutCo(Color col, float time, SpriteRenderer obj)
+    {
+        Color startCol = new Color(col.r, col.g, col.b, col.a);
         Color endCol = new Color(col.r, col.g, col.b, 0);
         for (float t = time; t >= 0; t -= Time.deltaTime)
         {
