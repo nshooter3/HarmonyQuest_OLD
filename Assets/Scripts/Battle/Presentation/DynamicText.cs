@@ -22,7 +22,8 @@ public class DynamicText : MonoBehaviour {
             duration = BeatManager.instance.GetQuarterNote() * quarterNotes;
         }
 
-        PlaySFX();
+        StartCoroutine(PlaySFX());
+        StartCoroutine(PlayParticles());
 
         if (startPos != endPos)
         {
@@ -127,10 +128,6 @@ public class DynamicText : MonoBehaviour {
     IEnumerator GoEffect()
     {
         yield return new WaitForSeconds(delay);
-        if (GetComponent<ParticleSystem>() != null)
-        {
-            GetComponent<ParticleSystem>().Play();
-        }
         foreach (Text t in text)
         {
             GlobalFunctions.instance.FadeInText(t.color, duration * 0.1f, t);
@@ -171,11 +168,21 @@ public class DynamicText : MonoBehaviour {
         isComplete = true;
     }
 
-    public void PlaySFX()
+    IEnumerator PlaySFX()
     {
+        yield return new WaitForSeconds(delay);
         if (sfx != null)
         {
             sfx.Play();
+        }
+    }
+
+    IEnumerator PlayParticles()
+    {
+        yield return new WaitForSeconds(delay);
+        if (GetComponent<ParticleSystem>() != null)
+        {
+            GetComponent<ParticleSystem>().Play();
         }
     }
 }
