@@ -63,6 +63,7 @@ public class DynamicText : MonoBehaviour {
             foreach (Text t in text)
             {
                 GlobalFunctions.instance.AdjustPositionOverTimeSmoothText(startPos, endPos, duration / 2.0f, t);
+                GlobalFunctions.instance.DelayedFunction(() => GlobalFunctions.instance.AdjustPositionOverTimeSmoothText(endPos, Vector3.Lerp(startPos, endPos, 0.75f), duration / 2.0f, t), duration / 2.0f);
             }
         }
     }
@@ -84,6 +85,7 @@ public class DynamicText : MonoBehaviour {
             foreach (Text t in text)
             {
                 GlobalFunctions.instance.AdjustScaleOverTimeSmoothText(startScale, endScale, duration / 2.0f, t);
+                GlobalFunctions.instance.DelayedFunction(() => GlobalFunctions.instance.AdjustScaleOverTimeSmoothText(endScale, Vector3.Lerp(startScale, endScale, 0.75f), duration / 2.0f, t), duration / 2.0f);
             }
         }
     }
@@ -105,6 +107,7 @@ public class DynamicText : MonoBehaviour {
             foreach (Text t in text)
             {
                 GlobalFunctions.instance.AdjustRotOverTimeSmoothText(startRot, endRot, duration/2.0f, t);
+                GlobalFunctions.instance.DelayedFunction(() => GlobalFunctions.instance.AdjustRotOverTimeSmoothText(endRot, Vector3.Lerp(startRot, endRot, 0.95f), duration / 4.0f, t), duration / 2.0f);
             }
         }
     }
