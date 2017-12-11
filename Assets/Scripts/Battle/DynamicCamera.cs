@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class DynamicCamera : MonoBehaviour {
 
-    Vector3 startPos;
-    Camera cam;
+    protected Vector3 startPos;
+    protected Camera cam;
+    protected float beat;
 
     // Use this for initialization
     void Start()
     {
         startPos = transform.position;
         cam = GetComponent<Camera>();
+        beat = BeatManager.instance.GetQuarterNote();
     }
 
     //Single camera shake
@@ -104,13 +106,19 @@ public class DynamicCamera : MonoBehaviour {
         StartCoroutine(ZoomCameraSmoothCo(newSize, duration, target, targetSpeed));
     }
 
+    //Zooms in/out camera over time smoothly
+    public void ZoomCameraSmooth(float newSize, float duration)
+    {
+        StartCoroutine(ZoomCameraSmoothCo(newSize, duration, Vector2.zero, 0));
+    }
+
     IEnumerator ZoomCameraSmoothCo(float newSize, float duration, Vector2 target, float targetSpeed = 0)
     {
         float startSize = cam.orthographicSize;
         for (var f = duration; f >= 0; f -= Time.deltaTime)
         {
             cam.orthographicSize = Mathf.SmoothStep(newSize, startSize, f / duration);
-            if (target != null)
+            if (targetSpeed != 0)
             {
                 cam.transform.position = Vector3.Lerp(transform.position, new Vector3(target.x, target.y, transform.position.z), targetSpeed);
             }

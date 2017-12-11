@@ -5,7 +5,7 @@ using UnityEngine;
 public class BeatManager : MonoBehaviour {
 
     //Used to calculate the tick duration based on the bpm of the music
-    private float bpm = 120f;
+    public float bpm;
     //The interval in seconds that a tick occurs
     private float tickDuration;
 

@@ -15,8 +15,20 @@ public class BattleCam : DynamicCamera
             Destroy(gameObject);
     }
 
-    // Update is called once per frame
-    void Update() {
+    public void IntroZoom()
+    {
+        StartCoroutine(IntroZoomCo());
+    }
 
+    IEnumerator IntroZoomCo()
+    {
+        yield return new WaitForSeconds(beat*4);
+        ZoomCameraSmooth(4.5f, 0.25f);
+        yield return new WaitForSeconds(beat);
+        ZoomCameraSmooth(4.0f, 0.25f);
+        yield return new WaitForSeconds(beat);
+        ZoomCameraSmooth(3.5f, 0.25f);
+        yield return new WaitForSeconds(beat);
+        ZoomCameraSmooth(5.0f, 0.5f);
     }
 }
