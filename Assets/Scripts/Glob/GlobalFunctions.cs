@@ -239,6 +239,40 @@ public class GlobalFunctions : MonoBehaviour {
         }
     }
 
+    public void AdjustScaleOverTimeSmooth(Vector3 startScale, Vector3 endScale, float time, Transform obj)
+    {
+        StartCoroutine(AdjustScaleOverTimeSmoothCo(startScale, endScale, time, obj));
+    }
+
+    //Lerps a passed in transform between 2 scales over time smoothly
+    IEnumerator AdjustScaleOverTimeSmoothCo(Vector3 startScale, Vector3 endScale, float time, Transform obj)
+    {
+        float t = 0;
+        while (t <= 1.0)
+        {
+            t += Time.deltaTime / time;
+            obj.transform.localScale = Vector3.Lerp(startScale, endScale, Mathf.SmoothStep(0.0f, 1.0f, t));
+            yield return new WaitForSeconds(0);
+        }
+    }
+
+    public void AdjustRotOverTimeSmooth(Vector3 startRot, Vector3 endRot, float time, Transform obj)
+    {
+        StartCoroutine(AdjustRotOverTimeSmoothCo(startRot, endRot, time, obj));
+    }
+
+    //Lerps a passed in transform between 2 rotations over time smoothly
+    IEnumerator AdjustRotOverTimeSmoothCo(Vector3 startRot, Vector3 endRot, float time, Transform obj)
+    {
+        float t = 0;
+        while (t <= 1.0)
+        {
+            t += Time.deltaTime / time;
+            obj.transform.eulerAngles = Vector3.Lerp(startRot, endRot, Mathf.SmoothStep(0.0f, 1.0f, t));
+            yield return new WaitForSeconds(0);
+        }
+    }
+
     public void AdjustColorOverTime(Color startCol, Color endCol, float time, SpriteRenderer obj)
     {
         StartCoroutine(AdjustColorOverTimeCo(startCol, endCol, time, obj));

@@ -3,18 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DynamicText : MonoBehaviour {
+public class DynamicText : Activatable {
 
-    public AudioSource sfx;
-    public float duration, delay;
-    public int quarterNotes;
-    public bool isComplete = false, isTypeFade = true, isGo = false;
+    public bool isGo = false;
     private Text[] text;
 
-    //Position/scale related vars
-    public Vector3 startPos, endPos, startScale, endScale, startRot, endRot;
+    public Explodable explode;
 
-    public void Activate()
+    public override void Activate()
     {
         text = GetComponentsInChildren<Text>();
         if (quarterNotes > 0)
@@ -128,8 +124,12 @@ public class DynamicText : MonoBehaviour {
     IEnumerator GoEffect()
     {
         yield return new WaitForSeconds(delay);
-        //ScreenFlash.instance.Flash(new Color(0, 0, 0, 0.5f), 0.25f);
+        ScreenFlash.instance.Flash(new Color(1, 1, 1, 0.5f), 0.25f);
         GlobalFunctions.instance.DelayedFunction(() => BattleScreenDimmer.instance.FadeOut(0.5f), duration/1.5f);
+        if (explode != null)
+        {
+            explode.explode();
+        }
         foreach (Text t in text)
         {
             GlobalFunctions.instance.FadeInText(t.color, duration * 0.1f, t);
@@ -168,23 +168,5 @@ public class DynamicText : MonoBehaviour {
         yield return new WaitForSeconds(duration * 0.1f);
 
         isComplete = true;
-    }
-
-    IEnumerator PlaySFX()
-    {
-        yield return new WaitForSeconds(delay);
-        if (sfx != null)
-        {
-            sfx.Play();
-        }
-    }
-
-    IEnumerator PlayParticles()
-    {
-        yield return new WaitForSeconds(delay);
-        if (GetComponent<ParticleSystem>() != null)
-        {
-            GetComponent<ParticleSystem>().Play();
-        }
     }
 }
