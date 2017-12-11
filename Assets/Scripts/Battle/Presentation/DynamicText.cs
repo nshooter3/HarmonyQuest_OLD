@@ -125,7 +125,7 @@ public class DynamicText : Activatable {
     {
         yield return new WaitForSeconds(delay);
         ScreenFlash.instance.Flash(new Color(1, 1, 1, 0.5f), 0.25f);
-        GlobalFunctions.instance.DelayedFunction(() => BattleScreenDimmer.instance.FadeOut(0.5f), duration/1.5f);
+        GlobalFunctions.instance.DelayedFunction(() => BattleScreenDimmer.instance.FadeOut(0.25f), duration/2.0f);
         if (explode != null)
         {
             explode.explode();
