@@ -22,7 +22,10 @@ public class BattleCam : DynamicCamera
 
     IEnumerator IntroZoomCo()
     {
-        yield return new WaitForSeconds(beat*4);
+        BattleScreenDimmer.instance.FadeTo(beat, 1.0f, 0.5f);
+        yield return new WaitForSeconds(beat * 2);
+        BattleSceneManager.instance.FadeInCharacters();
+        yield return new WaitForSeconds(beat * 2);
         ZoomCameraSmooth(4.5f, 0.25f);
         yield return new WaitForSeconds(beat);
         ZoomCameraSmooth(4.0f, 0.25f);

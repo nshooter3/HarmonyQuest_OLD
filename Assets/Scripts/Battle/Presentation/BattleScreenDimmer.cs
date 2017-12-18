@@ -19,11 +19,19 @@ public class BattleScreenDimmer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         sr = GetComponent<SpriteRenderer>();
-	}
+        SetAlpha(1.0f);
+    }
 
     public void SetAlpha(float a = 0.5f)
     {
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, a);
+    }
+
+    public void FadeTo(float dur, float a1 = 1.0f, float a2 = 0.5f)
+    {
+        Color c1 = new Color(sr.color.r, sr.color.g, sr.color.b, a1);
+        Color c2 = new Color(sr.color.r, sr.color.g, sr.color.b, a2);
+        GlobalFunctions.instance.AdjustColorOverTime(c1, c2, dur, sr);
     }
 
     public void FadeIn(float dur = 0.5f)
