@@ -22,6 +22,9 @@ public class BattleCam : DynamicCamera
 
     IEnumerator IntroZoomCo()
     {
+        cam.orthographicSize = 4.75f;
+        ZoomCameraSmooth(5.0f, beat * 2.0f);
+        GlobalFunctions.instance.AdjustRotOverTimeSmooth(new Vector3(0, 0, -2.5f), new Vector3(0, 0, 0), beat * 4.0f, transform);
         BattleScreenDimmer.instance.FadeTo(beat, 1.0f, 0.5f);
         yield return new WaitForSeconds(beat * 2);
         BattleSceneManager.instance.FadeInCharacters();
