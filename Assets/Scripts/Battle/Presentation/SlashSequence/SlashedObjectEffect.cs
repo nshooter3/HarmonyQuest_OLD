@@ -79,9 +79,6 @@ public class SlashedObjectEffect : MonoBehaviour
         SegmentA.material.SetColor("_MultColor", col);
         SegmentA.material.SetFloat("_MultStrength", colStrength);
         SegmentA.material.SetFloat("_Slope", slope);
-        spray.absorbA.transform.parent = SegmentA.transform;
-        spray.absorbA.transform.localPosition = new Vector3(0, 0, spray.absorbA.transform.localPosition.z);
-        //StartCoroutine(DelayedExplosion(SegmentA.GetComponent<Explodable>(), 2.0f));
 
         //Init SegmentB
         GlobalFunctions.instance.CopyTranform(SegmentB.transform, obj.transform);
@@ -91,9 +88,6 @@ public class SlashedObjectEffect : MonoBehaviour
         SegmentB.material.SetColor("_MultColor", col);
         SegmentB.material.SetFloat("_MultStrength", colStrength);
         SegmentB.material.SetFloat("_Slope", slope);
-        spray.absorbB.transform.parent = SegmentB.transform;
-        spray.absorbB.transform.localPosition = new Vector3(0, 0, spray.absorbA.transform.localPosition.z);
-        //StartCoroutine(DelayedExplosion(SegmentB.GetComponent<Explodable>(), 2.0f));
 
         //Init segment movement
         if (slope <= 0)
@@ -107,7 +101,6 @@ public class SlashedObjectEffect : MonoBehaviour
             SegmentB.GetComponent<Rigidbody2D>().velocity = new Vector2(1.0f, -1.0f / slope).normalized * -breakSpeed;
         }
 
-        //StartCoroutine(AfterImage(1.75f));
         StartCoroutine(DelayedExplosion(ShatterRenderer.GetComponent<Explodable>(), 2.0f));
         BattleCam.instance.ZoomCamera(4.25f, 1.85f, test.transform.position, 0.0025f);
         GlobalFunctions.instance.DelayedFunction(() => BattleCam.instance.ZoomCamera(3.25f, 0.1f, test.transform.position, 0.0025f), 1.9f);
@@ -147,8 +140,8 @@ public class SlashedObjectEffect : MonoBehaviour
                 fadeTime = Random.Range(0.1f, 0.05f);
                 xOff = Random.Range(0.3f, -0.3f);
                 yOff = Random.Range(0.3f, -0.3f);
-                AfterImagePool.instance.SpawnAfterImage(SegmentA.transform, fadeTime, xOff, yOff);
-                AfterImagePool.instance.SpawnAfterImage(SegmentB.transform, fadeTime, xOff, yOff);
+                AfterImagePool.instance.SpawnAfterImage(SegmentA.transform, fadeTime, xOff, yOff, "EndSequence");
+                AfterImagePool.instance.SpawnAfterImage(SegmentB.transform, fadeTime, xOff, yOff, "EndSequence");
                 randomDelay = Random.Range(.1f, .2f);
             }
             yield return new WaitForSeconds(Time.deltaTime);

@@ -19,11 +19,15 @@ public class AfterImageObject : MonoBehaviour {
 
     SpriteRenderer sr;
 
+    //Used to reset layer after command is complete
+    int originalLayer;
+
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
         sr.color = new Color(sr.color.r, sr.color.g, sr.color.b, 0);
         sr.enabled = false;
+        originalLayer = gameObject.layer;
     }
 
 	// Use this for initialization
@@ -32,12 +36,16 @@ public class AfterImageObject : MonoBehaviour {
 	}
 
     //Start fadeout
-    public void ToggleOn(Transform trans, float fadeTime, bool shrink = false, bool grow = false, float xOff = 0, float yOff = 0)
+    public void ToggleOn(Transform trans, float fadeTime, bool shrink = false, bool grow = false, float xOff = 0, float yOff = 0, string layer = "")
     {
         active = true;
         sr.enabled = true;
         sr.sprite = trans.GetComponent<SpriteRenderer>().sprite;
         sr.sortingLayerName = trans.GetComponent<SpriteRenderer>().sortingLayerName;
+        if (layer != "" && LayerMask.NameToLayer(layer) >= 0)
+        {
+            gameObject.layer = LayerMask.NameToLayer(layer);
+        }
         sr.material = trans.GetComponent<SpriteRenderer>().material;
         GlobalFunctions.instance.CopyTranform(transform, trans);
         transform.position = new Vector3(transform.position.x + xOff, transform.position.y + yOff, transform.position.z);
@@ -87,6 +95,7 @@ public class AfterImageObject : MonoBehaviour {
         {
             transform.parent = originalParent;
         }
+        gameObject.layer = originalLayer;
         GlobalFunctions.instance.ResetTranform(transform);
     }
 

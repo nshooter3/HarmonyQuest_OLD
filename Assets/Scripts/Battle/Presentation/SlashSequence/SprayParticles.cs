@@ -65,9 +65,9 @@ public class SprayParticles : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         absorbA.Play();
-        absorbB.Play();
+        //absorbB.Play();
         absorbA2.Play();
-        absorbB2.Play();
+        //absorbB2.Play();
         float time = 0.6f;
         ParticleSystem.EmissionModule emA = absorbA.emission;
         ParticleSystem.EmissionModule emB = absorbB.emission;
