@@ -7,12 +7,22 @@ public class BattleCam : DynamicCamera
 
     public static BattleCam instance;
 
+    public Camera[] subCams;
+
     void Awake()
     {
         if (instance == null)
             instance = this;
         else
             Destroy(gameObject);
+    }
+
+    void Update()
+    {
+        foreach (Camera sCam in subCams)
+        {
+            sCam.orthographicSize = cam.orthographicSize;
+        }
     }
 
     public void IntroZoom()

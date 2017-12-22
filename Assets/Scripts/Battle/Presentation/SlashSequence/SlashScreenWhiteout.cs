@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SlashScreenWhiteout : MonoBehaviour
 {
-
-    public GameObject slashedObject;
     SpriteRenderer sr;
 
     public static SlashScreenWhiteout instance;
