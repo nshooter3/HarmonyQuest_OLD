@@ -40,15 +40,15 @@ public class BattleCam : DynamicCamera
         BattleSceneManager.instance.FadeInCharacters();
         yield return new WaitForSeconds(beat * 2);
         ZoomCameraSmooth(4.5f, 0.25f);
-        GlobalFunctions.instance.AdjustRotOverTimeSmooth(new Vector3(0, 0, 0), new Vector3(0, 0, 5.0f), beat/2.0f, transform);
+        GlobalFunctions.instance.AdjustRotOverTimeSmooth(new Vector3(0, 0, 0), new Vector3(0, 0, 2.5f), beat/2.0f, transform);
         yield return new WaitForSeconds(beat);
         ZoomCameraSmooth(4.0f, 0.25f);
-        GlobalFunctions.instance.AdjustRotOverTimeSmooth(new Vector3(0, 0, 5.0f), new Vector3(0, 0, -7.5f), beat / 2.0f, transform);
+        GlobalFunctions.instance.AdjustRotOverTimeSmooth(new Vector3(0, 0, 2.5f), new Vector3(0, 0, -5.0f), beat / 2.0f, transform);
         yield return new WaitForSeconds(beat);
         ZoomCameraSmooth(3.5f, 0.25f);
-        GlobalFunctions.instance.AdjustRotOverTimeSmooth(new Vector3(0, 0, -7.5f), new Vector3(0, 0, 15.0f), beat / 2.0f, transform);
+        GlobalFunctions.instance.AdjustRotOverTimeSmooth(new Vector3(0, 0, -5.0f), new Vector3(0, 0, 7.5f), beat / 2.0f, transform);
         yield return new WaitForSeconds(beat);
-        GlobalFunctions.instance.AdjustRotOverTimeSmooth(new Vector3(0, 0, 15.0f), new Vector3(0, 0, 0), 0.5f, transform);
+        GlobalFunctions.instance.AdjustRotOverTimeSmooth(new Vector3(0, 0, 7.5f), new Vector3(0, 0, 0), 0.5f, transform);
         ZoomCameraSmooth(5.0f, 0.5f);
     }
 }
