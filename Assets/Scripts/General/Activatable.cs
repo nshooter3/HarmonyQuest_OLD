@@ -7,7 +7,7 @@ public class Activatable : MonoBehaviour {
     public AudioSource sfx;
     public float duration, delay;
     public int quarterNotes;
-    public bool isComplete = false, isTypeFade = true, wait = true;
+    public bool isComplete = false, isTypeFade = true, isTypeFadeOut = true, wait = true;
 
     //Position/scale related vars
     public Vector3 startPos, endPos, startScale, endScale, startRot, endRot;

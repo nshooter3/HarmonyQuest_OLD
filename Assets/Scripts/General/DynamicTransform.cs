@@ -62,7 +62,10 @@ public class DynamicTransform : Activatable {
         foreach (SpriteRenderer t in GetComponentsInChildren<SpriteRenderer>())
         {
             GlobalFunctions.instance.FadeIn(new Color(t.color.r, t.color.g, t.color.b, 1), duration * 0.25f, t);
-            GlobalFunctions.instance.DelayedFunction(() => GlobalFunctions.instance.FadeOut(new Color(t.color.r, t.color.g, t.color.b, 1), duration * 0.25f, t), duration * 0.75f);
+            if (isTypeFadeOut)
+            {
+                GlobalFunctions.instance.DelayedFunction(() => GlobalFunctions.instance.FadeOut(new Color(t.color.r, t.color.g, t.color.b, 1), duration * 0.25f, t), duration * 0.75f);
+            }
         }
         yield return new WaitForSeconds(duration);
         isComplete = true;

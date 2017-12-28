@@ -115,7 +115,10 @@ public class DynamicText : Activatable {
         foreach (Text t in text)
         {
             GlobalFunctions.instance.FadeInText(new Color(t.color.r, t.color.g, t.color.b, 1), duration * 0.25f, t);
-            GlobalFunctions.instance.DelayedFunction(() => GlobalFunctions.instance.FadeOutText(new Color(t.color.r, t.color.g, t.color.b, 1), duration * 0.25f, t), duration * 0.75f);
+            if (isTypeFadeOut)
+            {
+                GlobalFunctions.instance.DelayedFunction(() => GlobalFunctions.instance.FadeOutText(new Color(t.color.r, t.color.g, t.color.b, 1), duration * 0.25f, t), duration * 0.75f);
+            }
         }
         yield return new WaitForSeconds(duration);
         isComplete = true;

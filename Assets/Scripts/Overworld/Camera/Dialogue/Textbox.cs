@@ -64,9 +64,6 @@ public class Textbox : MonoBehaviour {
     //Cooldown timer that prevents user from accidentally blasting through a choice if they're skipping dialogue
     public float noChoiceTimer;
 
-    //Used to tell the dialogue box when to indent stuff.
-    public int textLineLength;
-
     /*
         TODO: Use these to do stuff, idiot
         TODO: Use these to do stuff, idiot
