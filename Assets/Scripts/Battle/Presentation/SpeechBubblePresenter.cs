@@ -10,28 +10,44 @@ public class SpeechBubblePresenter : MonoBehaviour {
 
     private IEnumerator showText;
 
+    public static SpeechBubblePresenter instance;
+
+    public SpeechBubbleQuipObject curQuip;
+
+    void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(gameObject);
+    }
+
 	// Use this for initialization
 	void Start () {
         speechText.text = "";
         speechBubble.SetActive(false);
     }
 
-    void Update()
+    public void Show(SpeechBubbleQuipObject quip, float stickTime = 2.0f)
     {
-        if (Input.GetKeyDown(KeyCode.M)){
-            Show("Is this a test? Did I pass?");
+        if (curQuip != null && quip.priority <= curQuip.priority)
+        {
+            return;
         }
-    }
-
-    public void Show(string text, float stickTime = 2.0f)
-    {
-        Hide();
-        speechBubble.transform.localScale = Vector3.zero;
-        speechBubble.SetActive(true);
-        speechText.text = "";
-        speechBubble.GetComponent<DynamicTransform>().Activate();
-        showText = ShowText(text, 0.25f, stickTime);
-        StartCoroutine(showText);
+        else
+        {
+            if (quip.text != "")
+            {
+                Hide();
+                curQuip = quip;
+                speechBubble.transform.localScale = Vector3.zero;
+                speechBubble.SetActive(true);
+                speechText.text = "";
+                speechBubble.GetComponent<DynamicTransform>().Activate();
+                showText = ShowText(curQuip.text, 0.25f, stickTime);
+                StartCoroutine(showText);
+            }
+        }
     }
 
     public void Hide()
@@ -40,6 +56,7 @@ public class SpeechBubblePresenter : MonoBehaviour {
         {
             StopCoroutine(showText);
         }
+        curQuip = null;
         speechBubble.SetActive(false);
     }
 
