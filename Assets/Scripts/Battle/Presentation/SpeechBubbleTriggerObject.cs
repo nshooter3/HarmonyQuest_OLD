@@ -6,33 +6,52 @@ public class SpeechBubbleTriggerObject : MonoBehaviour {
 
     public List<SpeechBubbleQuipObject> quips;
     public string triggerType;
+    public float maxCooldown = 0;
+    private float cooldown = 0;
 
     private int weightTotal;
 
+    void Update()
+    {
+        if (cooldown > 0)
+        {
+            cooldown -= Time.deltaTime;
+        }
+    }
+
     public SpeechBubbleQuipObject GetQuip()
     {
-        weightTotal = GenerateWeightTotal();
-        int ran = Random.Range(0, weightTotal);
-        int sum = 0;
-        SpeechBubbleQuipObject temp;
-
-        foreach (SpeechBubbleQuipObject quip in quips)
+        if (cooldown <= 0)
         {
-            if (ran < (sum + quip.weight))
+            weightTotal = GenerateWeightTotal();
+            int ran = Random.Range(0, weightTotal);
+            int sum = 0;
+            SpeechBubbleQuipObject temp;
+
+            foreach (SpeechBubbleQuipObject quip in quips)
             {
-                temp = quip;
-                if (quip.playOnce)
+                if (ran < (sum + quip.weight))
                 {
-                    quips.Remove(quip);
+                    temp = quip;
+                    if (quip.playOnce)
+                    {
+                        quips.Remove(quip);
+                    }
+                    cooldown = maxCooldown;
+                    return temp;
                 }
-                return temp;
+                else
+                {
+                    sum += quip.weight;
+                }
             }
-            else
-            {
-                sum += quip.weight;
-            }
+            return null;
         }
-        return null;
+        else
+        {
+            Debug.Log(triggerType + " trigger is in cooldown, will not fire quip");
+            return null;
+        }
     }
 
     private int GenerateWeightTotal()

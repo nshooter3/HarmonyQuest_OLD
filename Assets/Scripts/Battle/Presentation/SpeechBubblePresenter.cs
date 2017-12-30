@@ -30,7 +30,7 @@ public class SpeechBubblePresenter : MonoBehaviour {
 
     public void Show(SpeechBubbleQuipObject quip, float stickTime = 2.0f)
     {
-        if (curQuip != null && quip.priority <= curQuip.priority)
+        if (quip == null || (curQuip != null && quip.priority <= curQuip.priority))
         {
             return;
         }

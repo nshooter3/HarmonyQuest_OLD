@@ -507,6 +507,7 @@ MonoBehaviour:
   - {fileID: 114148616326467930}
   - {fileID: 114214180571761998}
   triggerType: EnemyHit
+  maxCooldown: 0
 --- !u!114 &114032905847005176
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -689,6 +690,7 @@ MonoBehaviour:
   - {fileID: 114264594426397226}
   - {fileID: 114501667443459278}
   triggerType: Idle
+  maxCooldown: 0
 --- !u!114 &114728648758236002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -706,6 +708,7 @@ MonoBehaviour:
   - {fileID: 114064737573743946}
   - {fileID: 114305383767265174}
   triggerType: PlayerHit
+  maxCooldown: 0
 --- !u!114 &114750236783564760
 MonoBehaviour:
   m_ObjectHideFlags: 1
