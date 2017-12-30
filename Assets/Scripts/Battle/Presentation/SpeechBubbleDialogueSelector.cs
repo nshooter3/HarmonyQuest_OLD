@@ -13,7 +13,7 @@ public class SpeechBubbleDialogueSelector : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        /*if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.B))
         {
             ActivateTrigger("EnemyHit");
         }
@@ -24,7 +24,7 @@ public class SpeechBubbleDialogueSelector : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.M))
         {
             ActivateTrigger("Idle");
-        }*/
+        }
     }
 
     public void ActivateTrigger(string triggerType)

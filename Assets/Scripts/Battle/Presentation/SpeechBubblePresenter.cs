@@ -14,6 +14,8 @@ public class SpeechBubblePresenter : MonoBehaviour {
 
     public SpeechBubbleQuipObject curQuip;
 
+    public Animator enemyAnim;
+
     void Awake()
     {
         if (instance == null)
@@ -67,6 +69,8 @@ public class SpeechBubblePresenter : MonoBehaviour {
         string finalText = text;
         int textIndex = 0;
 
+        enemyAnim.SetBool("isTalking", true);
+
         //Update dialogue UI
         while (textIndex <= text.Length) {
             speechText.text = finalText.Substring(0, textIndex) + "<color=#0000>" + finalText.Substring(textIndex) + "</color>";
@@ -90,6 +94,7 @@ public class SpeechBubblePresenter : MonoBehaviour {
         }
 
         yield return new WaitForSeconds(stickTime);
+        enemyAnim.SetBool("isTalking", false);
         Hide();
     }
 }
