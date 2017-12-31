@@ -12,9 +12,7 @@ public class InputManager : MonoBehaviour
     public bool confirmPress = false, backPress = false, menuPress = false, upPress = false, downPress = false, leftPress = false, rightPress = false, shiftPress = false;
     public bool confirmRelease = false, backRelease = false, menuRelease = false, upRelease = false, downRelease = false, leftRelease = false, rightRelease = false, shiftRelease = false;
     public bool confirmHeld = false, backHeld = false, menuHeld = false, upHeld = false, downHeld = false, leftHeld = false, rightHeld = false, shiftHeld = false;
-    public bool shoot1 = false, shoot2 = false, shoot3 = false, shield = false, killzone = false, bomb = false, dash = false;
-
-    public bool waitForBombRelease = false;
+    public bool shoot1Press = false, shoot1Held = false, shoot1Release = false, shoot2Press = false, shoot2Held = false, shoot2Release = false, weaponSwap = false, dash = false;
 
     public static InputManager instance;
 
@@ -103,41 +101,45 @@ public class InputManager : MonoBehaviour
         if (Input.GetKey(KeyCode.A))
         {
             confirmHeld = true;
-            shoot1 = true;
+            shoot1Held = true;
         }
         if (Input.GetKeyDown(KeyCode.A))
         {
             confirmPress = true;
+            shoot1Press = true;
         }
         if (Input.GetKeyUp(KeyCode.A))
         {
             confirmRelease = true;
+            shoot1Release = true;
         }
 
         //Back
         if (Input.GetKey(KeyCode.S))
         {
             backHeld = true;
-            shoot2 = true;
+            shoot2Held = true;
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
             backPress = true;
+            shoot2Press = true;
         }
         if (Input.GetKeyUp(KeyCode.S))
         {
             backRelease = true;
+            shoot2Release = true;
         }
 
         //Menu
         if (Input.GetKey(KeyCode.D))
         {
             menuHeld = true;
-            shoot3 = true;
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
             menuPress = true;
+            weaponSwap = true;
         }
         if (Input.GetKeyUp(KeyCode.D))
         {
@@ -158,31 +160,47 @@ public class InputManager : MonoBehaviour
         {
             shiftRelease = true;
         }
+    }
 
-        //Shield
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.S))
+    public Vector3 CheckDirectionalMovement()
+    {
+        //Check for various directional keys/combinations for movement
+        if (rightHeld && upHeld)
         {
-            shield = true;
+            return new Vector3(0.67f, 0.67f, 0);
         }
-
-        //Killzone
-        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
+        else if (rightHeld && downHeld)
         {
-            killzone = true;
+            return new Vector3(0.67f, -0.67f, 0);
         }
-
-        //Check to prevent bomb from firing multiple times
-        if (waitForBombRelease && (!Input.GetKey(KeyCode.S) || !Input.GetKey(KeyCode.D)))
+        else if (leftHeld && upHeld)
         {
-            waitForBombRelease = false;
+            return new Vector3(-0.67f, 0.67f, 0);
         }
-
-        //Bomb
-        if (Input.GetKey(KeyCode.S) && Input.GetKey(KeyCode.D))
+        else if (leftHeld && downHeld)
         {
-            bomb = true;
+            return new Vector3(-0.67f, -0.67f, 0);
         }
-
+        else if (rightHeld)
+        {
+            return new Vector3(1, 0, 0);
+        }
+        else if (leftHeld)
+        {
+            return new Vector3(-1, 0, 0);
+        }
+        else if (upHeld)
+        {
+            return new Vector3(0, 1, 0);
+        }
+        else if (downHeld)
+        {
+            return new Vector3(0, -1, 0);
+        }
+        else
+        {
+            return new Vector3(0, 0, 0);
+        }
     }
 
     //Resets all public variables
@@ -212,12 +230,13 @@ public class InputManager : MonoBehaviour
         shiftPress = false;
         shiftRelease = false;
         shiftHeld = false;
-        shoot1 = false;
-        shoot2 = false;
-        shoot3 = false;
+        shoot1Press = false;
+        shoot2Press = false;
+        shoot1Release = false;
+        shoot2Release = false;
+        shoot1Held = false;
+        shoot2Held = false;
+        weaponSwap = false;
         dash = false;
-        shield = false;
-        killzone = false;
-        bomb = false;
     }
 }

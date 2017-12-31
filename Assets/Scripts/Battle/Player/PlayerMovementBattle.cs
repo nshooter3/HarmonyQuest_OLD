@@ -1,88 +1,58 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
-public class PlayerMovementBattle : MonoBehaviour
-{
+public class PlayerMovementBattle : MonoBehaviour {
 
     public static PlayerMovementBattle instance;
 
-    public float speed, actualSpeed;
+    //Player's prepared weapons
+    public PlayerWeapon weapon1, weapon2, weapon3, weapon4;
+    //Used to determine which weapon loadout the player has active (weapons 1 and 2, or weapons 3 and 4)
+    private int loadout = 1;
+    private bool swappingWeapons = false;
 
-    //The cost of a dash in stamina
-    private float dashCost = 10f;
-    //How quickly stamina comes back, and how long it takes to start regenerating
-    private float staminaRegenRate = 25, regenCooldown, maxRegenCooldown = 0.5f;
-
-    public Transform rBullet, lBullet;
-
-    private Transform playerPos;
-
-    private float bulletCooldownMax, bulletCooldownCur;
-
-    Vector3 initScale;
-
-    public SpriteRenderer ren;
-
-    ParticleSystem dodge;
-    public ParticleSystem shieldBreak, shieldHit;
+    //variables used to store player's base speed and current speed
+    public float baseSpeed, curSpeed;
 
     //Vars for dashing duration and direction
-    float dashTimer = 0, maxDashTimer = 0.05f, dashCooldown = 0, maxDashCooldown = 0.1f;
-    Vector3 dashDir;
+    private float dashTimer = 0, maxDashTimer = 0.05f, dashCooldown = 0, maxDashCooldown = 0.1f;
+    private Vector3 dashDir;
 
-    public Transform shootLeft, shootUpperLeft, shootLowerLeft, shootRight, shootUpperRight, shootLowerRight;
+    //Player's initial scale
+    private Vector3 initScale;
 
-
-    Rigidbody2D rb;
-
-    //Generic var for functions that need to store stuff
-    float temp;
-
-    //Used to prevent specials from activating too early after running out of stamina
-    float specialRegen = 0, maxspecialRegen = 0.5f;
+    //Player components
+    private Rigidbody2D rb;
+    private SpriteRenderer ren;
 
     void Awake()
     {
         if (instance == null)
             instance = this;
         else
-            Destroy(this.gameObject);
+            Destroy(gameObject);
     }
 
     // Use this for initialization
-    void Start()
-    {
+    void Start () {
+        baseSpeed = 4.5f;
+        curSpeed = baseSpeed;
         initScale = transform.localScale;
-        speed = 6f;//Stored value
-        actualSpeed = speed;//Modified value that is actually used
-        playerPos = gameObject.transform;
-        bulletCooldownMax = 0.1f;
-        bulletCooldownCur = 0;
         rb = GetComponent<Rigidbody2D>();
         ren = GetComponent<SpriteRenderer>();
-        dodge = GetComponentInChildren<ParticleSystem>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
+	
+	// Update is called once per frame
+	void Update () {
         InputManager.instance.UpdateInput();
         CheckForKeyInput();
     }
 
     private void Move(Vector3 dir)
     {
-        //Adjusts speed based on whether or not shield is active
-        if (PlayerShield.instance.active || PlayerKillzone.instance.active)
-        {
-            temp = 0.5f;
-        }
-        else
-        {
-            temp = 0.75f;
-        }
         //Applies movement based on vector3 from CheckForMove
-        rb.velocity = dir * actualSpeed * temp;
+        rb.velocity = dir * curSpeed;
     }
 
     private void CheckForKeyInput()
@@ -94,216 +64,72 @@ public class PlayerMovementBattle : MonoBehaviour
             dashTimer -= Time.deltaTime;
             if (dashTimer <= 0)
             {
-                PlayerHitbox.instance.GetComponent<BoxCollider2D>().enabled = true;
+                //PlayerHitbox.instance.GetComponent<BoxCollider2D>().enabled = true;
                 dashCooldown = maxDashCooldown;
                 ren.color = new Color(1, 1, 1, 1);
             }
         }
+        //Logic for movement when not in the middle of a dash
         else
         {
             if (dashCooldown > 0)
             {
                 dashCooldown -= Time.deltaTime;
-                if (dashCooldown <= 0)
-                {
-                    dodge.Stop();
-                }
             }
-            CheckDirectionalMovement();
 
-            //Used to set speed depending on whether or not the player is dashing
-            if (InputManager.instance.dash && rb.velocity.magnitude > 0 && dashCooldown <= 0 && !PlayerShield.instance.active && !PlayerKillzone.instance.active)
-            {
-                if (BattleUIHandler.instance.stamina > 0)
-                {
-                    BattleUIHandler.instance.DecreaseStamina(dashCost);
-                    regenCooldown = maxRegenCooldown;
-                    dashTimer = maxDashTimer;
-                    PlayerHitbox.instance.GetComponent<BoxCollider2D>().enabled = false;
-                    dashDir = rb.velocity;
-                    ren.color = new Color(1, 1, 1, 0.1f);
-                    dodge.Play();
-                    StartCoroutine(SizePulse());
-                }
-                else
-                {
-                    StartCoroutine(BattleUIHandler.instance.AlphaFlash(BattleUIHandler.instance.staminaFlash.GetComponent<SpriteRenderer>()));
-                }
-            }
-            else
-            {
-                if (BattleUIHandler.instance.stamina > 0)
-                {
-                    if (specialRegen > 0)
-                    {
-                        specialRegen -= Time.deltaTime;
-                    }
-                }
-                if (PlayerShield.instance.active)
-                {
-                    BattleUIHandler.instance.DecreaseStamina(Time.deltaTime * staminaRegenRate);
-                    if (BattleUIHandler.instance.stamina <= 0)
-                    {
-                        //Punish player for losing all stamina with shield up
-                        BattleUIHandler.instance.stamina = -50f;
-                        shieldBreak.Play();
-                        shieldHit.Play();
-                        BattleCam.instance.GenericCamShake();
-                        StartCoroutine(BattleUIHandler.instance.AlphaFlash(BattleUIHandler.instance.staminaFlash.GetComponent<SpriteRenderer>()));
-                        PlayerShield.instance.ToggleActive(false);
-                        specialRegen = maxspecialRegen;
-                    }
-                    regenCooldown = 0;
-                }
-                else if (PlayerKillzone.instance.active)
-                {
-                    BattleUIHandler.instance.DecreaseStamina(Time.deltaTime * staminaRegenRate * 2);
-                    if (BattleUIHandler.instance.stamina <= 0)
-                    {
-                        PlayerKillzone.instance.ToggleActive(false);
-                        specialRegen = maxspecialRegen;
-                        StartCoroutine(BattleUIHandler.instance.AlphaFlash(BattleUIHandler.instance.staminaFlash.GetComponent<SpriteRenderer>()));
-                    }
-                    regenCooldown = 0;
-                }
-                else if (regenCooldown > 0)
-                {
-                    regenCooldown -= Time.deltaTime;
-                }
-                else
-                {
-                    BattleUIHandler.instance.IncreaseStamina(Time.deltaTime * staminaRegenRate);
-                }
-            }
-        }
-        //Used to determine firing patterns
-        if (InputManager.instance.shield)
-        {
-            bulletCooldownCur = 0;
-            if (!PlayerShield.instance.active && BattleUIHandler.instance.stamina > 0 && specialRegen <= 0)
-            {
-                PlayerShield.instance.ToggleActive(true);
-            }
-        }
-        else
-        {
-            if (PlayerShield.instance.active)
-            {
-                PlayerShield.instance.ToggleActive(false);
-            }
-            if (InputManager.instance.killzone)
-            {
-                bulletCooldownCur = 0;
-                if (!PlayerKillzone.instance.active && BattleUIHandler.instance.stamina > 0 && specialRegen <= 0)
-                {
-                    PlayerKillzone.instance.ToggleActive(true);
-                }
-            }
-            else
-            {
-                if (PlayerKillzone.instance.active)
-                {
-                    PlayerKillzone.instance.ToggleActive(false);
-                }
+            Move(InputManager.instance.CheckDirectionalMovement());
 
-                if (InputManager.instance.bomb)
+            //Used to initiate dash
+            if (InputManager.instance.dash && rb.velocity.magnitude > 0 && dashCooldown <= 0 && !isWeaponActive())
+            {
+                dashTimer = maxDashTimer;
+                //PlayerHitbox.instance.GetComponent<BoxCollider2D>().enabled = false;
+                dashDir = rb.velocity;
+                ren.color = new Color(1, 1, 1, 0.1f);
+                StartCoroutine(SizePulse());
+            }
+            //Used to check for weapon usage. Alters weapons based on which loadout is active
+            else if (swappingWeapons == false)
+            {
+                if (loadout == 1)
                 {
-                    if (!InputManager.instance.waitForBombRelease)
+                    weapon1.CheckForInput(1);
+                    if (!weapon1.weaponActive)
                     {
-                        bulletCooldownCur = 0;
-                        if (Bomb.instance.idle)
-                        {
-                            if (BattleUIHandler.instance.stamina > 0)
-                            {
-                                Bomb.instance.Plant(transform.position);
-                                InputManager.instance.waitForBombRelease = true;
-                            }
-                            else
-                            {
-                                StartCoroutine(BattleUIHandler.instance.AlphaFlash(BattleUIHandler.instance.staminaFlash.GetComponent<SpriteRenderer>()));
-                            }
-                        }
-                        else if (Bomb.instance.planted)
-                        {
-                            Bomb.instance.Boom();
-                            InputManager.instance.waitForBombRelease = true;
-                        }
+                        weapon2.CheckForInput(2);
                     }
                 }
-                else if (bulletCooldownCur <= 0)
+                else if (loadout == 2)
                 {
-                    if (InputManager.instance.shoot1)
+                    weapon3.CheckForInput(1);
+                    if (!weapon3.weaponActive)
                     {
-                        BulletPool.instance.SpawnNormalBullet(shootLeft.position);
-                        BulletPool.instance.SpawnNormalBullet(shootRight.position);
-                        bulletCooldownCur = bulletCooldownMax;
-                    }
-                    else if (InputManager.instance.shoot2)
-                    {
-                        BulletPool.instance.SpawnNormalBullet(transform.position, new Vector3(0, -1, 0));
-                        BulletPool.instance.SpawnNormalBullet(shootUpperLeft.position, new Vector3(-1, 1, 0));
-                        BulletPool.instance.SpawnNormalBullet(shootUpperRight.position, new Vector3(1, 1, 0));
-                        bulletCooldownCur = bulletCooldownMax * 2f;
-                    }
-                    else if (InputManager.instance.shoot3)
-                    {
-                        BulletPool.instance.SpawnNormalBullet(shootLowerLeft.position, new Vector3(-1, -1, 0));
-                        BulletPool.instance.SpawnNormalBullet(shootLowerRight.position, new Vector3(1, -1, 0));
-                        bulletCooldownCur = bulletCooldownMax;
+                        weapon4.CheckForInput(2);
                     }
                 }
-                else
+                if (InputManager.instance.weaponSwap && !isWeaponActive())
                 {
-                    bulletCooldownCur -= Time.deltaTime;
+                    SwapWeaponLoadout();
                 }
             }
         }
     }
 
-    private void CheckDirectionalMovement()
+    private void SwapWeaponLoadout()
     {
-        //Check for various directional keys/combinations for movement
-        if (InputManager.instance.rightHeld && InputManager.instance.upHeld)
+        //swappingWeapons = true;
+        //TODO Swapout animations
+        if (loadout == 1)
         {
-            Move(new Vector3(0.67f, 0.67f, 0));
+            Debug.Log("loadout 2!");
+            loadout = 2;
         }
-        else if (InputManager.instance.rightHeld && InputManager.instance.downHeld)
+        else if (loadout == 2)
         {
-            Move(new Vector3(0.67f, -0.67f, 0));
+            Debug.Log("loadout 1!");
+            loadout = 1;
         }
-        else if (InputManager.instance.leftHeld && InputManager.instance.upHeld)
-        {
-            Move(new Vector3(-0.67f, 0.67f, 0));
-        }
-        else if (InputManager.instance.leftHeld && InputManager.instance.downHeld)
-        {
-            Move(new Vector3(-0.67f, -0.67f, 0));
-        }
-        else if (InputManager.instance.rightHeld)
-        {
-            Move(new Vector3(1, 0, 0));
-        }
-        else if (InputManager.instance.leftHeld)
-        {
-            Move(new Vector3(-1, 0, 0));
-        }
-        else if (InputManager.instance.upHeld)
-        {
-            Move(new Vector3(0, 1, 0));
-        }
-        else if (InputManager.instance.downHeld)
-        {
-            Move(new Vector3(0, -1, 0));
-        }
-        else
-        {
-            Move(new Vector3(0, 0, 0));
-        }
-    }
-
-    public void setBulletCooldown(float val)
-    {
-        bulletCooldownMax = val;
+        //swappingWeapons = false;
     }
 
     //Size effect to juice up dodges
@@ -318,5 +144,12 @@ public class PlayerMovementBattle : MonoBehaviour
         }
         transform.eulerAngles = Vector3.zero;
         yield return null;
+    }
+
+    //Use this to determine whether or not a weapon is active
+    public bool isWeaponActive()
+    {
+        return (weapon1.weaponActive == true || weapon2.weaponActive == true ||
+                     weapon3.weaponActive == true || weapon4.weaponActive == true);
     }
 }
