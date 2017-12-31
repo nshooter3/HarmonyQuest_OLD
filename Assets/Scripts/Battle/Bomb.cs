@@ -36,7 +36,6 @@ public class Bomb : MonoBehaviour {
 
     public void Plant(Vector3 pos)
     {
-        BattleUIHandler.instance.DecreaseStamina(staminaCost);
         idle = false;
         planted = true;
         transform.position = pos;

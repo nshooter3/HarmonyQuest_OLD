@@ -7,17 +7,16 @@ public class BattleUIHandler : MonoBehaviour {
     public static BattleUIHandler instance;
 
     //References to the UI in need of manipulation
-    public GameObject healthMain, staminaMain, enemyMain, healthDrop, staminaDrop, enemyDrop,
-        healthAll, staminaAll, enemyAll, staminaFlash;
+    public GameObject healthMain, enemyMain, healthDrop, enemyDrop, healthAll, enemyAll;
     //Values for attributes
-    public float health, healthMax, stamina, staminaMax, enemy, enemyMax;
+    public float health, healthMax, enemy, enemyMax;
     //Max length of the actual bars in unity units
-    private float healthLength, staminaLength, enemyLength;
+    private float healthLength, enemyLength;
     //Whether or not yellow drop bar is shrinking
-    bool healthDropping, staminaDropping, enemyDropping;
+    bool healthDropping, enemyDropping;
     //The delay before the bar starts dropping
-    float healthDropDelay, staminaDropDelay, enemyDropDelay, maxDelay = 0.5f;
-    Vector3 initScaleHealth, initScaleStamina, initScaleEnemy;
+    float healthDropDelay, enemyDropDelay, maxDelay = 0.5f;
+    Vector3 initScaleHealth, initScaleEnemy;
 
     void Awake()
     {
@@ -32,20 +31,16 @@ public class BattleUIHandler : MonoBehaviour {
 
         //TEMP SCRIPT FOR HEALTH/STAMINA/ENEMY. Need to hook this up to datamanager and enemy info later
         healthMax = 100;
-        staminaMax = 100;
         enemyMax = 1000;
         //TEMP
 
         health = healthMax;
-        stamina = staminaMax;
         enemy = enemyMax;
 
         healthLength = healthMain.transform.localScale.x;
-        staminaLength = staminaMain.transform.localScale.x;
         enemyLength = enemyMain.transform.localScale.x;
 
         initScaleHealth = healthAll.transform.localScale;
-        initScaleStamina = staminaAll.transform.localScale;
         initScaleEnemy = enemyAll.transform.localScale;
     }
 
@@ -66,25 +61,6 @@ public class BattleUIHandler : MonoBehaviour {
         healthMain.transform.localScale = new Vector3(healthLength * (health / healthMax), healthMain.transform.localScale.y, healthMain.transform.localScale.z);
         if(healthDrop.transform.localScale.x < healthMain.transform.localScale.x)
             healthDrop.transform.localScale = new Vector3(healthLength * (health / healthMax), healthMain.transform.localScale.y, healthMain.transform.localScale.z);
-    }
-
-    public void DecreaseStamina(float damage)
-    {
-        stamina = stamina - damage;
-        staminaMain.transform.localScale = new Vector3(staminaLength * (Mathf.Max(0, stamina) / staminaMax), staminaMain.transform.localScale.y, staminaMain.transform.localScale.z);
-        if (staminaDropping != true)
-        {
-            staminaDropping = true;
-            staminaDropDelay = maxDelay;
-        }
-    }
-
-    public void IncreaseStamina(float healing)
-    {
-        stamina = Mathf.Min(staminaMax, stamina + healing);
-        staminaMain.transform.localScale = new Vector3(staminaLength * (Mathf.Max(0, stamina) / staminaMax), staminaMain.transform.localScale.y, staminaMain.transform.localScale.z);
-        if (staminaDrop.transform.localScale.x < staminaMain.transform.localScale.x)
-            staminaDrop.transform.localScale = new Vector3(staminaLength * (Mathf.Max(0, stamina) / staminaMax), staminaMain.transform.localScale.y, staminaMain.transform.localScale.z);
     }
 
     public void DecreaseEnemy(float damage)
@@ -145,22 +121,6 @@ public class BattleUIHandler : MonoBehaviour {
             {
                 healthDrop.transform.localScale = healthMain.transform.localScale;
                 healthDropping = false;
-            }
-        }
-        if (staminaDropping)
-        {
-            if (staminaDropDelay > 0)
-            {
-                staminaDropDelay -= Time.deltaTime;
-            }
-            else if (staminaDrop.transform.localScale.x > staminaMain.transform.localScale.x)
-            {
-                staminaDrop.transform.localScale = new Vector3(staminaDrop.transform.localScale.x - Time.deltaTime, staminaMain.transform.localScale.y, staminaMain.transform.localScale.z);
-            }
-            else
-            {
-                staminaDrop.transform.localScale = staminaMain.transform.localScale;
-                staminaDropping = false;
             }
         }
         if (enemyDropping)
