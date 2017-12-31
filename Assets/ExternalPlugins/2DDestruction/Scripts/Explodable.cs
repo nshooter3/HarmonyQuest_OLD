@@ -46,7 +46,7 @@ public class Explodable : MonoBehaviour
                 float torqueRange = 50;
                 frag.GetComponent<Rigidbody2D>().velocity = new Vector2(Random.Range(-range, range), Random.Range(-range, range));
                 frag.GetComponent<Rigidbody2D>().AddTorque(Random.Range(-torqueRange, torqueRange));
-                Destroy(frag, 3);
+                GlobalFunctions.instance.DelayedFunction(() => deleteFragments(), 3.0f);
             }
         }
         //if fragments exist destroy the original
