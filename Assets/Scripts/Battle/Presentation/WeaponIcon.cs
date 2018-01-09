@@ -7,16 +7,29 @@ public class WeaponIcon : MonoBehaviour
 
     public SpriteRenderer background, fill, weaponLight, weaponDark, whiteOut, redOut;
 
-    private float maxDur, curDur, whiteTimer = 0, whiteTimerMax = 0.25f;
+    private float maxDur, curDur, whiteTimer = 0, whiteTimerMax = 0.25f, sizeTimer = 0, sizeTimerMax = 0.1f;
 
-    public void Activate(float duration)
+    private Vector3 initSize;
+
+    //Toggle juicy size effect upon this weapon's loadout getting activated
+    public void LoadoutSizeLerp()
     {
-        maxDur = duration;
-        curDur = duration;
-        weaponDark.enabled = true;
-        weaponLight.enabled = false;
+        sizeTimer = sizeTimerMax;
+        initSize = transform.localScale;
+    }
+
+    public void Activate(float duration, bool playFill)
+    {
+        if (playFill)
+        {
+            maxDur = duration;
+            curDur = duration;
+            weaponDark.enabled = true;
+            weaponLight.enabled = false;
+            fill.transform.localScale = Vector3.zero;
+        }
+        LoadoutSizeLerp();
         whiteTimer = whiteTimerMax;
-        fill.transform.localScale = Vector3.zero;
     }
 
     public void Deactivate()
@@ -43,6 +56,11 @@ public class WeaponIcon : MonoBehaviour
         {
             whiteTimer -= Time.deltaTime;
             whiteOut.color = new Color(whiteOut.color.r, whiteOut.color.g, whiteOut.color.b, (whiteTimer / whiteTimerMax) / 2.0f);
+        }
+        if (sizeTimer > 0)
+        {
+            sizeTimer -= Time.deltaTime;
+            transform.localScale = Vector3.Lerp(initSize, initSize * 1.25f, sizeTimer / sizeTimerMax);
         }
     }
 }

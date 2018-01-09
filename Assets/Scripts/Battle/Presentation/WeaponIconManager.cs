@@ -43,6 +43,8 @@ public class WeaponIconManager : MonoBehaviour {
             weapons[2].transform.parent = backup1;
             weapons[3].transform.position = backup2.transform.position;
             weapons[3].transform.parent = backup2;
+            weapons[0].LoadoutSizeLerp();
+            weapons[1].LoadoutSizeLerp();
         }
         else
         {
@@ -54,11 +56,13 @@ public class WeaponIconManager : MonoBehaviour {
             weapons[2].transform.parent = active1;
             weapons[3].transform.position = active2.transform.position;
             weapons[3].transform.parent = active2;
+            weapons[2].LoadoutSizeLerp();
+            weapons[3].LoadoutSizeLerp();
         }
     }
 
-    public void ActivateWeaponIcon(int index, float duration)
+    public void ActivateWeaponIcon(int index, float duration, bool playFill = true)
     {
-        weapons[index].Activate(duration);
+        weapons[index].Activate(duration, playFill);
     }
 }

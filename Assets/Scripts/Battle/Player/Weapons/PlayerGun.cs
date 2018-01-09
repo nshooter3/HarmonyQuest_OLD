@@ -9,7 +9,7 @@ public class PlayerGun : PlayerWeapon {
         if (!weaponActive)
         {
             StartCoroutine(GunAttack());
-            WeaponIconManager.instance.ActivateWeaponIcon(weaponID, duration);
+            WeaponIconManager.instance.ActivateWeaponIcon(weaponID, duration, false);
         }
     }
 
