@@ -64,30 +64,45 @@ public class SaveData
 {
     //General variables
     #region
-    public int experience = 0;
-    public int level = 1;
-    public string playerName = "Melody";
-    public string curScene = "demo1";
-    public string destination = "s1";
-    public int deathCount = 0;
-    //States: baby, child, adult
-    public string age = "baby";
+        public int experience = 0;
+        public int level = 1;
+        public string playerName = "Melody";
+        public string curScene = "demo1";
+        public string destination = "s1";
+        public int deathCount = 0;
+        //States: baby, child, adult
+        public string age = "baby";
+    #endregion
+
+    //Combat Variables
+    #region
+        //Which weapons are equiped for loadouts one and two
+        public int weapon1 = 0;
+        public int weapon2 = 3;
+        public int weapon3 = 3;
+        public int weapon4 = 0;
+
+        //Whether or not a weapon slot has been unlocked. Two are available by default
+        public bool[] weaponsAvailable = { true, false, false, true, false, false };
+
+        //Whether or not the player has access to the second weapon loadout. Inactive until they find their first new weapon.
+        public bool twoLoadouts = true;
     #endregion
 
     //TwilitHollow variables
     #region
-    public int hollowProgress = 0;
+        public int hollowProgress = 0;
     #endregion
 
     /*
     //Demo scene variables
     #region
-    public bool talkedToBanana = false;
-    public bool talkedToBananaBill = false;
-    public bool recruitedTranslator = false;
-    public bool movedBanana = false;
+        public bool talkedToBanana = false;
+        public bool talkedToBananaBill = false;
+        public bool recruitedTranslator = false;
+        public bool movedBanana = false;
 
-    public float hallwayProgress = -1f;
-    public float potman = 0f;
+        public float hallwayProgress = -1f;
+        public float potman = 0f;
     #endregion*/
 }

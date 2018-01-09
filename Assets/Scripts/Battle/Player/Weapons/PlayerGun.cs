@@ -9,6 +9,7 @@ public class PlayerGun : PlayerWeapon {
         if (!weaponActive)
         {
             StartCoroutine(GunAttack());
+            WeaponIconManager.instance.ActivateWeaponIcon(weaponID, duration);
         }
     }
 
@@ -16,7 +17,7 @@ public class PlayerGun : PlayerWeapon {
     {
         Debug.Log("Gun!");
         weaponActive = true;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(duration);
         Debug.Log("Done with gun!");
         weaponActive = false;
     }

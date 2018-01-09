@@ -41,6 +41,10 @@ public class PlayerMovementBattle : MonoBehaviour {
         initScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
         ren = GetComponent<SpriteRenderer>();
+        weapon1.weaponID = 0;
+        weapon2.weaponID = 1;
+        weapon3.weaponID = 2;
+        weapon4.weaponID = 3;
     }
 	
 	// Update is called once per frame
@@ -117,19 +121,22 @@ public class PlayerMovementBattle : MonoBehaviour {
 
     private void SwapWeaponLoadout()
     {
-        //swappingWeapons = true;
-        //TODO Swapout animations
-        if (loadout == 1)
+        if (GlobalVars.instance.saveData.twoLoadouts)
         {
-            Debug.Log("loadout 2!");
-            loadout = 2;
+            //swappingWeapons = true;
+            //TODO Swapout animations
+            if (loadout == 1)
+            {
+                loadout = 2;
+                WeaponIconManager.instance.SwapLoadouts(false);
+            }
+            else if (loadout == 2)
+            {
+                loadout = 1;
+                WeaponIconManager.instance.SwapLoadouts(true);
+            }
+            //swappingWeapons = false;
         }
-        else if (loadout == 2)
-        {
-            Debug.Log("loadout 1!");
-            loadout = 1;
-        }
-        //swappingWeapons = false;
     }
 
     //Size effect to juice up dodges

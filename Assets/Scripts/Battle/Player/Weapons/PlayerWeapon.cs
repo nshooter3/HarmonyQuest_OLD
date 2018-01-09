@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerWeapon : MonoBehaviour {
 
     public bool weaponActive = false, heldButtonWeapon = false;
+    public int weaponID;
+    public float duration;
 
     public void CheckForInput(int weaponSlot)
     {
