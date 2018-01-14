@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class PlayerWeapon : MonoBehaviour {
 
-    public bool weaponActive = false, heldButtonWeapon = false;
+    public bool weaponActive = false, heldButtonWeapon = false, canAbort = false, playerImmobilized = false;
     public int weaponID;
     public float duration;
-    public bool canAbort = false;
 
     public void CheckForInput(int weaponSlot)
     {

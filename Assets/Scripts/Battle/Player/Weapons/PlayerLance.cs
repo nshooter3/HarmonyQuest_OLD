@@ -18,8 +18,10 @@ public class PlayerLance : PlayerWeapon
     {
         Debug.Log("Lance!");
         weaponActive = true;
+        playerImmobilized = true;
         yield return new WaitForSeconds(duration);
         Debug.Log("Done with Lance!");
         weaponActive = false;
+        playerImmobilized = false;
     }
 }

@@ -2,15 +2,85 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFireball : MonoBehaviour {
+public class PlayerFireball : PlayerWeapon
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    //How charged up the fireball is
+    int stage = 1, maxStage = 3;
+    //Timer and thresholds for determing charge level
+    float stage2Timer = 1.0f, stage3Timer = 2.0f, timer = 0;
+    //The length of the period after the player attacks, but before they can move again
+    float cooldown = 0.25f;
+
+    public override void ActivateWeapon()
+    {
+        if (!weaponActive && stage != maxStage)
+        {
+            Debug.Log("fireball!");
+            weaponActive = true;
+            playerImmobilized = true;
+            //Adjust timer starting point based on last charge stage reached
+            if (stage == 3)
+            {
+                timer = stage3Timer;
+            }
+            else if (stage == 2)
+            {
+                timer = stage2Timer;
+            }
+            else
+            {
+                timer = 0;
+            }
+        }
+        else
+        {
+            Attack();
+        }
+    }
+
+    public override void AbortWeapon()
+    {
+        Debug.Log("fireball aborted!");
+        weaponActive = false;
+    }
+
+    private IEnumerator Attack()
+    {
+        WeaponIconManager.instance.ActivateWeaponIcon(weaponID, duration);
+        //attack
+        if (stage == 3)
+        {
+            Debug.Log("fireball level 3!");
+        }
+        else if (stage == 2)
+        {
+            Debug.Log("fireball level 2!");
+        }
+        else
+        {
+            Debug.Log("fireball level 1!");
+        }
+        stage = 1;
+        yield return new WaitForSeconds(cooldown);
+        Debug.Log("fireball done!");
+        playerImmobilized = false;
+        weaponActive = false;
+    }
+
+    void Update()
+    {
+        if (weaponActive)
+        {
+            timer += Time.deltaTime;
+            if (timer > stage3Timer)
+            {
+                stage = 3;
+            }
+            else if (timer > stage2Timer)
+            {
+                stage = 2;
+            }
+        }
+    }
 }

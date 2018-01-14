@@ -9,8 +9,14 @@ public class PlayerGun : PlayerWeapon {
         if (!weaponActive)
         {
             StartCoroutine(GunAttack());
+            playerImmobilized = true;
             WeaponIconManager.instance.ActivateWeaponIcon(weaponID, duration, false);
         }
+    }
+
+    public override void ReleaseWeapon()
+    {
+        playerImmobilized = false;
     }
 
     IEnumerator GunAttack()

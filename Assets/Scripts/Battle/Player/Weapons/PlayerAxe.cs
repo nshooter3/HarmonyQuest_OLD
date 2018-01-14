@@ -20,6 +20,7 @@ public class PlayerAxe : PlayerWeapon
             Debug.Log("Axe!");
             weaponActive = true;
             axeCharging = true;
+            playerImmobilized = true;
             stage = 1;
             timer = 0;
         }
@@ -55,6 +56,7 @@ public class PlayerAxe : PlayerWeapon
         }
         yield return new WaitForSeconds(cooldown);
         Debug.Log("Axe done!");
+        playerImmobilized = false;
         weaponActive = false;
     }
 

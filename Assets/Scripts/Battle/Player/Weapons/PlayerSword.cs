@@ -17,8 +17,10 @@ public class PlayerSword : PlayerWeapon {
     {
         Debug.Log("Sword!");
         weaponActive = true;
+        playerImmobilized = true;
         yield return new WaitForSeconds(duration);
         Debug.Log("Done with sword!");
         weaponActive = false;
+        playerImmobilized = false;
     }
 }
