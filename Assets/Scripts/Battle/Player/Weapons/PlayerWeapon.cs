@@ -7,6 +7,7 @@ public class PlayerWeapon : MonoBehaviour {
     public bool weaponActive = false, heldButtonWeapon = false;
     public int weaponID;
     public float duration;
+    public bool canAbort = false;
 
     public void CheckForInput(int weaponSlot)
     {
@@ -17,6 +18,10 @@ public class PlayerWeapon : MonoBehaviour {
                 if (InputManager.instance.shoot1Held)
                 {
                     ActivateWeapon();
+                }
+                else if (InputManager.instance.shoot1Release)
+                {
+                    ReleaseWeapon();
                 }
             }
             else
@@ -35,6 +40,10 @@ public class PlayerWeapon : MonoBehaviour {
                 {
                     ActivateWeapon();
                 }
+                else if (InputManager.instance.shoot2Release)
+                {
+                    ReleaseWeapon();
+                }
             }
             else
             {
@@ -50,5 +59,12 @@ public class PlayerWeapon : MonoBehaviour {
         }
     }
 
+    //Attack button pressed/held
     public virtual void ActivateWeapon() { }
+
+    //Attack button released
+    public virtual void ReleaseWeapon() { }
+
+    //Cancel out of weapon behavior
+    public virtual void AbortWeapon() { }
 }
