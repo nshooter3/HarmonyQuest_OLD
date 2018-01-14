@@ -26,6 +26,9 @@ public class PlayerMovementBattle : MonoBehaviour {
     private Rigidbody2D rb;
     private SpriteRenderer ren;
 
+    //var to track how many bombs the player has dropped, and how many can be active at a time
+    public int bombCount, maxBombCount = 3;
+
     void Awake()
     {
         if (instance == null)
