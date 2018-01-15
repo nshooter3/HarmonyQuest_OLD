@@ -12,44 +12,32 @@ public class PlayerWeapon : MonoBehaviour {
     {
         if (weaponSlot == 1)
         {
-            if (heldButtonWeapon)
+            if (InputManager.instance.shoot1Press)
             {
-                if (InputManager.instance.shoot1Held)
-                {
-                    ActivateWeapon(dashing);
-                }
-                else if (InputManager.instance.shoot1Release)
-                {
-                    ReleaseWeapon();
-                }
+                ActivateWeapon(dashing);
             }
-            else
+            else if (InputManager.instance.shoot1Held)
             {
-                if (InputManager.instance.shoot1Press)
-                {
-                    ActivateWeapon(dashing);
-                }
+                ActivateWeaponHeld(dashing);
+            }
+            else if (InputManager.instance.shoot1Release)
+            {
+                ReleaseWeapon();
             }
         }
         else if (weaponSlot == 2)
         {
-            if (heldButtonWeapon)
+            if (InputManager.instance.shoot2Press)
             {
-                if (InputManager.instance.shoot2Held)
-                {
-                    ActivateWeapon(dashing);
-                }
-                else if (InputManager.instance.shoot2Release)
-                {
-                    ReleaseWeapon();
-                }
+                ActivateWeapon(dashing);
             }
-            else
+            else if (InputManager.instance.shoot2Held)
             {
-                if (InputManager.instance.shoot2Press)
-                {
-                    ActivateWeapon(dashing);
-                }
+                ActivateWeaponHeld(dashing);
+            }
+            else if (InputManager.instance.shoot2Release)
+            {
+                ReleaseWeapon();
             }
         }
         else
@@ -60,6 +48,9 @@ public class PlayerWeapon : MonoBehaviour {
 
     //Attack button pressed/held
     public virtual void ActivateWeapon(bool dashing) { }
+
+    //Attack button pressed/held
+    public virtual void ActivateWeaponHeld(bool dashing) { }
 
     //Attack button released
     public virtual void ReleaseWeapon() { }

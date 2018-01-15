@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerGun : PlayerWeapon {
 
-    public override void ActivateWeapon(bool dashing)
+    public override void ActivateWeaponHeld(bool dashing)
     {
         if (!dashing)
         {

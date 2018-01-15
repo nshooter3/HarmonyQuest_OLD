@@ -42,8 +42,11 @@ public class PlayerFireball : PlayerWeapon
 
     public override void AbortWeapon()
     {
-        Debug.Log("fireball aborted!");
-        weaponActive = false;
+        if (weaponActive)
+        {
+            Debug.Log("fireball aborted!");
+            weaponActive = false;
+        }
     }
 
     private IEnumerator Attack()

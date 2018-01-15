@@ -35,9 +35,14 @@ public class PlayerAxe : PlayerWeapon
 
     public override void AbortWeapon()
     {
-        Debug.Log("Axe aborted!");
-        weaponActive = false;
-        axeCharging = false;
+        if (weaponActive)
+        {
+            Debug.Log("Axe aborted!");
+            weaponActive = false;
+            axeCharging = false;
+            playerImmobilized = false;
+            PlayerMovementBattle.instance.Dash();
+        }
     }
 
     private IEnumerator Attack()

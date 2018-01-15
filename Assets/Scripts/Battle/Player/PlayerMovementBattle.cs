@@ -6,14 +6,14 @@ public class PlayerMovementBattle : MonoBehaviour {
 
     public static PlayerMovementBattle instance;
 
+    //The player's speed modifier
+    public float speed = 4.5f;
+
     //Player's prepared weapons
     private PlayerWeapon weapon1, weapon2, weapon3, weapon4;
     //Used to determine which weapon loadout the player has active (weapons 1 and 2, or weapons 3 and 4)
     private int loadout = 1;
     private bool swappingWeapons = false;
-
-    //variables used to store player's base speed and current speed
-    public float baseSpeed, curSpeed;
 
     //Vars for dashing duration and direction
     private float dashTimer = 0, maxDashTimer = 0.05f, dashCooldown = 0, maxDashCooldown = 0.1f;
@@ -42,8 +42,6 @@ public class PlayerMovementBattle : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        baseSpeed = 4.5f;
-        curSpeed = baseSpeed;
         initScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
         ren = GetComponent<SpriteRenderer>();
@@ -72,26 +70,41 @@ public class PlayerMovementBattle : MonoBehaviour {
         CheckForKeyInput();
     }
 
-    private void Move(Vector3 dir)
+    private void Move()
     {
+        Vector3 dir = InputManager.instance.CheckDirectionalMovement() * speed;
         if (isWeaponImobilizingPlayer())
         {
             //Applies movement based on vector3 from CheckForMove
-            rb.velocity = dir * curSpeed * 0.1f;
+            rb.velocity = dir * 0.1f;
+        }
+        else if (dashing)
+        {
+            rb.velocity = dashDir * 5.0f;
         }
         else
         {
             //Applies movement based on vector3 from CheckForMove
-            rb.velocity = dir * curSpeed;
+            rb.velocity = dir;
         }
+    }
+
+    public void Dash()
+    {
+        dashTimer = maxDashTimer;
+        //PlayerHitbox.instance.GetComponent<BoxCollider2D>().enabled = false;
+        dashDir = InputManager.instance.CheckDirectionalMovement() * speed;
+        ren.color = new Color(1, 1, 1, 0.1f);
+        StartCoroutine(SizePulse());
+        dashing = true;
     }
 
     private void CheckForKeyInput()
     {
-        //If player is dashing, move based on that
+        Move();
+        //Dash logic
         if (dashTimer > 0)
         {
-            Move(dashDir * 1.3f);
             dashTimer -= Time.deltaTime;
             if (dashTimer <= 0)
             {
@@ -109,19 +122,12 @@ public class PlayerMovementBattle : MonoBehaviour {
                 dashCooldown -= Time.deltaTime;
             }
 
-            Move(InputManager.instance.CheckDirectionalMovement());
-
             //Used to initiate dash
             if (InputManager.instance.dash && rb.velocity.magnitude > 0 && dashCooldown <= 0)
             {
                 if (!isWeaponActive())
                 {
-                    dashTimer = maxDashTimer;
-                    //PlayerHitbox.instance.GetComponent<BoxCollider2D>().enabled = false;
-                    dashDir = rb.velocity;
-                    ren.color = new Color(1, 1, 1, 0.1f);
-                    StartCoroutine(SizePulse());
-                    dashing = true;
+                    Dash();
                 }
                 else
                 {
