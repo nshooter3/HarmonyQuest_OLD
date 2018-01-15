@@ -7,7 +7,7 @@ public class PlayerAxe : PlayerWeapon
     //How charged up the axe strike is
     int stage = 1;
     //Whether or not the axe attack is currently charging
-    bool axeCharging;
+    bool axeCharging, attacking = false;
     //Timer and thresholds for determing charge level
     float stage2Timer = 1.0f, stage3Timer = 2.0f, timer = 0;
 
@@ -21,6 +21,7 @@ public class PlayerAxe : PlayerWeapon
             playerImmobilized = true;
             stage = 1;
             timer = 0;
+            attacking = false;
         }
     }
 
@@ -56,14 +57,16 @@ public class PlayerAxe : PlayerWeapon
         Debug.Log("Axe done!");
         playerImmobilized = false;
         weaponActive = false;
+        attacking = false;
     }
 
     void Update()
     {
-        if (weaponActive)
+        if (weaponActive && !attacking)
         {
             if (!axeCharging)
             {
+                attacking = true;
                 StartCoroutine(Attack());
             }
             else
