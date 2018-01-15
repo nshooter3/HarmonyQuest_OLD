@@ -47,19 +47,19 @@ public class PlayerMovementBattle : MonoBehaviour {
         ren = GetComponent<SpriteRenderer>();
         //Init weapons
         weapon1 = playerWeaponPool.GetWeaponFromIndex(GlobalVars.instance.saveData.weapon1);
-        weapon1.transform.parent = transform.parent;
+        weapon1.transform.parent = transform;
         weapon1.transform.localPosition = Vector3.zero;
         weapon1.weaponID = 0;
         weapon2 = playerWeaponPool.GetWeaponFromIndex(GlobalVars.instance.saveData.weapon2);
-        weapon2.transform.parent = transform.parent;
+        weapon2.transform.parent = transform;
         weapon2.transform.localPosition = Vector3.zero;
         weapon2.weaponID = 1;
         weapon3 = playerWeaponPool.GetWeaponFromIndex(GlobalVars.instance.saveData.weapon3);
-        weapon3.transform.parent = transform.parent;
+        weapon3.transform.parent = transform;
         weapon3.transform.localPosition = Vector3.zero;
         weapon3.weaponID = 2;
         weapon4 = playerWeaponPool.GetWeaponFromIndex(GlobalVars.instance.saveData.weapon4);
-        weapon4.transform.parent = transform.parent;
+        weapon4.transform.parent = transform;
         weapon4.transform.localPosition = Vector3.zero;
         weapon4.weaponID = 3;
     }
