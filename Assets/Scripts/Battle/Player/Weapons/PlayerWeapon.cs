@@ -8,7 +8,7 @@ public class PlayerWeapon : MonoBehaviour {
     public int weaponID;
     public float duration;
 
-    public void CheckForInput(int weaponSlot)
+    public void CheckForInput(int weaponSlot, bool dashing = false)
     {
         if (weaponSlot == 1)
         {
@@ -16,7 +16,7 @@ public class PlayerWeapon : MonoBehaviour {
             {
                 if (InputManager.instance.shoot1Held)
                 {
-                    ActivateWeapon();
+                    ActivateWeapon(dashing);
                 }
                 else if (InputManager.instance.shoot1Release)
                 {
@@ -27,7 +27,7 @@ public class PlayerWeapon : MonoBehaviour {
             {
                 if (InputManager.instance.shoot1Press)
                 {
-                    ActivateWeapon();
+                    ActivateWeapon(dashing);
                 }
             }
         }
@@ -37,7 +37,7 @@ public class PlayerWeapon : MonoBehaviour {
             {
                 if (InputManager.instance.shoot2Held)
                 {
-                    ActivateWeapon();
+                    ActivateWeapon(dashing);
                 }
                 else if (InputManager.instance.shoot2Release)
                 {
@@ -48,7 +48,7 @@ public class PlayerWeapon : MonoBehaviour {
             {
                 if (InputManager.instance.shoot2Press)
                 {
-                    ActivateWeapon();
+                    ActivateWeapon(dashing);
                 }
             }
         }
@@ -59,7 +59,7 @@ public class PlayerWeapon : MonoBehaviour {
     }
 
     //Attack button pressed/held
-    public virtual void ActivateWeapon() { }
+    public virtual void ActivateWeapon(bool dashing) { }
 
     //Attack button released
     public virtual void ReleaseWeapon() { }

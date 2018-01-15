@@ -6,14 +6,17 @@ public class PlayerBombSetter : PlayerWeapon
 {
     public PlayerBomb[] bombs;
 
-    public override void ActivateWeapon()
+    public override void ActivateWeapon(bool dashing)
     {
-        if (!weaponActive)
+        if (!dashing)
         {
-            if (PlayerMovementBattle.instance.bombCount < PlayerMovementBattle.instance.maxBombCount)
+            if (!weaponActive)
             {
-                StartCoroutine(BombAttack());
-                WeaponIconManager.instance.ActivateWeaponIcon(weaponID, duration, false);
+                if (PlayerMovementBattle.instance.bombCount < PlayerMovementBattle.instance.maxBombCount)
+                {
+                    StartCoroutine(BombAttack());
+                    WeaponIconManager.instance.ActivateWeaponIcon(weaponID, duration, false);
+                }
             }
         }
     }

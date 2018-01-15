@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PlayerLance : PlayerWeapon
 {
-
-    public override void ActivateWeapon()
+    public override void ActivateWeapon(bool dashing)
     {
-        if (!weaponActive)
+        if (!dashing)
         {
-            StartCoroutine(LanceAttack());
-            WeaponIconManager.instance.ActivateWeaponIcon(weaponID, duration);
+            if (!weaponActive)
+            {
+                StartCoroutine(LanceAttack());
+                WeaponIconManager.instance.ActivateWeaponIcon(weaponID, duration);
+            }
         }
     }
 

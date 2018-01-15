@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class PlayerGun : PlayerWeapon {
 
-    public override void ActivateWeapon()
+    public override void ActivateWeapon(bool dashing)
     {
-        if (!weaponActive)
+        if (!dashing)
         {
-            StartCoroutine(GunAttack());
-            playerImmobilized = true;
-            WeaponIconManager.instance.ActivateWeaponIcon(weaponID, duration, false);
+            if (!weaponActive)
+            {
+                StartCoroutine(GunAttack());
+                playerImmobilized = true;
+                WeaponIconManager.instance.ActivateWeaponIcon(weaponID, duration, false);
+            }
         }
     }
 

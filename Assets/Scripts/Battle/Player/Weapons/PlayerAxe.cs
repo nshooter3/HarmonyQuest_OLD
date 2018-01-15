@@ -11,17 +11,20 @@ public class PlayerAxe : PlayerWeapon
     //Timer and thresholds for determing charge level
     float stage2Timer = 1.0f, stage3Timer = 2.0f, timer = 0;
 
-    public override void ActivateWeapon()
+    public override void ActivateWeapon(bool dashing)
     {
-        if (!weaponActive)
+        if (!dashing)
         {
-            Debug.Log("Axe!");
-            weaponActive = true;
-            axeCharging = true;
-            playerImmobilized = true;
-            stage = 1;
-            timer = 0;
-            attacking = false;
+            if (!weaponActive)
+            {
+                Debug.Log("Axe!");
+                weaponActive = true;
+                axeCharging = true;
+                playerImmobilized = true;
+                stage = 1;
+                timer = 0;
+                attacking = false;
+            }
         }
     }
 

@@ -10,30 +10,33 @@ public class PlayerFireball : PlayerWeapon
     //Timer and thresholds for determing charge level
     float stage2Timer = 1.0f, stage3Timer = 2.0f, timer = 0;
 
-    public override void ActivateWeapon()
+    public override void ActivateWeapon(bool dashing)
     {
-        if (!weaponActive && stage != maxStage)
+        if (!dashing)
         {
-            Debug.Log("fireball!");
-            weaponActive = true;
-            playerImmobilized = true;
-            //Adjust timer starting point based on last charge stage reached
-            if (stage == 3)
+            if (!weaponActive && stage != maxStage)
             {
-                timer = stage3Timer;
-            }
-            else if (stage == 2)
-            {
-                timer = stage2Timer;
+                Debug.Log("fireball!");
+                weaponActive = true;
+                playerImmobilized = true;
+                //Adjust timer starting point based on last charge stage reached
+                if (stage == 3)
+                {
+                    timer = stage3Timer;
+                }
+                else if (stage == 2)
+                {
+                    timer = stage2Timer;
+                }
+                else
+                {
+                    timer = 0;
+                }
             }
             else
             {
-                timer = 0;
+                Attack();
             }
-        }
-        else
-        {
-            Attack();
         }
     }
 
@@ -74,10 +77,12 @@ public class PlayerFireball : PlayerWeapon
             if (timer > stage3Timer)
             {
                 stage = 3;
+                print("stage 3!");
             }
             else if (timer > stage2Timer)
             {
                 stage = 2;
+                print("stage 2!");
             }
         }
     }

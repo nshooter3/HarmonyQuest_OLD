@@ -18,6 +18,7 @@ public class PlayerMovementBattle : MonoBehaviour {
     //Vars for dashing duration and direction
     private float dashTimer = 0, maxDashTimer = 0.05f, dashCooldown = 0, maxDashCooldown = 0.1f;
     private Vector3 dashDir;
+    bool dashing = false;
 
     //Player's initial scale
     private Vector3 initScale;
@@ -73,8 +74,16 @@ public class PlayerMovementBattle : MonoBehaviour {
 
     private void Move(Vector3 dir)
     {
-        //Applies movement based on vector3 from CheckForMove
-        rb.velocity = dir * curSpeed;
+        if (isWeaponImobilizingPlayer())
+        {
+            //Applies movement based on vector3 from CheckForMove
+            rb.velocity = dir * curSpeed * 0.1f;
+        }
+        else
+        {
+            //Applies movement based on vector3 from CheckForMove
+            rb.velocity = dir * curSpeed;
+        }
     }
 
     private void CheckForKeyInput()
@@ -89,6 +98,7 @@ public class PlayerMovementBattle : MonoBehaviour {
                 //PlayerHitbox.instance.GetComponent<BoxCollider2D>().enabled = true;
                 dashCooldown = maxDashCooldown;
                 ren.color = new Color(1, 1, 1, 1);
+                dashing = false;
             }
         }
         //Logic for movement when not in the middle of a dash
@@ -102,31 +112,43 @@ public class PlayerMovementBattle : MonoBehaviour {
             Move(InputManager.instance.CheckDirectionalMovement());
 
             //Used to initiate dash
-            if (InputManager.instance.dash && rb.velocity.magnitude > 0 && dashCooldown <= 0 && !isWeaponActive())
+            if (InputManager.instance.dash && rb.velocity.magnitude > 0 && dashCooldown <= 0)
             {
-                dashTimer = maxDashTimer;
-                //PlayerHitbox.instance.GetComponent<BoxCollider2D>().enabled = false;
-                dashDir = rb.velocity;
-                ren.color = new Color(1, 1, 1, 0.1f);
-                StartCoroutine(SizePulse());
+                if (!isWeaponActive())
+                {
+                    dashTimer = maxDashTimer;
+                    //PlayerHitbox.instance.GetComponent<BoxCollider2D>().enabled = false;
+                    dashDir = rb.velocity;
+                    ren.color = new Color(1, 1, 1, 0.1f);
+                    StartCoroutine(SizePulse());
+                    dashing = true;
+                }
+                else
+                {
+                    print("abort weapons!");
+                    weapon1.AbortWeapon();
+                    weapon2.AbortWeapon();
+                    weapon3.AbortWeapon();
+                    weapon4.AbortWeapon();
+                }
             }
             //Used to check for weapon usage. Alters weapons based on which loadout is active
-            else if (swappingWeapons == false)
+            if (swappingWeapons == false)
             {
                 if (loadout == 1)
                 {
-                    weapon1.CheckForInput(1);
+                    weapon1.CheckForInput(1, dashing);
                     if (!weapon1.weaponActive)
                     {
-                        weapon2.CheckForInput(2);
+                        weapon2.CheckForInput(2, dashing);
                     }
                 }
                 else if (loadout == 2)
                 {
-                    weapon3.CheckForInput(1);
+                    weapon3.CheckForInput(1, dashing);
                     if (!weapon3.weaponActive)
                     {
-                        weapon4.CheckForInput(2);
+                        weapon4.CheckForInput(2, dashing);
                     }
                 }
                 if (InputManager.instance.weaponSwap && !isWeaponActive())
@@ -176,5 +198,12 @@ public class PlayerMovementBattle : MonoBehaviour {
     {
         return (weapon1.weaponActive == true || weapon2.weaponActive == true ||
                      weapon3.weaponActive == true || weapon4.weaponActive == true);
+    }
+
+    //Use this to determine whether or not a weapon is preventing the player from moving
+    public bool isWeaponImobilizingPlayer()
+    {
+        return (weapon1.playerImmobilized == true || weapon2.playerImmobilized == true ||
+                     weapon3.playerImmobilized == true || weapon4.playerImmobilized == true);
     }
 }
