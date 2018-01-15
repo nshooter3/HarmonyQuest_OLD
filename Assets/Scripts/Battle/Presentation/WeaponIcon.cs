@@ -11,6 +11,8 @@ public class WeaponIcon : MonoBehaviour
 
     private Vector3 initSize;
 
+    public string iconName;
+
     //Toggle juicy size effect upon this weapon's loadout getting activated
     public void LoadoutSizeLerp()
     {

@@ -43,11 +43,11 @@ public class PlayerBombSetter : PlayerWeapon
     {
         if (PlayerMovementBattle.instance.bombCount == PlayerMovementBattle.instance.maxBombCount)
         {
-            WeaponIconManager.instance.DarkenWeaponIcon(weaponID);
+            WeaponIconManager.instance.DarkenWeaponIcon("Bomb");
         }
         else
         {
-            WeaponIconManager.instance.UnDarkenWeaponIcon(weaponID);
+            WeaponIconManager.instance.UnDarkenWeaponIcon("Bomb");
         }
     }
 }

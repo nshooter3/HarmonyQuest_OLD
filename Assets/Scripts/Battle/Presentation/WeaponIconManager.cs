@@ -66,13 +66,25 @@ public class WeaponIconManager : MonoBehaviour {
         weapons[index].Activate(duration, playFill);
     }
 
-    public void DarkenWeaponIcon(int index)
+    public void DarkenWeaponIcon(string iconType)
     {
-        weapons[index].Darken();
+        foreach (WeaponIcon weapon in weapons)
+        {
+            if (weapon.iconName == iconType)
+            {
+                weapon.Darken();
+            }
+        }
     }
 
-    public void UnDarkenWeaponIcon(int index)
+    public void UnDarkenWeaponIcon(string iconType)
     {
-        weapons[index].UnDarken();
+        foreach (WeaponIcon weapon in weapons)
+        {
+            if (weapon.iconName == iconType)
+            {
+                weapon.UnDarken();
+            }
+        }
     }
 }
