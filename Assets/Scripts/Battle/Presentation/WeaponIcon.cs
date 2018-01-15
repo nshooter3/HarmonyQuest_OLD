@@ -41,6 +41,27 @@ public class WeaponIcon : MonoBehaviour
         fill.transform.localScale = Vector3.one;
     }
 
+    public void Darken()
+    {
+        if (fill.GetComponent<SpriteRenderer>().enabled == true)
+        {
+            weaponDark.enabled = true;
+            weaponLight.enabled = false;
+            fill.GetComponent<SpriteRenderer>().enabled = false;
+        }
+    }
+
+    public void UnDarken()
+    {
+        if (fill.GetComponent<SpriteRenderer>().enabled == false)
+        {
+            weaponDark.enabled = false;
+            weaponLight.enabled = true;
+            fill.GetComponent<SpriteRenderer>().enabled = true;
+            whiteTimer = whiteTimerMax;
+        }
+    }
+
     void Update()
     {
         if (curDur > 0)

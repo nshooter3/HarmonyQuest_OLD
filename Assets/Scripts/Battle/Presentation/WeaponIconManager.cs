@@ -65,4 +65,14 @@ public class WeaponIconManager : MonoBehaviour {
     {
         weapons[index].Activate(duration, playFill);
     }
+
+    public void DarkenWeaponIcon(int index)
+    {
+        weapons[index].Darken();
+    }
+
+    public void UnDarkenWeaponIcon(int index)
+    {
+        weapons[index].UnDarken();
+    }
 }

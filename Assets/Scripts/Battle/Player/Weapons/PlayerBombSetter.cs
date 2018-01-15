@@ -35,4 +35,16 @@ public class PlayerBombSetter : PlayerWeapon
         Debug.Log("Done with BombSetter!");
         weaponActive = false;
     }
+
+    void Update()
+    {
+        if (PlayerMovementBattle.instance.bombCount == PlayerMovementBattle.instance.maxBombCount)
+        {
+            WeaponIconManager.instance.DarkenWeaponIcon(weaponID);
+        }
+        else
+        {
+            WeaponIconManager.instance.UnDarkenWeaponIcon(weaponID);
+        }
+    }
 }
