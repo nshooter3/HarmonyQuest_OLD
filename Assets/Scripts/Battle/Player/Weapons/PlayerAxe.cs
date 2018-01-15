@@ -10,8 +10,6 @@ public class PlayerAxe : PlayerWeapon
     bool axeCharging;
     //Timer and thresholds for determing charge level
     float stage2Timer = 1.0f, stage3Timer = 2.0f, timer = 0;
-    //The length of the period after the player attacks, but before they can move again
-    float cooldown = 0.25f;
 
     public override void ActivateWeapon()
     {
@@ -54,7 +52,7 @@ public class PlayerAxe : PlayerWeapon
         {
             Debug.Log("Axe attack level 1!");
         }
-        yield return new WaitForSeconds(cooldown);
+        yield return new WaitForSeconds(duration);
         Debug.Log("Axe done!");
         playerImmobilized = false;
         weaponActive = false;

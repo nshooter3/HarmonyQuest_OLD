@@ -79,8 +79,8 @@ public class SaveData
         //Which weapons are equiped for loadouts one and two
         public int weapon1 = 0;
         public int weapon2 = 3;
-        public int weapon3 = 3;
-        public int weapon4 = 0;
+        public int weapon3 = 1;
+        public int weapon4 = 5;
 
         //Whether or not a weapon slot has been unlocked. Two are available by default
         public bool[] weaponsAvailable = { true, false, false, true, false, false };

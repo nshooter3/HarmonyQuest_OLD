@@ -13,7 +13,7 @@ public class PlayerBombSetter : PlayerWeapon
             if (PlayerMovementBattle.instance.bombCount < PlayerMovementBattle.instance.maxBombCount)
             {
                 StartCoroutine(BombAttack());
-                WeaponIconManager.instance.ActivateWeaponIcon(weaponID, duration);
+                WeaponIconManager.instance.ActivateWeaponIcon(weaponID, duration, false);
             }
         }
     }

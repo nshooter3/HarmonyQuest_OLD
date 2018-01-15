@@ -7,7 +7,7 @@ public class PlayerMovementBattle : MonoBehaviour {
     public static PlayerMovementBattle instance;
 
     //Player's prepared weapons
-    public PlayerWeapon weapon1, weapon2, weapon3, weapon4;
+    private PlayerWeapon weapon1, weapon2, weapon3, weapon4;
     //Used to determine which weapon loadout the player has active (weapons 1 and 2, or weapons 3 and 4)
     private int loadout = 1;
     private bool swappingWeapons = false;
@@ -29,6 +29,8 @@ public class PlayerMovementBattle : MonoBehaviour {
     //var to track how many bombs the player has dropped, and how many can be active at a time
     public int bombCount, maxBombCount = 3;
 
+    public PlayerWeaponPool playerWeaponPool;
+
     void Awake()
     {
         if (instance == null)
@@ -44,9 +46,22 @@ public class PlayerMovementBattle : MonoBehaviour {
         initScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
         ren = GetComponent<SpriteRenderer>();
+        //Init weapons
+        weapon1 = playerWeaponPool.GetWeaponFromIndex(GlobalVars.instance.saveData.weapon1);
+        weapon1.transform.parent = transform.parent;
+        weapon1.transform.localPosition = Vector3.zero;
         weapon1.weaponID = 0;
+        weapon2 = playerWeaponPool.GetWeaponFromIndex(GlobalVars.instance.saveData.weapon2);
+        weapon2.transform.parent = transform.parent;
+        weapon2.transform.localPosition = Vector3.zero;
         weapon2.weaponID = 1;
+        weapon3 = playerWeaponPool.GetWeaponFromIndex(GlobalVars.instance.saveData.weapon3);
+        weapon3.transform.parent = transform.parent;
+        weapon3.transform.localPosition = Vector3.zero;
         weapon3.weaponID = 2;
+        weapon4 = playerWeaponPool.GetWeaponFromIndex(GlobalVars.instance.saveData.weapon4);
+        weapon4.transform.parent = transform.parent;
+        weapon4.transform.localPosition = Vector3.zero;
         weapon4.weaponID = 3;
     }
 	

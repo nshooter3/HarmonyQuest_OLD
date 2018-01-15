@@ -5,12 +5,12 @@ using UnityEngine;
 public class WeaponIconPool : MonoBehaviour {
 
     //A list of all weapon icons.
-    //1. Sword
-    //2. Lance
-    //3. Axe
-    //4. Gun
-    //5. Fireball
-    //6. Bomb
+    //0. Sword
+    //1. Lance
+    //2. Axe
+    //3. Gun
+    //4. Fireball
+    //5. Bomb
     public WeaponIcon[] WeaponIcons;
 
     //Returns a new instance of a weapon icon based on index
