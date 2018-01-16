@@ -44,11 +44,12 @@ public class PlayerFireball : PlayerWeapon
 
     public override void AbortWeapon()
     {
-        if (weaponActive)
+        if (weaponActive && InputManager.instance.CheckDirectionalMovement() != Vector3.zero)
         {
             Debug.Log("fireball aborted!");
             weaponActive = false;
             playerImmobilized = false;
+            PlayerMovementBattle.instance.Dash();
         }
     }
 

@@ -36,7 +36,7 @@ public class PlayerAxe : PlayerWeapon
 
     public override void AbortWeapon()
     {
-        if (weaponActive)
+        if (weaponActive && InputManager.instance.CheckDirectionalMovement() != Vector3.zero)
         {
             Debug.Log("Axe aborted!");
             weaponActive = false;

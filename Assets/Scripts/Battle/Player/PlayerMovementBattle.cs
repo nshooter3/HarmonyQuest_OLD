@@ -22,7 +22,7 @@ public class PlayerMovementBattle : MonoBehaviour {
 
     //Counter used to gradually slow the player to a stop when they attack, then gradually speed up coming out of it
     private float immobilizationCountdown, maxImmobilizationCountdown = 0.1f;
-    public float speedUpCountdown, maxSpeedUpCountdown = 0.25f;
+    public float speedUpCountdown, maxSpeedUpCountdown = 0.1f;
 
     //Player's initial scale
     private Vector3 initScale;
@@ -153,9 +153,9 @@ public class PlayerMovementBattle : MonoBehaviour {
             }
 
             //Used to initiate dash
-            if (InputManager.instance.dash && rb.velocity.magnitude > 0 && dashCooldown <= 0)
+            if (InputManager.instance.dash)
             {
-                if (!isWeaponActive())
+                if (!isWeaponActive() && rb.velocity.magnitude > 0 && dashCooldown <= 0)
                 {
                     Dash();
                 }
