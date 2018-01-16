@@ -12,6 +12,7 @@ public class PlayerFireball : PlayerWeapon
 
     public override void ActivateWeapon(bool dashing)
     {
+        print("activate fireball");
         if (!dashing)
         {
             if (!weaponActive && stage != maxStage)
@@ -36,7 +37,7 @@ public class PlayerFireball : PlayerWeapon
             }
             else
             {
-                Attack();
+                StartCoroutine(Attack());
             }
         }
     }
@@ -47,6 +48,7 @@ public class PlayerFireball : PlayerWeapon
         {
             Debug.Log("fireball aborted!");
             weaponActive = false;
+            playerImmobilized = false;
         }
     }
 
@@ -67,6 +69,7 @@ public class PlayerFireball : PlayerWeapon
             Debug.Log("fireball level 1!");
         }
         stage = 1;
+        timer = 0;
         yield return new WaitForSeconds(duration);
         Debug.Log("fireball done!");
         playerImmobilized = false;
@@ -81,12 +84,10 @@ public class PlayerFireball : PlayerWeapon
             if (timer > stage3Timer)
             {
                 stage = 3;
-                print("stage 3!");
             }
             else if (timer > stage2Timer)
             {
                 stage = 2;
-                print("stage 2!");
             }
         }
     }

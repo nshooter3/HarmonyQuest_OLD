@@ -173,7 +173,10 @@ public class PlayerMovementBattle : MonoBehaviour {
             {
                 if (loadout == 1)
                 {
-                    weapon1.CheckForInput(1, dashing);
+                    if (!weapon2.weaponActive)
+                    {
+                        weapon1.CheckForInput(1, dashing);
+                    }
                     if (!weapon1.weaponActive)
                     {
                         weapon2.CheckForInput(2, dashing);
@@ -181,7 +184,10 @@ public class PlayerMovementBattle : MonoBehaviour {
                 }
                 else if (loadout == 2)
                 {
-                    weapon3.CheckForInput(1, dashing);
+                    if (!weapon4.weaponActive)
+                    {
+                        weapon3.CheckForInput(1, dashing);
+                    }
                     if (!weapon3.weaponActive)
                     {
                         weapon4.CheckForInput(2, dashing);
