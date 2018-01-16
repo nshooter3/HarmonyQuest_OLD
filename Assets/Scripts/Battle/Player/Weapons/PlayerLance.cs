@@ -21,6 +21,7 @@ public class PlayerLance : PlayerWeapon
         Debug.Log("Lance!");
         weaponActive = true;
         playerImmobilized = true;
+        PlayerMovementBattle.instance.StartImmobilization(.15f);
         yield return new WaitForSeconds(duration);
         Debug.Log("Done with Lance!");
         weaponActive = false;

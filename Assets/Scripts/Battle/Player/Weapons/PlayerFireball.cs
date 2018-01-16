@@ -19,6 +19,7 @@ public class PlayerFireball : PlayerWeapon
                 Debug.Log("fireball!");
                 weaponActive = true;
                 playerImmobilized = true;
+                PlayerMovementBattle.instance.StartImmobilization(.2f);
                 //Adjust timer starting point based on last charge stage reached
                 if (stage == 3)
                 {

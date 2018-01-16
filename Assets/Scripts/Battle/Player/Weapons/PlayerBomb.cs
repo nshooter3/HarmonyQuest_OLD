@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerBomb : MonoBehaviour {
 
-    public float fuse = 2.0f;
+    private float fuse = 1.0f;
     public bool active = false;
     SpriteRenderer sr;
 

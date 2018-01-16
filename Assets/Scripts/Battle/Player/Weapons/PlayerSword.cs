@@ -21,6 +21,7 @@ public class PlayerSword : PlayerWeapon {
         Debug.Log("Sword!");
         weaponActive = true;
         playerImmobilized = true;
+        PlayerMovementBattle.instance.StartImmobilization(.1f);
         yield return new WaitForSeconds(duration);
         Debug.Log("Done with sword!");
         weaponActive = false;

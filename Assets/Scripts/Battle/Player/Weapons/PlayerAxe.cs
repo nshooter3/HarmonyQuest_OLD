@@ -9,7 +9,7 @@ public class PlayerAxe : PlayerWeapon
     //Whether or not the axe attack is currently charging
     bool axeCharging, attacking = false;
     //Timer and thresholds for determing charge level
-    float stage2Timer = 1.0f, stage3Timer = 2.0f, timer = 0;
+    float stage2Timer = 0.75f, stage3Timer = 1.5f, timer = 0;
 
     public override void ActivateWeapon(bool dashing)
     {
@@ -21,6 +21,7 @@ public class PlayerAxe : PlayerWeapon
                 weaponActive = true;
                 axeCharging = true;
                 playerImmobilized = true;
+                PlayerMovementBattle.instance.StartImmobilization(.2f);
                 stage = 1;
                 timer = 0;
                 attacking = false;

@@ -9,7 +9,7 @@ public class WeaponIcon : MonoBehaviour
 
     private float maxDur, curDur, whiteTimer = 0, whiteTimerMax = 0.25f, sizeTimer = 0, sizeTimerMax = 0.1f;
 
-    private Vector3 initSize;
+    private Vector3 initSize = new Vector3(0.75f, 0.75f, 1);
 
     public string iconName;
 
@@ -17,7 +17,6 @@ public class WeaponIcon : MonoBehaviour
     public void LoadoutSizeLerp()
     {
         sizeTimer = sizeTimerMax;
-        initSize = transform.localScale;
     }
 
     public void Activate(float duration, bool playFill)

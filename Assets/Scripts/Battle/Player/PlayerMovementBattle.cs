@@ -7,7 +7,7 @@ public class PlayerMovementBattle : MonoBehaviour {
     public static PlayerMovementBattle instance;
 
     //The player's speed modifier
-    public float speed = 4.5f;
+    private float speed = 3.5f;
 
     //Player's prepared weapons
     private PlayerWeapon weapon1, weapon2, weapon3, weapon4;
@@ -16,9 +16,13 @@ public class PlayerMovementBattle : MonoBehaviour {
     private bool swappingWeapons = false;
 
     //Vars for dashing duration and direction
-    private float dashTimer = 0, maxDashTimer = 0.05f, dashCooldown = 0, maxDashCooldown = 0.1f;
+    private float dashTimer = 0, maxDashTimer = 0.04f, dashCooldown = 0, maxDashCooldown = 0.2f;
     private Vector3 dashDir;
     bool dashing = false;
+
+    //Counter used to gradually slow the player to a stop when they attack, then gradually speed up coming out of it
+    private float immobilizationCountdown, maxImmobilizationCountdown = 0.1f;
+    public float speedUpCountdown, maxSpeedUpCountdown = 0.25f;
 
     //Player's initial scale
     private Vector3 initScale;
@@ -76,7 +80,7 @@ public class PlayerMovementBattle : MonoBehaviour {
         if (isWeaponImobilizingPlayer())
         {
             //Applies movement based on vector3 from CheckForMove
-            rb.velocity = dir * 0.1f;
+            rb.velocity = dir * Mathf.Lerp(0, 1, immobilizationCountdown/ maxImmobilizationCountdown);
         }
         else if (dashing)
         {
@@ -85,7 +89,7 @@ public class PlayerMovementBattle : MonoBehaviour {
         else
         {
             //Applies movement based on vector3 from CheckForMove
-            rb.velocity = dir;
+            rb.velocity = dir * Mathf.Lerp(1, 0, speedUpCountdown / maxSpeedUpCountdown);
         }
     }
 
@@ -97,11 +101,37 @@ public class PlayerMovementBattle : MonoBehaviour {
         ren.color = new Color(1, 1, 1, 0.1f);
         StartCoroutine(SizePulse());
         dashing = true;
+        speedUpCountdown = 0;
+    }
+
+    //Kick off timer that gradually slows the player to a stop
+    public void StartImmobilization(float maxImmobilizationCountdown)
+    {
+        this.maxImmobilizationCountdown = maxImmobilizationCountdown;
+        immobilizationCountdown = maxImmobilizationCountdown;
+        speedUpCountdown = 0;
     }
 
     private void CheckForKeyInput()
     {
         Move();
+        if (immobilizationCountdown > 0)
+        {
+            immobilizationCountdown -= Time.deltaTime;
+            if (immobilizationCountdown <= 0)
+            {
+                immobilizationCountdown = 0;
+                speedUpCountdown = maxSpeedUpCountdown;
+            }
+        }
+        else if (speedUpCountdown > 0 && !isWeaponActive())
+        {
+            speedUpCountdown -= Time.deltaTime;
+            if (speedUpCountdown <= 0)
+            {
+                //stuff
+            }
+        }
         //Dash logic
         if (dashTimer > 0)
         {
