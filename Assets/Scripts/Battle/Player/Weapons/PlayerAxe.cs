@@ -25,6 +25,7 @@ public class PlayerAxe : PlayerWeapon
                 stage = 1;
                 timer = 0;
                 attacking = false;
+                WeaponIconManager.instance.ActivateWeaponIcon(weaponID, duration, false);
             }
         }
     }

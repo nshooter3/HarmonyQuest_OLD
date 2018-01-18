@@ -24,7 +24,7 @@ public class BattleSceneManager : MonoBehaviour {
         //assign player and enemy variables, and set their transparency to 0 for the intro sequence
         player = (PlayerMovementBattle)FindObjectOfType(typeof(PlayerMovementBattle));
         enemies = (Enemy[])FindObjectsOfType(typeof(Enemy));
-        GlobalFunctions.instance.FadeOut(player.GetComponent<SpriteRenderer>().color, 0.1f, player.GetComponent<SpriteRenderer>());
+        GlobalFunctions.instance.FadeOut(player.ren.color, 0.1f, player.ren);
         foreach (Enemy enemy in enemies)
         {
             GlobalFunctions.instance.FadeOut(enemy.GetComponent<SpriteRenderer>().color, 0.1f, enemy.GetComponent<SpriteRenderer>());
@@ -38,8 +38,8 @@ public class BattleSceneManager : MonoBehaviour {
     //Fade in player and enemies, as part of the intro sequence
     public void FadeInCharacters()
     {
-        GlobalFunctions.instance.FadeIn(new Color(player.GetComponent<SpriteRenderer>().color.r, player.GetComponent<SpriteRenderer>().color.g, player.GetComponent<SpriteRenderer>().color.b, 1),
-                                        0.5f, player.GetComponent<SpriteRenderer>());
+        GlobalFunctions.instance.FadeIn(new Color(player.ren.color.r, player.ren.color.g, player.ren.color.b, 1),
+                                        0.5f, player.ren);
         foreach (Enemy enemy in enemies)
         {
             GlobalFunctions.instance.FadeIn(new Color (enemy.GetComponent<SpriteRenderer>().color.r, enemy.GetComponent<SpriteRenderer>().color.g, enemy.GetComponent<SpriteRenderer>().color.b, 1),

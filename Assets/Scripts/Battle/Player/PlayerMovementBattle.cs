@@ -9,6 +9,12 @@ public class PlayerMovementBattle : MonoBehaviour {
     //The player's speed modifier
     private float speed = 3.5f;
 
+    //The direction that the player is currently facing. Represented in degrees, ranges from 0 to 359
+    float directionAngle = 0;
+    //Enum storing 8 directional player direction, used for animations
+    public enum PlayerDirection { Left, UpLeft, Up, UpRight, Right, DownRight, Down, DownLeft };
+    public PlayerDirection playerDirection;
+
     //Player's prepared weapons
     private PlayerWeapon weapon1, weapon2, weapon3, weapon4;
     //Used to determine which weapon loadout the player has active (weapons 1 and 2, or weapons 3 and 4)
@@ -25,15 +31,16 @@ public class PlayerMovementBattle : MonoBehaviour {
     public float speedUpCountdown, maxSpeedUpCountdown = 0.1f;
 
     //Player's initial scale
-    private Vector3 initScale;
+    private Vector3 initScaleRen;
 
     //Player components
     private Rigidbody2D rb;
-    private SpriteRenderer ren;
+    public SpriteRenderer ren;
 
     //var to track how many bombs the player has dropped, and how many can be active at a time
     public int bombCount, maxBombCount = 3;
 
+    //The pool used to instantiate player weapons
     public PlayerWeaponPool playerWeaponPool;
 
     void Awake()
@@ -46,9 +53,10 @@ public class PlayerMovementBattle : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        initScale = transform.localScale;
+        directionAngle = 0;
+        playerDirection = PlayerDirection.Up;
+        initScaleRen = ren.transform.localScale;
         rb = GetComponent<Rigidbody2D>();
-        ren = GetComponent<SpriteRenderer>();
         //Init weapons
         weapon1 = playerWeaponPool.GetWeaponFromIndex(GlobalVars.instance.saveData.weapon1);
         weapon1.transform.parent = transform;
@@ -221,20 +229,6 @@ public class PlayerMovementBattle : MonoBehaviour {
         }
     }
 
-    //Size effect to juice up dodges
-    IEnumerator SizePulse()
-    {
-        float rotDir = (Random.Range(0, 2) - 0.5f) * 40;
-        for (float f = 1; f >= 0; f -= 0.1f)
-        {
-            transform.eulerAngles = Vector3.Lerp(Vector3.zero, new Vector3(0, 0, rotDir), f);
-            transform.localScale = initScale * (1f + f / 2f);
-            yield return new WaitForSeconds(0.005f);
-        }
-        transform.eulerAngles = Vector3.zero;
-        yield return null;
-    }
-
     //Use this to determine whether or not a weapon is active
     public bool isWeaponActive()
     {
@@ -247,5 +241,20 @@ public class PlayerMovementBattle : MonoBehaviour {
     {
         return (weapon1.playerImmobilized == true || weapon2.playerImmobilized == true ||
                      weapon3.playerImmobilized == true || weapon4.playerImmobilized == true);
+    }
+
+    //Size effect to juice up dodges
+    IEnumerator SizePulse()
+    {
+        float rotDir = (Random.Range(0, 2) - 0.5f) * 40;
+        for (float f = 1; f >= 0; f -= 0.1f)
+        {
+            ren.transform.eulerAngles = Vector3.Lerp(Vector3.zero, new Vector3(0, 0, rotDir), f);
+            ren.transform.localScale = initScaleRen * (1f + f / 2f);
+            yield return new WaitForSeconds(0.005f);
+        }
+        ren.transform.eulerAngles = Vector3.zero;
+        ren.transform.localScale = initScaleRen;
+        yield return null;
     }
 }

@@ -34,6 +34,7 @@ public class PlayerFireball : PlayerWeapon
                 {
                     timer = 0;
                 }
+                WeaponIconManager.instance.ActivateWeaponIcon(weaponID, duration, false);
             }
             else
             {
