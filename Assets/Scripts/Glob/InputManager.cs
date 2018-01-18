@@ -14,6 +14,10 @@ public class InputManager : MonoBehaviour
     public bool confirmHeld = false, backHeld = false, menuHeld = false, upHeld = false, downHeld = false, leftHeld = false, rightHeld = false, shiftHeld = false;
     public bool shoot1Press = false, shoot1Held = false, shoot1Release = false, shoot2Press = false, shoot2Held = false, shoot2Release = false, weaponSwap = false, dash = false;
 
+    //Direction player is facing in degrees
+    public float directionAngle;
+    public bool UpdateDirectionalAngle = true;
+
     public static InputManager instance;
 
     void Awake()
@@ -27,7 +31,7 @@ public class InputManager : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        directionAngle = 180;
     }
 
     // Call this function to update
@@ -201,6 +205,47 @@ public class InputManager : MonoBehaviour
         {
             return new Vector3(0, 0, 0);
         }
+    }
+
+    public float CheckDirectionAngle()
+    {
+        if (UpdateDirectionalAngle)
+        {
+            //Check for various directional keys/combinations for movement
+            if (rightHeld && upHeld)
+            {
+                directionAngle = 315f;
+            }
+            else if (rightHeld && downHeld)
+            {
+                directionAngle = 225f;
+            }
+            else if (leftHeld && upHeld)
+            {
+                directionAngle = 45f;
+            }
+            else if (leftHeld && downHeld)
+            {
+                directionAngle = 135f;
+            }
+            else if (rightHeld)
+            {
+                directionAngle = 270f;
+            }
+            else if (leftHeld)
+            {
+                directionAngle = 90f;
+            }
+            else if (upHeld)
+            {
+                directionAngle = 0f;
+            }
+            else if (downHeld)
+            {
+                directionAngle = 180f;
+            }
+        }
+        return directionAngle;
     }
 
     //Resets all public variables

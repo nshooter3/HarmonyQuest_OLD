@@ -11,9 +11,6 @@ public class PlayerMovementBattle : MonoBehaviour {
 
     //The direction that the player is currently facing. Represented in degrees, ranges from 0 to 359
     float directionAngle = 0;
-    //Enum storing 8 directional player direction, used for animations
-    public enum PlayerDirection { Left, UpLeft, Up, UpRight, Right, DownRight, Down, DownLeft };
-    public PlayerDirection playerDirection;
 
     //Player's prepared weapons
     private PlayerWeapon weapon1, weapon2, weapon3, weapon4;
@@ -36,6 +33,7 @@ public class PlayerMovementBattle : MonoBehaviour {
     //Player components
     private Rigidbody2D rb;
     public SpriteRenderer ren;
+    public Animator anim;
 
     //var to track how many bombs the player has dropped, and how many can be active at a time
     public int bombCount, maxBombCount = 3;
@@ -53,8 +51,7 @@ public class PlayerMovementBattle : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        directionAngle = 0;
-        playerDirection = PlayerDirection.Down;
+        directionAngle = 180;
         initScaleRen = ren.transform.localScale;
         rb = GetComponent<Rigidbody2D>();
         //Init weapons
@@ -85,6 +82,16 @@ public class PlayerMovementBattle : MonoBehaviour {
     private void Move()
     {
         Vector3 dir = InputManager.instance.CheckDirectionalMovement() * speed;
+        //Updated anim params based on whether or not player is moving
+        if (dir != Vector3.zero)
+        {
+            anim.SetBool("isMoving", true);
+        }
+        else
+        {
+            anim.SetBool("isMoving", false);
+        }
+        //Alter movement behavior based on player state
         if (isWeaponImobilizingPlayer())
         {
             //Applies movement based on vector3 from CheckForMove
@@ -123,6 +130,7 @@ public class PlayerMovementBattle : MonoBehaviour {
     private void CheckForKeyInput()
     {
         Move();
+        UpdateDirection();
         if (immobilizationCountdown > 0)
         {
             immobilizationCountdown -= Time.deltaTime;
@@ -241,6 +249,43 @@ public class PlayerMovementBattle : MonoBehaviour {
     {
         return (weapon1.playerImmobilized == true || weapon2.playerImmobilized == true ||
                      weapon3.playerImmobilized == true || weapon4.playerImmobilized == true);
+    }
+
+    public void UpdateDirection()
+    {
+        directionAngle = InputManager.instance.CheckDirectionAngle();
+        if (directionAngle >= 315)
+        {
+            anim.SetInteger("direction", 1);
+        }
+        else if (directionAngle >= 270)
+        {
+            anim.SetInteger("direction", 2);
+        }
+        else if (directionAngle >= 225)
+        {
+            anim.SetInteger("direction", 3);
+        }
+        else if (directionAngle >= 180)
+        {
+            anim.SetInteger("direction", 4);
+        }
+        else if (directionAngle >= 135)
+        {
+            anim.SetInteger("direction", 5);
+        }
+        else if (directionAngle >= 90)
+        {
+            anim.SetInteger("direction", 6);
+        }
+        else if (directionAngle >= 45)
+        {
+            anim.SetInteger("direction", 7);
+        }
+        else
+        {
+            anim.SetInteger("direction", 0);
+        }
     }
 
     //Size effect to juice up dodges
