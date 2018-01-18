@@ -54,7 +54,7 @@ public class PlayerMovementBattle : MonoBehaviour {
     // Use this for initialization
     void Start () {
         directionAngle = 0;
-        playerDirection = PlayerDirection.Up;
+        playerDirection = PlayerDirection.Down;
         initScaleRen = ren.transform.localScale;
         rb = GetComponent<Rigidbody2D>();
         //Init weapons
