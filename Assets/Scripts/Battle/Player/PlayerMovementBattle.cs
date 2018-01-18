@@ -82,27 +82,37 @@ public class PlayerMovementBattle : MonoBehaviour {
     private void Move()
     {
         Vector3 dir = InputManager.instance.CheckDirectionalMovement() * speed;
-        //Updated anim params based on whether or not player is moving
-        if (dir != Vector3.zero)
-        {
-            anim.SetBool("isMoving", true);
-        }
-        else
-        {
-            anim.SetBool("isMoving", false);
-        }
         //Alter movement behavior based on player state
         if (isWeaponImobilizingPlayer())
         {
+            anim.SetBool("isMoving", false);
             //Applies movement based on vector3 from CheckForMove
             rb.velocity = dir * Mathf.Lerp(0, 1, immobilizationCountdown/ maxImmobilizationCountdown);
         }
         else if (dashing)
         {
+            //Updated anim params based on whether or not player is moving
+            if (dir != Vector3.zero)
+            {
+                anim.SetBool("isMoving", true);
+            }
+            else
+            {
+                anim.SetBool("isMoving", false);
+            }
             rb.velocity = dashDir * 5.0f;
         }
         else
         {
+            //Updated anim params based on whether or not player is moving
+            if (dir != Vector3.zero)
+            {
+                anim.SetBool("isMoving", true);
+            }
+            else
+            {
+                anim.SetBool("isMoving", false);
+            }
             //Applies movement based on vector3 from CheckForMove
             rb.velocity = dir * Mathf.Lerp(1, 0, speedUpCountdown / maxSpeedUpCountdown);
         }
