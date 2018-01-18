@@ -22,6 +22,8 @@ public class PlayerMovementBattle : MonoBehaviour {
     private float dashTimer = 0, maxDashTimer = 0.04f, dashCooldown = 0, maxDashCooldown = 0.2f;
     private Vector3 dashDir;
     bool dashing = false;
+    //Params for after image effect during dash
+    float afterimageInterval, afterImageIntervalMax = 0.005f;
 
     //Counter used to gradually slow the player to a stop when they attack, then gradually speed up coming out of it
     private float immobilizationCountdown, maxImmobilizationCountdown = 0.1f;
@@ -91,15 +93,7 @@ public class PlayerMovementBattle : MonoBehaviour {
         }
         else if (dashing)
         {
-            //Updated anim params based on whether or not player is moving
-            if (dir != Vector3.zero)
-            {
-                anim.SetBool("isMoving", true);
-            }
-            else
-            {
-                anim.SetBool("isMoving", false);
-            }
+            anim.SetBool("isMoving", false);
             rb.velocity = dashDir * 5.0f;
         }
         else
@@ -121,6 +115,7 @@ public class PlayerMovementBattle : MonoBehaviour {
     public void Dash()
     {
         dashTimer = maxDashTimer;
+        afterimageInterval = 0;
         //PlayerHitbox.instance.GetComponent<BoxCollider2D>().enabled = false;
         dashDir = InputManager.instance.CheckDirectionalMovement() * speed;
         ren.color = new Color(1, 1, 1, 0.1f);
@@ -162,12 +157,18 @@ public class PlayerMovementBattle : MonoBehaviour {
         if (dashTimer > 0)
         {
             dashTimer -= Time.deltaTime;
+            afterimageInterval -= Time.deltaTime;
             if (dashTimer <= 0)
             {
                 //PlayerHitbox.instance.GetComponent<BoxCollider2D>().enabled = true;
                 dashCooldown = maxDashCooldown;
                 ren.color = new Color(1, 1, 1, 1);
                 dashing = false;
+            }
+            if (afterimageInterval <= 0)
+            {
+                afterimageInterval = afterImageIntervalMax;
+                AfterImagePool.instance.SpawnAfterImage(ren.transform, 0.05f);
             }
         }
         //Logic for movement when not in the middle of a dash

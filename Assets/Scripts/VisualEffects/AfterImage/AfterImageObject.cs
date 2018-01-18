@@ -67,6 +67,7 @@ public class AfterImageObject : MonoBehaviour {
         }
         else
         {
+            transform.localScale = trans.lossyScale;
             StartCoroutine(AfterImageObjectFade(new Color(sr.color.r, sr.color.g, sr.color.b, 0.5f), new Color(sr.color.r, sr.color.g, sr.color.b, 0), fadeTime));
         }
     }
